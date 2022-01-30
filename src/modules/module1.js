@@ -8,7 +8,7 @@
  * @author Vivek Nair (https://nair.me) <vivek@nair.me>
  */
 
- /**
+/**
    * Single-factor (traditional) key derivation function; produces a derived a key from a single input.
    *
    * @example
@@ -23,7 +23,7 @@
    * @async
    * @memberOf modules
    */
- async function module1 (input, salt) {
-   console.log('module1')
- }
- module.exports.module1 = module1
+async function module1 (input, salt) {
+  console.log('module1')
+}
+module.exports.module1 = module1

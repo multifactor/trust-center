@@ -1,0 +1,31 @@
+{
+  "opts": {
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
+    "destination": "site/docs/",
+    "recurse": true,
+    "verbose": true
+  },
+  "docdash": {
+    "openGraph": {
+      "title": "Documentation | replace-this-with-project-name (replace-this-with-project-name) | JavaScript",
+      "type": "website",
+      "site-name": "replace-this-with-project-name",
+      "url": "https://replace-this-with-site-url"
+    },
+    "meta": {
+      "title": "Documentation | replace-this-with-project-name (replace-this-with-project-name) | JavaScript",
+      "description": "Documentation for the JavaScript implementation of replace-this-with-project-name (replace-this-with-project-name)."
+    },
+    "search": true,
+    "menu": {
+      "Project Website": {
+        "href": "https://replace-this-with-site-url"
+      },
+      "GitHub Repository": {
+        "href": "https://github.com/multifactor/replace-this-with-project-name"
+      }
+    },
+    "scripts": ["../docs.css", "../docs.js"]
+  }
+}

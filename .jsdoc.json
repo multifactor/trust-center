@@ -8,22 +8,22 @@
   },
   "docdash": {
     "openGraph": {
-      "title": "Documentation | replace-this-with-project-name (replace-this-with-project-name) | JavaScript",
+      "title": "Documentation | trust-center (trust-center) | JavaScript",
       "type": "website",
-      "site-name": "replace-this-with-project-name",
-      "url": "https://replace-this-with-site-url"
+      "site-name": "trust-center",
+      "url": "https://trust.multifactor.com"
     },
     "meta": {
-      "title": "Documentation | replace-this-with-project-name (replace-this-with-project-name) | JavaScript",
-      "description": "Documentation for the JavaScript implementation of replace-this-with-project-name (replace-this-with-project-name)."
+      "title": "Documentation | trust-center (trust-center) | JavaScript",
+      "description": "Documentation for the JavaScript implementation of trust-center (trust-center)."
     },
     "search": true,
     "menu": {
       "Project Website": {
-        "href": "https://replace-this-with-site-url"
+        "href": "https://trust.multifactor.com"
       },
       "GitHub Repository": {
-        "href": "https://github.com/multifactor/replace-this-with-project-name"
+        "href": "https://github.com/multifactor/trust-center"
       }
     },
     "scripts": ["../docs.css", "../docs.js"]

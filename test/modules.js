@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions: "off" */
 require('chai').should()
-// const replace-this-with-project-name = require('../src')
+// const trust-center = require('../src')
 const { suite, test } = require('mocha')
 
 suite('index', () => {

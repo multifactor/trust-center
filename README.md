@@ -1,50 +1,36 @@
-[![replace-this-with-project-name](https://raw.githubusercontent.com/multifactor/replace-this-with-project-name/master/site/logo.png "replace-this-with-project-name")](https://replace-this-with-site-url "replace-this-with-project-name")
+[![trust-center](https://raw.githubusercontent.com/multifactor/trust-center/master/site/logo.png "trust-center")](https://trust.multifactor.com "trust-center")
 
-replace-this-with-full-name
+Multifactor Trust Center
 
-[![GitHub issues](https://img.shields.io/github/issues/multifactor/replace-this-with-project-name)](https://github.com/multifactor/replace-this-with-project-name/issues)
-[![GitHub tag](https://img.shields.io/github/tag/multifactor/replace-this-with-project-name.svg)](https://github.com/multifactor/replace-this-with-project-name/tags)
-[![GitHub release](https://img.shields.io/github/release/multifactor/replace-this-with-project-name.svg)](https://github.com/multifactor/replace-this-with-project-name/releases)
-[![NPM release](https://img.shields.io/npm/v/replace-this-with-project-name.svg)](https://www.npmjs.com/package/replace-this-with-project-name)
+[![GitHub issues](https://img.shields.io/github/issues/multifactor/trust-center)](https://github.com/multifactor/trust-center/issues)
+[![GitHub tag](https://img.shields.io/github/tag/multifactor/trust-center.svg)](https://github.com/multifactor/trust-center/tags)
+[![GitHub release](https://img.shields.io/github/release/multifactor/trust-center.svg)](https://github.com/multifactor/trust-center/releases)
+[![NPM release](https://img.shields.io/npm/v/trust-center.svg)](https://www.npmjs.com/package/trust-center)
 
-[Site](https://replace-this-with-site-url) |
-[Docs](https://replace-this-with-site-url/docs) |
-[Contributing](https://github.com/multifactor/replace-this-with-project-name/blob/master/CONTRIBUTING.md) |
-[Security](https://github.com/multifactor/replace-this-with-project-name/blob/master/SECURITY.md) |
+[Site](https://trust.multifactor.com) |
+[Docs](https://trust.multifactor.com/docs) |
+[Contributing](https://github.com/multifactor/trust-center/blob/master/CONTRIBUTING.md) |
+[Security](https://github.com/multifactor/trust-center/blob/master/SECURITY.md) |
 [Multifactor](https://github.com/multifactor) |
 [Author](https://github.com/VCNinc)
 
-replace-this-with-full-name (replace-this-with-project-name) is ...
-
-## Getting Started
-- Replace all instances the following terms in the repository:
-		replace-this-with-project-name	=> 	project short name (eg. mfkdf)
-		replace-this-with-full-name			=> 	project full name (eg. Multi-Factor Key Derivation Function)
-		replace-this-with-site-url			=>	project domain (eg. mfkdf.com)
-		(in atom, use Ctrl+Shift+F to replace in whole project)
-- Manually add description in sections labelled "..."
-- Install all required dependencies ("npm i")
-- Add logo.png to /site/
-- Add favicons to /site/
-- Push changes to a new GitHub repo
-- Use "npm run release" to deploy the project
-- Remove this section from the readme when you're done
+The Multifactor Trust Center provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets for use in enclaves, either manually via the online portal (trust.multifactor.com) or programmatically via the trust-center SDK. The trust center is entirely open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.
 
 ## Download
 ### GitHub
-[Download Latest Release](https://github.com/multifactor/replace-this-with-project-name/releases)
+[Download Latest Release](https://github.com/multifactor/trust-center/releases)
 
 ## Installation
 ### In a browser:
-Get the latest tag with SRI from [jsDelivr](https://www.jsdelivr.com/package/npm/replace-this-with-project-name) (recommended), or include the latest version automatically like so:
+Get the latest tag with SRI from [jsDelivr](https://www.jsdelivr.com/package/npm/trust-center) (recommended), or include the latest version automatically like so:
 
-	<script src="https://cdn.jsdelivr.net/gh/multifactor/replace-this-with-project-name/index.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/multifactor/trust-center/index.min.js"></script>
 
 ### Using npm:
-	npm install replace-this-with-project-name
+	npm install trust-center
 
 ### In Node.js:
-	const replace-this-with-project-name = require('replace-this-with-project-name');
+	const trust-center = require('trust-center');
 
 ## Usage
 ### example-1

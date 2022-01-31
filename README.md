@@ -16,8 +16,6 @@ Multifactor Trust Center
 
 The Multifactor Trust Center provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets for use in enclaves using PGP, either manually via the online portal (trust.multifactor.com) or programmatically via the trust-center SDK. The trust center is entirely open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.
 
-Note: The SDK uses crypto.X509Certificate for certificate validation and thus requires Node.js v15.6.0 or later.
-
 ## Download
 ### GitHub
 [Download Latest Release](https://github.com/multifactor/trust-center/releases)
@@ -34,10 +32,28 @@ Get the latest tag with SRI from [jsDelivr](https://www.jsdelivr.com/package/npm
 ### In Node.js:
 	const trust-center = require('trust-center');
 
+Note: The SDK uses crypto.X509Certificate for certificate validation and thus requires Node.js v15.6.0 or later.
+
 ## Usage
-### example-1
-First code usage example...
+The following code snippet uses the trust-center SDK to verify an AWS Nitro attestation document and then encrypt a secret for use within the enclave.
 
 ```
-// first code usage example...
+// add required dependencies
+const trust = require('trust-center')
+const fs = require('fs')
+const path = require('path')
+
+// load attestation document in CBOR format
+const attestationDocument = fs.readFileSync(path.join(__dirname, 'attestation.cbor'))
+// parse and validate attestation document
+const attestationResult = await trust.enclaves.nitro.verifyAttestation(attestationDocument)
+
+// verify attestation document validity
+if (!attestationResult.valid) throw new Error('Failed to validate enclave attestation: ' + attestationResult.reason)
+// check that pcr0 matches desired enclave image file hash
+if (attestationResult.attr.pcr0 !== '1595770e76cea659a5650a88b965b053eb66a0ce5a60a460223d50ff1d16b394d2651b130a38af4ccd818ad8cf42c963') throw new Error('Failed to validate enclave attestation')
+
+// encrypt secret for enclave using PGP
+const encrypted = await trust.secrets.encryptForEnclave(attestationResult, 'my secret')
+console.log(encrypted) // -> '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
 ```

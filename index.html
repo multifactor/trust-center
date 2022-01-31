@@ -27,7 +27,17 @@
 		</header>
 		<div class="container main">
 			<section class="code">
-<pre><code class="js">// insert code example here...
+<pre><code class="js">const trust = require('trust-center')
+const attestation = fs.readFileSync(path.join(__dirname, 'attestation.cbor'))
+const attestationResult = await trust.enclaves.nitro.verifyAttestation(attestation)
+
+// verify attestation validity & check that pcr0 matches desired enclave image
+if (!attestationResult.valid || attestationResult.attr.pcr0 !== '1595...c963')
+	throw new Error('Failed to validate enclave attestation')
+
+// encrypt secret for use within enclave using PGP
+const encrypted = await trust.secrets.encryptForEnclave(attestationResult, 'my secret')
+console.log(encrypted) // -> '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
 </code></pre>
 			</section>
 			<section>
@@ -41,7 +51,7 @@
 			</section>
 			<section>
 				<h2>What's trust-center?</h2>
-				<p>Multifactor Trust Center (trust-center)...</p>
+				<p>The Multifactor Trust Center (trust-center) SDK provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets for use in enclaves using PGP. Try it out using the online trust center interface at <a href="https://trust.multifactor.com">trust.multifactor.com</a>, which is open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.</p>
 				<p><a href="https://github.com/multifactor/trust-center"><i class="fa fa-github"></i> &nbsp;GitHub Repository</a></p>
 			</section>
 			<section>

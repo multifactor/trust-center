@@ -1,6 +1,6 @@
 {
   "name": "trust-center",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Multifactor Trust Center (trust.multifactor.com): Verify Enclave Attestations & Generate Enclave Secrets",
   "main": "src/index.js",
   "scripts": {

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run style && npm run unit",
     "style": "standard ./src --fix && standard ./test --fix",
-    "unit": "mocha -u tdd -s 0 --timeout 5000",
+    "unit": "mocha \"test/**/*.js\" -u tdd -s 0 --timeout 5000",
     "version": "npm run docs && git add site && npm run build && git add index.js && git add index.min.js",
     "release": "np --branch main --no-cleanup",
     "postpublish": "npm run deploy",
@@ -48,5 +48,9 @@
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cbor": "^8.1.0",
+    "cose-js": "^0.8.3",
+    "openpgp": "^5.1.0"
+  }
 }

@@ -1,3 +1,5 @@
 module.exports = {
-  ...require('./modules')
+  enclaves: {
+    ...require('./enclaves')
+  }
 }

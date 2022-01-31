@@ -12,7 +12,7 @@ suite('secrets', () => {
     const attestation = await trust.enclaves.nitro.verifyAttestation(document)
     const encrypted = await trust.secrets.encryptForEnclave(attestation, 'password')
     encrypted.should.be.a.string
-    const message = await openpgp.readMessage({
+    await openpgp.readMessage({
       armoredMessage: encrypted
     })
   })

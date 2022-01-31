@@ -14,7 +14,7 @@ Multifactor Trust Center
 [Multifactor](https://github.com/multifactor) |
 [Author](https://github.com/VCNinc)
 
-The Multifactor Trust Center provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets using PGP for use in enclaves, either manually via the online portal (trust.multifactor.com) or programmatically via the trust-center SDK. The trust center is entirely open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.
+The Multifactor Trust Center provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets for use in enclaves using PGP, either manually via the online portal (trust.multifactor.com) or programmatically via the trust-center SDK. The trust center is entirely open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.
 
 Note: The SDK uses crypto.X509Certificate for certificate validation and thus requires Node.js v15.6.0 or later.
 

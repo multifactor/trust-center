@@ -1,6 +1,6 @@
 /**
- * Secure Enclaves
- * @namespace enclaves
+ * AWS Nitro Enclaves
+ * @namespace nitro
  */
 module.exports = {
   nitro: {

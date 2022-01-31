@@ -6,9 +6,9 @@ const path = require('path')
 const { suite, test } = require('mocha')
 
 suite('nitro', () => {
-  test('valid', async () => {
+  test('verifyAttestation', async () => {
     const document = fs.readFileSync(path.join(__dirname, 'attestation.cbor'))
-    const result = await trust.enclaves.nitro.verify(document)
+    const result = await trust.enclaves.nitro.verifyAttestation(document)
 
     result.valid.should.be.true
     result.attr.pcr0.should.equal('1595770e76cea659a5650a88b965b053eb66a0ce5a60a460223d50ff1d16b394d2651b130a38af4ccd818ad8cf42c963')

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation | trust-center (trust-center) | JavaScript</title>
+    <title>Global - Documentation | trust-center (trust-center) | JavaScript</title>
     
     <meta name="description" content="Documentation for the JavaScript implementation of trust-center (trust-center)." />
     
@@ -43,34 +43,10 @@
 
 <div id="main">
     
-
+    <h1 class="page-title">Global</h1>
     
 
-
-
     
-
-
-    <section class="package">
-        <h3> </h3>		
-    </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
 
 
 
@@ -80,7 +56,7 @@
 <header>
     
         <h2>
-        enclaves/nitro/index.js
+        
         </h2>
         
     
@@ -95,11 +71,6 @@
 <dl class="details">
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="enclaves_nitro_index.js.html">enclaves/nitro/index.js</a>, <a href="enclaves_nitro_index.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
 
     
 
@@ -118,17 +89,7 @@
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Vivek Nair (https://nair.me) &lt;vivek@nair.me></li>
-        </ul>
-    </dd>
-    
 
-    
-    <dt class="tag-copyright">Copyright:</dt>
-    <dd class="tag-copyright"><ul class="dummy"><li>Multifactor 2021 All Rights Reserved</li></ul></dd>
     
 
     
@@ -145,8 +106,6 @@
 
 
 
-            
-                <div class="description usertext">Cryptographic operations for AWS Nitro Enclaves</div>
             
 
             
@@ -171,41 +130,22 @@
     
 
     
+        <h3 class="subsection-title">Type Definitions</h3>
 
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        secrets/index.js
-        </h2>
         
-    
-</header>
+                
+<h4 class="name" id="AttestationResult">AttestationResult</h4>
 
-<article>
-    
-        <div class="container-overview">
-        
-            
+
+
+
 
 <dl class="details">
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="secrets_index.js.html">secrets/index.js</a>, <a href="secrets_index.js.html#line1">line 1</a>
+        <a href="enclaves_nitro_index.js.html">enclaves/nitro/index.js</a>, <a href="enclaves_nitro_index.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -226,17 +166,7 @@
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Vivek Nair (https://nair.me) &lt;vivek@nair.me></li>
-        </ul>
-    </dd>
-    
 
-    
-    <dt class="tag-copyright">Copyright:</dt>
-    <dd class="tag-copyright"><ul class="dummy"><li>Multifactor 2021 All Rights Reserved</li></ul></dd>
     
 
     
@@ -252,32 +182,152 @@
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
 
-            
-                <div class="description usertext">Encrypt secrets for use in enclaves</div>
-            
+    
 
-            
+<table class="props">
+    <thead>
+    <tr>
         
-        </div>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
+
+        <tr>
+            
+                <td class="name"><code>valid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Indicates whether the attestation document is valid.</td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>reason</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">If the attestation document is not valid, describes why validation failed.</td>
+        </tr>
 
     
-    
-    
 
-     
+        <tr>
+            
+                <td class="name"><code>attr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">If the attestation document is valid, contains the attestation document attributes.</td>
+        </tr>
 
     
+    </tbody>
+</table>
 
-    
 
-    
 
+
+
+
+<div class="description usertext">
+    The result of calling a verifyAttestation function.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
     
 
     

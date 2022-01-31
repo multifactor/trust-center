@@ -1,6 +1,6 @@
 {
   "name": "trust-center",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Multifactor Trust Center (trust.multifactor.com): Verify Enclave Attestations & Generate Enclave Secrets",
   "main": "src/index.js",
   "scripts": {
@@ -51,7 +51,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
-    "cbor": "^8.1.0",
+    "cbor-web": "^8.1.0",
     "cose-js": "^0.8.3",
     "openpgp": "^5.1.0"
   }

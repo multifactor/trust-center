@@ -7,7 +7,7 @@
  *
  * @author Vivek Nair (https://nair.me) <vivek@nair.me>
  */
-const cbor = require('cbor')
+const cbor = require('cbor-web')
 const cose = require('cose-js')
 const crypto = require('crypto')
 const fs = require('fs')

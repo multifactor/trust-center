@@ -15,9 +15,9 @@
     "postpublish": "npm run deploy",
     "deploy": "gh-pages -d site",
     "docs": "jsdoc src -c .jsdoc.json",
-    "react": "cd web-app && npm run build && cp -R build ../site",
+    "react": "cd web-app && npm run build && cp -R build ../site && cd ../",
     "build": "npm run browserify && npm run minify",
-    "start": "cd web-app && npm run start",
+    "start": "cd web-app && npm run start && cd ../",
     "browserify": "webpack",
     "minify": "terser --compress --comments false --module index.js --mangle -o index.min.js"
   },

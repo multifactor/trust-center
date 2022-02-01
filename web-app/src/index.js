@@ -1,50 +1,45 @@
 import React from 'react';
 import {
   HashRouter as Router,
+  Redirect,
   Switch,
   Route,
   Link
 } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import reportWebVitals from './reportWebVitals';
-import logo from './logo.png';
+import nitro from './img/nitro.png';
+import Navigation from './Navigation';
+import Nitro from './Nitro';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-        <div className="container">
-          <a className="navbar-brand" href="#">
-            <img src={logo} alt="Trust Center" height="30" />
-          </a>
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <a className="nav-link active" href="https://trust.multifactor.com">Tools</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="https://trust.multifactor.com/sdk">SDK</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="https://github.com/multifactor/trust-center">Source Code</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="https://trust.multifactor.com/docs">Documentation</a>
-            </li>
-          </ul>
-          <form className="d-flex">
-            <a className="btn btn-secondary my-2 my-sm-0" href="#">Security</a>
-          </form>
-        </div>
-      </nav>
+      <Navigation />
       <div className="container">
         <Switch>
           <Route exact path="/">
-            <div className="page-header">
+            <Redirect to="/nitro" />
+            <div className="page-header mb-4">
               <h1>Multifactor Trust Center</h1>
               <p className="lead">Tools for Trusted Computing</p>
             </div>
+            <div className="row pt-4">
+              <div className="col-3">
+                <Link to="/nitro" className="text-decoration-none">
+                  <div class="card text-white bg-dark mb-3">
+                    <div class="card-body text-center p-4">
+                      <img src={nitro} width="96px" className="mb-4" alt="AWS Nitro" />
+                      <h4 class="card-title">AWS Nitro</h4>
+                      <p class="card-text">Validate AWS Nitro attestation documents and encrypt secrets for use in Nitro enclaves.</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </Route>
+          <Route path="/nitro" component={Nitro} />
           <Route path="*">
             <div className="page-header">
               <h1><i class="fas fa-exclamation-triangle"></i> 404</h1>

@@ -9,7 +9,7 @@ module.exports = {
         publicPath: '/',
         filename: 'index.js',
         library: {
-          name: 'trust-center',
+          name: 'trust',
           type: 'umd'
         }
     },

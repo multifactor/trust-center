@@ -10,7 +10,7 @@ module.exports = {
         filename: 'index.js',
         library: {
           name: 'trust',
-          type: 'umd'
+          type: 'window'
         }
     },
     optimization: {

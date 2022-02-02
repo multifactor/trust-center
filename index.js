@@ -11,6 +11,13862 @@
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 6858:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "YQ": () => (/* reexport */ AsnArray),
+  "zc": () => (/* reexport */ AsnConvert),
+  "te": () => (/* reexport */ AsnIntegerArrayBufferConverter),
+  "A6": () => (/* reexport */ AsnIntegerConverter),
+  "Cz": () => (/* reexport */ AsnOctetStringConverter),
+  "Vs": () => (/* reexport */ AsnParser),
+  "qw": () => (/* reexport */ AsnProp),
+  "gZ": () => (/* reexport */ AsnPropTypes),
+  "xg": () => (/* reexport */ AsnSerializer),
+  "Ve": () => (/* reexport */ AsnType),
+  "cN": () => (/* reexport */ AsnTypeTypes),
+  "VU": () => (/* reexport */ AsnUtf8StringConverter),
+  "_K": () => (/* reexport */ BitString),
+  "fi": () => (/* reexport */ OctetString)
+});
+
+// UNUSED EXPORTS: AsnAnyConverter, AsnBitStringConverter, AsnBmpStringConverter, AsnBooleanConverter, AsnCharacterStringConverter, AsnEnumeratedConverter, AsnGeneralStringConverter, AsnGeneralizedTimeConverter, AsnGraphicStringConverter, AsnIA5StringConverter, AsnNullConverter, AsnNumericStringConverter, AsnObjectIdentifierConverter, AsnPrintableStringConverter, AsnSchemaValidationError, AsnTeletexStringConverter, AsnUTCTimeConverter, AsnUniversalStringConverter, AsnVideotexStringConverter, AsnVisibleStringConverter, defaultConverter
+
+// EXTERNAL MODULE: ./node_modules/asn1js/src/asn1.js + 1 modules
+var asn1 = __webpack_require__(3898);
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/enums.js
+var AsnTypeTypes;
+(function (AsnTypeTypes) {
+    AsnTypeTypes[AsnTypeTypes["Sequence"] = 0] = "Sequence";
+    AsnTypeTypes[AsnTypeTypes["Set"] = 1] = "Set";
+    AsnTypeTypes[AsnTypeTypes["Choice"] = 2] = "Choice";
+})(AsnTypeTypes || (AsnTypeTypes = {}));
+var AsnPropTypes;
+(function (AsnPropTypes) {
+    AsnPropTypes[AsnPropTypes["Any"] = 1] = "Any";
+    AsnPropTypes[AsnPropTypes["Boolean"] = 2] = "Boolean";
+    AsnPropTypes[AsnPropTypes["OctetString"] = 3] = "OctetString";
+    AsnPropTypes[AsnPropTypes["BitString"] = 4] = "BitString";
+    AsnPropTypes[AsnPropTypes["Integer"] = 5] = "Integer";
+    AsnPropTypes[AsnPropTypes["Enumerated"] = 6] = "Enumerated";
+    AsnPropTypes[AsnPropTypes["ObjectIdentifier"] = 7] = "ObjectIdentifier";
+    AsnPropTypes[AsnPropTypes["Utf8String"] = 8] = "Utf8String";
+    AsnPropTypes[AsnPropTypes["BmpString"] = 9] = "BmpString";
+    AsnPropTypes[AsnPropTypes["UniversalString"] = 10] = "UniversalString";
+    AsnPropTypes[AsnPropTypes["NumericString"] = 11] = "NumericString";
+    AsnPropTypes[AsnPropTypes["PrintableString"] = 12] = "PrintableString";
+    AsnPropTypes[AsnPropTypes["TeletexString"] = 13] = "TeletexString";
+    AsnPropTypes[AsnPropTypes["VideotexString"] = 14] = "VideotexString";
+    AsnPropTypes[AsnPropTypes["IA5String"] = 15] = "IA5String";
+    AsnPropTypes[AsnPropTypes["GraphicString"] = 16] = "GraphicString";
+    AsnPropTypes[AsnPropTypes["VisibleString"] = 17] = "VisibleString";
+    AsnPropTypes[AsnPropTypes["GeneralString"] = 18] = "GeneralString";
+    AsnPropTypes[AsnPropTypes["CharacterString"] = 19] = "CharacterString";
+    AsnPropTypes[AsnPropTypes["UTCTime"] = 20] = "UTCTime";
+    AsnPropTypes[AsnPropTypes["GeneralizedTime"] = 21] = "GeneralizedTime";
+    AsnPropTypes[AsnPropTypes["DATE"] = 22] = "DATE";
+    AsnPropTypes[AsnPropTypes["TimeOfDay"] = 23] = "TimeOfDay";
+    AsnPropTypes[AsnPropTypes["DateTime"] = 24] = "DateTime";
+    AsnPropTypes[AsnPropTypes["Duration"] = 25] = "Duration";
+    AsnPropTypes[AsnPropTypes["TIME"] = 26] = "TIME";
+    AsnPropTypes[AsnPropTypes["Null"] = 27] = "Null";
+})(AsnPropTypes || (AsnPropTypes = {}));
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/converters.js
+
+
+const AsnAnyConverter = {
+    fromASN: (value) => value instanceof asn1.Null ? null : value.valueBeforeDecode,
+    toASN: (value) => {
+        if (value === null) {
+            return new asn1.Null();
+        }
+        const schema = asn1.fromBER(value);
+        if (schema.result.error) {
+            throw new Error(schema.result.error);
+        }
+        return schema.result;
+    },
+};
+const AsnIntegerConverter = {
+    fromASN: (value) => value.valueBlock.valueHex.byteLength > 4
+        ? value.valueBlock.toString()
+        : value.valueBlock.valueDec,
+    toASN: (value) => new asn1.Integer({ value: value }),
+};
+const AsnEnumeratedConverter = {
+    fromASN: (value) => value.valueBlock.valueDec,
+    toASN: (value) => new asn1.Enumerated({ value }),
+};
+const AsnIntegerArrayBufferConverter = {
+    fromASN: (value) => value.valueBlock.valueHex,
+    toASN: (value) => new asn1.Integer({ valueHex: value }),
+};
+const AsnBitStringConverter = {
+    fromASN: (value) => value.valueBlock.valueHex,
+    toASN: (value) => new asn1.BitString({ valueHex: value }),
+};
+const AsnObjectIdentifierConverter = {
+    fromASN: (value) => value.valueBlock.toString(),
+    toASN: (value) => new asn1.ObjectIdentifier({ value }),
+};
+const AsnBooleanConverter = {
+    fromASN: (value) => value.valueBlock.value,
+    toASN: (value) => new asn1.Boolean({ value }),
+};
+const AsnOctetStringConverter = {
+    fromASN: (value) => value.valueBlock.valueHex,
+    toASN: (value) => new asn1.OctetString({ valueHex: value }),
+};
+function createStringConverter(Asn1Type) {
+    return {
+        fromASN: (value) => value.valueBlock.value,
+        toASN: (value) => new Asn1Type({ value }),
+    };
+}
+const AsnUtf8StringConverter = createStringConverter(asn1.Utf8String);
+const AsnBmpStringConverter = createStringConverter(asn1.BmpString);
+const AsnUniversalStringConverter = createStringConverter(asn1.UniversalString);
+const AsnNumericStringConverter = createStringConverter(asn1.NumericString);
+const AsnPrintableStringConverter = createStringConverter(asn1.PrintableString);
+const AsnTeletexStringConverter = createStringConverter(asn1.TeletexString);
+const AsnVideotexStringConverter = createStringConverter(asn1.VideotexString);
+const AsnIA5StringConverter = createStringConverter(asn1.IA5String);
+const AsnGraphicStringConverter = createStringConverter(asn1.GraphicString);
+const AsnVisibleStringConverter = createStringConverter(asn1.VisibleString);
+const AsnGeneralStringConverter = createStringConverter(asn1.GeneralString);
+const AsnCharacterStringConverter = createStringConverter(asn1.CharacterString);
+const AsnUTCTimeConverter = {
+    fromASN: (value) => value.toDate(),
+    toASN: (value) => new asn1.UTCTime({ valueDate: value }),
+};
+const AsnGeneralizedTimeConverter = {
+    fromASN: (value) => value.toDate(),
+    toASN: (value) => new asn1.GeneralizedTime({ valueDate: value }),
+};
+const AsnNullConverter = {
+    fromASN: (value) => null,
+    toASN: (value) => {
+        return new asn1.Null();
+    },
+};
+function converters_defaultConverter(type) {
+    switch (type) {
+        case AsnPropTypes.Any:
+            return AsnAnyConverter;
+        case AsnPropTypes.BitString:
+            return AsnBitStringConverter;
+        case AsnPropTypes.BmpString:
+            return AsnBmpStringConverter;
+        case AsnPropTypes.Boolean:
+            return AsnBooleanConverter;
+        case AsnPropTypes.CharacterString:
+            return AsnCharacterStringConverter;
+        case AsnPropTypes.Enumerated:
+            return AsnEnumeratedConverter;
+        case AsnPropTypes.GeneralString:
+            return AsnGeneralStringConverter;
+        case AsnPropTypes.GeneralizedTime:
+            return AsnGeneralizedTimeConverter;
+        case AsnPropTypes.GraphicString:
+            return AsnGraphicStringConverter;
+        case AsnPropTypes.IA5String:
+            return AsnIA5StringConverter;
+        case AsnPropTypes.Integer:
+            return AsnIntegerConverter;
+        case AsnPropTypes.Null:
+            return AsnNullConverter;
+        case AsnPropTypes.NumericString:
+            return AsnNumericStringConverter;
+        case AsnPropTypes.ObjectIdentifier:
+            return AsnObjectIdentifierConverter;
+        case AsnPropTypes.OctetString:
+            return AsnOctetStringConverter;
+        case AsnPropTypes.PrintableString:
+            return AsnPrintableStringConverter;
+        case AsnPropTypes.TeletexString:
+            return AsnTeletexStringConverter;
+        case AsnPropTypes.UTCTime:
+            return AsnUTCTimeConverter;
+        case AsnPropTypes.UniversalString:
+            return AsnUniversalStringConverter;
+        case AsnPropTypes.Utf8String:
+            return AsnUtf8StringConverter;
+        case AsnPropTypes.VideotexString:
+            return AsnVideotexStringConverter;
+        case AsnPropTypes.VisibleString:
+            return AsnVisibleStringConverter;
+        default:
+            return null;
+    }
+}
+
+// EXTERNAL MODULE: ./node_modules/pvtsutils/build/index.js
+var build = __webpack_require__(2043);
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/types/bit_string.js
+
+
+class BitString {
+    constructor(params, unusedBits = 0) {
+        this.unusedBits = 0;
+        this.value = new ArrayBuffer(0);
+        if (params) {
+            if (typeof params === "number") {
+                this.fromNumber(params);
+            }
+            else if (build.BufferSourceConverter.isBufferSource(params)) {
+                this.unusedBits = unusedBits;
+                this.value = build.BufferSourceConverter.toArrayBuffer(params);
+            }
+            else {
+                throw TypeError("Unsupported type of 'params' argument for BitString");
+            }
+        }
+    }
+    fromASN(asn) {
+        if (!(asn instanceof asn1.BitString)) {
+            throw new TypeError("Argument 'asn' is not instance of ASN.1 BitString");
+        }
+        this.unusedBits = asn.valueBlock.unusedBits;
+        this.value = asn.valueBlock.valueHex;
+        return this;
+    }
+    toASN() {
+        return new asn1.BitString({ unusedBits: this.unusedBits, valueHex: this.value });
+    }
+    toSchema(name) {
+        return new asn1.BitString({ name });
+    }
+    toNumber() {
+        let res = "";
+        const uintArray = new Uint8Array(this.value);
+        for (const octet of uintArray) {
+            res += octet.toString(2).padStart(8, "0");
+        }
+        res = res.split("").reverse().join("");
+        if (this.unusedBits) {
+            res = res.slice(this.unusedBits).padStart(this.unusedBits, "0");
+        }
+        return parseInt(res, 2);
+    }
+    fromNumber(value) {
+        let bits = value.toString(2);
+        const octetSize = (bits.length + 7) >> 3;
+        this.unusedBits = (octetSize << 3) - bits.length;
+        const octets = new Uint8Array(octetSize);
+        bits = bits.padStart(octetSize << 3, "0").split("").reverse().join("");
+        let index = 0;
+        while (index < octetSize) {
+            octets[index] = parseInt(bits.slice(index << 3, (index << 3) + 8), 2);
+            index++;
+        }
+        this.value = octets.buffer;
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/types/octet_string.js
+
+
+class OctetString {
+    constructor(param) {
+        if (typeof param === "number") {
+            this.buffer = new ArrayBuffer(param);
+        }
+        else {
+            if (build.BufferSourceConverter.isBufferSource(param)) {
+                this.buffer = build.BufferSourceConverter.toArrayBuffer(param);
+            }
+            else if (Array.isArray(param)) {
+                this.buffer = new Uint8Array(param);
+            }
+            else {
+                this.buffer = new ArrayBuffer(0);
+            }
+        }
+    }
+    get byteLength() {
+        return this.buffer.byteLength;
+    }
+    get byteOffset() {
+        return 0;
+    }
+    fromASN(asn) {
+        if (!(asn instanceof asn1.OctetString)) {
+            throw new TypeError("Argument 'asn' is not instance of ASN.1 OctetString");
+        }
+        this.buffer = asn.valueBlock.valueHex;
+        return this;
+    }
+    toASN() {
+        return new asn1.OctetString({ valueHex: this.buffer });
+    }
+    toSchema(name) {
+        return new asn1.OctetString({ name });
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/types/index.js
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/helper.js
+function isConvertible(target) {
+    if (target && target.prototype) {
+        if (target.prototype.toASN && target.prototype.fromASN) {
+            return true;
+        }
+        else {
+            return isConvertible(target.prototype);
+        }
+    }
+    else {
+        return !!(target && target.toASN && target.fromASN);
+    }
+}
+function isTypeOfArray(target) {
+    var _a;
+    if (target) {
+        const proto = Object.getPrototypeOf(target);
+        if (((_a = proto === null || proto === void 0 ? void 0 : proto.prototype) === null || _a === void 0 ? void 0 : _a.constructor) === Array) {
+            return true;
+        }
+        return isTypeOfArray(proto);
+    }
+    return false;
+}
+function isArrayEqual(bytes1, bytes2) {
+    if (!(bytes1 && bytes2)) {
+        return false;
+    }
+    if (bytes1.byteLength !== bytes2.byteLength) {
+        return false;
+    }
+    const b1 = new Uint8Array(bytes1);
+    const b2 = new Uint8Array(bytes2);
+    for (let i = 0; i < bytes1.byteLength; i++) {
+        if (b1[i] !== b2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/schema.js
+
+
+
+class AsnSchemaStorage {
+    constructor() {
+        this.items = new WeakMap();
+    }
+    has(target) {
+        return this.items.has(target);
+    }
+    get(target) {
+        var _a, _b, _c, _d;
+        const schema = this.items.get(target);
+        if (!schema) {
+            throw new Error(`Cannot get schema for '${(_d = (_c = (_b = (_a = target) === null || _a === void 0 ? void 0 : _a.prototype) === null || _b === void 0 ? void 0 : _b.constructor) === null || _c === void 0 ? void 0 : _c.name) !== null && _d !== void 0 ? _d : target}' target`);
+        }
+        return schema;
+    }
+    cache(target) {
+        const schema = this.get(target);
+        if (!schema.schema) {
+            schema.schema = this.create(target, true);
+        }
+    }
+    createDefault(target) {
+        const schema = {
+            type: AsnTypeTypes.Sequence,
+            items: {},
+        };
+        const parentSchema = this.findParentSchema(target);
+        if (parentSchema) {
+            Object.assign(schema, parentSchema);
+            schema.items = Object.assign({}, schema.items, parentSchema.items);
+        }
+        return schema;
+    }
+    create(target, useNames) {
+        const schema = this.items.get(target) || this.createDefault(target);
+        const asn1Value = [];
+        for (const key in schema.items) {
+            const item = schema.items[key];
+            const name = useNames ? key : "";
+            let asn1Item;
+            if (typeof (item.type) === "number") {
+                const Asn1TypeName = AsnPropTypes[item.type];
+                const Asn1Type = asn1[Asn1TypeName];
+                if (!Asn1Type) {
+                    throw new Error(`Cannot get ASN1 class by name '${Asn1TypeName}'`);
+                }
+                asn1Item = new Asn1Type({ name });
+            }
+            else if (isConvertible(item.type)) {
+                const instance = new item.type();
+                asn1Item = instance.toSchema(name);
+            }
+            else if (item.optional) {
+                const itemSchema = this.get(item.type);
+                if (itemSchema.type === AsnTypeTypes.Choice) {
+                    asn1Item = new asn1.Any({ name });
+                }
+                else {
+                    asn1Item = this.create(item.type, false);
+                    asn1Item.name = name;
+                }
+            }
+            else {
+                asn1Item = new asn1.Any({ name });
+            }
+            const optional = !!item.optional || item.defaultValue !== undefined;
+            if (item.repeated) {
+                asn1Item.name = "";
+                const Container = item.repeated === "set"
+                    ? asn1.Set
+                    : asn1.Sequence;
+                asn1Item = new Container({
+                    name: "",
+                    value: [
+                        new asn1.Repeated({
+                            name,
+                            value: asn1Item,
+                        }),
+                    ],
+                });
+            }
+            if (item.context !== null && item.context !== undefined) {
+                if (item.implicit) {
+                    if (typeof item.type === "number" || isConvertible(item.type)) {
+                        const Container = item.repeated
+                            ? asn1.Constructed
+                            : asn1.Primitive;
+                        asn1Value.push(new Container({
+                            name,
+                            optional,
+                            idBlock: {
+                                tagClass: 3,
+                                tagNumber: item.context,
+                            },
+                        }));
+                    }
+                    else {
+                        this.cache(item.type);
+                        const isRepeated = !!item.repeated;
+                        let value = !isRepeated
+                            ? this.get(item.type).schema
+                            : asn1Item;
+                        value = value.valueBlock ? value.valueBlock.value : value.value;
+                        asn1Value.push(new asn1.Constructed({
+                            name: !isRepeated ? name : "",
+                            optional,
+                            idBlock: {
+                                tagClass: 3,
+                                tagNumber: item.context,
+                            },
+                            value,
+                        }));
+                    }
+                }
+                else {
+                    asn1Value.push(new asn1.Constructed({
+                        optional,
+                        idBlock: {
+                            tagClass: 3,
+                            tagNumber: item.context,
+                        },
+                        value: [asn1Item],
+                    }));
+                }
+            }
+            else {
+                asn1Item.optional = optional;
+                asn1Value.push(asn1Item);
+            }
+        }
+        switch (schema.type) {
+            case AsnTypeTypes.Sequence:
+                return new asn1.Sequence({ value: asn1Value, name: "" });
+            case AsnTypeTypes.Set:
+                return new asn1.Set({ value: asn1Value, name: "" });
+            case AsnTypeTypes.Choice:
+                return new asn1.Choice({ value: asn1Value, name: "" });
+            default:
+                throw new Error(`Unsupported ASN1 type in use`);
+        }
+    }
+    set(target, schema) {
+        this.items.set(target, schema);
+        return this;
+    }
+    findParentSchema(target) {
+        const parent = target.__proto__;
+        if (parent) {
+            const schema = this.items.get(parent);
+            return schema || this.findParentSchema(parent);
+        }
+        return null;
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/storage.js
+
+const schemaStorage = new AsnSchemaStorage();
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/decorators.js
+
+
+const AsnType = (options) => (target) => {
+    let schema;
+    if (!schemaStorage.has(target)) {
+        schema = schemaStorage.createDefault(target);
+        schemaStorage.set(target, schema);
+    }
+    else {
+        schema = schemaStorage.get(target);
+    }
+    Object.assign(schema, options);
+};
+const AsnProp = (options) => (target, propertyKey) => {
+    let schema;
+    if (!schemaStorage.has(target.constructor)) {
+        schema = schemaStorage.createDefault(target.constructor);
+        schemaStorage.set(target.constructor, schema);
+    }
+    else {
+        schema = schemaStorage.get(target.constructor);
+    }
+    const copyOptions = Object.assign({}, options);
+    if (typeof copyOptions.type === "number" && !copyOptions.converter) {
+        const defaultConverter = converters_defaultConverter(options.type);
+        if (!defaultConverter) {
+            throw new Error(`Cannot get default converter for property '${propertyKey}' of ${target.constructor.name}`);
+        }
+        copyOptions.converter = defaultConverter;
+    }
+    schema.items[propertyKey] = copyOptions;
+};
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/errors/schema_validation.js
+class AsnSchemaValidationError extends Error {
+    constructor() {
+        super(...arguments);
+        this.schemas = [];
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/errors/index.js
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/parser.js
+/* provided dependency */ var Buffer = __webpack_require__(8764)["Buffer"];
+
+
+
+
+
+
+class AsnParser {
+    static parse(data, target) {
+        let buf;
+        if (data instanceof ArrayBuffer) {
+            buf = data;
+        }
+        else if (typeof Buffer !== "undefined" && Buffer.isBuffer(data)) {
+            buf = new Uint8Array(data).buffer;
+        }
+        else if (ArrayBuffer.isView(data) || data.buffer instanceof ArrayBuffer) {
+            buf = data.buffer;
+        }
+        else {
+            throw new TypeError("Wrong type of 'data' argument");
+        }
+        const asn1Parsed = asn1.fromBER(buf);
+        if (asn1Parsed.result.error) {
+            throw new Error(asn1Parsed.result.error);
+        }
+        const res = this.fromASN(asn1Parsed.result, target);
+        return res;
+    }
+    static fromASN(asn1Schema, target) {
+        var _a;
+        try {
+            if (isConvertible(target)) {
+                const value = new target();
+                return value.fromASN(asn1Schema);
+            }
+            const schema = schemaStorage.get(target);
+            schemaStorage.cache(target);
+            let targetSchema = schema.schema;
+            if (asn1Schema.constructor === asn1.Constructed && schema.type !== AsnTypeTypes.Choice) {
+                targetSchema = new asn1.Constructed({
+                    idBlock: {
+                        tagClass: 3,
+                        tagNumber: asn1Schema.idBlock.tagNumber,
+                    },
+                    value: schema.schema.valueBlock.value,
+                });
+                for (const key in schema.items) {
+                    delete asn1Schema[key];
+                }
+            }
+            const asn1ComparedSchema = asn1.compareSchema(asn1Schema, asn1Schema, targetSchema);
+            if (!asn1ComparedSchema.verified) {
+                throw new AsnSchemaValidationError(`Data does not match to ${target.name} ASN1 schema. ${asn1ComparedSchema.result.error}`);
+            }
+            const res = new target();
+            if (isTypeOfArray(target)) {
+                if (typeof schema.itemType === "number") {
+                    const converter = converters_defaultConverter(schema.itemType);
+                    if (!converter) {
+                        throw new Error(`Cannot get default converter for array item of ${target.name} ASN1 schema`);
+                    }
+                    return target.from(asn1Schema.valueBlock.value, (element) => converter.fromASN(element));
+                }
+                else {
+                    return target.from(asn1Schema.valueBlock.value, (element) => this.fromASN(element, schema.itemType));
+                }
+            }
+            for (const key in schema.items) {
+                if (!asn1Schema[key]) {
+                    continue;
+                }
+                const schemaItem = schema.items[key];
+                if (typeof (schemaItem.type) === "number" || isConvertible(schemaItem.type)) {
+                    const converter = (_a = schemaItem.converter) !== null && _a !== void 0 ? _a : (isConvertible(schemaItem.type)
+                        ? new schemaItem.type()
+                        : null);
+                    if (!converter) {
+                        throw new Error("Converter is empty");
+                    }
+                    if (schemaItem.repeated) {
+                        if (schemaItem.implicit) {
+                            const Container = schemaItem.repeated === "sequence"
+                                ? asn1.Sequence
+                                : asn1.Set;
+                            const newItem = new Container();
+                            newItem.valueBlock = asn1Schema[key].valueBlock;
+                            const value = asn1.fromBER(newItem.toBER(false)).result.valueBlock.value;
+                            res[key] = Array.from(value, (element) => converter.fromASN(element));
+                        }
+                        else {
+                            res[key] = Array.from(asn1Schema[key], (element) => converter.fromASN(element));
+                        }
+                    }
+                    else {
+                        let value = asn1Schema[key];
+                        if (schemaItem.implicit) {
+                            let newItem;
+                            if (isConvertible(schemaItem.type)) {
+                                newItem = new schemaItem.type().toSchema("");
+                            }
+                            else {
+                                const Asn1TypeName = AsnPropTypes[schemaItem.type];
+                                const Asn1Type = asn1[Asn1TypeName];
+                                if (!Asn1Type) {
+                                    throw new Error(`Cannot get '${Asn1TypeName}' class from asn1js module`);
+                                }
+                                newItem = new Asn1Type();
+                            }
+                            newItem.valueBlock = value.valueBlock;
+                            value = asn1.fromBER(newItem.toBER(false)).result;
+                        }
+                        res[key] = converter.fromASN(value);
+                    }
+                }
+                else {
+                    if (schemaItem.repeated) {
+                        res[key] = Array.from(asn1Schema[key], (element) => this.fromASN(element, schemaItem.type));
+                    }
+                    else {
+                        res[key] = this.fromASN(asn1Schema[key], schemaItem.type);
+                    }
+                }
+            }
+            return res;
+        }
+        catch (error) {
+            if (error instanceof AsnSchemaValidationError) {
+                error.schemas.push(target.name);
+            }
+            throw error;
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/serializer.js
+
+
+
+
+
+class AsnSerializer {
+    static serialize(obj) {
+        if (obj instanceof asn1.BaseBlock) {
+            return obj.toBER(false);
+        }
+        return this.toASN(obj).toBER(false);
+    }
+    static toASN(obj) {
+        if (obj && isConvertible(obj.constructor)) {
+            return obj.toASN();
+        }
+        const target = obj.constructor;
+        const schema = schemaStorage.get(target);
+        schemaStorage.cache(target);
+        let asn1Value = [];
+        if (schema.itemType) {
+            if (typeof schema.itemType === "number") {
+                const converter = converters_defaultConverter(schema.itemType);
+                if (!converter) {
+                    throw new Error(`Cannot get default converter for array item of ${target.name} ASN1 schema`);
+                }
+                asn1Value = obj.map((o) => converter.toASN(o));
+            }
+            else {
+                asn1Value = obj.map((o) => this.toAsnItem({ type: schema.itemType }, "[]", target, o));
+            }
+        }
+        else {
+            for (const key in schema.items) {
+                const schemaItem = schema.items[key];
+                const objProp = obj[key];
+                if (objProp === undefined
+                    || schemaItem.defaultValue === objProp
+                    || (typeof schemaItem.defaultValue === "object" && typeof objProp === "object"
+                        && isArrayEqual(this.serialize(schemaItem.defaultValue), this.serialize(objProp)))) {
+                    continue;
+                }
+                let asn1Item = AsnSerializer.toAsnItem(schemaItem, key, target, objProp);
+                if (typeof schemaItem.context === "number") {
+                    if (schemaItem.implicit) {
+                        if (!schemaItem.repeated
+                            && (typeof schemaItem.type === "number" || isConvertible(schemaItem.type))) {
+                            const value = {};
+                            value.valueHex = asn1Item instanceof asn1.Null ? asn1Item.valueBeforeDecode : asn1Item.valueBlock.toBER();
+                            asn1Value.push(new asn1.Primitive(Object.assign({ optional: schemaItem.optional, idBlock: {
+                                    tagClass: 3,
+                                    tagNumber: schemaItem.context,
+                                } }, value)));
+                        }
+                        else {
+                            asn1Value.push(new asn1.Constructed({
+                                optional: schemaItem.optional,
+                                idBlock: {
+                                    tagClass: 3,
+                                    tagNumber: schemaItem.context,
+                                },
+                                value: asn1Item.valueBlock.value,
+                            }));
+                        }
+                    }
+                    else {
+                        asn1Value.push(new asn1.Constructed({
+                            optional: schemaItem.optional,
+                            idBlock: {
+                                tagClass: 3,
+                                tagNumber: schemaItem.context,
+                            },
+                            value: [asn1Item],
+                        }));
+                    }
+                }
+                else if (schemaItem.repeated) {
+                    asn1Value = asn1Value.concat(asn1Item);
+                }
+                else {
+                    asn1Value.push(asn1Item);
+                }
+            }
+        }
+        let asnSchema;
+        switch (schema.type) {
+            case AsnTypeTypes.Sequence:
+                asnSchema = new asn1.Sequence({ value: asn1Value });
+                break;
+            case AsnTypeTypes.Set:
+                asnSchema = new asn1.Set({ value: asn1Value });
+                break;
+            case AsnTypeTypes.Choice:
+                if (!asn1Value[0]) {
+                    throw new Error(`Schema '${target.name}' has wrong data. Choice cannot be empty.`);
+                }
+                asnSchema = asn1Value[0];
+                break;
+        }
+        return asnSchema;
+    }
+    static toAsnItem(schemaItem, key, target, objProp) {
+        let asn1Item;
+        if (typeof (schemaItem.type) === "number") {
+            const converter = schemaItem.converter;
+            if (!converter) {
+                throw new Error(`Property '${key}' doesn't have converter for type ${AsnPropTypes[schemaItem.type]} in schema '${target.name}'`);
+            }
+            if (schemaItem.repeated) {
+                const items = Array.from(objProp, (element) => converter.toASN(element));
+                const Container = schemaItem.repeated === "sequence"
+                    ? asn1.Sequence
+                    : asn1.Set;
+                asn1Item = new Container({
+                    value: items,
+                });
+            }
+            else {
+                asn1Item = converter.toASN(objProp);
+            }
+        }
+        else {
+            if (schemaItem.repeated) {
+                const items = Array.from(objProp, (element) => this.toASN(element));
+                const Container = schemaItem.repeated === "sequence"
+                    ? asn1.Sequence
+                    : asn1.Set;
+                asn1Item = new Container({
+                    value: items,
+                });
+            }
+            else {
+                asn1Item = this.toASN(objProp);
+            }
+        }
+        return asn1Item;
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/objects.js
+class AsnArray extends Array {
+    constructor(items = []) {
+        if (typeof items === "number") {
+            super(items);
+        }
+        else {
+            super();
+            for (const item of items) {
+                this.push(item);
+            }
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/convert.js
+
+
+
+
+class AsnConvert {
+    static serialize(obj) {
+        return AsnSerializer.serialize(obj);
+    }
+    static parse(data, target) {
+        return AsnParser.parse(data, target);
+    }
+    static toString(data) {
+        const buf = build.BufferSourceConverter.isBufferSource(data)
+            ? build.BufferSourceConverter.toArrayBuffer(data)
+            : AsnConvert.serialize(data);
+        const asn = asn1.fromBER(buf);
+        if (asn.offset === -1) {
+            throw new Error(`Cannot decode ASN.1 data. ${asn.result.error}`);
+        }
+        return asn.result.toString();
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/index.js
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 3561:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "w": () => (/* binding */ Crypto)
+});
+
+// UNUSED EXPORTS: CryptoKey
+
+// EXTERNAL MODULE: ./node_modules/pvtsutils/build/index.js
+var build = __webpack_require__(2043);
+// EXTERNAL MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/index.js + 15 modules
+var es2015 = __webpack_require__(6858);
+;// CONCATENATED MODULE: ./node_modules/webcrypto-core/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var __createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function __exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+}
+
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function __spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var __setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+}
+
+function __importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/json-schema/build/index.es.js
+/**
+ * Copyright (c) 2020, Peculiar Ventures, All rights reserved.
+ */
+
+class JsonError extends Error {
+    constructor(message, innerError) {
+        super(innerError
+            ? `${message}. See the inner exception for more details.`
+            : message);
+        this.message = message;
+        this.innerError = innerError;
+    }
+}
+
+class TransformError extends JsonError {
+    constructor(schema, message, innerError) {
+        super(message, innerError);
+        this.schema = schema;
+    }
+}
+
+class ParserError extends TransformError {
+    constructor(schema, message, innerError) {
+        super(schema, `JSON doesn't match to '${schema.target.name}' schema. ${message}`, innerError);
+    }
+}
+
+class ValidationError extends JsonError {
+}
+
+class SerializerError extends JsonError {
+    constructor(schemaName, message, innerError) {
+        super(`Cannot serialize by '${schemaName}' schema. ${message}`, innerError);
+        this.schemaName = schemaName;
+    }
+}
+
+class KeyError extends ParserError {
+    constructor(schema, keys, errors = {}) {
+        super(schema, "Some keys doesn't match to schema");
+        this.keys = keys;
+        this.errors = errors;
+    }
+}
+
+var JsonPropTypes;
+(function (JsonPropTypes) {
+    JsonPropTypes[JsonPropTypes["Any"] = 0] = "Any";
+    JsonPropTypes[JsonPropTypes["Boolean"] = 1] = "Boolean";
+    JsonPropTypes[JsonPropTypes["Number"] = 2] = "Number";
+    JsonPropTypes[JsonPropTypes["String"] = 3] = "String";
+})(JsonPropTypes || (JsonPropTypes = {}));
+
+function checkType(value, type) {
+    switch (type) {
+        case JsonPropTypes.Boolean:
+            return typeof value === "boolean";
+        case JsonPropTypes.Number:
+            return typeof value === "number";
+        case JsonPropTypes.String:
+            return typeof value === "string";
+    }
+    return true;
+}
+function throwIfTypeIsWrong(value, type) {
+    if (!checkType(value, type)) {
+        throw new TypeError(`Value must be ${JsonPropTypes[type]}`);
+    }
+}
+function isConvertible(target) {
+    if (target && target.prototype) {
+        if (target.prototype.toJSON && target.prototype.fromJSON) {
+            return true;
+        }
+        else {
+            return isConvertible(target.prototype);
+        }
+    }
+    else {
+        return !!(target && target.toJSON && target.fromJSON);
+    }
+}
+
+class JsonSchemaStorage {
+    constructor() {
+        this.items = new Map();
+    }
+    has(target) {
+        return this.items.has(target) || !!this.findParentSchema(target);
+    }
+    get(target) {
+        const schema = this.items.get(target) || this.findParentSchema(target);
+        if (!schema) {
+            throw new Error("Cannot get schema for current target");
+        }
+        return schema;
+    }
+    create(target) {
+        const schema = { names: {} };
+        const parentSchema = this.findParentSchema(target);
+        if (parentSchema) {
+            Object.assign(schema, parentSchema);
+            schema.names = {};
+            for (const name in parentSchema.names) {
+                schema.names[name] = Object.assign({}, parentSchema.names[name]);
+            }
+        }
+        schema.target = target;
+        return schema;
+    }
+    set(target, schema) {
+        this.items.set(target, schema);
+        return this;
+    }
+    findParentSchema(target) {
+        const parent = target.__proto__;
+        if (parent) {
+            const schema = this.items.get(parent);
+            return schema || this.findParentSchema(parent);
+        }
+        return null;
+    }
+}
+
+const DEFAULT_SCHEMA = "default";
+const schemaStorage = new JsonSchemaStorage();
+
+class PatternValidation {
+    constructor(pattern) {
+        this.pattern = new RegExp(pattern);
+    }
+    validate(value) {
+        const pattern = new RegExp(this.pattern.source, this.pattern.flags);
+        if (typeof value !== "string") {
+            throw new ValidationError("Incoming value must be string");
+        }
+        if (!pattern.exec(value)) {
+            throw new ValidationError(`Value doesn't match to pattern '${pattern.toString()}'`);
+        }
+    }
+}
+
+class InclusiveValidation {
+    constructor(min = Number.MIN_VALUE, max = Number.MAX_VALUE) {
+        this.min = min;
+        this.max = max;
+    }
+    validate(value) {
+        throwIfTypeIsWrong(value, JsonPropTypes.Number);
+        if (!(this.min <= value && value <= this.max)) {
+            const min = this.min === Number.MIN_VALUE ? "MIN" : this.min;
+            const max = this.max === Number.MAX_VALUE ? "MAX" : this.max;
+            throw new ValidationError(`Value doesn't match to diapason [${min},${max}]`);
+        }
+    }
+}
+
+class ExclusiveValidation {
+    constructor(min = Number.MIN_VALUE, max = Number.MAX_VALUE) {
+        this.min = min;
+        this.max = max;
+    }
+    validate(value) {
+        throwIfTypeIsWrong(value, JsonPropTypes.Number);
+        if (!(this.min < value && value < this.max)) {
+            const min = this.min === Number.MIN_VALUE ? "MIN" : this.min;
+            const max = this.max === Number.MAX_VALUE ? "MAX" : this.max;
+            throw new ValidationError(`Value doesn't match to diapason (${min},${max})`);
+        }
+    }
+}
+
+class LengthValidation {
+    constructor(length, minLength, maxLength) {
+        this.length = length;
+        this.minLength = minLength;
+        this.maxLength = maxLength;
+    }
+    validate(value) {
+        if (this.length !== undefined) {
+            if (value.length !== this.length) {
+                throw new ValidationError(`Value length must be exactly ${this.length}.`);
+            }
+            return;
+        }
+        if (this.minLength !== undefined) {
+            if (value.length < this.minLength) {
+                throw new ValidationError(`Value length must be more than ${this.minLength}.`);
+            }
+        }
+        if (this.maxLength !== undefined) {
+            if (value.length > this.maxLength) {
+                throw new ValidationError(`Value length must be less than ${this.maxLength}.`);
+            }
+        }
+    }
+}
+
+class EnumerationValidation {
+    constructor(enumeration) {
+        this.enumeration = enumeration;
+    }
+    validate(value) {
+        throwIfTypeIsWrong(value, JsonPropTypes.String);
+        if (!this.enumeration.includes(value)) {
+            throw new ValidationError(`Value must be one of ${this.enumeration.map((v) => `'${v}'`).join(", ")}`);
+        }
+    }
+}
+
+class JsonTransform {
+    static checkValues(data, schemaItem) {
+        const values = Array.isArray(data) ? data : [data];
+        for (const value of values) {
+            for (const validation of schemaItem.validations) {
+                if (validation instanceof LengthValidation && schemaItem.repeated) {
+                    validation.validate(data);
+                }
+                else {
+                    validation.validate(value);
+                }
+            }
+        }
+    }
+    static checkTypes(value, schemaItem) {
+        if (schemaItem.repeated && !Array.isArray(value)) {
+            throw new TypeError("Value must be Array");
+        }
+        if (typeof schemaItem.type === "number") {
+            const values = Array.isArray(value) ? value : [value];
+            for (const v of values) {
+                throwIfTypeIsWrong(v, schemaItem.type);
+            }
+        }
+    }
+    static getSchemaByName(schema, name = DEFAULT_SCHEMA) {
+        return { ...schema.names[DEFAULT_SCHEMA], ...schema.names[name] };
+    }
+}
+
+class JsonSerializer extends JsonTransform {
+    static serialize(obj, options, replacer, space) {
+        const json = this.toJSON(obj, options);
+        return JSON.stringify(json, replacer, space);
+    }
+    static toJSON(obj, options = {}) {
+        let res;
+        let targetSchema = options.targetSchema;
+        const schemaName = options.schemaName || DEFAULT_SCHEMA;
+        if (isConvertible(obj)) {
+            return obj.toJSON();
+        }
+        if (Array.isArray(obj)) {
+            res = [];
+            for (const item of obj) {
+                res.push(this.toJSON(item, options));
+            }
+        }
+        else if (typeof obj === "object") {
+            if (targetSchema && !schemaStorage.has(targetSchema)) {
+                throw new JsonError("Cannot get schema for `targetSchema` param");
+            }
+            targetSchema = (targetSchema || obj.constructor);
+            if (schemaStorage.has(targetSchema)) {
+                const schema = schemaStorage.get(targetSchema);
+                res = {};
+                const namedSchema = this.getSchemaByName(schema, schemaName);
+                for (const key in namedSchema) {
+                    try {
+                        const item = namedSchema[key];
+                        const objItem = obj[key];
+                        let value;
+                        if ((item.optional && objItem === undefined)
+                            || (item.defaultValue !== undefined && objItem === item.defaultValue)) {
+                            continue;
+                        }
+                        if (!item.optional && objItem === undefined) {
+                            throw new SerializerError(targetSchema.name, `Property '${key}' is required.`);
+                        }
+                        if (typeof item.type === "number") {
+                            if (item.converter) {
+                                if (item.repeated) {
+                                    value = objItem.map((el) => item.converter.toJSON(el, obj));
+                                }
+                                else {
+                                    value = item.converter.toJSON(objItem, obj);
+                                }
+                            }
+                            else {
+                                value = objItem;
+                            }
+                        }
+                        else {
+                            if (item.repeated) {
+                                value = objItem.map((el) => this.toJSON(el, { schemaName }));
+                            }
+                            else {
+                                value = this.toJSON(objItem, { schemaName });
+                            }
+                        }
+                        this.checkTypes(value, item);
+                        this.checkValues(value, item);
+                        res[item.name || key] = value;
+                    }
+                    catch (e) {
+                        if (e instanceof SerializerError) {
+                            throw e;
+                        }
+                        else {
+                            throw new SerializerError(schema.target.name, `Property '${key}' is wrong. ${e.message}`, e);
+                        }
+                    }
+                }
+            }
+            else {
+                res = {};
+                for (const key in obj) {
+                    res[key] = this.toJSON(obj[key], { schemaName });
+                }
+            }
+        }
+        else {
+            res = obj;
+        }
+        return res;
+    }
+}
+
+class JsonParser extends JsonTransform {
+    static parse(data, options) {
+        const obj = JSON.parse(data);
+        return this.fromJSON(obj, options);
+    }
+    static fromJSON(target, options) {
+        const targetSchema = options.targetSchema;
+        const schemaName = options.schemaName || DEFAULT_SCHEMA;
+        const obj = new targetSchema();
+        if (isConvertible(obj)) {
+            return obj.fromJSON(target);
+        }
+        const schema = schemaStorage.get(targetSchema);
+        const namedSchema = this.getSchemaByName(schema, schemaName);
+        const keyErrors = {};
+        if (options.strictProperty && !Array.isArray(target)) {
+            JsonParser.checkStrictProperty(target, namedSchema, schema);
+        }
+        for (const key in namedSchema) {
+            try {
+                const item = namedSchema[key];
+                const name = item.name || key;
+                const value = target[name];
+                if (value === undefined && (item.optional || item.defaultValue !== undefined)) {
+                    continue;
+                }
+                if (!item.optional && value === undefined) {
+                    throw new ParserError(schema, `Property '${name}' is required.`);
+                }
+                this.checkTypes(value, item);
+                this.checkValues(value, item);
+                if (typeof (item.type) === "number") {
+                    if (item.converter) {
+                        if (item.repeated) {
+                            obj[key] = value.map((el) => item.converter.fromJSON(el, obj));
+                        }
+                        else {
+                            obj[key] = item.converter.fromJSON(value, obj);
+                        }
+                    }
+                    else {
+                        obj[key] = value;
+                    }
+                }
+                else {
+                    const newOptions = {
+                        ...options,
+                        targetSchema: item.type,
+                        schemaName,
+                    };
+                    if (item.repeated) {
+                        obj[key] = value.map((el) => this.fromJSON(el, newOptions));
+                    }
+                    else {
+                        obj[key] = this.fromJSON(value, newOptions);
+                    }
+                }
+            }
+            catch (e) {
+                if (!(e instanceof ParserError)) {
+                    e = new ParserError(schema, `Property '${key}' is wrong. ${e.message}`, e);
+                }
+                if (options.strictAllKeys) {
+                    keyErrors[key] = e;
+                }
+                else {
+                    throw e;
+                }
+            }
+        }
+        const keys = Object.keys(keyErrors);
+        if (keys.length) {
+            throw new KeyError(schema, keys, keyErrors);
+        }
+        return obj;
+    }
+    static checkStrictProperty(target, namedSchema, schema) {
+        const jsonProps = Object.keys(target);
+        const schemaProps = Object.keys(namedSchema);
+        const keys = [];
+        for (const key of jsonProps) {
+            if (schemaProps.indexOf(key) === -1) {
+                keys.push(key);
+            }
+        }
+        if (keys.length) {
+            throw new KeyError(schema, keys);
+        }
+    }
+}
+
+function getValidations(item) {
+    const validations = [];
+    if (item.pattern) {
+        validations.push(new PatternValidation(item.pattern));
+    }
+    if (item.type === JsonPropTypes.Number || item.type === JsonPropTypes.Any) {
+        if (item.minInclusive !== undefined || item.maxInclusive !== undefined) {
+            validations.push(new InclusiveValidation(item.minInclusive, item.maxInclusive));
+        }
+        if (item.minExclusive !== undefined || item.maxExclusive !== undefined) {
+            validations.push(new ExclusiveValidation(item.minExclusive, item.maxExclusive));
+        }
+        if (item.enumeration !== undefined) {
+            validations.push(new EnumerationValidation(item.enumeration));
+        }
+    }
+    if (item.type === JsonPropTypes.String || item.repeated || item.type === JsonPropTypes.Any) {
+        if (item.length !== undefined || item.minLength !== undefined || item.maxLength !== undefined) {
+            validations.push(new LengthValidation(item.length, item.minLength, item.maxLength));
+        }
+    }
+    return validations;
+}
+const JsonProp = (options = {}) => (target, propertyKey) => {
+    const errorMessage = `Cannot set type for ${propertyKey} property of ${target.constructor.name} schema`;
+    let schema;
+    if (!schemaStorage.has(target.constructor)) {
+        schema = schemaStorage.create(target.constructor);
+        schemaStorage.set(target.constructor, schema);
+    }
+    else {
+        schema = schemaStorage.get(target.constructor);
+        if (schema.target !== target.constructor) {
+            schema = schemaStorage.create(target.constructor);
+            schemaStorage.set(target.constructor, schema);
+        }
+    }
+    const defaultSchema = {
+        type: JsonPropTypes.Any,
+        validations: [],
+    };
+    const copyOptions = Object.assign(defaultSchema, options);
+    copyOptions.validations = getValidations(copyOptions);
+    if (typeof copyOptions.type !== "number") {
+        if (!schemaStorage.has(copyOptions.type) && !isConvertible(copyOptions.type)) {
+            throw new Error(`${errorMessage}. Assigning type doesn't have schema.`);
+        }
+    }
+    let schemaNames;
+    if (Array.isArray(options.schema)) {
+        schemaNames = options.schema;
+    }
+    else {
+        schemaNames = [options.schema || DEFAULT_SCHEMA];
+    }
+    for (const schemaName of schemaNames) {
+        if (!schema.names[schemaName]) {
+            schema.names[schemaName] = {};
+        }
+        const namedSchema = schema.names[schemaName];
+        namedSchema[propertyKey] = copyOptions;
+    }
+};
+
+
+
+// EXTERNAL MODULE: ./node_modules/asn1js/src/asn1.js + 1 modules
+var asn1 = __webpack_require__(3898);
+;// CONCATENATED MODULE: ./node_modules/webcrypto-core/build/webcrypto-core.es.js
+/* provided dependency */ var Buffer = __webpack_require__(8764)["Buffer"];
+/**
+ * Copyright (c) 2019, Peculiar Ventures, All rights reserved.
+ */
+
+
+
+
+
+
+
+
+class CryptoError extends Error {
+}
+
+class AlgorithmError extends CryptoError {
+}
+
+class UnsupportedOperationError extends CryptoError {
+    constructor(methodName) {
+        super(`Unsupported operation: ${methodName ? `${methodName}` : ""}`);
+    }
+}
+
+class OperationError extends CryptoError {
+}
+
+class RequiredPropertyError extends CryptoError {
+    constructor(propName) {
+        super(`${propName}: Missing required property`);
+    }
+}
+
+class PemConverter {
+    static toArrayBuffer(pem) {
+        const base64 = pem
+            .replace(/-{5}(BEGIN|END) .*-{5}/g, "")
+            .replace("\r", "")
+            .replace("\n", "");
+        return Convert.FromBase64(base64);
+    }
+    static toUint8Array(pem) {
+        const bytes = this.toArrayBuffer(pem);
+        return new Uint8Array(bytes);
+    }
+    static fromBufferSource(buffer, tag) {
+        const base64 = Convert.ToBase64(buffer);
+        let sliced;
+        let offset = 0;
+        const rows = [];
+        while (true) {
+            sliced = base64.slice(offset, offset = offset + 64);
+            if (sliced.length) {
+                rows.push(sliced);
+                if (sliced.length < 64) {
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+        }
+        const upperCaseTag = tag.toUpperCase();
+        return `-----BEGIN ${upperCaseTag}-----\n${rows.join("\n")}\n-----END ${upperCaseTag}-----`;
+    }
+    static isPEM(data) {
+        return /-----BEGIN .+-----[A-Za-z0-9+\/\+\=\s\n]+-----END .+-----/i.test(data);
+    }
+    static getTagName(pem) {
+        if (!this.isPEM(pem)) {
+            throw new Error("Bad parameter. Incoming data is not right PEM");
+        }
+        const res = /-----BEGIN (.+)-----/.exec(pem);
+        if (!res) {
+            throw new Error("Cannot get tag from PEM");
+        }
+        return res[1];
+    }
+    static hasTagName(pem, tagName) {
+        const tag = this.getTagName(pem);
+        return tagName.toLowerCase() === tag.toLowerCase();
+    }
+    static isCertificate(pem) {
+        return this.hasTagName(pem, "certificate");
+    }
+    static isCertificateRequest(pem) {
+        return this.hasTagName(pem, "certificate request");
+    }
+    static isCRL(pem) {
+        return this.hasTagName(pem, "x509 crl");
+    }
+    static isPublicKey(pem) {
+        return this.hasTagName(pem, "public key");
+    }
+}
+
+function isJWK(data) {
+    return typeof data === "object" && "kty" in data;
+}
+
+class ProviderCrypto {
+    async digest(...args) {
+        this.checkDigest.apply(this, args);
+        return this.onDigest.apply(this, args);
+    }
+    checkDigest(algorithm, data) {
+        this.checkAlgorithmName(algorithm);
+    }
+    async onDigest(algorithm, data) {
+        throw new UnsupportedOperationError("digest");
+    }
+    async generateKey(...args) {
+        this.checkGenerateKey.apply(this, args);
+        return this.onGenerateKey.apply(this, args);
+    }
+    checkGenerateKey(algorithm, extractable, keyUsages, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkGenerateKeyParams(algorithm);
+        if (!(keyUsages && keyUsages.length)) {
+            throw new TypeError(`Usages cannot be empty when creating a key.`);
+        }
+        let allowedUsages;
+        if (Array.isArray(this.usages)) {
+            allowedUsages = this.usages;
+        }
+        else {
+            allowedUsages = this.usages.privateKey.concat(this.usages.publicKey);
+        }
+        this.checkKeyUsages(keyUsages, allowedUsages);
+    }
+    checkGenerateKeyParams(algorithm) {
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages, ...args) {
+        throw new UnsupportedOperationError("generateKey");
+    }
+    async sign(...args) {
+        this.checkSign.apply(this, args);
+        return this.onSign.apply(this, args);
+    }
+    checkSign(algorithm, key, data, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkAlgorithmParams(algorithm);
+        this.checkCryptoKey(key, "sign");
+    }
+    async onSign(algorithm, key, data, ...args) {
+        throw new UnsupportedOperationError("sign");
+    }
+    async verify(...args) {
+        this.checkVerify.apply(this, args);
+        return this.onVerify.apply(this, args);
+    }
+    checkVerify(algorithm, key, signature, data, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkAlgorithmParams(algorithm);
+        this.checkCryptoKey(key, "verify");
+    }
+    async onVerify(algorithm, key, signature, data, ...args) {
+        throw new UnsupportedOperationError("verify");
+    }
+    async encrypt(...args) {
+        this.checkEncrypt.apply(this, args);
+        return this.onEncrypt.apply(this, args);
+    }
+    checkEncrypt(algorithm, key, data, options = {}, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkAlgorithmParams(algorithm);
+        this.checkCryptoKey(key, options.keyUsage ? "encrypt" : void 0);
+    }
+    async onEncrypt(algorithm, key, data, ...args) {
+        throw new UnsupportedOperationError("encrypt");
+    }
+    async decrypt(...args) {
+        this.checkDecrypt.apply(this, args);
+        return this.onDecrypt.apply(this, args);
+    }
+    checkDecrypt(algorithm, key, data, options = {}, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkAlgorithmParams(algorithm);
+        this.checkCryptoKey(key, options.keyUsage ? "decrypt" : void 0);
+    }
+    async onDecrypt(algorithm, key, data, ...args) {
+        throw new UnsupportedOperationError("decrypt");
+    }
+    async deriveBits(...args) {
+        this.checkDeriveBits.apply(this, args);
+        return this.onDeriveBits.apply(this, args);
+    }
+    checkDeriveBits(algorithm, baseKey, length, options = {}, ...args) {
+        this.checkAlgorithmName(algorithm);
+        this.checkAlgorithmParams(algorithm);
+        this.checkCryptoKey(baseKey, options.keyUsage ? "deriveBits" : void 0);
+        if (length % 8 !== 0) {
+            throw new OperationError("length: Is not multiple of 8");
+        }
+    }
+    async onDeriveBits(algorithm, baseKey, length, ...args) {
+        throw new UnsupportedOperationError("deriveBits");
+    }
+    async exportKey(...args) {
+        this.checkExportKey.apply(this, args);
+        return this.onExportKey.apply(this, args);
+    }
+    checkExportKey(format, key, ...args) {
+        this.checkKeyFormat(format);
+        this.checkCryptoKey(key);
+        if (!key.extractable) {
+            throw new CryptoError("key: Is not extractable");
+        }
+    }
+    async onExportKey(format, key, ...args) {
+        throw new UnsupportedOperationError("exportKey");
+    }
+    async importKey(...args) {
+        this.checkImportKey.apply(this, args);
+        return this.onImportKey.apply(this, args);
+    }
+    checkImportKey(format, keyData, algorithm, extractable, keyUsages, ...args) {
+        this.checkKeyFormat(format);
+        this.checkKeyData(format, keyData);
+        this.checkAlgorithmName(algorithm);
+        this.checkImportParams(algorithm);
+        if (Array.isArray(this.usages)) {
+            this.checkKeyUsages(keyUsages, this.usages);
+        }
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages, ...args) {
+        throw new UnsupportedOperationError("importKey");
+    }
+    checkAlgorithmName(algorithm) {
+        if (algorithm.name.toLowerCase() !== this.name.toLowerCase()) {
+            throw new AlgorithmError("Unrecognized name");
+        }
+    }
+    checkAlgorithmParams(algorithm) {
+    }
+    checkDerivedKeyParams(algorithm) {
+    }
+    checkKeyUsages(usages, allowed) {
+        for (const usage of usages) {
+            if (allowed.indexOf(usage) === -1) {
+                throw new TypeError("Cannot create a key using the specified key usages");
+            }
+        }
+    }
+    checkCryptoKey(key, keyUsage) {
+        this.checkAlgorithmName(key.algorithm);
+        if (keyUsage && key.usages.indexOf(keyUsage) === -1) {
+            throw new CryptoError(`key does not match that of operation`);
+        }
+    }
+    checkRequiredProperty(data, propName) {
+        if (!(propName in data)) {
+            throw new RequiredPropertyError(propName);
+        }
+    }
+    checkHashAlgorithm(algorithm, hashAlgorithms) {
+        for (const item of hashAlgorithms) {
+            if (item.toLowerCase() === algorithm.name.toLowerCase()) {
+                return;
+            }
+        }
+        throw new OperationError(`hash: Must be one of ${hashAlgorithms.join(", ")}`);
+    }
+    checkImportParams(algorithm) {
+    }
+    checkKeyFormat(format) {
+        switch (format) {
+            case "raw":
+            case "pkcs8":
+            case "spki":
+            case "jwk":
+                break;
+            default:
+                throw new TypeError("format: Is invalid value. Must be 'jwk', 'raw', 'spki', or 'pkcs8'");
+        }
+    }
+    checkKeyData(format, keyData) {
+        if (!keyData) {
+            throw new TypeError("keyData: Cannot be empty on empty on key importing");
+        }
+        if (format === "jwk") {
+            if (!isJWK(keyData)) {
+                throw new TypeError("keyData: Is not JsonWebToken");
+            }
+        }
+        else if (!build.BufferSourceConverter.isBufferSource(keyData)) {
+            throw new TypeError("keyData: Is not ArrayBufferView or ArrayBuffer");
+        }
+    }
+    prepareData(data) {
+        return build.BufferSourceConverter.toArrayBuffer(data);
+    }
+}
+
+class AesProvider extends ProviderCrypto {
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "length");
+        if (typeof algorithm.length !== "number") {
+            throw new TypeError("length: Is not of type Number");
+        }
+        switch (algorithm.length) {
+            case 128:
+            case 192:
+            case 256:
+                break;
+            default:
+                throw new TypeError("length: Must be 128, 192, or 256");
+        }
+    }
+    checkDerivedKeyParams(algorithm) {
+        this.checkGenerateKeyParams(algorithm);
+    }
+}
+
+class webcrypto_core_es_AesCbcProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-CBC";
+        this.usages = ["encrypt", "decrypt", "wrapKey", "unwrapKey"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "iv");
+        if (!(algorithm.iv instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.iv))) {
+            throw new TypeError("iv: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+        if (algorithm.iv.byteLength !== 16) {
+            throw new TypeError("iv: Must have length 16 bytes");
+        }
+    }
+}
+
+class webcrypto_core_es_AesCmacProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-CMAC";
+        this.usages = ["sign", "verify"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "length");
+        if (typeof algorithm.length !== "number") {
+            throw new TypeError("length: Is not a Number");
+        }
+        if (algorithm.length < 1) {
+            throw new OperationError("length: Must be more than 0");
+        }
+    }
+}
+
+class webcrypto_core_es_AesCtrProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-CTR";
+        this.usages = ["encrypt", "decrypt", "wrapKey", "unwrapKey"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "counter");
+        if (!(algorithm.counter instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.counter))) {
+            throw new TypeError("counter: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+        if (algorithm.counter.byteLength !== 16) {
+            throw new TypeError("iv: Must have length 16 bytes");
+        }
+        this.checkRequiredProperty(algorithm, "length");
+        if (typeof algorithm.length !== "number") {
+            throw new TypeError("length: Is not a Number");
+        }
+        if (algorithm.length < 1) {
+            throw new OperationError("length: Must be more than 0");
+        }
+    }
+}
+
+class webcrypto_core_es_AesEcbProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-ECB";
+        this.usages = ["encrypt", "decrypt", "wrapKey", "unwrapKey"];
+    }
+}
+
+class webcrypto_core_es_AesGcmProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-GCM";
+        this.usages = ["encrypt", "decrypt", "wrapKey", "unwrapKey"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "iv");
+        if (!(algorithm.iv instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.iv))) {
+            throw new TypeError("iv: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+        if (algorithm.iv.byteLength < 1) {
+            throw new OperationError("iv: Must have length more than 0 and less than 2^64 - 1");
+        }
+        if (!("tagLength" in algorithm)) {
+            algorithm.tagLength = 128;
+        }
+        switch (algorithm.tagLength) {
+            case 32:
+            case 64:
+            case 96:
+            case 104:
+            case 112:
+            case 120:
+            case 128:
+                break;
+            default:
+                throw new OperationError("tagLength: Must be one of 32, 64, 96, 104, 112, 120 or 128");
+        }
+    }
+}
+
+class webcrypto_core_es_AesKwProvider extends AesProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "AES-KW";
+        this.usages = ["wrapKey", "unwrapKey"];
+    }
+}
+
+class DesProvider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.usages = ["encrypt", "decrypt", "wrapKey", "unwrapKey"];
+    }
+    checkAlgorithmParams(algorithm) {
+        if (this.ivSize) {
+            this.checkRequiredProperty(algorithm, "iv");
+            if (!(algorithm.iv instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.iv))) {
+                throw new TypeError("iv: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+            }
+            if (algorithm.iv.byteLength !== this.ivSize) {
+                throw new TypeError(`iv: Must have length ${this.ivSize} bytes`);
+            }
+        }
+    }
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "length");
+        if (typeof algorithm.length !== "number") {
+            throw new TypeError("length: Is not of type Number");
+        }
+        if (algorithm.length !== this.keySizeBits) {
+            throw new OperationError(`algorithm.length: Must be ${this.keySizeBits}`);
+        }
+    }
+    checkDerivedKeyParams(algorithm) {
+        this.checkGenerateKeyParams(algorithm);
+    }
+}
+
+class RsaProvider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.hashAlgorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
+    }
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+        this.checkRequiredProperty(algorithm, "publicExponent");
+        if (!(algorithm.publicExponent && algorithm.publicExponent instanceof Uint8Array)) {
+            throw new TypeError("publicExponent: Missing or not a Uint8Array");
+        }
+        const publicExponent = build.Convert.ToBase64(algorithm.publicExponent);
+        if (!(publicExponent === "Aw==" || publicExponent === "AQAB")) {
+            throw new TypeError("publicExponent: Must be [3] or [1,0,1]");
+        }
+        this.checkRequiredProperty(algorithm, "modulusLength");
+        if (algorithm.modulusLength % 8
+            || algorithm.modulusLength < 256
+            || algorithm.modulusLength > 16384) {
+            throw new TypeError("The modulus length must be a multiple of 8 bits and >= 256 and <= 16384");
+        }
+    }
+    checkImportParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+    }
+}
+
+class webcrypto_core_es_RsaSsaProvider extends RsaProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "RSASSA-PKCS1-v1_5";
+        this.usages = {
+            privateKey: ["sign"],
+            publicKey: ["verify"],
+        };
+    }
+}
+
+class webcrypto_core_es_RsaPssProvider extends RsaProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "RSA-PSS";
+        this.usages = {
+            privateKey: ["sign"],
+            publicKey: ["verify"],
+        };
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "saltLength");
+        if (typeof algorithm.saltLength !== "number") {
+            throw new TypeError("saltLength: Is not a Number");
+        }
+        if (algorithm.saltLength < 0) {
+            throw new RangeError("saltLength: Must be positive number");
+        }
+    }
+}
+
+class webcrypto_core_es_RsaOaepProvider extends RsaProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "RSA-OAEP";
+        this.usages = {
+            privateKey: ["decrypt", "unwrapKey"],
+            publicKey: ["encrypt", "wrapKey"],
+        };
+    }
+    checkAlgorithmParams(algorithm) {
+        if (algorithm.label
+            && !(algorithm.label instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.label))) {
+            throw new TypeError("label: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+    }
+}
+
+class EllipticProvider extends ProviderCrypto {
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "namedCurve");
+        this.checkNamedCurve(algorithm.namedCurve);
+    }
+    checkNamedCurve(namedCurve) {
+        for (const item of this.namedCurves) {
+            if (item.toLowerCase() === namedCurve.toLowerCase()) {
+                return;
+            }
+        }
+        throw new OperationError(`namedCurve: Must be one of ${this.namedCurves.join(", ")}`);
+    }
+}
+
+class webcrypto_core_es_EcdsaProvider extends EllipticProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "ECDSA";
+        this.hashAlgorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
+        this.usages = {
+            privateKey: ["sign"],
+            publicKey: ["verify"],
+        };
+        this.namedCurves = ["P-256", "P-384", "P-521", "K-256"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+    }
+}
+
+const KEY_TYPES = ["secret", "private", "public"];
+class webcrypto_core_es_CryptoKey {
+    static create(algorithm, type, extractable, usages) {
+        const key = new this();
+        key.algorithm = algorithm;
+        key.type = type;
+        key.extractable = extractable;
+        key.usages = usages;
+        return key;
+    }
+    static isKeyType(data) {
+        return KEY_TYPES.indexOf(data) !== -1;
+    }
+    get [Symbol.toStringTag]() {
+        return "CryptoKey";
+    }
+}
+
+class webcrypto_core_es_EcdhProvider extends EllipticProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "ECDH";
+        this.usages = {
+            privateKey: ["deriveBits", "deriveKey"],
+            publicKey: [],
+        };
+        this.namedCurves = ["P-256", "P-384", "P-521", "K-256"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "public");
+        if (!(algorithm.public instanceof webcrypto_core_es_CryptoKey)) {
+            throw new TypeError("public: Is not a CryptoKey");
+        }
+        if (algorithm.public.type !== "public") {
+            throw new OperationError("public: Is not a public key");
+        }
+        if (algorithm.public.algorithm.name !== this.name) {
+            throw new OperationError(`public: Is not ${this.name} key`);
+        }
+    }
+}
+
+class webcrypto_core_es_EcdhEsProvider extends webcrypto_core_es_EcdhProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "ECDH-ES";
+        this.namedCurves = ["X25519", "X448"];
+    }
+}
+
+class webcrypto_core_es_EdDsaProvider extends EllipticProvider {
+    constructor() {
+        super(...arguments);
+        this.name = "EdDSA";
+        this.usages = {
+            privateKey: ["sign"],
+            publicKey: ["verify"],
+        };
+        this.namedCurves = ["Ed25519", "Ed448"];
+    }
+}
+
+let ObjectIdentifier = class ObjectIdentifier {
+    constructor(value) {
+        if (value) {
+            this.value = value;
+        }
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], ObjectIdentifier.prototype, "value", void 0);
+ObjectIdentifier = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], ObjectIdentifier);
+
+class AlgorithmIdentifier {
+    constructor(params) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier,
+    })
+], AlgorithmIdentifier.prototype, "algorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Any */.gZ.Any,
+        optional: true,
+    })
+], AlgorithmIdentifier.prototype, "parameters", void 0);
+
+class PrivateKeyInfo {
+    constructor() {
+        this.version = 0;
+        this.privateKeyAlgorithm = new AlgorithmIdentifier();
+        this.privateKey = new ArrayBuffer(0);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], PrivateKeyInfo.prototype, "version", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], PrivateKeyInfo.prototype, "privateKeyAlgorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.OctetString */.gZ.OctetString })
+], PrivateKeyInfo.prototype, "privateKey", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, optional: true })
+], PrivateKeyInfo.prototype, "attributes", void 0);
+
+class PublicKeyInfo {
+    constructor() {
+        this.publicKeyAlgorithm = new AlgorithmIdentifier();
+        this.publicKey = new ArrayBuffer(0);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], PublicKeyInfo.prototype, "publicKeyAlgorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], PublicKeyInfo.prototype, "publicKey", void 0);
+
+const JsonBase64UrlArrayBufferConverter = {
+    fromJSON: (value) => build.Convert.FromBase64Url(value),
+    toJSON: (value) => build.Convert.ToBase64Url(new Uint8Array(value)),
+};
+
+const AsnIntegerArrayBufferConverter = {
+    fromASN: (value) => {
+        const valueHex = value.valueBlock.valueHex;
+        return !(new Uint8Array(valueHex)[0])
+            ? value.valueBlock.valueHex.slice(1)
+            : value.valueBlock.valueHex;
+    },
+    toASN: (value) => {
+        const valueHex = new Uint8Array(value)[0] > 127
+            ? Buffer.concat([Buffer.from([0]), Buffer.from(value)])
+            : Buffer.from(value);
+        return new asn1.Integer({ valueHex: new Uint8Array(valueHex).buffer });
+    },
+};
+
+var index$3 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  JsonBase64UrlArrayBufferConverter: JsonBase64UrlArrayBufferConverter,
+  AsnIntegerArrayBufferConverter: AsnIntegerArrayBufferConverter
+});
+
+class RsaPrivateKey {
+    constructor() {
+        this.version = 0;
+        this.modulus = new ArrayBuffer(0);
+        this.publicExponent = new ArrayBuffer(0);
+        this.privateExponent = new ArrayBuffer(0);
+        this.prime1 = new ArrayBuffer(0);
+        this.prime2 = new ArrayBuffer(0);
+        this.exponent1 = new ArrayBuffer(0);
+        this.exponent2 = new ArrayBuffer(0);
+        this.coefficient = new ArrayBuffer(0);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerConverter */.A6 })
+], RsaPrivateKey.prototype, "version", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "n", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "modulus", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "e", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "publicExponent", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "d", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "privateExponent", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "p", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "prime1", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "q", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "prime2", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "dp", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "exponent1", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "dq", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "exponent2", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "qi", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPrivateKey.prototype, "coefficient", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, optional: true })
+], RsaPrivateKey.prototype, "otherPrimeInfos", void 0);
+
+class RsaPublicKey {
+    constructor() {
+        this.modulus = new ArrayBuffer(0);
+        this.publicExponent = new ArrayBuffer(0);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "n", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPublicKey.prototype, "modulus", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerArrayBufferConverter }),
+    JsonProp({ name: "e", converter: JsonBase64UrlArrayBufferConverter })
+], RsaPublicKey.prototype, "publicExponent", void 0);
+
+let EcPublicKey = class EcPublicKey {
+    constructor(value) {
+        this.value = new ArrayBuffer(0);
+        if (value) {
+            this.value = value;
+        }
+    }
+    toJSON() {
+        let bytes = new Uint8Array(this.value);
+        if (bytes[0] !== 0x04) {
+            throw new CryptoError("Wrong ECPoint. Current version supports only Uncompressed (0x04) point");
+        }
+        bytes = new Uint8Array(this.value.slice(1));
+        const size = bytes.length / 2;
+        const offset = 0;
+        const json = {
+            x: build.Convert.ToBase64Url(bytes.buffer.slice(offset, offset + size)),
+            y: build.Convert.ToBase64Url(bytes.buffer.slice(offset + size, offset + size + size)),
+        };
+        return json;
+    }
+    fromJSON(json) {
+        if (!("x" in json)) {
+            throw new Error("x: Missing required property");
+        }
+        if (!("y" in json)) {
+            throw new Error("y: Missing required property");
+        }
+        const x = build.Convert.FromBase64Url(json.x);
+        const y = build.Convert.FromBase64Url(json.y);
+        const value = Buffer.concat([
+            new Uint8Array([0x04]),
+            new Uint8Array(x),
+            new Uint8Array(y),
+        ]);
+        this.value = new Uint8Array(value).buffer;
+        return this;
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.OctetString */.gZ.OctetString })
+], EcPublicKey.prototype, "value", void 0);
+EcPublicKey = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], EcPublicKey);
+
+class EcPrivateKey {
+    constructor() {
+        this.version = 1;
+        this.privateKey = new ArrayBuffer(0);
+    }
+    fromJSON(json) {
+        if (!("d" in json)) {
+            throw new Error("d: Missing required property");
+        }
+        this.privateKey = build.Convert.FromBase64Url(json.d);
+        if ("x" in json) {
+            const publicKey = new EcPublicKey();
+            publicKey.fromJSON(json);
+            this.publicKey = es2015/* AsnSerializer.toASN */.xg.toASN(publicKey).valueBlock.valueHex;
+        }
+        return this;
+    }
+    toJSON() {
+        const jwk = {};
+        jwk.d = build.Convert.ToBase64Url(this.privateKey);
+        if (this.publicKey) {
+            Object.assign(jwk, new EcPublicKey(this.publicKey).toJSON());
+        }
+        return jwk;
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerConverter */.A6 })
+], EcPrivateKey.prototype, "version", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.OctetString */.gZ.OctetString })
+], EcPrivateKey.prototype, "privateKey", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ context: 0, type: es2015/* AsnPropTypes.Any */.gZ.Any, optional: true })
+], EcPrivateKey.prototype, "parameters", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ context: 1, type: es2015/* AsnPropTypes.BitString */.gZ.BitString, optional: true })
+], EcPrivateKey.prototype, "publicKey", void 0);
+
+const AsnIntegerWithoutPaddingConverter = {
+    fromASN: (value) => {
+        const bytes = new Uint8Array(value.valueBlock.valueHex);
+        return (bytes[0] === 0)
+            ? bytes.buffer.slice(1)
+            : bytes.buffer;
+    },
+    toASN: (value) => {
+        const bytes = new Uint8Array(value);
+        if (bytes[0] > 127) {
+            const newValue = new Uint8Array(bytes.length + 1);
+            newValue.set(bytes, 1);
+            return new asn1.Integer({ valueHex: newValue.buffer });
+        }
+        return new asn1.Integer({ valueHex: value });
+    },
+};
+
+var index$2 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  AsnIntegerWithoutPaddingConverter: AsnIntegerWithoutPaddingConverter
+});
+
+class EcUtils {
+    static decodePoint(data, pointSize) {
+        const view = build.BufferSourceConverter.toUint8Array(data);
+        if ((view.length === 0) || (view[0] !== 4)) {
+            throw new Error("Only uncompressed point format supported");
+        }
+        const n = (view.length - 1) / 2;
+        if (n !== (Math.ceil(pointSize / 8))) {
+            throw new Error("Point does not match field size");
+        }
+        const xb = view.slice(1, n + 1);
+        const yb = view.slice(n + 1, n + 1 + n);
+        return { x: xb, y: yb };
+    }
+    static encodePoint(point, pointSize) {
+        const size = Math.ceil(pointSize / 8);
+        if (point.x.byteLength !== size || point.y.byteLength !== size) {
+            throw new Error("X,Y coordinates don't match point size criteria");
+        }
+        const x = build.BufferSourceConverter.toUint8Array(point.x);
+        const y = build.BufferSourceConverter.toUint8Array(point.y);
+        const res = new Uint8Array(size * 2 + 1);
+        res[0] = 4;
+        res.set(x, 1);
+        res.set(y, size + 1);
+        return res;
+    }
+    static getSize(pointSize) {
+        return Math.ceil(pointSize / 8);
+    }
+    static encodeSignature(signature, pointSize) {
+        const size = this.getSize(pointSize);
+        const r = build.BufferSourceConverter.toUint8Array(signature.r);
+        const s = build.BufferSourceConverter.toUint8Array(signature.s);
+        const res = new Uint8Array(size * 2);
+        res.set(this.padStart(r, size));
+        res.set(this.padStart(s, size), size);
+        return res;
+    }
+    static decodeSignature(data, pointSize) {
+        const size = this.getSize(pointSize);
+        const view = build.BufferSourceConverter.toUint8Array(data);
+        if (view.length !== (size * 2)) {
+            throw new Error("Incorrect size of the signature");
+        }
+        const r = view.slice(0, size);
+        const s = view.slice(size);
+        return {
+            r: this.trimStart(r),
+            s: this.trimStart(s),
+        };
+    }
+    static trimStart(data) {
+        let i = 0;
+        while ((i < data.length - 1) && (data[i] === 0)) {
+            i++;
+        }
+        if (i === 0) {
+            return data;
+        }
+        return data.slice(i, data.length);
+    }
+    static padStart(data, size) {
+        if (size === data.length) {
+            return data;
+        }
+        const res = new Uint8Array(size);
+        res.set(data, size - data.length);
+        return res;
+    }
+}
+
+class EcDsaSignature {
+    constructor() {
+        this.r = new ArrayBuffer(0);
+        this.s = new ArrayBuffer(0);
+    }
+    static fromWebCryptoSignature(value) {
+        const pointSize = value.byteLength / 2;
+        const point = EcUtils.decodeSignature(value, pointSize * 8);
+        const ecSignature = new EcDsaSignature();
+        ecSignature.r = build.BufferSourceConverter.toArrayBuffer(point.r);
+        ecSignature.s = build.BufferSourceConverter.toArrayBuffer(point.s);
+        return ecSignature;
+    }
+    toWebCryptoSignature(pointSize) {
+        pointSize !== null && pointSize !== void 0 ? pointSize : (pointSize = Math.max(this.r.byteLength, this.s.byteLength) * 8);
+        const signature = EcUtils.encodeSignature(this, pointSize);
+        return signature.buffer;
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerWithoutPaddingConverter })
+], EcDsaSignature.prototype, "r", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: AsnIntegerWithoutPaddingConverter })
+], EcDsaSignature.prototype, "s", void 0);
+
+let CurvePrivateKey = class CurvePrivateKey {
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.OctetString */.gZ.OctetString }),
+    JsonProp({ type: JsonPropTypes.String, converter: JsonBase64UrlArrayBufferConverter })
+], CurvePrivateKey.prototype, "d", void 0);
+CurvePrivateKey = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CurvePrivateKey);
+
+const idSecp256r1 = "1.2.840.10045.3.1.7";
+const idEllipticCurve = "1.3.132.0";
+const idSecp384r1 = `${idEllipticCurve}.34`;
+const idSecp521r1 = `${idEllipticCurve}.35`;
+const idSecp256k1 = `${idEllipticCurve}.10`;
+const idVersionOne = "1.3.36.3.3.2.8.1.1";
+const idBrainpoolP160r1 = `${idVersionOne}.1`;
+const idBrainpoolP160t1 = `${idVersionOne}.2`;
+const idBrainpoolP192r1 = `${idVersionOne}.3`;
+const idBrainpoolP192t1 = `${idVersionOne}.4`;
+const idBrainpoolP224r1 = `${idVersionOne}.5`;
+const idBrainpoolP224t1 = `${idVersionOne}.6`;
+const idBrainpoolP256r1 = `${idVersionOne}.7`;
+const idBrainpoolP256t1 = `${idVersionOne}.8`;
+const idBrainpoolP320r1 = `${idVersionOne}.9`;
+const idBrainpoolP320t1 = `${idVersionOne}.10`;
+const idBrainpoolP384r1 = `${idVersionOne}.11`;
+const idBrainpoolP384t1 = `${idVersionOne}.12`;
+const idBrainpoolP512r1 = `${idVersionOne}.13`;
+const idBrainpoolP512t1 = `${idVersionOne}.14`;
+const idX25519 = "1.3.101.110";
+const idX448 = "1.3.101.111";
+const idEd25519 = "1.3.101.112";
+const idEd448 = "1.3.101.113";
+
+var index$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  converters: index$2,
+  get ObjectIdentifier () { return ObjectIdentifier; },
+  AlgorithmIdentifier: AlgorithmIdentifier,
+  PrivateKeyInfo: PrivateKeyInfo,
+  PublicKeyInfo: PublicKeyInfo,
+  RsaPrivateKey: RsaPrivateKey,
+  RsaPublicKey: RsaPublicKey,
+  EcPrivateKey: EcPrivateKey,
+  get EcPublicKey () { return EcPublicKey; },
+  EcDsaSignature: EcDsaSignature,
+  get CurvePrivateKey () { return CurvePrivateKey; },
+  idSecp256r1: idSecp256r1,
+  idEllipticCurve: idEllipticCurve,
+  idSecp384r1: idSecp384r1,
+  idSecp521r1: idSecp521r1,
+  idSecp256k1: idSecp256k1,
+  idVersionOne: idVersionOne,
+  idBrainpoolP160r1: idBrainpoolP160r1,
+  idBrainpoolP160t1: idBrainpoolP160t1,
+  idBrainpoolP192r1: idBrainpoolP192r1,
+  idBrainpoolP192t1: idBrainpoolP192t1,
+  idBrainpoolP224r1: idBrainpoolP224r1,
+  idBrainpoolP224t1: idBrainpoolP224t1,
+  idBrainpoolP256r1: idBrainpoolP256r1,
+  idBrainpoolP256t1: idBrainpoolP256t1,
+  idBrainpoolP320r1: idBrainpoolP320r1,
+  idBrainpoolP320t1: idBrainpoolP320t1,
+  idBrainpoolP384r1: idBrainpoolP384r1,
+  idBrainpoolP384t1: idBrainpoolP384t1,
+  idBrainpoolP512r1: idBrainpoolP512r1,
+  idBrainpoolP512t1: idBrainpoolP512t1,
+  idX25519: idX25519,
+  idX448: idX448,
+  idEd25519: idEd25519,
+  idEd448: idEd448
+});
+
+class EcCurves {
+    constructor() { }
+    static register(item) {
+        const oid = new ObjectIdentifier();
+        oid.value = item.id;
+        const raw = es2015/* AsnConvert.serialize */.zc.serialize(oid);
+        this.items.push({
+            ...item,
+            raw,
+        });
+        this.names.push(item.name);
+    }
+    static find(nameOrId) {
+        nameOrId = nameOrId.toUpperCase();
+        for (const item of this.items) {
+            if (item.name.toUpperCase() === nameOrId || item.id.toUpperCase() === nameOrId) {
+                return item;
+            }
+        }
+        return null;
+    }
+    static get(nameOrId) {
+        const res = this.find(nameOrId);
+        if (!res) {
+            throw new Error(`Unsupported EC named curve '${nameOrId}'`);
+        }
+        return res;
+    }
+}
+EcCurves.items = [];
+EcCurves.names = [];
+EcCurves.register({ name: "P-256", id: idSecp256r1, size: 256 });
+EcCurves.register({ name: "P-384", id: idSecp384r1, size: 384 });
+EcCurves.register({ name: "P-521", id: idSecp521r1, size: 521 });
+EcCurves.register({ name: "K-256", id: idSecp256k1, size: 256 });
+EcCurves.register({ name: "brainpoolP160r1", id: idBrainpoolP160r1, size: 160 });
+EcCurves.register({ name: "brainpoolP160t1", id: idBrainpoolP160t1, size: 160 });
+EcCurves.register({ name: "brainpoolP192r1", id: idBrainpoolP192r1, size: 192 });
+EcCurves.register({ name: "brainpoolP192t1", id: idBrainpoolP192t1, size: 192 });
+EcCurves.register({ name: "brainpoolP224r1", id: idBrainpoolP224r1, size: 224 });
+EcCurves.register({ name: "brainpoolP224t1", id: idBrainpoolP224t1, size: 224 });
+EcCurves.register({ name: "brainpoolP256r1", id: idBrainpoolP256r1, size: 256 });
+EcCurves.register({ name: "brainpoolP256t1", id: idBrainpoolP256t1, size: 256 });
+EcCurves.register({ name: "brainpoolP320r1", id: idBrainpoolP320r1, size: 320 });
+EcCurves.register({ name: "brainpoolP320t1", id: idBrainpoolP320t1, size: 320 });
+EcCurves.register({ name: "brainpoolP384r1", id: idBrainpoolP384r1, size: 384 });
+EcCurves.register({ name: "brainpoolP384t1", id: idBrainpoolP384t1, size: 384 });
+EcCurves.register({ name: "brainpoolP512r1", id: idBrainpoolP512r1, size: 512 });
+EcCurves.register({ name: "brainpoolP512t1", id: idBrainpoolP512t1, size: 512 });
+
+class webcrypto_core_es_HmacProvider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "HMAC";
+        this.hashAlgorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
+        this.usages = ["sign", "verify"];
+    }
+    getDefaultLength(algName) {
+        switch (algName.toUpperCase()) {
+            case "SHA-1":
+            case "SHA-256":
+            case "SHA-384":
+            case "SHA-512":
+                return 512;
+            default:
+                throw new Error(`Unknown algorithm name '${algName}'`);
+        }
+    }
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+        if ("length" in algorithm) {
+            if (typeof algorithm.length !== "number") {
+                throw new TypeError("length: Is not a Number");
+            }
+            if (algorithm.length < 1) {
+                throw new RangeError("length: Number is out of range");
+            }
+        }
+    }
+    checkImportParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+    }
+}
+
+class webcrypto_core_es_Pbkdf2Provider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "PBKDF2";
+        this.hashAlgorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
+        this.usages = ["deriveBits", "deriveKey"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+        this.checkRequiredProperty(algorithm, "salt");
+        if (!(algorithm.salt instanceof ArrayBuffer || ArrayBuffer.isView(algorithm.salt))) {
+            throw new TypeError("salt: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+        this.checkRequiredProperty(algorithm, "iterations");
+        if (typeof algorithm.iterations !== "number") {
+            throw new TypeError("iterations: Is not a Number");
+        }
+        if (algorithm.iterations < 1) {
+            throw new TypeError("iterations: Is less than 1");
+        }
+    }
+    checkImportKey(format, keyData, algorithm, extractable, keyUsages, ...args) {
+        super.checkImportKey(format, keyData, algorithm, extractable, keyUsages);
+        if (extractable) {
+            throw new SyntaxError("extractable: Must be 'false'");
+        }
+    }
+}
+
+class webcrypto_core_es_HkdfProvider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "HKDF";
+        this.hashAlgorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
+        this.usages = ["deriveKey", "deriveBits"];
+    }
+    checkAlgorithmParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "hash");
+        this.checkHashAlgorithm(algorithm.hash, this.hashAlgorithms);
+        this.checkRequiredProperty(algorithm, "salt");
+        if (!build.BufferSourceConverter.isBufferSource(algorithm.salt)) {
+            throw new TypeError("salt: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+        this.checkRequiredProperty(algorithm, "info");
+        if (!build.BufferSourceConverter.isBufferSource(algorithm.info)) {
+            throw new TypeError("salt: Is not of type '(ArrayBuffer or ArrayBufferView)'");
+        }
+    }
+    checkImportKey(format, keyData, algorithm, extractable, keyUsages, ...args) {
+        super.checkImportKey(format, keyData, algorithm, extractable, keyUsages);
+        if (extractable) {
+            throw new SyntaxError("extractable: Must be 'false'");
+        }
+    }
+}
+
+class webcrypto_core_es_Crypto {
+    get [Symbol.toStringTag]() {
+        return "Crypto";
+    }
+}
+
+class ProviderStorage {
+    constructor() {
+        this.items = {};
+    }
+    get(algorithmName) {
+        return this.items[algorithmName.toLowerCase()] || null;
+    }
+    set(provider) {
+        this.items[provider.name.toLowerCase()] = provider;
+    }
+    removeAt(algorithmName) {
+        const provider = this.get(algorithmName.toLowerCase());
+        if (provider) {
+            delete this.items[algorithmName];
+        }
+        return provider;
+    }
+    has(name) {
+        return !!this.get(name);
+    }
+    get length() {
+        return Object.keys(this.items).length;
+    }
+    get algorithms() {
+        const algorithms = [];
+        for (const key in this.items) {
+            const provider = this.items[key];
+            algorithms.push(provider.name);
+        }
+        return algorithms.sort();
+    }
+}
+
+class webcrypto_core_es_SubtleCrypto {
+    constructor() {
+        this.providers = new ProviderStorage();
+    }
+    static isHashedAlgorithm(data) {
+        return data
+            && typeof data === "object"
+            && "name" in data
+            && "hash" in data
+            ? true
+            : false;
+    }
+    get [Symbol.toStringTag]() {
+        return "SubtleCrypto";
+    }
+    async digest(...args) {
+        this.checkRequiredArguments(args, 2, "digest");
+        const [algorithm, data, ...params] = args;
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(data);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.digest(preparedAlgorithm, preparedData, ...params);
+        return result;
+    }
+    async generateKey(...args) {
+        this.checkRequiredArguments(args, 3, "generateKey");
+        const [algorithm, extractable, keyUsages, ...params] = args;
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.generateKey({ ...preparedAlgorithm, name: provider.name }, extractable, keyUsages, ...params);
+        return result;
+    }
+    async sign(...args) {
+        this.checkRequiredArguments(args, 3, "sign");
+        const [algorithm, key, data, ...params] = args;
+        this.checkCryptoKey(key);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(data);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.sign({ ...preparedAlgorithm, name: provider.name }, key, preparedData, ...params);
+        return result;
+    }
+    async verify(...args) {
+        this.checkRequiredArguments(args, 4, "verify");
+        const [algorithm, key, signature, data, ...params] = args;
+        this.checkCryptoKey(key);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(data);
+        const preparedSignature = build.BufferSourceConverter.toArrayBuffer(signature);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.verify({ ...preparedAlgorithm, name: provider.name }, key, preparedSignature, preparedData, ...params);
+        return result;
+    }
+    async encrypt(...args) {
+        this.checkRequiredArguments(args, 3, "encrypt");
+        const [algorithm, key, data, ...params] = args;
+        this.checkCryptoKey(key);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(data);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.encrypt({ ...preparedAlgorithm, name: provider.name }, key, preparedData, { keyUsage: true }, ...params);
+        return result;
+    }
+    async decrypt(...args) {
+        this.checkRequiredArguments(args, 3, "decrypt");
+        const [algorithm, key, data, ...params] = args;
+        this.checkCryptoKey(key);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(data);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.decrypt({ ...preparedAlgorithm, name: provider.name }, key, preparedData, { keyUsage: true }, ...params);
+        return result;
+    }
+    async deriveBits(...args) {
+        this.checkRequiredArguments(args, 3, "deriveBits");
+        const [algorithm, baseKey, length, ...params] = args;
+        this.checkCryptoKey(baseKey);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        const result = await provider.deriveBits({ ...preparedAlgorithm, name: provider.name }, baseKey, length, { keyUsage: true }, ...params);
+        return result;
+    }
+    async deriveKey(...args) {
+        this.checkRequiredArguments(args, 5, "deriveKey");
+        const [algorithm, baseKey, derivedKeyType, extractable, keyUsages, ...params] = args;
+        const preparedDerivedKeyType = this.prepareAlgorithm(derivedKeyType);
+        const importProvider = this.getProvider(preparedDerivedKeyType.name);
+        importProvider.checkDerivedKeyParams(preparedDerivedKeyType);
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        provider.checkCryptoKey(baseKey, "deriveKey");
+        const derivedBits = await provider.deriveBits({ ...preparedAlgorithm, name: provider.name }, baseKey, derivedKeyType.length || 512, { keyUsage: false }, ...params);
+        return this.importKey("raw", derivedBits, derivedKeyType, extractable, keyUsages, ...params);
+    }
+    async exportKey(...args) {
+        this.checkRequiredArguments(args, 2, "exportKey");
+        const [format, key, ...params] = args;
+        this.checkCryptoKey(key);
+        const provider = this.getProvider(key.algorithm.name);
+        const result = await provider.exportKey(format, key, ...params);
+        return result;
+    }
+    async importKey(...args) {
+        this.checkRequiredArguments(args, 5, "importKey");
+        const [format, keyData, algorithm, extractable, keyUsages, ...params] = args;
+        const preparedAlgorithm = this.prepareAlgorithm(algorithm);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        if (["pkcs8", "spki", "raw"].indexOf(format) !== -1) {
+            const preparedData = build.BufferSourceConverter.toArrayBuffer(keyData);
+            return provider.importKey(format, preparedData, { ...preparedAlgorithm, name: provider.name }, extractable, keyUsages, ...params);
+        }
+        else {
+            if (!keyData.kty) {
+                throw new TypeError("keyData: Is not JSON");
+            }
+        }
+        return provider.importKey(format, keyData, { ...preparedAlgorithm, name: provider.name }, extractable, keyUsages, ...params);
+    }
+    async wrapKey(format, key, wrappingKey, wrapAlgorithm, ...args) {
+        let keyData = await this.exportKey(format, key, ...args);
+        if (format === "jwk") {
+            const json = JSON.stringify(keyData);
+            keyData = build.Convert.FromUtf8String(json);
+        }
+        const preparedAlgorithm = this.prepareAlgorithm(wrapAlgorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(keyData);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        return provider.encrypt({ ...preparedAlgorithm, name: provider.name }, wrappingKey, preparedData, { keyUsage: false }, ...args);
+    }
+    async unwrapKey(format, wrappedKey, unwrappingKey, unwrapAlgorithm, unwrappedKeyAlgorithm, extractable, keyUsages, ...args) {
+        const preparedAlgorithm = this.prepareAlgorithm(unwrapAlgorithm);
+        const preparedData = build.BufferSourceConverter.toArrayBuffer(wrappedKey);
+        const provider = this.getProvider(preparedAlgorithm.name);
+        let keyData = await provider.decrypt({ ...preparedAlgorithm, name: provider.name }, unwrappingKey, preparedData, { keyUsage: false }, ...args);
+        if (format === "jwk") {
+            try {
+                keyData = JSON.parse(build.Convert.ToUtf8String(keyData));
+            }
+            catch (e) {
+                const error = new TypeError("wrappedKey: Is not a JSON");
+                error.internal = e;
+                throw error;
+            }
+        }
+        return this.importKey(format, keyData, unwrappedKeyAlgorithm, extractable, keyUsages, ...args);
+    }
+    checkRequiredArguments(args, size, methodName) {
+        if (args.length < size) {
+            throw new TypeError(`Failed to execute '${methodName}' on 'SubtleCrypto': ${size} arguments required, but only ${args.length} present`);
+        }
+    }
+    prepareAlgorithm(algorithm) {
+        if (typeof algorithm === "string") {
+            return {
+                name: algorithm,
+            };
+        }
+        if (webcrypto_core_es_SubtleCrypto.isHashedAlgorithm(algorithm)) {
+            const preparedAlgorithm = { ...algorithm };
+            preparedAlgorithm.hash = this.prepareAlgorithm(algorithm.hash);
+            return preparedAlgorithm;
+        }
+        return { ...algorithm };
+    }
+    getProvider(name) {
+        const provider = this.providers.get(name);
+        if (!provider) {
+            throw new AlgorithmError("Unrecognized name");
+        }
+        return provider;
+    }
+    checkCryptoKey(key) {
+        if (!(key instanceof webcrypto_core_es_CryptoKey)) {
+            throw new TypeError(`Key is not of type 'CryptoKey'`);
+        }
+    }
+}
+
+var index = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  converters: index$3
+});
+
+
+
+// EXTERNAL MODULE: ./node_modules/crypto-browserify/index.js
+var crypto_browserify = __webpack_require__(5835);
+// EXTERNAL MODULE: ./node_modules/process/browser.js
+var browser = __webpack_require__(4155);
+;// CONCATENATED MODULE: ./node_modules/@peculiar/webcrypto/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var tslib_es6_extendStatics = function(d, b) {
+    tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return tslib_es6_extendStatics(d, b);
+};
+
+function tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var tslib_es6_assign = function() {
+    tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return tslib_es6_assign.apply(this, arguments);
+}
+
+function tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) tslib_es6_createBinding(o, m, p);
+}
+
+function tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function tslib_es6_await(v) {
+    return this instanceof tslib_es6_await ? (this.v = v, this) : new tslib_es6_await(v);
+}
+
+function tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof tslib_es6_values === "function" ? tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) tslib_es6_createBinding(result, mod, k);
+    tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/webcrypto/build/webcrypto.es.js
+/* provided dependency */ var webcrypto_es_Buffer = __webpack_require__(8764)["Buffer"];
+/**
+ * Copyright (c) 2020 Peculiar Ventures, LLC
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+const JsonBase64UrlConverter = {
+    fromJSON: (value) => webcrypto_es_Buffer.from(build.Convert.FromBase64Url(value)),
+    toJSON: (value) => build.Convert.ToBase64Url(value),
+};
+
+class CryptoKey extends webcrypto_core_es_CryptoKey {
+    constructor() {
+        super(...arguments);
+        this.data = webcrypto_es_Buffer.alloc(0);
+        this.algorithm = { name: "" };
+        this.extractable = false;
+        this.type = "secret";
+        this.usages = [];
+        this.kty = "oct";
+        this.alg = "";
+    }
+}
+tslib_es6_decorate([
+    JsonProp({ name: "ext", type: JsonPropTypes.Boolean, optional: true })
+], CryptoKey.prototype, "extractable", void 0);
+tslib_es6_decorate([
+    JsonProp({ name: "key_ops", type: JsonPropTypes.String, repeated: true, optional: true })
+], CryptoKey.prototype, "usages", void 0);
+tslib_es6_decorate([
+    JsonProp({ type: JsonPropTypes.String })
+], CryptoKey.prototype, "kty", void 0);
+tslib_es6_decorate([
+    JsonProp({ type: JsonPropTypes.String, optional: true })
+], CryptoKey.prototype, "alg", void 0);
+
+class SymmetricKey extends CryptoKey {
+    constructor() {
+        super(...arguments);
+        this.kty = "oct";
+        this.type = "secret";
+    }
+}
+
+class AsymmetricKey extends CryptoKey {
+}
+
+class AesCryptoKey extends SymmetricKey {
+    get alg() {
+        switch (this.algorithm.name.toUpperCase()) {
+            case "AES-CBC":
+                return `A${this.algorithm.length}CBC`;
+            case "AES-CTR":
+                return `A${this.algorithm.length}CTR`;
+            case "AES-GCM":
+                return `A${this.algorithm.length}GCM`;
+            case "AES-KW":
+                return `A${this.algorithm.length}KW`;
+            case "AES-CMAC":
+                return `A${this.algorithm.length}CMAC`;
+            case "AES-ECB":
+                return `A${this.algorithm.length}ECB`;
+            default:
+                throw new AlgorithmError("Unsupported algorithm name");
+        }
+    }
+    set alg(value) {
+    }
+}
+tslib_es6_decorate([
+    JsonProp({ name: "k", converter: JsonBase64UrlConverter })
+], AesCryptoKey.prototype, "data", void 0);
+
+const keyStorage = new WeakMap();
+function getCryptoKey(key) {
+    const res = keyStorage.get(key);
+    if (!res) {
+        throw new OperationError("Cannot get CryptoKey from secure storage");
+    }
+    return res;
+}
+function setCryptoKey(value) {
+    const key = webcrypto_core_es_CryptoKey.create(value.algorithm, value.type, value.extractable, value.usages);
+    Object.freeze(key);
+    keyStorage.set(key, value);
+    return key;
+}
+
+class AesCrypto {
+    static async generateKey(algorithm, extractable, keyUsages) {
+        const key = new AesCryptoKey();
+        key.algorithm = algorithm;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        key.data = crypto_browserify.randomBytes(algorithm.length >> 3);
+        return key;
+    }
+    static async exportKey(format, key) {
+        if (!(key instanceof AesCryptoKey)) {
+            throw new Error("key: Is not AesCryptoKey");
+        }
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(key);
+            case "raw":
+                return new Uint8Array(key.data).buffer;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+    }
+    static async importKey(format, keyData, algorithm, extractable, keyUsages) {
+        let key;
+        switch (format.toLowerCase()) {
+            case "jwk":
+                key = JsonParser.fromJSON(keyData, { targetSchema: AesCryptoKey });
+                break;
+            case "raw":
+                key = new AesCryptoKey();
+                key.data = webcrypto_es_Buffer.from(keyData);
+                break;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+        key.algorithm = algorithm;
+        key.algorithm.length = key.data.length << 3;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        switch (key.algorithm.length) {
+            case 128:
+            case 192:
+            case 256:
+                break;
+            default:
+                throw new OperationError("keyData: Is wrong key length");
+        }
+        return key;
+    }
+    static async encrypt(algorithm, key, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "AES-CBC":
+                return this.encryptAesCBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-CTR":
+                return this.encryptAesCTR(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-GCM":
+                return this.encryptAesGCM(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-KW":
+                return this.encryptAesKW(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-ECB":
+                return this.encryptAesECB(algorithm, key, webcrypto_es_Buffer.from(data));
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async decrypt(algorithm, key, data) {
+        if (!(key instanceof AesCryptoKey)) {
+            throw new Error("key: Is not AesCryptoKey");
+        }
+        switch (algorithm.name.toUpperCase()) {
+            case "AES-CBC":
+                return this.decryptAesCBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-CTR":
+                return this.decryptAesCTR(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-GCM":
+                return this.decryptAesGCM(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-KW":
+                return this.decryptAesKW(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "AES-ECB":
+                return this.decryptAesECB(algorithm, key, webcrypto_es_Buffer.from(data));
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async encryptAesCBC(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`aes-${key.algorithm.length}-cbc`, key.data, new Uint8Array(algorithm.iv));
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptAesCBC(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`aes-${key.algorithm.length}-cbc`, key.data, new Uint8Array(algorithm.iv));
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+    static async encryptAesCTR(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`aes-${key.algorithm.length}-ctr`, key.data, webcrypto_es_Buffer.from(algorithm.counter));
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptAesCTR(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`aes-${key.algorithm.length}-ctr`, key.data, new Uint8Array(algorithm.counter));
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+    static async encryptAesGCM(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`aes-${key.algorithm.length}-gcm`, key.data, webcrypto_es_Buffer.from(algorithm.iv), {
+            authTagLength: (algorithm.tagLength || 128) >> 3,
+        });
+        if (algorithm.additionalData) {
+            cipher.setAAD(webcrypto_es_Buffer.from(algorithm.additionalData));
+        }
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final(), cipher.getAuthTag()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptAesGCM(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`aes-${key.algorithm.length}-gcm`, key.data, new Uint8Array(algorithm.iv));
+        const tagLength = (algorithm.tagLength || 128) >> 3;
+        const enc = data.slice(0, data.length - tagLength);
+        const tag = data.slice(data.length - tagLength);
+        if (algorithm.additionalData) {
+            decipher.setAAD(webcrypto_es_Buffer.from(algorithm.additionalData));
+        }
+        decipher.setAuthTag(tag);
+        let dec = decipher.update(enc);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+    static async encryptAesKW(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`id-aes${key.algorithm.length}-wrap`, key.data, this.AES_KW_IV);
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        return new Uint8Array(enc).buffer;
+    }
+    static async decryptAesKW(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`id-aes${key.algorithm.length}-wrap`, key.data, this.AES_KW_IV);
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+    static async encryptAesECB(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`aes-${key.algorithm.length}-ecb`, key.data, new Uint8Array(0));
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptAesECB(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`aes-${key.algorithm.length}-ecb`, key.data, new Uint8Array(0));
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+}
+AesCrypto.AES_KW_IV = webcrypto_es_Buffer.from("A6A6A6A6A6A6A6A6", "hex");
+
+class AesCbcProvider extends webcrypto_core_es_AesCbcProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return AesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return AesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+const zero = webcrypto_es_Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+const rb = webcrypto_es_Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 135]);
+const blockSize = 16;
+function bitShiftLeft(buffer) {
+    const shifted = webcrypto_es_Buffer.alloc(buffer.length);
+    const last = buffer.length - 1;
+    for (let index = 0; index < last; index++) {
+        shifted[index] = buffer[index] << 1;
+        if (buffer[index + 1] & 0x80) {
+            shifted[index] += 0x01;
+        }
+    }
+    shifted[last] = buffer[last] << 1;
+    return shifted;
+}
+function xor(a, b) {
+    const length = Math.min(a.length, b.length);
+    const output = webcrypto_es_Buffer.alloc(length);
+    for (let index = 0; index < length; index++) {
+        output[index] = a[index] ^ b[index];
+    }
+    return output;
+}
+function aes(key, message) {
+    const cipher = crypto_browserify.createCipheriv(`aes${key.length << 3}`, key, zero);
+    const result = cipher.update(message);
+    cipher.final();
+    return result;
+}
+function getMessageBlock(message, blockIndex) {
+    const block = webcrypto_es_Buffer.alloc(blockSize);
+    const start = blockIndex * blockSize;
+    const end = start + blockSize;
+    message.copy(block, 0, start, end);
+    return block;
+}
+function getPaddedMessageBlock(message, blockIndex) {
+    const block = webcrypto_es_Buffer.alloc(blockSize);
+    const start = blockIndex * blockSize;
+    const end = message.length;
+    block.fill(0);
+    message.copy(block, 0, start, end);
+    block[end - start] = 0x80;
+    return block;
+}
+function generateSubkeys(key) {
+    const l = aes(key, zero);
+    let subkey1 = bitShiftLeft(l);
+    if (l[0] & 0x80) {
+        subkey1 = xor(subkey1, rb);
+    }
+    let subkey2 = bitShiftLeft(subkey1);
+    if (subkey1[0] & 0x80) {
+        subkey2 = xor(subkey2, rb);
+    }
+    return { subkey1, subkey2 };
+}
+function aesCmac(key, message) {
+    const subkeys = generateSubkeys(key);
+    let blockCount = Math.ceil(message.length / blockSize);
+    let lastBlockCompleteFlag;
+    let lastBlock;
+    if (blockCount === 0) {
+        blockCount = 1;
+        lastBlockCompleteFlag = false;
+    }
+    else {
+        lastBlockCompleteFlag = (message.length % blockSize === 0);
+    }
+    const lastBlockIndex = blockCount - 1;
+    if (lastBlockCompleteFlag) {
+        lastBlock = xor(getMessageBlock(message, lastBlockIndex), subkeys.subkey1);
+    }
+    else {
+        lastBlock = xor(getPaddedMessageBlock(message, lastBlockIndex), subkeys.subkey2);
+    }
+    let x = zero;
+    let y;
+    for (let index = 0; index < lastBlockIndex; index++) {
+        y = xor(x, getMessageBlock(message, index));
+        x = aes(key, y);
+    }
+    y = xor(lastBlock, x);
+    return aes(key, y);
+}
+class AesCmacProvider extends webcrypto_core_es_AesCmacProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onSign(algorithm, key, data) {
+        const result = aesCmac(getCryptoKey(key).data, webcrypto_es_Buffer.from(data));
+        return new Uint8Array(result).buffer;
+    }
+    async onVerify(algorithm, key, signature, data) {
+        const signature2 = await this.sign(algorithm, key, data);
+        return webcrypto_es_Buffer.from(signature).compare(webcrypto_es_Buffer.from(signature2)) === 0;
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+class AesCtrProvider extends webcrypto_core_es_AesCtrProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return AesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return AesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+class AesGcmProvider extends webcrypto_core_es_AesGcmProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return AesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return AesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+class AesKwProvider extends webcrypto_core_es_AesKwProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return AesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return AesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+class AesEcbProvider extends webcrypto_core_es_AesEcbProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await AesCrypto.generateKey({
+            name: this.name,
+            length: algorithm.length,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return AesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return AesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return AesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const res = await AesCrypto.importKey(format, keyData, { name: algorithm.name }, extractable, keyUsages);
+        return setCryptoKey(res);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof AesCryptoKey)) {
+            throw new TypeError("key: Is not a AesCryptoKey");
+        }
+    }
+}
+
+class DesCryptoKey extends SymmetricKey {
+    get alg() {
+        switch (this.algorithm.name.toUpperCase()) {
+            case "DES-CBC":
+                return `DES-CBC`;
+            case "DES-EDE3-CBC":
+                return `3DES-CBC`;
+            default:
+                throw new AlgorithmError("Unsupported algorithm name");
+        }
+    }
+    set alg(value) {
+    }
+}
+tslib_es6_decorate([
+    JsonProp({ name: "k", converter: JsonBase64UrlConverter })
+], DesCryptoKey.prototype, "data", void 0);
+
+class DesCrypto {
+    static async generateKey(algorithm, extractable, keyUsages) {
+        const key = new DesCryptoKey();
+        key.algorithm = algorithm;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        key.data = crypto_browserify.randomBytes(algorithm.length >> 3);
+        return key;
+    }
+    static async exportKey(format, key) {
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(key);
+            case "raw":
+                return new Uint8Array(key.data).buffer;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+    }
+    static async importKey(format, keyData, algorithm, extractable, keyUsages) {
+        let key;
+        switch (format.toLowerCase()) {
+            case "jwk":
+                key = JsonParser.fromJSON(keyData, { targetSchema: DesCryptoKey });
+                break;
+            case "raw":
+                key = new DesCryptoKey();
+                key.data = webcrypto_es_Buffer.from(keyData);
+                break;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+        key.algorithm = algorithm;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static async encrypt(algorithm, key, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "DES-CBC":
+                return this.encryptDesCBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "DES-EDE3-CBC":
+                return this.encryptDesEDE3CBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async decrypt(algorithm, key, data) {
+        if (!(key instanceof DesCryptoKey)) {
+            throw new Error("key: Is not DesCryptoKey");
+        }
+        switch (algorithm.name.toUpperCase()) {
+            case "DES-CBC":
+                return this.decryptDesCBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            case "DES-EDE3-CBC":
+                return this.decryptDesEDE3CBC(algorithm, key, webcrypto_es_Buffer.from(data));
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async encryptDesCBC(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`des-cbc`, key.data, new Uint8Array(algorithm.iv));
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptDesCBC(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`des-cbc`, key.data, new Uint8Array(algorithm.iv));
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+    static async encryptDesEDE3CBC(algorithm, key, data) {
+        const cipher = crypto_browserify.createCipheriv(`des-ede3-cbc`, key.data, webcrypto_es_Buffer.from(algorithm.iv));
+        let enc = cipher.update(data);
+        enc = webcrypto_es_Buffer.concat([enc, cipher.final()]);
+        const res = new Uint8Array(enc).buffer;
+        return res;
+    }
+    static async decryptDesEDE3CBC(algorithm, key, data) {
+        const decipher = crypto_browserify.createDecipheriv(`des-ede3-cbc`, key.data, new Uint8Array(algorithm.iv));
+        let dec = decipher.update(data);
+        dec = webcrypto_es_Buffer.concat([dec, decipher.final()]);
+        return new Uint8Array(dec).buffer;
+    }
+}
+
+class DesCbcProvider extends DesProvider {
+    constructor() {
+        super(...arguments);
+        this.keySizeBits = 64;
+        this.ivSize = 8;
+        this.name = "DES-CBC";
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await DesCrypto.generateKey({
+            name: this.name,
+            length: this.keySizeBits,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return DesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return DesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return DesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await DesCrypto.importKey(format, keyData, { name: this.name, length: this.keySizeBits }, extractable, keyUsages);
+        if (key.data.length !== (this.keySizeBits >> 3)) {
+            throw new OperationError("keyData: Wrong key size");
+        }
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof DesCryptoKey)) {
+            throw new TypeError("key: Is not a DesCryptoKey");
+        }
+    }
+}
+
+class DesEde3CbcProvider extends DesProvider {
+    constructor() {
+        super(...arguments);
+        this.keySizeBits = 192;
+        this.ivSize = 8;
+        this.name = "DES-EDE3-CBC";
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const key = await DesCrypto.generateKey({
+            name: this.name,
+            length: this.keySizeBits,
+        }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    async onEncrypt(algorithm, key, data) {
+        return DesCrypto.encrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onDecrypt(algorithm, key, data) {
+        return DesCrypto.decrypt(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return DesCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await DesCrypto.importKey(format, keyData, { name: this.name, length: this.keySizeBits }, extractable, keyUsages);
+        if (key.data.length !== (this.keySizeBits >> 3)) {
+            throw new OperationError("keyData: Wrong key size");
+        }
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof DesCryptoKey)) {
+            throw new TypeError("key: Is not a DesCryptoKey");
+        }
+    }
+}
+
+function getJwkAlgorithm(algorithm) {
+    switch (algorithm.name.toUpperCase()) {
+        case "RSA-OAEP": {
+            const mdSize = /(\d+)$/.exec(algorithm.hash.name)[1];
+            return `RSA-OAEP${mdSize !== "1" ? `-${mdSize}` : ""}`;
+        }
+        case "RSASSA-PKCS1-V1_5":
+            return `RS${/(\d+)$/.exec(algorithm.hash.name)[1]}`;
+        case "RSA-PSS":
+            return `PS${/(\d+)$/.exec(algorithm.hash.name)[1]}`;
+        case "RSA-PKCS1":
+            return `RS1`;
+        default:
+            throw new OperationError("algorithm: Is not recognized");
+    }
+}
+
+class webcrypto_es_RsaPrivateKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "private";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PrivateKeyInfo);
+        return es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.RsaPrivateKey);
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "RSA",
+            alg: getJwkAlgorithm(this.algorithm),
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, JsonSerializer.toJSON(key));
+    }
+    fromJSON(json) {
+        const key = JsonParser.fromJSON(json, { targetSchema: index$1.RsaPrivateKey });
+        const keyInfo = new index$1.PrivateKeyInfo();
+        keyInfo.privateKeyAlgorithm.algorithm = "1.2.840.113549.1.1.1";
+        keyInfo.privateKeyAlgorithm.parameters = null;
+        keyInfo.privateKey = es2015/* AsnSerializer.serialize */.xg.serialize(key);
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+    }
+}
+
+class webcrypto_es_RsaPublicKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "public";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PublicKeyInfo);
+        return es2015/* AsnParser.parse */.Vs.parse(keyInfo.publicKey, index$1.RsaPublicKey);
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "RSA",
+            alg: getJwkAlgorithm(this.algorithm),
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, JsonSerializer.toJSON(key));
+    }
+    fromJSON(json) {
+        const key = JsonParser.fromJSON(json, { targetSchema: index$1.RsaPublicKey });
+        const keyInfo = new index$1.PublicKeyInfo();
+        keyInfo.publicKeyAlgorithm.algorithm = "1.2.840.113549.1.1.1";
+        keyInfo.publicKeyAlgorithm.parameters = null;
+        keyInfo.publicKey = es2015/* AsnSerializer.serialize */.xg.serialize(key);
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+    }
+}
+
+class RsaCrypto {
+    static async generateKey(algorithm, extractable, keyUsages) {
+        const privateKey = new webcrypto_es_RsaPrivateKey();
+        privateKey.algorithm = algorithm;
+        privateKey.extractable = extractable;
+        privateKey.usages = keyUsages.filter((usage) => this.privateKeyUsages.indexOf(usage) !== -1);
+        const publicKey = new webcrypto_es_RsaPublicKey();
+        publicKey.algorithm = algorithm;
+        publicKey.extractable = true;
+        publicKey.usages = keyUsages.filter((usage) => this.publicKeyUsages.indexOf(usage) !== -1);
+        const publicExponent = webcrypto_es_Buffer.concat([
+            webcrypto_es_Buffer.alloc(4 - algorithm.publicExponent.byteLength, 0),
+            webcrypto_es_Buffer.from(algorithm.publicExponent),
+        ]).readInt32BE(0);
+        const keys = crypto_browserify.generateKeyPairSync("rsa", {
+            modulusLength: algorithm.modulusLength,
+            publicExponent,
+            publicKeyEncoding: {
+                format: "der",
+                type: "spki",
+            },
+            privateKeyEncoding: {
+                format: "der",
+                type: "pkcs8",
+            },
+        });
+        privateKey.data = keys.privateKey;
+        publicKey.data = keys.publicKey;
+        const res = {
+            privateKey,
+            publicKey,
+        };
+        return res;
+    }
+    static async exportKey(format, key) {
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(key);
+            case "pkcs8":
+            case "spki":
+                return new Uint8Array(key.data).buffer;
+            default:
+                throw new OperationError("format: Must be 'jwk', 'pkcs8' or 'spki'");
+        }
+    }
+    static async importKey(format, keyData, algorithm, extractable, keyUsages) {
+        switch (format.toLowerCase()) {
+            case "jwk": {
+                const jwk = keyData;
+                if (jwk.d) {
+                    const asnKey = JsonParser.fromJSON(keyData, { targetSchema: index$1.RsaPrivateKey });
+                    return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+                }
+                else {
+                    const asnKey = JsonParser.fromJSON(keyData, { targetSchema: index$1.RsaPublicKey });
+                    return this.importPublicKey(asnKey, algorithm, extractable, keyUsages);
+                }
+            }
+            case "spki": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PublicKeyInfo);
+                const asnKey = es2015/* AsnParser.parse */.Vs.parse(keyInfo.publicKey, index$1.RsaPublicKey);
+                return this.importPublicKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            case "pkcs8": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PrivateKeyInfo);
+                const asnKey = es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.RsaPrivateKey);
+                return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            default:
+                throw new OperationError("format: Must be 'jwk', 'pkcs8' or 'spki'");
+        }
+    }
+    static async sign(algorithm, key, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "RSA-PSS":
+            case "RSASSA-PKCS1-V1_5":
+                return this.signRsa(algorithm, key, data);
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async verify(algorithm, key, signature, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "RSA-PSS":
+            case "RSASSA-PKCS1-V1_5":
+                return this.verifySSA(algorithm, key, data, signature);
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async encrypt(algorithm, key, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "RSA-OAEP":
+                return this.encryptOAEP(algorithm, key, data);
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static async decrypt(algorithm, key, data) {
+        switch (algorithm.name.toUpperCase()) {
+            case "RSA-OAEP":
+                return this.decryptOAEP(algorithm, key, data);
+            default:
+                throw new OperationError("algorithm: Is not recognized");
+        }
+    }
+    static importPrivateKey(asnKey, algorithm, extractable, keyUsages) {
+        const keyInfo = new index$1.PrivateKeyInfo();
+        keyInfo.privateKeyAlgorithm.algorithm = "1.2.840.113549.1.1.1";
+        keyInfo.privateKeyAlgorithm.parameters = null;
+        keyInfo.privateKey = es2015/* AsnSerializer.serialize */.xg.serialize(asnKey);
+        const key = new webcrypto_es_RsaPrivateKey();
+        key.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        key.algorithm = Object.assign({}, algorithm);
+        key.algorithm.publicExponent = new Uint8Array(asnKey.publicExponent);
+        key.algorithm.modulusLength = asnKey.modulus.byteLength << 3;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static importPublicKey(asnKey, algorithm, extractable, keyUsages) {
+        const keyInfo = new index$1.PublicKeyInfo();
+        keyInfo.publicKeyAlgorithm.algorithm = "1.2.840.113549.1.1.1";
+        keyInfo.publicKeyAlgorithm.parameters = null;
+        keyInfo.publicKey = es2015/* AsnSerializer.serialize */.xg.serialize(asnKey);
+        const key = new webcrypto_es_RsaPublicKey();
+        key.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        key.algorithm = Object.assign({}, algorithm);
+        key.algorithm.publicExponent = new Uint8Array(asnKey.publicExponent);
+        key.algorithm.modulusLength = asnKey.modulus.byteLength << 3;
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static getCryptoAlgorithm(alg) {
+        switch (alg.hash.name.toUpperCase()) {
+            case "SHA-1":
+                return "RSA-SHA1";
+            case "SHA-256":
+                return "RSA-SHA256";
+            case "SHA-384":
+                return "RSA-SHA384";
+            case "SHA-512":
+                return "RSA-SHA512";
+            default:
+                throw new OperationError("algorithm.hash: Is not recognized");
+        }
+    }
+    static signRsa(algorithm, key, data) {
+        const cryptoAlg = this.getCryptoAlgorithm(key.algorithm);
+        const signer = crypto_browserify.createSign(cryptoAlg);
+        signer.update(webcrypto_es_Buffer.from(data));
+        if (!key.pem) {
+            key.pem = `-----BEGIN PRIVATE KEY-----\n${key.data.toString("base64")}\n-----END PRIVATE KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        if (algorithm.name.toUpperCase() === "RSA-PSS") {
+            options.padding = crypto_browserify.constants.RSA_PKCS1_PSS_PADDING;
+            options.saltLength = algorithm.saltLength;
+        }
+        const signature = signer.sign(options);
+        return new Uint8Array(signature).buffer;
+    }
+    static verifySSA(algorithm, key, data, signature) {
+        const cryptoAlg = this.getCryptoAlgorithm(key.algorithm);
+        const signer = crypto_browserify.createVerify(cryptoAlg);
+        signer.update(webcrypto_es_Buffer.from(data));
+        if (!key.pem) {
+            key.pem = `-----BEGIN PUBLIC KEY-----\n${key.data.toString("base64")}\n-----END PUBLIC KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        if (algorithm.name.toUpperCase() === "RSA-PSS") {
+            options.padding = crypto_browserify.constants.RSA_PKCS1_PSS_PADDING;
+            options.saltLength = algorithm.saltLength;
+        }
+        const ok = signer.verify(options, signature);
+        return ok;
+    }
+    static encryptOAEP(algorithm, key, data) {
+        const options = {
+            key: `-----BEGIN PUBLIC KEY-----\n${key.data.toString("base64")}\n-----END PUBLIC KEY-----`,
+            padding: crypto_browserify.constants.RSA_PKCS1_OAEP_PADDING,
+        };
+        if (algorithm.label) ;
+        return new Uint8Array(crypto_browserify.publicEncrypt(options, data)).buffer;
+    }
+    static decryptOAEP(algorithm, key, data) {
+        const options = {
+            key: `-----BEGIN PRIVATE KEY-----\n${key.data.toString("base64")}\n-----END PRIVATE KEY-----`,
+            padding: crypto_browserify.constants.RSA_PKCS1_OAEP_PADDING,
+        };
+        if (algorithm.label) ;
+        return new Uint8Array(crypto_browserify.privateDecrypt(options, data)).buffer;
+    }
+}
+RsaCrypto.publicKeyUsages = ["verify", "encrypt", "wrapKey"];
+RsaCrypto.privateKeyUsages = ["sign", "decrypt", "unwrapKey"];
+
+class RsaSsaProvider extends webcrypto_core_es_RsaSsaProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await RsaCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onSign(algorithm, key, data) {
+        return RsaCrypto.sign(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onVerify(algorithm, key, signature, data) {
+        return RsaCrypto.verify(algorithm, getCryptoKey(key), new Uint8Array(signature), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return RsaCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await RsaCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_RsaPrivateKey || internalKey instanceof webcrypto_es_RsaPublicKey)) {
+            throw new TypeError("key: Is not RSA CryptoKey");
+        }
+    }
+}
+
+class RsaPssProvider extends webcrypto_core_es_RsaPssProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await RsaCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onSign(algorithm, key, data) {
+        return RsaCrypto.sign(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onVerify(algorithm, key, signature, data) {
+        return RsaCrypto.verify(algorithm, getCryptoKey(key), new Uint8Array(signature), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return RsaCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await RsaCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_RsaPrivateKey || internalKey instanceof webcrypto_es_RsaPublicKey)) {
+            throw new TypeError("key: Is not RSA CryptoKey");
+        }
+    }
+}
+
+class ShaCrypto {
+    static size(algorithm) {
+        switch (algorithm.name.toUpperCase()) {
+            case "SHA-1":
+                return 160;
+            case "SHA-256":
+                return 256;
+            case "SHA-384":
+                return 384;
+            case "SHA-512":
+                return 512;
+            default:
+                throw new Error("Unrecognized name");
+        }
+    }
+    static digest(algorithm, data) {
+        const hash = crypto_browserify.createHash(algorithm.name.replace("-", ""))
+            .update(webcrypto_es_Buffer.from(data)).digest();
+        return new Uint8Array(hash).buffer;
+    }
+}
+
+class RsaOaepProvider extends webcrypto_core_es_RsaOaepProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await RsaCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onEncrypt(algorithm, key, data) {
+        const internalKey = getCryptoKey(key);
+        const dataView = new Uint8Array(data);
+        const keySize = Math.ceil(internalKey.algorithm.modulusLength >> 3);
+        const hashSize = ShaCrypto.size(internalKey.algorithm.hash) >> 3;
+        const dataLength = dataView.byteLength;
+        const psLength = keySize - dataLength - 2 * hashSize - 2;
+        if (dataLength > keySize - 2 * hashSize - 2) {
+            throw new Error("Data too large");
+        }
+        const message = new Uint8Array(keySize);
+        const seed = message.subarray(1, hashSize + 1);
+        const dataBlock = message.subarray(hashSize + 1);
+        dataBlock.set(dataView, hashSize + psLength + 1);
+        const labelHash = crypto_browserify.createHash(internalKey.algorithm.hash.name.replace("-", ""))
+            .update(build.BufferSourceConverter.toUint8Array(algorithm.label || new Uint8Array(0)))
+            .digest();
+        dataBlock.set(labelHash, 0);
+        dataBlock[hashSize + psLength] = 1;
+        crypto_browserify.randomFillSync(seed);
+        const dataBlockMask = this.mgf1(internalKey.algorithm.hash, seed, dataBlock.length);
+        for (let i = 0; i < dataBlock.length; i++) {
+            dataBlock[i] ^= dataBlockMask[i];
+        }
+        const seedMask = this.mgf1(internalKey.algorithm.hash, dataBlock, seed.length);
+        for (let i = 0; i < seed.length; i++) {
+            seed[i] ^= seedMask[i];
+        }
+        if (!internalKey.pem) {
+            internalKey.pem = `-----BEGIN PUBLIC KEY-----\n${internalKey.data.toString("base64")}\n-----END PUBLIC KEY-----`;
+        }
+        const pkcs0 = crypto_browserify.publicEncrypt({
+            key: internalKey.pem,
+            padding: crypto_browserify.constants.RSA_NO_PADDING,
+        }, webcrypto_es_Buffer.from(message));
+        return new Uint8Array(pkcs0).buffer;
+    }
+    async onDecrypt(algorithm, key, data) {
+        const internalKey = getCryptoKey(key);
+        const keySize = Math.ceil(internalKey.algorithm.modulusLength >> 3);
+        const hashSize = ShaCrypto.size(internalKey.algorithm.hash) >> 3;
+        const dataLength = data.byteLength;
+        if (dataLength !== keySize) {
+            throw new Error("Bad data");
+        }
+        if (!internalKey.pem) {
+            internalKey.pem = `-----BEGIN PRIVATE KEY-----\n${internalKey.data.toString("base64")}\n-----END PRIVATE KEY-----`;
+        }
+        let pkcs0 = crypto_browserify.privateDecrypt({
+            key: internalKey.pem,
+            padding: crypto_browserify.constants.RSA_NO_PADDING,
+        }, webcrypto_es_Buffer.from(data));
+        const z = pkcs0[0];
+        const seed = pkcs0.subarray(1, hashSize + 1);
+        const dataBlock = pkcs0.subarray(hashSize + 1);
+        if (z !== 0) {
+            throw new Error("Decryption failed");
+        }
+        const seedMask = this.mgf1(internalKey.algorithm.hash, dataBlock, seed.length);
+        for (let i = 0; i < seed.length; i++) {
+            seed[i] ^= seedMask[i];
+        }
+        const dataBlockMask = this.mgf1(internalKey.algorithm.hash, seed, dataBlock.length);
+        for (let i = 0; i < dataBlock.length; i++) {
+            dataBlock[i] ^= dataBlockMask[i];
+        }
+        const labelHash = crypto_browserify.createHash(internalKey.algorithm.hash.name.replace("-", ""))
+            .update(build.BufferSourceConverter.toUint8Array(algorithm.label || new Uint8Array(0)))
+            .digest();
+        for (let i = 0; i < hashSize; i++) {
+            if (labelHash[i] !== dataBlock[i]) {
+                throw new Error("Decryption failed");
+            }
+        }
+        let psEnd = hashSize;
+        for (; psEnd < dataBlock.length; psEnd++) {
+            const psz = dataBlock[psEnd];
+            if (psz === 1) {
+                break;
+            }
+            if (psz !== 0) {
+                throw new Error("Decryption failed");
+            }
+        }
+        if (psEnd === dataBlock.length) {
+            throw new Error("Decryption failed");
+        }
+        pkcs0 = dataBlock.subarray(psEnd + 1);
+        return new Uint8Array(pkcs0).buffer;
+    }
+    async onExportKey(format, key) {
+        return RsaCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await RsaCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_RsaPrivateKey || internalKey instanceof webcrypto_es_RsaPublicKey)) {
+            throw new TypeError("key: Is not RSA CryptoKey");
+        }
+    }
+    mgf1(algorithm, seed, length = 0) {
+        const hashSize = ShaCrypto.size(algorithm) >> 3;
+        const mask = new Uint8Array(length);
+        const counter = new Uint8Array(4);
+        const chunks = Math.ceil(length / hashSize);
+        for (let i = 0; i < chunks; i++) {
+            counter[0] = i >>> 24;
+            counter[1] = (i >>> 16) & 255;
+            counter[2] = (i >>> 8) & 255;
+            counter[3] = i & 255;
+            const submask = mask.subarray(i * hashSize);
+            let chunk = crypto_browserify.createHash(algorithm.name.replace("-", ""))
+                .update(seed)
+                .update(counter)
+                .digest();
+            if (chunk.length > submask.length) {
+                chunk = chunk.subarray(0, submask.length);
+            }
+            submask.set(chunk);
+        }
+        return mask;
+    }
+}
+
+class RsaEsProvider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "RSAES-PKCS1-v1_5";
+        this.usages = {
+            publicKey: ["encrypt", "wrapKey"],
+            privateKey: ["decrypt", "unwrapKey"],
+        };
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await RsaCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    checkGenerateKeyParams(algorithm) {
+        this.checkRequiredProperty(algorithm, "publicExponent");
+        if (!(algorithm.publicExponent && algorithm.publicExponent instanceof Uint8Array)) {
+            throw new TypeError("publicExponent: Missing or not a Uint8Array");
+        }
+        const publicExponent = build.Convert.ToBase64(algorithm.publicExponent);
+        if (!(publicExponent === "Aw==" || publicExponent === "AQAB")) {
+            throw new TypeError("publicExponent: Must be [3] or [1,0,1]");
+        }
+        this.checkRequiredProperty(algorithm, "modulusLength");
+        switch (algorithm.modulusLength) {
+            case 1024:
+            case 2048:
+            case 4096:
+                break;
+            default:
+                throw new TypeError("modulusLength: Must be 1024, 2048, or 4096");
+        }
+    }
+    async onEncrypt(algorithm, key, data) {
+        const options = this.toCryptoOptions(key);
+        const enc = crypto_browserify.publicEncrypt(options, new Uint8Array(data));
+        return new Uint8Array(enc).buffer;
+    }
+    async onDecrypt(algorithm, key, data) {
+        const options = this.toCryptoOptions(key);
+        const dec = crypto_browserify.privateDecrypt(options, new Uint8Array(data));
+        return new Uint8Array(dec).buffer;
+    }
+    async onExportKey(format, key) {
+        return RsaCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await RsaCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_RsaPrivateKey || internalKey instanceof webcrypto_es_RsaPublicKey)) {
+            throw new TypeError("key: Is not RSA CryptoKey");
+        }
+    }
+    toCryptoOptions(key) {
+        const type = key.type.toUpperCase();
+        return {
+            key: `-----BEGIN ${type} KEY-----\n${getCryptoKey(key).data.toString("base64")}\n-----END ${type} KEY-----`,
+            padding: crypto_browserify.constants.RSA_PKCS1_PADDING,
+        };
+    }
+}
+
+const namedOIDs = {
+    "1.2.840.10045.3.1.7": "P-256",
+    "P-256": "1.2.840.10045.3.1.7",
+    "1.3.132.0.34": "P-384",
+    "P-384": "1.3.132.0.34",
+    "1.3.132.0.35": "P-521",
+    "P-521": "1.3.132.0.35",
+    "1.3.132.0.10": "K-256",
+    "K-256": "1.3.132.0.10",
+    "brainpoolP160r1": "1.3.36.3.3.2.8.1.1.1",
+    "1.3.36.3.3.2.8.1.1.1": "brainpoolP160r1",
+    "brainpoolP160t1": "1.3.36.3.3.2.8.1.1.2",
+    "1.3.36.3.3.2.8.1.1.2": "brainpoolP160t1",
+    "brainpoolP192r1": "1.3.36.3.3.2.8.1.1.3",
+    "1.3.36.3.3.2.8.1.1.3": "brainpoolP192r1",
+    "brainpoolP192t1": "1.3.36.3.3.2.8.1.1.4",
+    "1.3.36.3.3.2.8.1.1.4": "brainpoolP192t1",
+    "brainpoolP224r1": "1.3.36.3.3.2.8.1.1.5",
+    "1.3.36.3.3.2.8.1.1.5": "brainpoolP224r1",
+    "brainpoolP224t1": "1.3.36.3.3.2.8.1.1.6",
+    "1.3.36.3.3.2.8.1.1.6": "brainpoolP224t1",
+    "brainpoolP256r1": "1.3.36.3.3.2.8.1.1.7",
+    "1.3.36.3.3.2.8.1.1.7": "brainpoolP256r1",
+    "brainpoolP256t1": "1.3.36.3.3.2.8.1.1.8",
+    "1.3.36.3.3.2.8.1.1.8": "brainpoolP256t1",
+    "brainpoolP320r1": "1.3.36.3.3.2.8.1.1.9",
+    "1.3.36.3.3.2.8.1.1.9": "brainpoolP320r1",
+    "brainpoolP320t1": "1.3.36.3.3.2.8.1.1.10",
+    "1.3.36.3.3.2.8.1.1.10": "brainpoolP320t1",
+    "brainpoolP384r1": "1.3.36.3.3.2.8.1.1.11",
+    "1.3.36.3.3.2.8.1.1.11": "brainpoolP384r1",
+    "brainpoolP384t1": "1.3.36.3.3.2.8.1.1.12",
+    "1.3.36.3.3.2.8.1.1.12": "brainpoolP384t1",
+    "brainpoolP512r1": "1.3.36.3.3.2.8.1.1.13",
+    "1.3.36.3.3.2.8.1.1.13": "brainpoolP512r1",
+    "brainpoolP512t1": "1.3.36.3.3.2.8.1.1.14",
+    "1.3.36.3.3.2.8.1.1.14": "brainpoolP512t1",
+};
+function getOidByNamedCurve$1(namedCurve) {
+    const oid = namedOIDs[namedCurve];
+    if (!oid) {
+        throw new OperationError(`Cannot convert WebCrypto named curve '${namedCurve}' to OID`);
+    }
+    return oid;
+}
+
+class webcrypto_es_EcPrivateKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "private";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PrivateKeyInfo);
+        return es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.EcPrivateKey);
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "EC",
+            crv: this.algorithm.namedCurve,
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, JsonSerializer.toJSON(key));
+    }
+    fromJSON(json) {
+        if (!json.crv) {
+            throw new OperationError(`Cannot get named curve from JWK. Property 'crv' is required`);
+        }
+        const keyInfo = new index$1.PrivateKeyInfo();
+        keyInfo.privateKeyAlgorithm.algorithm = "1.2.840.10045.2.1";
+        keyInfo.privateKeyAlgorithm.parameters = es2015/* AsnSerializer.serialize */.xg.serialize(new index$1.ObjectIdentifier(getOidByNamedCurve$1(json.crv)));
+        const key = JsonParser.fromJSON(json, { targetSchema: index$1.EcPrivateKey });
+        keyInfo.privateKey = es2015/* AsnSerializer.serialize */.xg.serialize(key);
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        return this;
+    }
+}
+
+class webcrypto_es_EcPublicKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "public";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PublicKeyInfo);
+        return new index$1.EcPublicKey(keyInfo.publicKey);
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "EC",
+            crv: this.algorithm.namedCurve,
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, JsonSerializer.toJSON(key));
+    }
+    fromJSON(json) {
+        if (!json.crv) {
+            throw new OperationError(`Cannot get named curve from JWK. Property 'crv' is required`);
+        }
+        const key = JsonParser.fromJSON(json, { targetSchema: index$1.EcPublicKey });
+        const keyInfo = new index$1.PublicKeyInfo();
+        keyInfo.publicKeyAlgorithm.algorithm = "1.2.840.10045.2.1";
+        keyInfo.publicKeyAlgorithm.parameters = es2015/* AsnSerializer.serialize */.xg.serialize(new index$1.ObjectIdentifier(getOidByNamedCurve$1(json.crv)));
+        keyInfo.publicKey = es2015/* AsnSerializer.toASN */.xg.toASN(key).valueHex;
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        return this;
+    }
+}
+
+class EcCrypto {
+    static async generateKey(algorithm, extractable, keyUsages) {
+        const privateKey = new webcrypto_es_EcPrivateKey();
+        privateKey.algorithm = algorithm;
+        privateKey.extractable = extractable;
+        privateKey.usages = keyUsages.filter((usage) => this.privateKeyUsages.indexOf(usage) !== -1);
+        const publicKey = new webcrypto_es_EcPublicKey();
+        publicKey.algorithm = algorithm;
+        publicKey.extractable = true;
+        publicKey.usages = keyUsages.filter((usage) => this.publicKeyUsages.indexOf(usage) !== -1);
+        const keys = crypto_browserify.generateKeyPairSync("ec", {
+            namedCurve: this.getOpenSSLNamedCurve(algorithm.namedCurve),
+            publicKeyEncoding: {
+                format: "der",
+                type: "spki",
+            },
+            privateKeyEncoding: {
+                format: "der",
+                type: "pkcs8",
+            },
+        });
+        privateKey.data = keys.privateKey;
+        publicKey.data = keys.publicKey;
+        const res = {
+            privateKey,
+            publicKey,
+        };
+        return res;
+    }
+    static async sign(algorithm, key, data) {
+        const cryptoAlg = algorithm.hash.name.replace("-", "");
+        const signer = crypto_browserify.createSign(cryptoAlg);
+        signer.update(webcrypto_es_Buffer.from(data));
+        if (!key.pem) {
+            key.pem = `-----BEGIN PRIVATE KEY-----\n${key.data.toString("base64")}\n-----END PRIVATE KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        const signature = signer.sign(options);
+        const ecSignature = es2015/* AsnParser.parse */.Vs.parse(signature, index$1.EcDsaSignature);
+        const signatureRaw = EcUtils.encodeSignature(ecSignature, EcCurves.get(key.algorithm.namedCurve).size);
+        return signatureRaw.buffer;
+    }
+    static async verify(algorithm, key, signature, data) {
+        const cryptoAlg = algorithm.hash.name.replace("-", "");
+        const signer = crypto_browserify.createVerify(cryptoAlg);
+        signer.update(webcrypto_es_Buffer.from(data));
+        if (!key.pem) {
+            key.pem = `-----BEGIN PUBLIC KEY-----\n${key.data.toString("base64")}\n-----END PUBLIC KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        const ecSignature = new index$1.EcDsaSignature();
+        const namedCurve = EcCurves.get(key.algorithm.namedCurve);
+        const signaturePoint = EcUtils.decodeSignature(signature, namedCurve.size);
+        ecSignature.r = build.BufferSourceConverter.toArrayBuffer(signaturePoint.r);
+        ecSignature.s = build.BufferSourceConverter.toArrayBuffer(signaturePoint.s);
+        const ecSignatureRaw = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(ecSignature));
+        const ok = signer.verify(options, ecSignatureRaw);
+        return ok;
+    }
+    static async deriveBits(algorithm, baseKey, length) {
+        const cryptoAlg = this.getOpenSSLNamedCurve(baseKey.algorithm.namedCurve);
+        const ecdh = crypto_browserify.createECDH(cryptoAlg);
+        const asnPrivateKey = es2015/* AsnParser.parse */.Vs.parse(baseKey.data, index$1.PrivateKeyInfo);
+        const asnEcPrivateKey = es2015/* AsnParser.parse */.Vs.parse(asnPrivateKey.privateKey, index$1.EcPrivateKey);
+        ecdh.setPrivateKey(webcrypto_es_Buffer.from(asnEcPrivateKey.privateKey));
+        const asnPublicKey = es2015/* AsnParser.parse */.Vs.parse(algorithm.public.data, index$1.PublicKeyInfo);
+        const bits = ecdh.computeSecret(webcrypto_es_Buffer.from(asnPublicKey.publicKey));
+        return new Uint8Array(bits).buffer.slice(0, length >> 3);
+    }
+    static async exportKey(format, key) {
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(key);
+            case "pkcs8":
+            case "spki":
+                return new Uint8Array(key.data).buffer;
+            case "raw": {
+                const publicKeyInfo = es2015/* AsnParser.parse */.Vs.parse(key.data, index$1.PublicKeyInfo);
+                return publicKeyInfo.publicKey;
+            }
+            default:
+                throw new OperationError("format: Must be 'jwk', 'raw', pkcs8' or 'spki'");
+        }
+    }
+    static async importKey(format, keyData, algorithm, extractable, keyUsages) {
+        switch (format.toLowerCase()) {
+            case "jwk": {
+                const jwk = keyData;
+                if (jwk.d) {
+                    const asnKey = JsonParser.fromJSON(keyData, { targetSchema: index$1.EcPrivateKey });
+                    return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+                }
+                else {
+                    const asnKey = JsonParser.fromJSON(keyData, { targetSchema: index$1.EcPublicKey });
+                    return this.importPublicKey(asnKey, algorithm, extractable, keyUsages);
+                }
+            }
+            case "raw": {
+                const asnKey = new index$1.EcPublicKey(keyData);
+                return this.importPublicKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            case "spki": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PublicKeyInfo);
+                const asnKey = new index$1.EcPublicKey(keyInfo.publicKey);
+                this.assertKeyParameters(keyInfo.publicKeyAlgorithm.parameters, algorithm.namedCurve);
+                return this.importPublicKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            case "pkcs8": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PrivateKeyInfo);
+                const asnKey = es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.EcPrivateKey);
+                this.assertKeyParameters(keyInfo.privateKeyAlgorithm.parameters, algorithm.namedCurve);
+                return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            default:
+                throw new OperationError("format: Must be 'jwk', 'raw', 'pkcs8' or 'spki'");
+        }
+    }
+    static assertKeyParameters(parameters, namedCurve) {
+        if (!parameters) {
+            throw new CryptoError("Key info doesn't have required parameters");
+        }
+        let namedCurveIdentifier = "";
+        try {
+            namedCurveIdentifier = es2015/* AsnParser.parse */.Vs.parse(parameters, index$1.ObjectIdentifier).value;
+        }
+        catch (e) {
+            throw new CryptoError("Cannot read key info parameters");
+        }
+        if (getOidByNamedCurve$1(namedCurve) !== namedCurveIdentifier) {
+            throw new CryptoError("Key info parameter doesn't match to named curve");
+        }
+    }
+    static async importPrivateKey(asnKey, algorithm, extractable, keyUsages) {
+        const keyInfo = new index$1.PrivateKeyInfo();
+        keyInfo.privateKeyAlgorithm.algorithm = "1.2.840.10045.2.1";
+        keyInfo.privateKeyAlgorithm.parameters = es2015/* AsnSerializer.serialize */.xg.serialize(new index$1.ObjectIdentifier(getOidByNamedCurve$1(algorithm.namedCurve)));
+        keyInfo.privateKey = es2015/* AsnSerializer.serialize */.xg.serialize(asnKey);
+        const key = new webcrypto_es_EcPrivateKey();
+        key.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        key.algorithm = Object.assign({}, algorithm);
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static async importPublicKey(asnKey, algorithm, extractable, keyUsages) {
+        const keyInfo = new index$1.PublicKeyInfo();
+        keyInfo.publicKeyAlgorithm.algorithm = "1.2.840.10045.2.1";
+        const namedCurve = getOidByNamedCurve$1(algorithm.namedCurve);
+        keyInfo.publicKeyAlgorithm.parameters = es2015/* AsnSerializer.serialize */.xg.serialize(new index$1.ObjectIdentifier(namedCurve));
+        keyInfo.publicKey = asnKey.value;
+        const key = new webcrypto_es_EcPublicKey();
+        key.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        key.algorithm = Object.assign({}, algorithm);
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static getOpenSSLNamedCurve(curve) {
+        switch (curve.toUpperCase()) {
+            case "P-256":
+                return "prime256v1";
+            case "K-256":
+                return "secp256k1";
+            case "P-384":
+                return "secp384r1";
+            case "P-521":
+                return "secp521r1";
+            default:
+                return curve;
+        }
+    }
+}
+EcCrypto.publicKeyUsages = ["verify"];
+EcCrypto.privateKeyUsages = ["sign", "deriveKey", "deriveBits"];
+
+class EcdsaProvider extends webcrypto_core_es_EcdsaProvider {
+    constructor() {
+        super(...arguments);
+        this.namedCurves = EcCurves.names;
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await EcCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onSign(algorithm, key, data) {
+        return EcCrypto.sign(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onVerify(algorithm, key, signature, data) {
+        return EcCrypto.verify(algorithm, getCryptoKey(key), new Uint8Array(signature), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return EcCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await EcCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_EcPrivateKey || internalKey instanceof webcrypto_es_EcPublicKey)) {
+            throw new TypeError("key: Is not EC CryptoKey");
+        }
+    }
+}
+
+class EcdhProvider extends webcrypto_core_es_EcdhProvider {
+    constructor() {
+        super(...arguments);
+        this.namedCurves = EcCurves.names;
+    }
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await EcCrypto.generateKey({
+            ...algorithm,
+            name: this.name,
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onExportKey(format, key) {
+        return EcCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await EcCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        const internalKey = getCryptoKey(key);
+        if (!(internalKey instanceof webcrypto_es_EcPrivateKey || internalKey instanceof webcrypto_es_EcPublicKey)) {
+            throw new TypeError("key: Is not EC CryptoKey");
+        }
+    }
+    async onDeriveBits(algorithm, baseKey, length) {
+        const bits = await EcCrypto.deriveBits({ ...algorithm, public: getCryptoKey(algorithm.public) }, getCryptoKey(baseKey), length);
+        return bits;
+    }
+}
+
+const edOIDs = {
+    [index$1.idEd448]: "Ed448",
+    "ed448": index$1.idEd448,
+    [index$1.idX448]: "X448",
+    "x448": index$1.idX448,
+    [index$1.idEd25519]: "Ed25519",
+    "ed25519": index$1.idEd25519,
+    [index$1.idX25519]: "X25519",
+    "x25519": index$1.idX25519,
+};
+function getOidByNamedCurve(namedCurve) {
+    const oid = edOIDs[namedCurve.toLowerCase()];
+    if (!oid) {
+        throw new OperationError(`Cannot convert WebCrypto named curve '${namedCurve}' to OID`);
+    }
+    return oid;
+}
+
+class EdPrivateKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "private";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PrivateKeyInfo);
+        return es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.CurvePrivateKey);
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "OKP",
+            crv: this.algorithm.namedCurve,
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, JsonSerializer.toJSON(key));
+    }
+    fromJSON(json) {
+        if (!json.crv) {
+            throw new OperationError(`Cannot get named curve from JWK. Property 'crv' is required`);
+        }
+        const keyInfo = new index$1.PrivateKeyInfo();
+        keyInfo.privateKeyAlgorithm.algorithm = getOidByNamedCurve(json.crv);
+        const key = JsonParser.fromJSON(json, { targetSchema: index$1.CurvePrivateKey });
+        keyInfo.privateKey = es2015/* AsnSerializer.serialize */.xg.serialize(key);
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        return this;
+    }
+}
+
+class EdPublicKey extends AsymmetricKey {
+    constructor() {
+        super(...arguments);
+        this.type = "public";
+    }
+    getKey() {
+        const keyInfo = es2015/* AsnParser.parse */.Vs.parse(this.data, index$1.PublicKeyInfo);
+        return keyInfo.publicKey;
+    }
+    toJSON() {
+        const key = this.getKey();
+        const json = {
+            kty: "OKP",
+            crv: this.algorithm.namedCurve,
+            key_ops: this.usages,
+            ext: this.extractable,
+        };
+        return Object.assign(json, {
+            x: build.Convert.ToBase64Url(key)
+        });
+    }
+    fromJSON(json) {
+        if (!json.crv) {
+            throw new OperationError(`Cannot get named curve from JWK. Property 'crv' is required`);
+        }
+        if (!json.x) {
+            throw new OperationError(`Cannot get property from JWK. Property 'x' is required`);
+        }
+        const keyInfo = new index$1.PublicKeyInfo();
+        keyInfo.publicKeyAlgorithm.algorithm = getOidByNamedCurve(json.crv);
+        keyInfo.publicKey = build.Convert.FromBase64Url(json.x);
+        this.data = webcrypto_es_Buffer.from(es2015/* AsnSerializer.serialize */.xg.serialize(keyInfo));
+        return this;
+    }
+}
+
+class EdCrypto {
+    static async generateKey(algorithm, extractable, keyUsages) {
+        const privateKey = new EdPrivateKey();
+        privateKey.algorithm = algorithm;
+        privateKey.extractable = extractable;
+        privateKey.usages = keyUsages.filter((usage) => this.privateKeyUsages.indexOf(usage) !== -1);
+        const publicKey = new EdPublicKey();
+        publicKey.algorithm = algorithm;
+        publicKey.extractable = true;
+        publicKey.usages = keyUsages.filter((usage) => this.publicKeyUsages.indexOf(usage) !== -1);
+        const type = algorithm.namedCurve.toLowerCase();
+        const keys = crypto_browserify.generateKeyPairSync(type, {
+            publicKeyEncoding: {
+                format: "der",
+                type: "spki",
+            },
+            privateKeyEncoding: {
+                format: "der",
+                type: "pkcs8",
+            },
+        });
+        privateKey.data = keys.privateKey;
+        publicKey.data = keys.publicKey;
+        const res = {
+            privateKey,
+            publicKey,
+        };
+        return res;
+    }
+    static async sign(algorithm, key, data) {
+        if (!key.pem) {
+            key.pem = `-----BEGIN PRIVATE KEY-----\n${key.data.toString("base64")}\n-----END PRIVATE KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        const signature = crypto_browserify.sign(null, webcrypto_es_Buffer.from(data), options);
+        return build.BufferSourceConverter.toArrayBuffer(signature);
+    }
+    static async verify(algorithm, key, signature, data) {
+        if (!key.pem) {
+            key.pem = `-----BEGIN PUBLIC KEY-----\n${key.data.toString("base64")}\n-----END PUBLIC KEY-----`;
+        }
+        const options = {
+            key: key.pem,
+        };
+        const ok = crypto_browserify.verify(null, webcrypto_es_Buffer.from(data), options, webcrypto_es_Buffer.from(signature));
+        return ok;
+    }
+    static async deriveBits(algorithm, baseKey, length) {
+        const publicKey = crypto_browserify.createPublicKey({
+            key: algorithm.public.data,
+            format: "der",
+            type: "spki",
+        });
+        const privateKey = crypto_browserify.createPrivateKey({
+            key: baseKey.data,
+            format: "der",
+            type: "pkcs8",
+        });
+        const bits = crypto_browserify.diffieHellman({
+            publicKey,
+            privateKey,
+        });
+        return new Uint8Array(bits).buffer.slice(0, length >> 3);
+    }
+    static async exportKey(format, key) {
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(key);
+            case "pkcs8":
+            case "spki":
+                return new Uint8Array(key.data).buffer;
+            case "raw": {
+                const publicKeyInfo = es2015/* AsnParser.parse */.Vs.parse(key.data, index$1.PublicKeyInfo);
+                return publicKeyInfo.publicKey;
+            }
+            default:
+                throw new OperationError("format: Must be 'jwk', 'raw', pkcs8' or 'spki'");
+        }
+    }
+    static async importKey(format, keyData, algorithm, extractable, keyUsages) {
+        switch (format.toLowerCase()) {
+            case "jwk": {
+                const jwk = keyData;
+                if (jwk.d) {
+                    const asnKey = JsonParser.fromJSON(keyData, { targetSchema: index$1.CurvePrivateKey });
+                    return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+                }
+                else {
+                    if (!jwk.x) {
+                        throw new TypeError("keyData: Cannot get required 'x' filed");
+                    }
+                    return this.importPublicKey(build.Convert.FromBase64Url(jwk.x), algorithm, extractable, keyUsages);
+                }
+            }
+            case "raw": {
+                return this.importPublicKey(keyData, algorithm, extractable, keyUsages);
+            }
+            case "spki": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PublicKeyInfo);
+                return this.importPublicKey(keyInfo.publicKey, algorithm, extractable, keyUsages);
+            }
+            case "pkcs8": {
+                const keyInfo = es2015/* AsnParser.parse */.Vs.parse(new Uint8Array(keyData), index$1.PrivateKeyInfo);
+                const asnKey = es2015/* AsnParser.parse */.Vs.parse(keyInfo.privateKey, index$1.CurvePrivateKey);
+                return this.importPrivateKey(asnKey, algorithm, extractable, keyUsages);
+            }
+            default:
+                throw new OperationError("format: Must be 'jwk', 'raw', 'pkcs8' or 'spki'");
+        }
+    }
+    static importPrivateKey(asnKey, algorithm, extractable, keyUsages) {
+        const key = new EdPrivateKey();
+        key.fromJSON({
+            crv: algorithm.namedCurve,
+            d: build.Convert.ToBase64Url(asnKey.d),
+        });
+        key.algorithm = Object.assign({}, algorithm);
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+    static async importPublicKey(asnKey, algorithm, extractable, keyUsages) {
+        const key = new EdPublicKey();
+        key.fromJSON({
+            crv: algorithm.namedCurve,
+            x: build.Convert.ToBase64Url(asnKey),
+        });
+        key.algorithm = Object.assign({}, algorithm);
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return key;
+    }
+}
+EdCrypto.publicKeyUsages = ["verify"];
+EdCrypto.privateKeyUsages = ["sign", "deriveKey", "deriveBits"];
+
+class EdDsaProvider extends webcrypto_core_es_EdDsaProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await EdCrypto.generateKey({
+            name: this.name,
+            namedCurve: algorithm.namedCurve.replace(/^ed/i, "Ed"),
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onSign(algorithm, key, data) {
+        return EdCrypto.sign(algorithm, getCryptoKey(key), new Uint8Array(data));
+    }
+    async onVerify(algorithm, key, signature, data) {
+        return EdCrypto.verify(algorithm, getCryptoKey(key), new Uint8Array(signature), new Uint8Array(data));
+    }
+    async onExportKey(format, key) {
+        return EdCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await EdCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+}
+
+class EcdhEsProvider extends webcrypto_core_es_EcdhEsProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const keys = await EdCrypto.generateKey({
+            name: this.name,
+            namedCurve: algorithm.namedCurve.toUpperCase(),
+        }, extractable, keyUsages);
+        return {
+            privateKey: setCryptoKey(keys.privateKey),
+            publicKey: setCryptoKey(keys.publicKey),
+        };
+    }
+    async onDeriveBits(algorithm, baseKey, length) {
+        const bits = await EdCrypto.deriveBits({ ...algorithm, public: getCryptoKey(algorithm.public) }, getCryptoKey(baseKey), length);
+        return bits;
+    }
+    async onExportKey(format, key) {
+        return EdCrypto.exportKey(format, getCryptoKey(key));
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        const key = await EdCrypto.importKey(format, keyData, { ...algorithm, name: this.name }, extractable, keyUsages);
+        return setCryptoKey(key);
+    }
+}
+
+class Sha1Provider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "SHA-1";
+        this.usages = [];
+    }
+    async onDigest(algorithm, data) {
+        return ShaCrypto.digest(algorithm, data);
+    }
+}
+
+class Sha256Provider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "SHA-256";
+        this.usages = [];
+    }
+    async onDigest(algorithm, data) {
+        return ShaCrypto.digest(algorithm, data);
+    }
+}
+
+class Sha384Provider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "SHA-384";
+        this.usages = [];
+    }
+    async onDigest(algorithm, data) {
+        return ShaCrypto.digest(algorithm, data);
+    }
+}
+
+class Sha512Provider extends ProviderCrypto {
+    constructor() {
+        super(...arguments);
+        this.name = "SHA-512";
+        this.usages = [];
+    }
+    async onDigest(algorithm, data) {
+        return ShaCrypto.digest(algorithm, data);
+    }
+}
+
+class PbkdfCryptoKey extends CryptoKey {
+}
+
+class Pbkdf2Provider extends webcrypto_core_es_Pbkdf2Provider {
+    async onDeriveBits(algorithm, baseKey, length) {
+        return new Promise((resolve, reject) => {
+            const salt = build.BufferSourceConverter.toArrayBuffer(algorithm.salt);
+            const hash = algorithm.hash.name.replace("-", "");
+            crypto_browserify.pbkdf2(getCryptoKey(baseKey).data, webcrypto_es_Buffer.from(salt), algorithm.iterations, length >> 3, hash, (err, derivedBits) => {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(new Uint8Array(derivedBits).buffer);
+                }
+            });
+        });
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        if (format === "raw") {
+            const key = new PbkdfCryptoKey();
+            key.data = webcrypto_es_Buffer.from(keyData);
+            key.algorithm = { name: this.name };
+            key.extractable = false;
+            key.usages = keyUsages;
+            return setCryptoKey(key);
+        }
+        throw new OperationError("format: Must be 'raw'");
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof PbkdfCryptoKey)) {
+            throw new TypeError("key: Is not PBKDF CryptoKey");
+        }
+    }
+}
+
+class HmacCryptoKey extends CryptoKey {
+    get alg() {
+        const hash = this.algorithm.hash.name.toUpperCase();
+        return `HS${hash.replace("SHA-", "")}`;
+    }
+    set alg(value) {
+    }
+}
+tslib_es6_decorate([
+    JsonProp({ name: "k", converter: JsonBase64UrlConverter })
+], HmacCryptoKey.prototype, "data", void 0);
+
+class HmacProvider extends webcrypto_core_es_HmacProvider {
+    async onGenerateKey(algorithm, extractable, keyUsages) {
+        const length = (algorithm.length || this.getDefaultLength(algorithm.hash.name)) >> 3 << 3;
+        const key = new HmacCryptoKey();
+        key.algorithm = {
+            ...algorithm,
+            length,
+            name: this.name,
+        };
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        key.data = crypto_browserify.randomBytes(length >> 3);
+        return setCryptoKey(key);
+    }
+    async onSign(algorithm, key, data) {
+        const hash = key.algorithm.hash.name.replace("-", "");
+        const hmac = crypto_browserify.createHmac(hash, getCryptoKey(key).data)
+            .update(webcrypto_es_Buffer.from(data)).digest();
+        return new Uint8Array(hmac).buffer;
+    }
+    async onVerify(algorithm, key, signature, data) {
+        const hash = key.algorithm.hash.name.replace("-", "");
+        const hmac = crypto_browserify.createHmac(hash, getCryptoKey(key).data)
+            .update(webcrypto_es_Buffer.from(data)).digest();
+        return hmac.compare(webcrypto_es_Buffer.from(signature)) === 0;
+    }
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        let key;
+        switch (format.toLowerCase()) {
+            case "jwk":
+                key = JsonParser.fromJSON(keyData, { targetSchema: HmacCryptoKey });
+                break;
+            case "raw":
+                key = new HmacCryptoKey();
+                key.data = webcrypto_es_Buffer.from(keyData);
+                break;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+        key.algorithm = {
+            hash: { name: algorithm.hash.name },
+            name: this.name,
+            length: key.data.length << 3,
+        };
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return setCryptoKey(key);
+    }
+    async onExportKey(format, key) {
+        switch (format.toLowerCase()) {
+            case "jwk":
+                return JsonSerializer.toJSON(getCryptoKey(key));
+            case "raw":
+                return new Uint8Array(getCryptoKey(key).data).buffer;
+            default:
+                throw new OperationError("format: Must be 'jwk' or 'raw'");
+        }
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof HmacCryptoKey)) {
+            throw new TypeError("key: Is not HMAC CryptoKey");
+        }
+    }
+}
+
+class HkdfCryptoKey extends CryptoKey {
+}
+
+class HkdfProvider extends webcrypto_core_es_HkdfProvider {
+    async onImportKey(format, keyData, algorithm, extractable, keyUsages) {
+        if (format.toLowerCase() !== "raw") {
+            throw new OperationError("Operation not supported");
+        }
+        const key = new HkdfCryptoKey();
+        key.data = webcrypto_es_Buffer.from(keyData);
+        key.algorithm = { name: this.name };
+        key.extractable = extractable;
+        key.usages = keyUsages;
+        return setCryptoKey(key);
+    }
+    async onDeriveBits(params, baseKey, length) {
+        const hash = params.hash.name.replace("-", "");
+        const hashLength = crypto_browserify.createHash(hash).digest().length;
+        const byteLength = length / 8;
+        const info = build.BufferSourceConverter.toUint8Array(params.info);
+        const PRK = crypto_browserify.createHmac(hash, build.BufferSourceConverter.toUint8Array(params.salt))
+            .update(build.BufferSourceConverter.toUint8Array(getCryptoKey(baseKey).data))
+            .digest();
+        const blocks = [webcrypto_es_Buffer.alloc(0)];
+        const blockCount = Math.ceil(byteLength / hashLength) + 1;
+        for (let i = 1; i < blockCount; ++i) {
+            blocks.push(crypto_browserify.createHmac(hash, PRK)
+                .update(webcrypto_es_Buffer.concat([blocks[i - 1], info, webcrypto_es_Buffer.from([i])]))
+                .digest());
+        }
+        return webcrypto_es_Buffer.concat(blocks).slice(0, byteLength);
+    }
+    checkCryptoKey(key, keyUsage) {
+        super.checkCryptoKey(key, keyUsage);
+        if (!(getCryptoKey(key) instanceof HkdfCryptoKey)) {
+            throw new TypeError("key: Is not HKDF CryptoKey");
+        }
+    }
+}
+
+class SubtleCrypto extends webcrypto_core_es_SubtleCrypto {
+    constructor() {
+        var _a;
+        super();
+        this.providers.set(new AesCbcProvider());
+        this.providers.set(new AesCtrProvider());
+        this.providers.set(new AesGcmProvider());
+        this.providers.set(new AesCmacProvider());
+        this.providers.set(new AesKwProvider());
+        this.providers.set(new AesEcbProvider());
+        this.providers.set(new DesCbcProvider());
+        this.providers.set(new DesEde3CbcProvider());
+        this.providers.set(new RsaSsaProvider());
+        this.providers.set(new RsaPssProvider());
+        this.providers.set(new RsaOaepProvider());
+        this.providers.set(new RsaEsProvider());
+        this.providers.set(new EcdsaProvider());
+        this.providers.set(new EcdhProvider());
+        this.providers.set(new Sha1Provider());
+        this.providers.set(new Sha256Provider());
+        this.providers.set(new Sha384Provider());
+        this.providers.set(new Sha512Provider());
+        this.providers.set(new Pbkdf2Provider());
+        this.providers.set(new HmacProvider());
+        this.providers.set(new HkdfProvider());
+        const nodeMajorVersion = (_a = /^v(\d+)/.exec(browser.version)) === null || _a === void 0 ? void 0 : _a[1];
+        if (nodeMajorVersion && parseInt(nodeMajorVersion, 10) >= 14) {
+            this.providers.set(new EdDsaProvider());
+            this.providers.set(new EcdhEsProvider());
+        }
+    }
+}
+
+class Crypto extends webcrypto_core_es_Crypto {
+    constructor() {
+        super(...arguments);
+        this.subtle = new SubtleCrypto();
+    }
+    getRandomValues(array) {
+        if (!ArrayBuffer.isView(array)) {
+            throw new TypeError("Failed to execute 'getRandomValues' on 'Crypto': parameter 1 is not of type 'ArrayBufferView'");
+        }
+        const buffer = webcrypto_es_Buffer.from(array.buffer, array.byteOffset, array.byteLength);
+        crypto_browserify.randomFillSync(buffer);
+        return array;
+    }
+}
+
+
+
+
+/***/ }),
+
+/***/ 9759:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "AlgorithmProvider": () => (/* binding */ AlgorithmProvider),
+  "AsnData": () => (/* binding */ AsnData),
+  "AsnDefaultSignatureFormatter": () => (/* binding */ AsnDefaultSignatureFormatter),
+  "AsnEcSignatureFormatter": () => (/* binding */ AsnEcSignatureFormatter),
+  "Attribute": () => (/* binding */ x509_es_Attribute),
+  "AttributeFactory": () => (/* binding */ AttributeFactory),
+  "AuthorityKeyIdentifierExtension": () => (/* binding */ AuthorityKeyIdentifierExtension),
+  "BasicConstraintsExtension": () => (/* binding */ BasicConstraintsExtension),
+  "CertificatePolicyExtension": () => (/* binding */ CertificatePolicyExtension),
+  "ChallengePasswordAttribute": () => (/* binding */ ChallengePasswordAttribute),
+  "CryptoProvider": () => (/* binding */ CryptoProvider),
+  "EcAlgorithm": () => (/* binding */ EcAlgorithm),
+  "EdAlgorithm": () => (/* binding */ EdAlgorithm),
+  "ExtendedKeyUsageExtension": () => (/* binding */ ExtendedKeyUsageExtension),
+  "Extension": () => (/* binding */ Extension),
+  "ExtensionFactory": () => (/* binding */ ExtensionFactory),
+  "ExtensionsAttribute": () => (/* binding */ ExtensionsAttribute),
+  "KeyUsageFlags": () => (/* binding */ x509_es_KeyUsageFlags),
+  "KeyUsagesExtension": () => (/* binding */ KeyUsagesExtension),
+  "Name": () => (/* binding */ Name),
+  "NameIdentifier": () => (/* binding */ NameIdentifier),
+  "OtherName": () => (/* binding */ OtherName),
+  "PemConverter": () => (/* binding */ PemConverter),
+  "Pkcs10CertificateRequest": () => (/* binding */ Pkcs10CertificateRequest),
+  "Pkcs10CertificateRequestGenerator": () => (/* binding */ Pkcs10CertificateRequestGenerator),
+  "PublicKey": () => (/* binding */ PublicKey),
+  "RsaAlgorithm": () => (/* binding */ RsaAlgorithm),
+  "SubjectAlternativeNameExtension": () => (/* binding */ SubjectAlternativeNameExtension),
+  "SubjectKeyIdentifierExtension": () => (/* binding */ SubjectKeyIdentifierExtension),
+  "X509Certificate": () => (/* binding */ X509Certificate),
+  "X509CertificateGenerator": () => (/* binding */ X509CertificateGenerator),
+  "X509Certificates": () => (/* binding */ X509Certificates),
+  "X509ChainBuilder": () => (/* binding */ X509ChainBuilder),
+  "cryptoProvider": () => (/* binding */ cryptoProvider),
+  "diAlgorithm": () => (/* binding */ diAlgorithm),
+  "diAlgorithmProvider": () => (/* binding */ diAlgorithmProvider),
+  "diAsnSignatureFormatter": () => (/* binding */ diAsnSignatureFormatter),
+  "idEd25519": () => (/* binding */ idEd25519),
+  "idEd448": () => (/* binding */ idEd448),
+  "idX25519": () => (/* binding */ idX25519),
+  "idX448": () => (/* binding */ idX448)
+});
+
+// EXTERNAL MODULE: ./node_modules/reflect-metadata/Reflect.js
+var reflect_metadata_Reflect = __webpack_require__(8660);
+// EXTERNAL MODULE: ./node_modules/@peculiar/asn1-schema/build/es2015/index.js + 15 modules
+var es2015 = __webpack_require__(6858);
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return __assign.apply(this, arguments);
+}
+
+function tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var __createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function __exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+}
+
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var __setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+}
+
+function __importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+// EXTERNAL MODULE: ./node_modules/ipaddr.js/lib/ipaddr.js
+var ipaddr = __webpack_require__(6512);
+// EXTERNAL MODULE: ./node_modules/pvtsutils/build/index.js
+var build = __webpack_require__(2043);
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/ip_converter.js
+
+
+class IpConverter {
+    static decodeIP(value) {
+        if (value.length === 64 && parseInt(value, 16) === 0) {
+            return "::/0";
+        }
+        if (value.length !== 16) {
+            return value;
+        }
+        const mask = parseInt(value.slice(8), 16)
+            .toString(2)
+            .split('')
+            .reduce((a, k) => a + (+k), 0);
+        let ip = value.slice(0, 8)
+            .replace(/(.{2})/g, match => `${parseInt(match, 16)}.`);
+        ip = ip.slice(0, -1);
+        return `${ip}/${mask}`;
+    }
+    static toString(buf) {
+        if (buf.byteLength === 4 || buf.byteLength === 16) {
+            const uint8 = new Uint8Array(buf);
+            const addr = ipaddr.fromByteArray(Array.from(uint8));
+            return addr.toString();
+        }
+        return this.decodeIP(build.Convert.ToHex(buf));
+    }
+    static fromString(text) {
+        const addr = ipaddr.parse(text);
+        return new Uint8Array(addr.toByteArray()).buffer;
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/name.js
+var RelativeDistinguishedName_1, RDNSequence_1, Name_1;
+
+
+
+let DirectoryString = class DirectoryString {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+    toString() {
+        return this.bmpString || this.printableString || this.teletexString || this.universalString
+            || this.utf8String || "";
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.TeletexString */.gZ.TeletexString })
+], DirectoryString.prototype, "teletexString", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.PrintableString */.gZ.PrintableString })
+], DirectoryString.prototype, "printableString", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.UniversalString */.gZ.UniversalString })
+], DirectoryString.prototype, "universalString", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Utf8String */.gZ.Utf8String })
+], DirectoryString.prototype, "utf8String", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BmpString */.gZ.BmpString })
+], DirectoryString.prototype, "bmpString", void 0);
+DirectoryString = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], DirectoryString);
+
+let AttributeValue = class AttributeValue extends DirectoryString {
+    constructor(params = {}) {
+        super(params);
+        Object.assign(this, params);
+    }
+    toString() {
+        return this.ia5String || (this.anyValue ? build.Convert.ToHex(this.anyValue) : super.toString());
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String })
+], AttributeValue.prototype, "ia5String", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any })
+], AttributeValue.prototype, "anyValue", void 0);
+AttributeValue = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], AttributeValue);
+
+class AttributeTypeAndValue {
+    constructor(params = {}) {
+        this.type = "";
+        this.value = new AttributeValue();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], AttributeTypeAndValue.prototype, "type", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttributeValue })
+], AttributeTypeAndValue.prototype, "value", void 0);
+let RelativeDistinguishedName = RelativeDistinguishedName_1 = class RelativeDistinguishedName extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, RelativeDistinguishedName_1.prototype);
+    }
+};
+RelativeDistinguishedName = RelativeDistinguishedName_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: AttributeTypeAndValue })
+], RelativeDistinguishedName);
+
+let RDNSequence = RDNSequence_1 = class RDNSequence extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, RDNSequence_1.prototype);
+    }
+};
+RDNSequence = RDNSequence_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: RelativeDistinguishedName })
+], RDNSequence);
+
+let name_Name = Name_1 = class Name extends RDNSequence {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, Name_1.prototype);
+    }
+};
+name_Name = Name_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], name_Name);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/general_name.js
+
+
+
+
+const AsnIpConverter = {
+    fromASN: (value) => IpConverter.toString(es2015/* AsnOctetStringConverter.fromASN */.Cz.fromASN(value)),
+    toASN: (value) => es2015/* AsnOctetStringConverter.toASN */.Cz.toASN(IpConverter.fromString(value)),
+};
+class general_name_OtherName {
+    constructor(params = {}) {
+        this.typeId = "";
+        this.value = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], general_name_OtherName.prototype, "typeId", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], general_name_OtherName.prototype, "value", void 0);
+class EDIPartyName {
+    constructor(params = {}) {
+        this.partyName = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DirectoryString, optional: true, context: 0, implicit: true })
+], EDIPartyName.prototype, "nameAssigner", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DirectoryString, context: 1, implicit: true })
+], EDIPartyName.prototype, "partyName", void 0);
+let GeneralName = class GeneralName {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: general_name_OtherName, context: 0, implicit: true })
+], GeneralName.prototype, "otherName", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String, context: 1, implicit: true })
+], GeneralName.prototype, "rfc822Name", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String, context: 2, implicit: true })
+], GeneralName.prototype, "dNSName", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 3, implicit: true })
+], GeneralName.prototype, "x400Address", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name, context: 4, implicit: false })
+], GeneralName.prototype, "directoryName", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: EDIPartyName, context: 5 })
+], GeneralName.prototype, "ediPartyName", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String, context: 6, implicit: true })
+], GeneralName.prototype, "uniformResourceIdentifier", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.OctetString */.gZ.OctetString, context: 7, implicit: true, converter: AsnIpConverter })
+], GeneralName.prototype, "iPAddress", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier, context: 8, implicit: true })
+], GeneralName.prototype, "registeredID", void 0);
+GeneralName = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], GeneralName);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/object_identifiers.js
+const id_pkix = "1.3.6.1.5.5.7";
+const id_pe = `${id_pkix}.1`;
+const id_qt = `${id_pkix}.2`;
+const id_kp = `${id_pkix}.3`;
+const id_ad = `${id_pkix}.48`;
+const id_qt_csp = `${id_qt}.1`;
+const id_qt_unotice = `${id_qt}.2`;
+const id_ad_ocsp = `${id_ad}.1`;
+const id_ad_caIssuers = `${id_ad}.2`;
+const id_ad_timeStamping = `${id_ad}.3`;
+const id_ad_caRepository = `${id_ad}.5`;
+const id_ce = "2.5.29";
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/authority_information_access.js
+var AuthorityInfoAccessSyntax_1;
+
+
+
+
+const id_pe_authorityInfoAccess = `${id_pe}.1`;
+class AccessDescription {
+    constructor(params = {}) {
+        this.accessMethod = "";
+        this.accessLocation = new GeneralName();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], AccessDescription.prototype, "accessMethod", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName })
+], AccessDescription.prototype, "accessLocation", void 0);
+let AuthorityInfoAccessSyntax = AuthorityInfoAccessSyntax_1 = class AuthorityInfoAccessSyntax extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, AuthorityInfoAccessSyntax_1.prototype);
+    }
+};
+AuthorityInfoAccessSyntax = AuthorityInfoAccessSyntax_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: AccessDescription })
+], AuthorityInfoAccessSyntax);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/authority_key_identifier.js
+
+
+
+
+const id_ce_authorityKeyIdentifier = `${id_ce}.35`;
+class KeyIdentifier extends es2015/* OctetString */.fi {
+}
+class AuthorityKeyIdentifier {
+    constructor(params = {}) {
+        if (params) {
+            Object.assign(this, params);
+        }
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: KeyIdentifier, context: 0, optional: true, implicit: true })
+], AuthorityKeyIdentifier.prototype, "keyIdentifier", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, context: 1, optional: true, implicit: true, repeated: "sequence" })
+], AuthorityKeyIdentifier.prototype, "authorityCertIssuer", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Integer */.gZ.Integer,
+        context: 2,
+        optional: true,
+        implicit: true,
+        converter: es2015/* AsnIntegerArrayBufferConverter */.te,
+    })
+], AuthorityKeyIdentifier.prototype, "authorityCertSerialNumber", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/basic_constraints.js
+
+
+
+const id_ce_basicConstraints = `${id_ce}.19`;
+class BasicConstraints {
+    constructor(params = {}) {
+        this.cA = false;
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, defaultValue: false })
+], BasicConstraints.prototype, "cA", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, optional: true })
+], BasicConstraints.prototype, "pathLenConstraint", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/general_names.js
+var GeneralNames_1;
+
+
+
+
+let GeneralNames = GeneralNames_1 = class GeneralNames extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, GeneralNames_1.prototype);
+    }
+};
+GeneralNames = GeneralNames_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: GeneralName })
+], GeneralNames);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/certificate_issuer.js
+var CertificateIssuer_1;
+
+
+
+
+const id_ce_certificateIssuer = `${id_ce}.29`;
+let CertificateIssuer = CertificateIssuer_1 = class CertificateIssuer extends GeneralNames {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, CertificateIssuer_1.prototype);
+    }
+};
+CertificateIssuer = CertificateIssuer_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], CertificateIssuer);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/certificate_policies.js
+var CertificatePolicies_1;
+
+
+
+const id_ce_certificatePolicies = `${id_ce}.32`;
+const id_ce_certificatePolicies_anyPolicy = `${id_ce_certificatePolicies}.0`;
+let DisplayText = class DisplayText {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+    toString() {
+        return this.ia5String || this.visibleString || this.bmpString || this.utf8String;
+        "";
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String })
+], DisplayText.prototype, "ia5String", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.VisibleString */.gZ.VisibleString })
+], DisplayText.prototype, "visibleString", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BmpString */.gZ.BmpString })
+], DisplayText.prototype, "bmpString", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Utf8String */.gZ.Utf8String })
+], DisplayText.prototype, "utf8String", void 0);
+DisplayText = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], DisplayText);
+
+class NoticeReference {
+    constructor(params = {}) {
+        this.organization = new DisplayText();
+        this.noticeNumbers = [];
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DisplayText })
+], NoticeReference.prototype, "organization", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, repeated: "sequence" })
+], NoticeReference.prototype, "noticeNumbers", void 0);
+class UserNotice {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: NoticeReference, optional: true })
+], UserNotice.prototype, "noticeRef", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DisplayText, optional: true })
+], UserNotice.prototype, "explicitText", void 0);
+let Qualifier = class Qualifier {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String })
+], Qualifier.prototype, "cPSuri", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: UserNotice })
+], Qualifier.prototype, "userNotice", void 0);
+Qualifier = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], Qualifier);
+
+class PolicyQualifierInfo {
+    constructor(params = {}) {
+        this.policyQualifierId = "";
+        this.qualifier = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], PolicyQualifierInfo.prototype, "policyQualifierId", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any })
+], PolicyQualifierInfo.prototype, "qualifier", void 0);
+class PolicyInformation {
+    constructor(params = {}) {
+        this.policyIdentifier = "";
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], PolicyInformation.prototype, "policyIdentifier", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: PolicyQualifierInfo, repeated: "sequence", optional: true })
+], PolicyInformation.prototype, "policyQualifiers", void 0);
+let CertificatePolicies = CertificatePolicies_1 = class CertificatePolicies extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, CertificatePolicies_1.prototype);
+    }
+};
+CertificatePolicies = CertificatePolicies_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: PolicyInformation })
+], CertificatePolicies);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_number.js
+
+
+
+const id_ce_cRLNumber = `${id_ce}.20`;
+let CRLNumber = class CRLNumber {
+    constructor(value = 0) {
+        this.value = value;
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], CRLNumber.prototype, "value", void 0);
+CRLNumber = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CRLNumber);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_delta_indicator.js
+
+
+
+
+const id_ce_deltaCRLIndicator = `${id_ce}.27`;
+let BaseCRLNumber = class BaseCRLNumber extends CRLNumber {
+};
+BaseCRLNumber = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], BaseCRLNumber);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_distribution_points.js
+var CRLDistributionPoints_1;
+
+
+
+
+
+const id_ce_cRLDistributionPoints = `${id_ce}.31`;
+var ReasonFlags;
+(function (ReasonFlags) {
+    ReasonFlags[ReasonFlags["unused"] = 1] = "unused";
+    ReasonFlags[ReasonFlags["keyCompromise"] = 2] = "keyCompromise";
+    ReasonFlags[ReasonFlags["cACompromise"] = 4] = "cACompromise";
+    ReasonFlags[ReasonFlags["affiliationChanged"] = 8] = "affiliationChanged";
+    ReasonFlags[ReasonFlags["superseded"] = 16] = "superseded";
+    ReasonFlags[ReasonFlags["cessationOfOperation"] = 32] = "cessationOfOperation";
+    ReasonFlags[ReasonFlags["certificateHold"] = 64] = "certificateHold";
+    ReasonFlags[ReasonFlags["privilegeWithdrawn"] = 128] = "privilegeWithdrawn";
+    ReasonFlags[ReasonFlags["aACompromise"] = 256] = "aACompromise";
+})(ReasonFlags || (ReasonFlags = {}));
+class Reason extends es2015/* BitString */._K {
+    toJSON() {
+        const res = [];
+        const flags = this.toNumber();
+        if (flags & ReasonFlags.aACompromise) {
+            res.push("aACompromise");
+        }
+        if (flags & ReasonFlags.affiliationChanged) {
+            res.push("affiliationChanged");
+        }
+        if (flags & ReasonFlags.cACompromise) {
+            res.push("cACompromise");
+        }
+        if (flags & ReasonFlags.certificateHold) {
+            res.push("certificateHold");
+        }
+        if (flags & ReasonFlags.cessationOfOperation) {
+            res.push("cessationOfOperation");
+        }
+        if (flags & ReasonFlags.keyCompromise) {
+            res.push("keyCompromise");
+        }
+        if (flags & ReasonFlags.privilegeWithdrawn) {
+            res.push("privilegeWithdrawn");
+        }
+        if (flags & ReasonFlags.superseded) {
+            res.push("superseded");
+        }
+        if (flags & ReasonFlags.unused) {
+            res.push("unused");
+        }
+        return res;
+    }
+    toString() {
+        return `[${this.toJSON().join(", ")}]`;
+    }
+}
+let DistributionPointName = class DistributionPointName {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, context: 0, repeated: "sequence", implicit: true })
+], DistributionPointName.prototype, "fullName", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: RelativeDistinguishedName, context: 1, implicit: true })
+], DistributionPointName.prototype, "nameRelativeToCRLIssuer", void 0);
+DistributionPointName = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], DistributionPointName);
+
+class DistributionPoint {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DistributionPointName, context: 0, optional: true })
+], DistributionPoint.prototype, "distributionPoint", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Reason, context: 1, optional: true, implicit: true })
+], DistributionPoint.prototype, "reasons", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, context: 2, optional: true, repeated: "sequence", implicit: true })
+], DistributionPoint.prototype, "cRLIssuer", void 0);
+let CRLDistributionPoints = CRLDistributionPoints_1 = class CRLDistributionPoints extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, CRLDistributionPoints_1.prototype);
+    }
+};
+CRLDistributionPoints = CRLDistributionPoints_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: DistributionPoint })
+], CRLDistributionPoints);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_freshest.js
+var FreshestCRL_1;
+
+
+
+
+const id_ce_freshestCRL = `${id_ce}.46`;
+let FreshestCRL = FreshestCRL_1 = class FreshestCRL extends CRLDistributionPoints {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, FreshestCRL_1.prototype);
+    }
+};
+FreshestCRL = FreshestCRL_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: DistributionPoint })
+], FreshestCRL);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_issuing_distribution_point.js
+
+
+
+
+
+const id_ce_issuingDistributionPoint = `${id_ce}.28`;
+class IssuingDistributionPoint {
+    constructor(params = {}) {
+        this.onlyContainsUserCerts = IssuingDistributionPoint.ONLY;
+        this.onlyContainsCACerts = IssuingDistributionPoint.ONLY;
+        this.indirectCRL = IssuingDistributionPoint.ONLY;
+        this.onlyContainsAttributeCerts = IssuingDistributionPoint.ONLY;
+        Object.assign(this, params);
+    }
+    ;
+    ;
+    ;
+    ;
+}
+IssuingDistributionPoint.ONLY = false;
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DistributionPointName, context: 0, optional: true })
+], IssuingDistributionPoint.prototype, "distributionPoint", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, context: 1, defaultValue: IssuingDistributionPoint.ONLY })
+], IssuingDistributionPoint.prototype, "onlyContainsUserCerts", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, context: 2, defaultValue: IssuingDistributionPoint.ONLY })
+], IssuingDistributionPoint.prototype, "onlyContainsCACerts", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Reason, context: 3, optional: true })
+], IssuingDistributionPoint.prototype, "onlySomeReasons", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, context: 4, defaultValue: IssuingDistributionPoint.ONLY })
+], IssuingDistributionPoint.prototype, "indirectCRL", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, context: 5, defaultValue: IssuingDistributionPoint.ONLY })
+], IssuingDistributionPoint.prototype, "onlyContainsAttributeCerts", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/crl_reason.js
+
+
+
+const id_ce_cRLReasons = `${id_ce}.21`;
+var CRLReasons;
+(function (CRLReasons) {
+    CRLReasons[CRLReasons["unspecified"] = 0] = "unspecified";
+    CRLReasons[CRLReasons["keyCompromise"] = 1] = "keyCompromise";
+    CRLReasons[CRLReasons["cACompromise"] = 2] = "cACompromise";
+    CRLReasons[CRLReasons["affiliationChanged"] = 3] = "affiliationChanged";
+    CRLReasons[CRLReasons["superseded"] = 4] = "superseded";
+    CRLReasons[CRLReasons["cessationOfOperation"] = 5] = "cessationOfOperation";
+    CRLReasons[CRLReasons["certificateHold"] = 6] = "certificateHold";
+    CRLReasons[CRLReasons["removeFromCRL"] = 8] = "removeFromCRL";
+    CRLReasons[CRLReasons["privilegeWithdrawn"] = 9] = "privilegeWithdrawn";
+    CRLReasons[CRLReasons["aACompromise"] = 10] = "aACompromise";
+})(CRLReasons || (CRLReasons = {}));
+let CRLReason = class CRLReason {
+    constructor(reason = CRLReasons.unspecified) {
+        this.reason = CRLReasons.unspecified;
+        this.reason = reason;
+    }
+    toJSON() {
+        return CRLReasons[this.reason];
+    }
+    toString() {
+        return this.toJSON();
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Enumerated */.gZ.Enumerated })
+], CRLReason.prototype, "reason", void 0);
+CRLReason = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CRLReason);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/extended_key_usage.js
+var ExtendedKeyUsage_1;
+
+
+
+const id_ce_extKeyUsage = `${id_ce}.37`;
+let ExtendedKeyUsage = ExtendedKeyUsage_1 = class ExtendedKeyUsage extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, ExtendedKeyUsage_1.prototype);
+    }
+};
+ExtendedKeyUsage = ExtendedKeyUsage_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], ExtendedKeyUsage);
+
+const anyExtendedKeyUsage = `${id_ce_extKeyUsage}.0`;
+const id_kp_serverAuth = `${id_kp}.1`;
+const id_kp_clientAuth = `${id_kp}.2`;
+const id_kp_codeSigning = `${id_kp}.3`;
+const id_kp_emailProtection = `${id_kp}.4`;
+const id_kp_timeStamping = `${id_kp}.8`;
+const id_kp_OCSPSigning = `${id_kp}.9`;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/inhibit_any_policy.js
+
+
+
+const id_ce_inhibitAnyPolicy = `${id_ce}.54`;
+let InhibitAnyPolicy = class InhibitAnyPolicy {
+    constructor(value = new ArrayBuffer(0)) {
+        this.value = value;
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], InhibitAnyPolicy.prototype, "value", void 0);
+InhibitAnyPolicy = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], InhibitAnyPolicy);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/invalidity_date.js
+
+
+
+const id_ce_invalidityDate = `${id_ce}.24`;
+let InvalidityDate = class InvalidityDate {
+    constructor(value) {
+        this.value = new Date();
+        if (value) {
+            this.value = value;
+        }
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime })
+], InvalidityDate.prototype, "value", void 0);
+InvalidityDate = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], InvalidityDate);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/issuer_alternative_name.js
+var IssueAlternativeName_1;
+
+
+
+
+const id_ce_issuerAltName = `${id_ce}.18`;
+let IssueAlternativeName = IssueAlternativeName_1 = class IssueAlternativeName extends GeneralNames {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, IssueAlternativeName_1.prototype);
+    }
+};
+IssueAlternativeName = IssueAlternativeName_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], IssueAlternativeName);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/key_usage.js
+
+
+const id_ce_keyUsage = `${id_ce}.15`;
+var KeyUsageFlags;
+(function (KeyUsageFlags) {
+    KeyUsageFlags[KeyUsageFlags["digitalSignature"] = 1] = "digitalSignature";
+    KeyUsageFlags[KeyUsageFlags["nonRepudiation"] = 2] = "nonRepudiation";
+    KeyUsageFlags[KeyUsageFlags["keyEncipherment"] = 4] = "keyEncipherment";
+    KeyUsageFlags[KeyUsageFlags["dataEncipherment"] = 8] = "dataEncipherment";
+    KeyUsageFlags[KeyUsageFlags["keyAgreement"] = 16] = "keyAgreement";
+    KeyUsageFlags[KeyUsageFlags["keyCertSign"] = 32] = "keyCertSign";
+    KeyUsageFlags[KeyUsageFlags["cRLSign"] = 64] = "cRLSign";
+    KeyUsageFlags[KeyUsageFlags["encipherOnly"] = 128] = "encipherOnly";
+    KeyUsageFlags[KeyUsageFlags["decipherOnly"] = 256] = "decipherOnly";
+})(KeyUsageFlags || (KeyUsageFlags = {}));
+class KeyUsage extends es2015/* BitString */._K {
+    toJSON() {
+        const flag = this.toNumber();
+        const res = [];
+        if (flag & KeyUsageFlags.cRLSign) {
+            res.push("crlSign");
+        }
+        if (flag & KeyUsageFlags.dataEncipherment) {
+            res.push("dataEncipherment");
+        }
+        if (flag & KeyUsageFlags.decipherOnly) {
+            res.push("decipherOnly");
+        }
+        if (flag & KeyUsageFlags.digitalSignature) {
+            res.push("digitalSignature");
+        }
+        if (flag & KeyUsageFlags.encipherOnly) {
+            res.push("encipherOnly");
+        }
+        if (flag & KeyUsageFlags.keyAgreement) {
+            res.push("keyAgreement");
+        }
+        if (flag & KeyUsageFlags.keyCertSign) {
+            res.push("keyCertSign");
+        }
+        if (flag & KeyUsageFlags.keyEncipherment) {
+            res.push("keyEncipherment");
+        }
+        if (flag & KeyUsageFlags.nonRepudiation) {
+            res.push("nonRepudiation");
+        }
+        return res;
+    }
+    toString() {
+        return `[${this.toJSON().join(", ")}]`;
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/name_constraints.js
+var GeneralSubtrees_1;
+
+
+
+
+const id_ce_nameConstraints = `${id_ce}.30`;
+class GeneralSubtree {
+    constructor(params = {}) {
+        this.base = new GeneralName();
+        this.minimum = 0;
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName })
+], GeneralSubtree.prototype, "base", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 0, defaultValue: 0, implicit: true })
+], GeneralSubtree.prototype, "minimum", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 1, optional: true, implicit: true })
+], GeneralSubtree.prototype, "maximum", void 0);
+let GeneralSubtrees = GeneralSubtrees_1 = class GeneralSubtrees extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, GeneralSubtrees_1.prototype);
+    }
+};
+GeneralSubtrees = GeneralSubtrees_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: GeneralSubtree })
+], GeneralSubtrees);
+
+class NameConstraints {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralSubtrees, context: 0, optional: true, implicit: true })
+], NameConstraints.prototype, "permittedSubtrees", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralSubtrees, context: 1, optional: true, implicit: true })
+], NameConstraints.prototype, "excludedSubtrees", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/policy_constraints.js
+
+
+
+const id_ce_policyConstraints = `${id_ce}.36`;
+class PolicyConstraints {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 0, implicit: true, optional: true,
+        converter: es2015/* AsnIntegerArrayBufferConverter */.te,
+    })
+], PolicyConstraints.prototype, "requireExplicitPolicy", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 1, implicit: true, optional: true,
+        converter: es2015/* AsnIntegerArrayBufferConverter */.te,
+    })
+], PolicyConstraints.prototype, "inhibitPolicyMapping", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/policy_mappings.js
+
+
+
+const id_ce_policyMappings = `${id_ce}.33`;
+class PolicyMappings {
+    constructor(params = {}) {
+        this.issuerDomainPolicy = "";
+        this.subjectDomainPolicy = "";
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], PolicyMappings.prototype, "issuerDomainPolicy", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], PolicyMappings.prototype, "subjectDomainPolicy", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/subject_alternative_name.js
+var SubjectAlternativeName_1;
+
+
+
+
+const id_ce_subjectAltName = `${id_ce}.17`;
+let SubjectAlternativeName = SubjectAlternativeName_1 = class SubjectAlternativeName extends GeneralNames {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, SubjectAlternativeName_1.prototype);
+    }
+};
+SubjectAlternativeName = SubjectAlternativeName_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], SubjectAlternativeName);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/attribute.js
+
+
+class attribute_Attribute {
+    constructor(params = {}) {
+        this.type = "";
+        this.values = [];
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], attribute_Attribute.prototype, "type", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, repeated: "set" })
+], attribute_Attribute.prototype, "values", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/subject_directory_attributes.js
+var SubjectDirectoryAttributes_1;
+
+
+
+
+const id_ce_subjectDirectoryAttributes = `${id_ce}.9`;
+let SubjectDirectoryAttributes = SubjectDirectoryAttributes_1 = class SubjectDirectoryAttributes extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, SubjectDirectoryAttributes_1.prototype);
+    }
+};
+SubjectDirectoryAttributes = SubjectDirectoryAttributes_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: attribute_Attribute })
+], SubjectDirectoryAttributes);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/subject_key_identifier.js
+
+
+const id_ce_subjectKeyIdentifier = `${id_ce}.14`;
+class SubjectKeyIdentifier extends KeyIdentifier {
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/private_key_usage_period.js
+
+
+
+const id_ce_privateKeyUsagePeriod = `${id_ce}.16`;
+class PrivateKeyUsagePeriod {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime, context: 0, implicit: true, optional: true })
+], PrivateKeyUsagePeriod.prototype, "notBefore", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime, context: 1, implicit: true, optional: true, })
+], PrivateKeyUsagePeriod.prototype, "notAfter", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/entrust_version_info.js
+
+
+const id_entrust_entrustVersInfo = "1.2.840.113533.7.65.0";
+var EntrustInfoFlags;
+(function (EntrustInfoFlags) {
+    EntrustInfoFlags[EntrustInfoFlags["keyUpdateAllowed"] = 1] = "keyUpdateAllowed";
+    EntrustInfoFlags[EntrustInfoFlags["newExtensions"] = 2] = "newExtensions";
+    EntrustInfoFlags[EntrustInfoFlags["pKIXCertificate"] = 4] = "pKIXCertificate";
+})(EntrustInfoFlags || (EntrustInfoFlags = {}));
+class EntrustInfo extends es2015/* BitString */._K {
+    toJSON() {
+        const res = [];
+        const flags = this.toNumber();
+        if (flags & EntrustInfoFlags.pKIXCertificate) {
+            res.push("pKIXCertificate");
+        }
+        if (flags & EntrustInfoFlags.newExtensions) {
+            res.push("newExtensions");
+        }
+        if (flags & EntrustInfoFlags.keyUpdateAllowed) {
+            res.push("keyUpdateAllowed");
+        }
+        return res;
+    }
+    toString() {
+        return `[${this.toJSON().join(", ")}]`;
+    }
+}
+class EntrustVersionInfo {
+    constructor(params = {}) {
+        this.entrustVers = '';
+        this.entrustInfoFlags = new EntrustInfo();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralString */.gZ.GeneralString })
+], EntrustVersionInfo.prototype, "entrustVers", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: EntrustInfo })
+], EntrustVersionInfo.prototype, "entrustInfoFlags", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extensions/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/algorithm_identifier.js
+
+
+class AlgorithmIdentifier {
+    constructor(params = {}) {
+        this.algorithm = "";
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier,
+    })
+], AlgorithmIdentifier.prototype, "algorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Any */.gZ.Any,
+        optional: true,
+    })
+], AlgorithmIdentifier.prototype, "parameters", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/subject_public_key_info.js
+
+
+
+class SubjectPublicKeyInfo {
+    constructor(params = {}) {
+        this.algorithm = new AlgorithmIdentifier();
+        this.subjectPublicKey = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], SubjectPublicKeyInfo.prototype, "algorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], SubjectPublicKeyInfo.prototype, "subjectPublicKey", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/time.js
+
+
+let Time = class Time {
+    constructor(time) {
+        if (time) {
+            if (typeof time === "string" || typeof time === "number") {
+                this.utcTime = new Date(time);
+            }
+            else if (time instanceof Date) {
+                this.utcTime = time;
+            }
+            else {
+                Object.assign(this, time);
+            }
+        }
+    }
+    getTime() {
+        const time = this.utcTime || this.generalTime;
+        if (!time) {
+            throw new Error("Cannot get time from CHOICE object");
+        }
+        return time;
+    }
+};
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.UTCTime */.gZ.UTCTime,
+    })
+], Time.prototype, "utcTime", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime,
+    })
+], Time.prototype, "generalTime", void 0);
+Time = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], Time);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/validity.js
+
+
+
+class Validity {
+    constructor(params) {
+        this.notBefore = new Time(new Date());
+        this.notAfter = new Time(new Date());
+        if (params) {
+            this.notBefore = new Time(params.notBefore);
+            this.notAfter = new Time(params.notAfter);
+        }
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Time })
+], Validity.prototype, "notBefore", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Time })
+], Validity.prototype, "notAfter", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/extension.js
+var Extensions_1;
+
+
+class extension_Extension {
+    constructor(params = {}) {
+        this.extnID = "";
+        this.critical = extension_Extension.CRITICAL;
+        this.extnValue = new es2015/* OctetString */.fi();
+        Object.assign(this, params);
+    }
+}
+extension_Extension.CRITICAL = false;
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], extension_Extension.prototype, "extnID", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean,
+        defaultValue: extension_Extension.CRITICAL,
+    })
+], extension_Extension.prototype, "critical", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], extension_Extension.prototype, "extnValue", void 0);
+let Extensions = Extensions_1 = class Extensions extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, Extensions_1.prototype);
+    }
+};
+Extensions = Extensions_1 = __decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: extension_Extension })
+], Extensions);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/types.js
+var Version;
+(function (Version) {
+    Version[Version["v1"] = 0] = "v1";
+    Version[Version["v2"] = 1] = "v2";
+    Version[Version["v3"] = 2] = "v3";
+})(Version || (Version = {}));
+;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/tbs_certificate.js
+
+
+
+
+
+
+
+
+class TBSCertificate {
+    constructor(params = {}) {
+        this.version = Version.v1;
+        this.serialNumber = new ArrayBuffer(0);
+        this.signature = new AlgorithmIdentifier();
+        this.issuer = new name_Name();
+        this.validity = new Validity();
+        this.subject = new name_Name();
+        this.subjectPublicKeyInfo = new SubjectPublicKeyInfo();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Integer */.gZ.Integer,
+        context: 0,
+        defaultValue: Version.v1,
+    })
+], TBSCertificate.prototype, "version", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.Integer */.gZ.Integer,
+        converter: es2015/* AsnIntegerArrayBufferConverter */.te,
+    })
+], TBSCertificate.prototype, "serialNumber", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], TBSCertificate.prototype, "signature", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name })
+], TBSCertificate.prototype, "issuer", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Validity })
+], TBSCertificate.prototype, "validity", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name })
+], TBSCertificate.prototype, "subject", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SubjectPublicKeyInfo })
+], TBSCertificate.prototype, "subjectPublicKeyInfo", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({
+        type: es2015/* AsnPropTypes.BitString */.gZ.BitString,
+        context: 1,
+        implicit: true,
+        optional: true,
+    })
+], TBSCertificate.prototype, "issuerUniqueID", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString, context: 2, implicit: true, optional: true })
+], TBSCertificate.prototype, "subjectUniqueID", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Extensions, context: 3, optional: true })
+], TBSCertificate.prototype, "extensions", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/certificate.js
+
+
+
+
+class Certificate {
+    constructor(params = {}) {
+        this.tbsCertificate = new TBSCertificate();
+        this.signatureAlgorithm = new AlgorithmIdentifier();
+        this.signatureValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: TBSCertificate })
+], Certificate.prototype, "tbsCertificate", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], Certificate.prototype, "signatureAlgorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], Certificate.prototype, "signatureValue", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/tbs_cert_list.js
+
+
+
+
+
+
+class RevokedCertificate {
+    constructor(params = {}) {
+        this.userCertificate = new ArrayBuffer(0);
+        this.revocationDate = new Time();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RevokedCertificate.prototype, "userCertificate", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Time })
+], RevokedCertificate.prototype, "revocationDate", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: extension_Extension, optional: true, repeated: "sequence" })
+], RevokedCertificate.prototype, "crlEntryExtensions", void 0);
+class TBSCertList {
+    constructor(params = {}) {
+        this.signature = new AlgorithmIdentifier();
+        this.issuer = new name_Name();
+        this.thisUpdate = new Time();
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, optional: true })
+], TBSCertList.prototype, "version", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], TBSCertList.prototype, "signature", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name })
+], TBSCertList.prototype, "issuer", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Time })
+], TBSCertList.prototype, "thisUpdate", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Time, optional: true })
+], TBSCertList.prototype, "nextUpdate", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: RevokedCertificate, repeated: "sequence", optional: true })
+], TBSCertList.prototype, "revokedCertificates", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: extension_Extension, optional: true, context: 0, repeated: "sequence" })
+], TBSCertList.prototype, "crlExtensions", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/certificate_list.js
+
+
+
+
+class CertificateList {
+    constructor(params = {}) {
+        this.tbsCertList = new TBSCertList();
+        this.signatureAlgorithm = new AlgorithmIdentifier();
+        this.signature = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: TBSCertList })
+], CertificateList.prototype, "tbsCertList", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], CertificateList.prototype, "signatureAlgorithm", void 0);
+__decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], CertificateList.prototype, "signature", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509/build/es2015/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var tslib_es6_extendStatics = function(d, b) {
+    tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return tslib_es6_extendStatics(d, b);
+};
+
+function tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var tslib_es6_assign = function() {
+    tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return tslib_es6_assign.apply(this, arguments);
+}
+
+function tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) tslib_es6_createBinding(o, m, p);
+}
+
+function tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function tslib_es6_await(v) {
+    return this instanceof tslib_es6_await ? (this.v = v, this) : new tslib_es6_await(v);
+}
+
+function tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof tslib_es6_values === "function" ? tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) tslib_es6_createBinding(result, mod, k);
+    tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/object_identifiers.js
+const id_pkcs_1 = "1.2.840.113549.1.1";
+const id_rsaEncryption = `${id_pkcs_1}.1`;
+const id_RSAES_OAEP = `${id_pkcs_1}.7`;
+const id_pSpecified = `${id_pkcs_1}.9`;
+const id_RSASSA_PSS = `${id_pkcs_1}.10`;
+const id_md2WithRSAEncryption = `${id_pkcs_1}.2`;
+const id_md5WithRSAEncryption = `${id_pkcs_1}.4`;
+const id_sha1WithRSAEncryption = `${id_pkcs_1}.5`;
+const id_sha224WithRSAEncryption = `${id_pkcs_1}.14`;
+const id_ssha224WithRSAEncryption = (/* unused pure expression or super */ null && (id_sha224WithRSAEncryption));
+const id_sha256WithRSAEncryption = `${id_pkcs_1}.11`;
+const id_sha384WithRSAEncryption = `${id_pkcs_1}.12`;
+const id_sha512WithRSAEncryption = `${id_pkcs_1}.13`;
+const id_sha512_224WithRSAEncryption = `${id_pkcs_1}.15`;
+const id_sha512_256WithRSAEncryption = `${id_pkcs_1}.16`;
+const id_sha1 = "1.3.14.3.2.26";
+const id_sha224 = "2.16.840.1.101.3.4.2.4";
+const id_sha256 = "2.16.840.1.101.3.4.2.1";
+const id_sha384 = "2.16.840.1.101.3.4.2.2";
+const id_sha512 = "2.16.840.1.101.3.4.2.3";
+const id_sha512_224 = "2.16.840.1.101.3.4.2.5";
+const id_sha512_256 = "2.16.840.1.101.3.4.2.6";
+const id_md2 = "1.2.840.113549.2.2";
+const id_md5 = "1.2.840.113549.2.5";
+const id_mgf1 = `${id_pkcs_1}.8`;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/algorithms.js
+
+
+
+function create(algorithm) {
+    return new AlgorithmIdentifier({ algorithm, parameters: null });
+}
+const md2 = create(id_md2);
+const md4 = create(id_md5);
+const sha1 = create(id_sha1);
+const sha224 = create(id_sha224);
+const sha256 = create(id_sha256);
+const sha384 = create(id_sha384);
+const sha512 = create(id_sha512);
+const sha512_224 = create(id_sha512_224);
+const sha512_256 = create(id_sha512_256);
+const mgf1SHA1 = new AlgorithmIdentifier({
+    algorithm: id_mgf1,
+    parameters: es2015/* AsnConvert.serialize */.zc.serialize(sha1),
+});
+const pSpecifiedEmpty = new AlgorithmIdentifier({
+    algorithm: id_pSpecified,
+    parameters: es2015/* AsnConvert.serialize */.zc.serialize(es2015/* AsnOctetStringConverter.toASN */.Cz.toASN(new Uint8Array([0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d, 0x32, 0x55, 0xbf, 0xef, 0x95, 0x60, 0x18, 0x90, 0xaf, 0xd8, 0x07, 0x09]).buffer)),
+});
+const rsaEncryption = create(id_rsaEncryption);
+const md2WithRSAEncryption = create(id_md2WithRSAEncryption);
+const md5WithRSAEncryption = create(id_md5WithRSAEncryption);
+const sha1WithRSAEncryption = create(id_sha1WithRSAEncryption);
+const sha224WithRSAEncryption = create(id_sha512_224WithRSAEncryption);
+const sha256WithRSAEncryption = create(id_sha512_256WithRSAEncryption);
+const sha384WithRSAEncryption = create(id_sha384WithRSAEncryption);
+const sha512WithRSAEncryption = create(id_sha512WithRSAEncryption);
+const sha512_224WithRSAEncryption = create(id_sha512_224WithRSAEncryption);
+const sha512_256WithRSAEncryption = create(id_sha512_256WithRSAEncryption);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/parameters/rsaes_oaep.js
+
+
+
+
+
+class RsaEsOaepParams {
+    constructor(params = {}) {
+        this.hashAlgorithm = new AlgorithmIdentifier(sha1);
+        this.maskGenAlgorithm = new AlgorithmIdentifier({
+            algorithm: id_mgf1,
+            parameters: es2015/* AsnConvert.serialize */.zc.serialize(sha1),
+        });
+        this.pSourceAlgorithm = new AlgorithmIdentifier(pSpecifiedEmpty);
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier, context: 0, defaultValue: sha1 })
+], RsaEsOaepParams.prototype, "hashAlgorithm", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier, context: 1, defaultValue: mgf1SHA1 })
+], RsaEsOaepParams.prototype, "maskGenAlgorithm", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier, context: 2, defaultValue: pSpecifiedEmpty })
+], RsaEsOaepParams.prototype, "pSourceAlgorithm", void 0);
+const RSAES_OAEP = new AlgorithmIdentifier({
+    algorithm: id_RSAES_OAEP,
+    parameters: es2015/* AsnConvert.serialize */.zc.serialize(new RsaEsOaepParams()),
+});
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/parameters/rsassa_pss.js
+
+
+
+
+
+class RsaSaPssParams {
+    constructor(params = {}) {
+        this.hashAlgorithm = new AlgorithmIdentifier(sha1);
+        this.maskGenAlgorithm = new AlgorithmIdentifier({
+            algorithm: id_mgf1,
+            parameters: es2015/* AsnConvert.serialize */.zc.serialize(sha1),
+        });
+        this.saltLength = 20;
+        this.trailerField = 1;
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier, context: 0, defaultValue: sha1 })
+], RsaSaPssParams.prototype, "hashAlgorithm", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier, context: 1, defaultValue: mgf1SHA1 })
+], RsaSaPssParams.prototype, "maskGenAlgorithm", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 2, defaultValue: 20 })
+], RsaSaPssParams.prototype, "saltLength", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, context: 3, defaultValue: 1 })
+], RsaSaPssParams.prototype, "trailerField", void 0);
+const RSASSA_PSS = new AlgorithmIdentifier({
+    algorithm: id_RSASSA_PSS,
+    parameters: es2015/* AsnConvert.serialize */.zc.serialize(new RsaSaPssParams()),
+});
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/parameters/rsassa_pkcs1_v1_5.js
+
+
+
+class DigestInfo {
+    constructor(params = {}) {
+        this.digestAlgorithm = new AlgorithmIdentifier();
+        this.digest = new es2015/* OctetString */.fi();
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], DigestInfo.prototype, "digestAlgorithm", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], DigestInfo.prototype, "digest", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/parameters/index.js
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/other_prime_info.js
+var OtherPrimeInfos_1;
+
+
+class OtherPrimeInfo {
+    constructor(params = {}) {
+        this.prime = new ArrayBuffer(0);
+        this.exponent = new ArrayBuffer(0);
+        this.coefficient = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], OtherPrimeInfo.prototype, "prime", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], OtherPrimeInfo.prototype, "exponent", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], OtherPrimeInfo.prototype, "coefficient", void 0);
+let OtherPrimeInfos = OtherPrimeInfos_1 = class OtherPrimeInfos extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, OtherPrimeInfos_1.prototype);
+    }
+};
+OtherPrimeInfos = OtherPrimeInfos_1 = tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: OtherPrimeInfo })
+], OtherPrimeInfos);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/rsa_private_key.js
+
+
+
+class RSAPrivateKey {
+    constructor(params = {}) {
+        this.version = 0;
+        this.modulus = new ArrayBuffer(0);
+        this.publicExponent = new ArrayBuffer(0);
+        this.privateExponent = new ArrayBuffer(0);
+        this.prime1 = new ArrayBuffer(0);
+        this.prime2 = new ArrayBuffer(0);
+        this.exponent1 = new ArrayBuffer(0);
+        this.exponent2 = new ArrayBuffer(0);
+        this.coefficient = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], RSAPrivateKey.prototype, "version", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "modulus", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "publicExponent", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "privateExponent", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "prime1", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "prime2", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "exponent1", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "exponent2", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPrivateKey.prototype, "coefficient", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: OtherPrimeInfos, optional: true })
+], RSAPrivateKey.prototype, "otherPrimeInfos", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/rsa_public_key.js
+
+
+class RSAPublicKey {
+    constructor(params = {}) {
+        this.modulus = new ArrayBuffer(0);
+        this.publicExponent = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPublicKey.prototype, "modulus", void 0);
+tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], RSAPublicKey.prototype, "publicExponent", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-rsa/build/es2015/index.js
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/types/lifecycle.js
+var Lifecycle;
+(function (Lifecycle) {
+    Lifecycle[Lifecycle["Transient"] = 0] = "Transient";
+    Lifecycle[Lifecycle["Singleton"] = 1] = "Singleton";
+    Lifecycle[Lifecycle["ResolutionScoped"] = 2] = "ResolutionScoped";
+    Lifecycle[Lifecycle["ContainerScoped"] = 3] = "ContainerScoped";
+})(Lifecycle || (Lifecycle = {}));
+/* harmony default export */ const lifecycle = (Lifecycle);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/types/index.js
+
+
+;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var tslib_tslib_es6_extendStatics = function(d, b) {
+    tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return tslib_tslib_es6_extendStatics(d, b);
+};
+
+function node_modules_tslib_tslib_es6_extends(d, b) {
+    tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var tslib_tslib_es6_assign = function() {
+    tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+function tslib_tslib_es6_createBinding(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}
+
+function tslib_tslib_es6_exportStar(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+function node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+function tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+
+function tslib_tslib_es6_await(v) {
+    return this instanceof tslib_tslib_es6_await ? (this.v = v, this) : new tslib_tslib_es6_await(v);
+}
+
+function tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof tslib_tslib_es6_values === "function" ? tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+function tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
+    return result;
+}
+
+function tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function tslib_tslib_es6_classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+}
+
+function tslib_tslib_es6_classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/class-provider.js
+function isClassProvider(provider) {
+    return !!provider.useClass;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/factory-provider.js
+function isFactoryProvider(provider) {
+    return !!provider.useFactory;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/lazy-helpers.js
+
+var DelayedConstructor = (function () {
+    function DelayedConstructor(wrap) {
+        this.wrap = wrap;
+        this.reflectMethods = [
+            "get",
+            "getPrototypeOf",
+            "setPrototypeOf",
+            "getOwnPropertyDescriptor",
+            "defineProperty",
+            "has",
+            "set",
+            "deleteProperty",
+            "apply",
+            "construct",
+            "ownKeys"
+        ];
+    }
+    DelayedConstructor.prototype.createProxy = function (createObject) {
+        var _this = this;
+        var target = {};
+        var init = false;
+        var value;
+        var delayedObject = function () {
+            if (!init) {
+                value = createObject(_this.wrap());
+                init = true;
+            }
+            return value;
+        };
+        return new Proxy(target, this.createHandler(delayedObject));
+    };
+    DelayedConstructor.prototype.createHandler = function (delayedObject) {
+        var handler = {};
+        var install = function (name) {
+            handler[name] = function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                args[0] = delayedObject();
+                var method = Reflect[name];
+                return method.apply(void 0, node_modules_tslib_tslib_es6_spread(args));
+            };
+        };
+        this.reflectMethods.forEach(install);
+        return handler;
+    };
+    return DelayedConstructor;
+}());
+
+function delay(wrappedConstructor) {
+    if (typeof wrappedConstructor === "undefined") {
+        throw new Error("Attempt to `delay` undefined. Constructor must be wrapped in a callback");
+    }
+    return new DelayedConstructor(wrappedConstructor);
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/injection-token.js
+
+function isNormalToken(token) {
+    return typeof token === "string" || typeof token === "symbol";
+}
+function injection_token_isTokenDescriptor(descriptor) {
+    return (typeof descriptor === "object" &&
+        "token" in descriptor &&
+        "multiple" in descriptor);
+}
+function injection_token_isTransformDescriptor(descriptor) {
+    return (typeof descriptor === "object" &&
+        "token" in descriptor &&
+        "transform" in descriptor);
+}
+function isConstructorToken(token) {
+    return typeof token === "function" || token instanceof DelayedConstructor;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/token-provider.js
+function isTokenProvider(provider) {
+    return !!provider.useToken;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/value-provider.js
+function isValueProvider(provider) {
+    return provider.useValue != undefined;
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/index.js
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/providers/provider.js
+
+
+
+
+function isProvider(provider) {
+    return (isClassProvider(provider) ||
+        isValueProvider(provider) ||
+        isTokenProvider(provider) ||
+        isFactoryProvider(provider));
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/registry-base.js
+var RegistryBase = (function () {
+    function RegistryBase() {
+        this._registryMap = new Map();
+    }
+    RegistryBase.prototype.entries = function () {
+        return this._registryMap.entries();
+    };
+    RegistryBase.prototype.getAll = function (key) {
+        this.ensure(key);
+        return this._registryMap.get(key);
+    };
+    RegistryBase.prototype.get = function (key) {
+        this.ensure(key);
+        var value = this._registryMap.get(key);
+        return value[value.length - 1] || null;
+    };
+    RegistryBase.prototype.set = function (key, value) {
+        this.ensure(key);
+        this._registryMap.get(key).push(value);
+    };
+    RegistryBase.prototype.setAll = function (key, value) {
+        this._registryMap.set(key, value);
+    };
+    RegistryBase.prototype.has = function (key) {
+        this.ensure(key);
+        return this._registryMap.get(key).length > 0;
+    };
+    RegistryBase.prototype.clear = function () {
+        this._registryMap.clear();
+    };
+    RegistryBase.prototype.ensure = function (key) {
+        if (!this._registryMap.has(key)) {
+            this._registryMap.set(key, []);
+        }
+    };
+    return RegistryBase;
+}());
+/* harmony default export */ const registry_base = (RegistryBase);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/registry.js
+
+
+var Registry = (function (_super) {
+    node_modules_tslib_tslib_es6_extends(Registry, _super);
+    function Registry() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Registry;
+}(registry_base));
+/* harmony default export */ const registry = (Registry);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/resolution-context.js
+var ResolutionContext = (function () {
+    function ResolutionContext() {
+        this.scopedResolutions = new Map();
+    }
+    return ResolutionContext;
+}());
+/* harmony default export */ const resolution_context = (ResolutionContext);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/error-helpers.js
+
+function formatDependency(params, idx) {
+    if (params === null) {
+        return "at position #" + idx;
+    }
+    var argName = params.split(",")[idx].trim();
+    return "\"" + argName + "\" at position #" + idx;
+}
+function composeErrorMessage(msg, e, indent) {
+    if (indent === void 0) { indent = "    "; }
+    return node_modules_tslib_tslib_es6_spread([msg], e.message.split("\n").map(function (l) { return indent + l; })).join("\n");
+}
+function error_helpers_formatErrorCtor(ctor, paramIdx, error) {
+    var _a = tslib_tslib_es6_read(ctor.toString().match(/constructor\(([\w, ]+)\)/) || [], 2), _b = _a[1], params = _b === void 0 ? null : _b;
+    var dep = formatDependency(params, paramIdx);
+    return composeErrorMessage("Cannot inject the dependency " + dep + " of \"" + ctor.name + "\" constructor. Reason:", error);
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/interceptors.js
+
+
+var PreResolutionInterceptors = (function (_super) {
+    node_modules_tslib_tslib_es6_extends(PreResolutionInterceptors, _super);
+    function PreResolutionInterceptors() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return PreResolutionInterceptors;
+}(registry_base));
+
+var PostResolutionInterceptors = (function (_super) {
+    node_modules_tslib_tslib_es6_extends(PostResolutionInterceptors, _super);
+    function PostResolutionInterceptors() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return PostResolutionInterceptors;
+}(registry_base));
+
+var Interceptors = (function () {
+    function Interceptors() {
+        this.preResolution = new PreResolutionInterceptors();
+        this.postResolution = new PostResolutionInterceptors();
+    }
+    return Interceptors;
+}());
+/* harmony default export */ const interceptors = (Interceptors);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/dependency-container.js
+
+
+
+
+
+
+
+
+
+
+var typeInfo = new Map();
+var InternalDependencyContainer = (function () {
+    function InternalDependencyContainer(parent) {
+        this.parent = parent;
+        this._registry = new registry();
+        this.interceptors = new interceptors();
+    }
+    InternalDependencyContainer.prototype.register = function (token, providerOrConstructor, options) {
+        if (options === void 0) { options = { lifecycle: lifecycle.Transient }; }
+        var provider;
+        if (!isProvider(providerOrConstructor)) {
+            provider = { useClass: providerOrConstructor };
+        }
+        else {
+            provider = providerOrConstructor;
+        }
+        if (isTokenProvider(provider)) {
+            var path = [token];
+            var tokenProvider = provider;
+            while (tokenProvider != null) {
+                var currentToken = tokenProvider.useToken;
+                if (path.includes(currentToken)) {
+                    throw new Error("Token registration cycle detected! " + node_modules_tslib_tslib_es6_spread(path, [currentToken]).join(" -> "));
+                }
+                path.push(currentToken);
+                var registration = this._registry.get(currentToken);
+                if (registration && isTokenProvider(registration.provider)) {
+                    tokenProvider = registration.provider;
+                }
+                else {
+                    tokenProvider = null;
+                }
+            }
+        }
+        if (options.lifecycle === lifecycle.Singleton ||
+            options.lifecycle == lifecycle.ContainerScoped ||
+            options.lifecycle == lifecycle.ResolutionScoped) {
+            if (isValueProvider(provider) || isFactoryProvider(provider)) {
+                throw new Error("Cannot use lifecycle \"" + lifecycle[options.lifecycle] + "\" with ValueProviders or FactoryProviders");
+            }
+        }
+        this._registry.set(token, { provider: provider, options: options });
+        return this;
+    };
+    InternalDependencyContainer.prototype.registerType = function (from, to) {
+        if (isNormalToken(to)) {
+            return this.register(from, {
+                useToken: to
+            });
+        }
+        return this.register(from, {
+            useClass: to
+        });
+    };
+    InternalDependencyContainer.prototype.registerInstance = function (token, instance) {
+        return this.register(token, {
+            useValue: instance
+        });
+    };
+    InternalDependencyContainer.prototype.registerSingleton = function (from, to) {
+        if (isNormalToken(from)) {
+            if (isNormalToken(to)) {
+                return this.register(from, {
+                    useToken: to
+                }, { lifecycle: lifecycle.Singleton });
+            }
+            else if (to) {
+                return this.register(from, {
+                    useClass: to
+                }, { lifecycle: lifecycle.Singleton });
+            }
+            throw new Error('Cannot register a type name as a singleton without a "to" token');
+        }
+        var useClass = from;
+        if (to && !isNormalToken(to)) {
+            useClass = to;
+        }
+        return this.register(from, {
+            useClass: useClass
+        }, { lifecycle: lifecycle.Singleton });
+    };
+    InternalDependencyContainer.prototype.resolve = function (token, context) {
+        if (context === void 0) { context = new resolution_context(); }
+        var registration = this.getRegistration(token);
+        if (!registration && isNormalToken(token)) {
+            throw new Error("Attempted to resolve unregistered dependency token: \"" + token.toString() + "\"");
+        }
+        this.executePreResolutionInterceptor(token, "Single");
+        if (registration) {
+            var result = this.resolveRegistration(registration, context);
+            this.executePostResolutionInterceptor(token, result, "Single");
+            return result;
+        }
+        if (isConstructorToken(token)) {
+            var result = this.construct(token, context);
+            this.executePostResolutionInterceptor(token, result, "Single");
+            return result;
+        }
+        throw new Error("Attempted to construct an undefined constructor. Could mean a circular dependency problem. Try using `delay` function.");
+    };
+    InternalDependencyContainer.prototype.executePreResolutionInterceptor = function (token, resolutionType) {
+        var e_1, _a;
+        if (this.interceptors.preResolution.has(token)) {
+            var remainingInterceptors = [];
+            try {
+                for (var _b = tslib_tslib_es6_values(this.interceptors.preResolution.getAll(token)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var interceptor = _c.value;
+                    if (interceptor.options.frequency != "Once") {
+                        remainingInterceptors.push(interceptor);
+                    }
+                    interceptor.callback(token, resolutionType);
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            this.interceptors.preResolution.setAll(token, remainingInterceptors);
+        }
+    };
+    InternalDependencyContainer.prototype.executePostResolutionInterceptor = function (token, result, resolutionType) {
+        var e_2, _a;
+        if (this.interceptors.postResolution.has(token)) {
+            var remainingInterceptors = [];
+            try {
+                for (var _b = tslib_tslib_es6_values(this.interceptors.postResolution.getAll(token)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var interceptor = _c.value;
+                    if (interceptor.options.frequency != "Once") {
+                        remainingInterceptors.push(interceptor);
+                    }
+                    interceptor.callback(token, result, resolutionType);
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            this.interceptors.postResolution.setAll(token, remainingInterceptors);
+        }
+    };
+    InternalDependencyContainer.prototype.resolveRegistration = function (registration, context) {
+        if (registration.options.lifecycle === lifecycle.ResolutionScoped &&
+            context.scopedResolutions.has(registration)) {
+            return context.scopedResolutions.get(registration);
+        }
+        var isSingleton = registration.options.lifecycle === lifecycle.Singleton;
+        var isContainerScoped = registration.options.lifecycle === lifecycle.ContainerScoped;
+        var returnInstance = isSingleton || isContainerScoped;
+        var resolved;
+        if (isValueProvider(registration.provider)) {
+            resolved = registration.provider.useValue;
+        }
+        else if (isTokenProvider(registration.provider)) {
+            resolved = returnInstance
+                ? registration.instance ||
+                    (registration.instance = this.resolve(registration.provider.useToken, context))
+                : this.resolve(registration.provider.useToken, context);
+        }
+        else if (isClassProvider(registration.provider)) {
+            resolved = returnInstance
+                ? registration.instance ||
+                    (registration.instance = this.construct(registration.provider.useClass, context))
+                : this.construct(registration.provider.useClass, context);
+        }
+        else if (isFactoryProvider(registration.provider)) {
+            resolved = registration.provider.useFactory(this);
+        }
+        else {
+            resolved = this.construct(registration.provider, context);
+        }
+        if (registration.options.lifecycle === lifecycle.ResolutionScoped) {
+            context.scopedResolutions.set(registration, resolved);
+        }
+        return resolved;
+    };
+    InternalDependencyContainer.prototype.resolveAll = function (token, context) {
+        var _this = this;
+        if (context === void 0) { context = new resolution_context(); }
+        var registrations = this.getAllRegistrations(token);
+        if (!registrations && isNormalToken(token)) {
+            throw new Error("Attempted to resolve unregistered dependency token: \"" + token.toString() + "\"");
+        }
+        this.executePreResolutionInterceptor(token, "All");
+        if (registrations) {
+            var result_1 = registrations.map(function (item) {
+                return _this.resolveRegistration(item, context);
+            });
+            this.executePostResolutionInterceptor(token, result_1, "All");
+            return result_1;
+        }
+        var result = [this.construct(token, context)];
+        this.executePostResolutionInterceptor(token, result, "All");
+        return result;
+    };
+    InternalDependencyContainer.prototype.isRegistered = function (token, recursive) {
+        if (recursive === void 0) { recursive = false; }
+        return (this._registry.has(token) ||
+            (recursive &&
+                (this.parent || false) &&
+                this.parent.isRegistered(token, true)));
+    };
+    InternalDependencyContainer.prototype.reset = function () {
+        this._registry.clear();
+        this.interceptors.preResolution.clear();
+        this.interceptors.postResolution.clear();
+    };
+    InternalDependencyContainer.prototype.clearInstances = function () {
+        var e_3, _a;
+        try {
+            for (var _b = tslib_tslib_es6_values(this._registry.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var _d = tslib_tslib_es6_read(_c.value, 2), token = _d[0], registrations = _d[1];
+                this._registry.setAll(token, registrations
+                    .filter(function (registration) { return !isValueProvider(registration.provider); })
+                    .map(function (registration) {
+                    registration.instance = undefined;
+                    return registration;
+                }));
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+    };
+    InternalDependencyContainer.prototype.createChildContainer = function () {
+        var e_4, _a;
+        var childContainer = new InternalDependencyContainer(this);
+        try {
+            for (var _b = tslib_tslib_es6_values(this._registry.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var _d = tslib_tslib_es6_read(_c.value, 2), token = _d[0], registrations = _d[1];
+                if (registrations.some(function (_a) {
+                    var options = _a.options;
+                    return options.lifecycle === lifecycle.ContainerScoped;
+                })) {
+                    childContainer._registry.setAll(token, registrations.map(function (registration) {
+                        if (registration.options.lifecycle === lifecycle.ContainerScoped) {
+                            return {
+                                provider: registration.provider,
+                                options: registration.options
+                            };
+                        }
+                        return registration;
+                    }));
+                }
+            }
+        }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_4) throw e_4.error; }
+        }
+        return childContainer;
+    };
+    InternalDependencyContainer.prototype.beforeResolution = function (token, callback, options) {
+        if (options === void 0) { options = { frequency: "Always" }; }
+        this.interceptors.preResolution.set(token, {
+            callback: callback,
+            options: options
+        });
+    };
+    InternalDependencyContainer.prototype.afterResolution = function (token, callback, options) {
+        if (options === void 0) { options = { frequency: "Always" }; }
+        this.interceptors.postResolution.set(token, {
+            callback: callback,
+            options: options
+        });
+    };
+    InternalDependencyContainer.prototype.getRegistration = function (token) {
+        if (this.isRegistered(token)) {
+            return this._registry.get(token);
+        }
+        if (this.parent) {
+            return this.parent.getRegistration(token);
+        }
+        return null;
+    };
+    InternalDependencyContainer.prototype.getAllRegistrations = function (token) {
+        if (this.isRegistered(token)) {
+            return this._registry.getAll(token);
+        }
+        if (this.parent) {
+            return this.parent.getAllRegistrations(token);
+        }
+        return null;
+    };
+    InternalDependencyContainer.prototype.construct = function (ctor, context) {
+        var _this = this;
+        if (ctor instanceof DelayedConstructor) {
+            return ctor.createProxy(function (target) {
+                return _this.resolve(target, context);
+            });
+        }
+        var paramInfo = typeInfo.get(ctor);
+        if (!paramInfo || paramInfo.length === 0) {
+            if (ctor.length === 0) {
+                return new ctor();
+            }
+            else {
+                throw new Error("TypeInfo not known for \"" + ctor.name + "\"");
+            }
+        }
+        var params = paramInfo.map(this.resolveParams(context, ctor));
+        return new (ctor.bind.apply(ctor, node_modules_tslib_tslib_es6_spread([void 0], params)))();
+    };
+    InternalDependencyContainer.prototype.resolveParams = function (context, ctor) {
+        var _this = this;
+        return function (param, idx) {
+            var _a, _b, _c;
+            try {
+                if (injection_token_isTokenDescriptor(param)) {
+                    if (injection_token_isTransformDescriptor(param)) {
+                        return param.multiple
+                            ? (_a = _this.resolve(param.transform)).transform.apply(_a, node_modules_tslib_tslib_es6_spread([_this.resolveAll(param.token)], param.transformArgs)) : (_b = _this.resolve(param.transform)).transform.apply(_b, node_modules_tslib_tslib_es6_spread([_this.resolve(param.token, context)], param.transformArgs));
+                    }
+                    else {
+                        return param.multiple
+                            ? _this.resolveAll(param.token)
+                            : _this.resolve(param.token, context);
+                    }
+                }
+                else if (injection_token_isTransformDescriptor(param)) {
+                    return (_c = _this.resolve(param.transform, context)).transform.apply(_c, node_modules_tslib_tslib_es6_spread([_this.resolve(param.token, context)], param.transformArgs));
+                }
+                return _this.resolve(param, context);
+            }
+            catch (e) {
+                throw new Error(error_helpers_formatErrorCtor(ctor, idx, e));
+            }
+        };
+    };
+    return InternalDependencyContainer;
+}());
+var instance = new InternalDependencyContainer();
+/* harmony default export */ const dependency_container = ((/* unused pure expression or super */ null && (instance)));
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/auto-injectable.js
+
+
+
+
+
+function autoInjectable() {
+    return function (target) {
+        var paramInfo = getParamInfo(target);
+        return (function (_super) {
+            __extends(class_1, _super);
+            function class_1() {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return _super.apply(this, __spread(args.concat(paramInfo.slice(args.length).map(function (type, index) {
+                    var _a, _b, _c;
+                    try {
+                        if (isTokenDescriptor(type)) {
+                            if (isTransformDescriptor(type)) {
+                                return type.multiple
+                                    ? (_a = globalContainer
+                                        .resolve(type.transform)).transform.apply(_a, __spread([globalContainer.resolveAll(type.token)], type.transformArgs)) : (_b = globalContainer
+                                    .resolve(type.transform)).transform.apply(_b, __spread([globalContainer.resolve(type.token)], type.transformArgs));
+                            }
+                            else {
+                                return type.multiple
+                                    ? globalContainer.resolveAll(type.token)
+                                    : globalContainer.resolve(type.token);
+                            }
+                        }
+                        else if (isTransformDescriptor(type)) {
+                            return (_c = globalContainer
+                                .resolve(type.transform)).transform.apply(_c, __spread([globalContainer.resolve(type.token)], type.transformArgs));
+                        }
+                        return globalContainer.resolve(type);
+                    }
+                    catch (e) {
+                        var argIndex = index + args.length;
+                        throw new Error(formatErrorCtor(target, argIndex, e));
+                    }
+                })))) || this;
+            }
+            return class_1;
+        }(target));
+    };
+}
+/* harmony default export */ const auto_injectable = ((/* unused pure expression or super */ null && (autoInjectable)));
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/reflection-helpers.js
+var INJECTION_TOKEN_METADATA_KEY = "injectionTokens";
+function reflection_helpers_getParamInfo(target) {
+    var params = Reflect.getMetadata("design:paramtypes", target) || [];
+    var injectionTokens = Reflect.getOwnMetadata(INJECTION_TOKEN_METADATA_KEY, target) || {};
+    Object.keys(injectionTokens).forEach(function (key) {
+        params[+key] = injectionTokens[key];
+    });
+    return params;
+}
+function defineInjectionTokenMetadata(data, transform) {
+    return function (target, _propertyKey, parameterIndex) {
+        var descriptors = Reflect.getOwnMetadata(INJECTION_TOKEN_METADATA_KEY, target) || {};
+        descriptors[parameterIndex] = transform
+            ? {
+                token: data,
+                transform: transform.transformToken,
+                transformArgs: transform.args || []
+            }
+            : data;
+        Reflect.defineMetadata(INJECTION_TOKEN_METADATA_KEY, descriptors, target);
+    };
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/injectable.js
+
+
+function injectable_injectable() {
+    return function (target) {
+        typeInfo.set(target, reflection_helpers_getParamInfo(target));
+    };
+}
+/* harmony default export */ const decorators_injectable = (injectable_injectable);
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/registry.js
+
+
+function registry_registry(registrations) {
+    if (registrations === void 0) { registrations = []; }
+    return function (target) {
+        registrations.forEach(function (_a) {
+            var token = _a.token, options = _a.options, provider = __rest(_a, ["token", "options"]);
+            return globalContainer.register(token, provider, options);
+        });
+        return target;
+    };
+}
+/* harmony default export */ const decorators_registry = ((/* unused pure expression or super */ null && (registry_registry)));
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/singleton.js
+
+
+function singleton() {
+    return function (target) {
+        injectable()(target);
+        globalContainer.registerSingleton(target);
+    };
+}
+/* harmony default export */ const decorators_singleton = ((/* unused pure expression or super */ null && (singleton)));
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/scoped.js
+
+
+function scoped(lifecycle, token) {
+    return function (target) {
+        injectable()(target);
+        globalContainer.register(token || target, target, {
+            lifecycle: lifecycle
+        });
+    };
+}
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/decorators/index.js
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/tsyringe/dist/esm5/index.js
+if (typeof Reflect === "undefined" || !Reflect.getMetadata) {
+    throw new Error("tsyringe requires a reflect polyfill. Please add 'import \"reflect-metadata\"' to the top of your entry point.");
+}
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs9/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_pkcs9_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var node_modules_tslib_tslib_es6_assign = function() {
+    node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_pkcs9_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_pkcs9_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new node_modules_tslib_tslib_es6_await(v);
+}
+
+function node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof node_modules_tslib_tslib_es6_values === "function" ? node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_cms_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_cms_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_cms_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_cms_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_cms_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_cms_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_cms_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_cms_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_cms_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_cms_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_cms_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_cms_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_cms_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_cms_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_cms_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_cms_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_cms_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_cms_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_cms_node_modules_tslib_tslib_es6_values === "function" ? asn1_cms_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_cms_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_cms_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_cms_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/attribute.js
+
+
+class Attribute {
+    constructor(params = {}) {
+        this.attrType = "";
+        this.attrValues = [];
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], Attribute.prototype, "attrType", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, repeated: "set" })
+], Attribute.prototype, "attrValues", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_x509_attr_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_x509_attr_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_x509_attr_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_x509_attr_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_x509_attr_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_x509_attr_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_x509_attr_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_x509_attr_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_x509_attr_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_x509_attr_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_x509_attr_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_x509_attr_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_x509_attr_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_x509_attr_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_x509_attr_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_x509_attr_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_x509_attr_node_modules_tslib_tslib_es6_values === "function" ? asn1_x509_attr_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var asn1_x509_attr_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_x509_attr_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    asn1_x509_attr_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_x509_attr_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/aa_clear_attrs.js
+
+
+
+class ACClearAttrs {
+    constructor(params = {}) {
+        this.acIssuer = new GeneralName();
+        this.acSerial = 0;
+        this.attrs = [];
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName })
+], ACClearAttrs.prototype, "acIssuer", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], ACClearAttrs.prototype, "acSerial", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: attribute_Attribute, repeated: "sequence" })
+], ACClearAttrs.prototype, "attrs", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/attr_spec.js
+var AttrSpec_1;
+
+
+let AttrSpec = AttrSpec_1 = class AttrSpec extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, AttrSpec_1.prototype);
+    }
+};
+AttrSpec = AttrSpec_1 = asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], AttrSpec);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/aa_controls.js
+
+
+
+class AAControls {
+    constructor(params = {}) {
+        this.permitUnSpecified = true;
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, optional: true })
+], AAControls.prototype, "pathLenConstraint", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttrSpec, implicit: true, context: 0, optional: true })
+], AAControls.prototype, "permittedAttrs", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttrSpec, implicit: true, context: 1, optional: true })
+], AAControls.prototype, "excludedAttrs", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Boolean */.gZ.Boolean, defaultValue: true })
+], AAControls.prototype, "permitUnSpecified", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/issuer_serial.js
+
+
+
+class IssuerSerial {
+    constructor(params = {}) {
+        this.issuer = new GeneralNames();
+        this.serial = new ArrayBuffer(0);
+        this.issuerUID = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralNames })
+], IssuerSerial.prototype, "issuer", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], IssuerSerial.prototype, "serial", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString, optional: true })
+], IssuerSerial.prototype, "issuerUID", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/object_digest_info.js
+
+
+
+var DigestedObjectType;
+(function (DigestedObjectType) {
+    DigestedObjectType[DigestedObjectType["publicKey"] = 0] = "publicKey";
+    DigestedObjectType[DigestedObjectType["publicKeyCert"] = 1] = "publicKeyCert";
+    DigestedObjectType[DigestedObjectType["otherObjectTypes"] = 2] = "otherObjectTypes";
+})(DigestedObjectType || (DigestedObjectType = {}));
+class ObjectDigestInfo {
+    constructor(params = {}) {
+        this.digestedObjectType = DigestedObjectType.publicKey;
+        this.digestAlgorithm = new AlgorithmIdentifier();
+        this.objectDigest = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Enumerated */.gZ.Enumerated })
+], ObjectDigestInfo.prototype, "digestedObjectType", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier, optional: true })
+], ObjectDigestInfo.prototype, "otherObjectTypeID", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], ObjectDigestInfo.prototype, "digestAlgorithm", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], ObjectDigestInfo.prototype, "objectDigest", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/v2_form.js
+
+
+
+
+
+class V2Form {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralNames, optional: true })
+], V2Form.prototype, "issuerName", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: IssuerSerial, context: 0, implicit: true, optional: true })
+], V2Form.prototype, "baseCertificateID", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ObjectDigestInfo, context: 1, implicit: true, optional: true })
+], V2Form.prototype, "objectDigestInfo", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/attr_cert_issuer.js
+
+
+
+
+let AttCertIssuer = class AttCertIssuer {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, repeated: "sequence" })
+], AttCertIssuer.prototype, "v1Form", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: V2Form, context: 0, implicit: true })
+], AttCertIssuer.prototype, "v2Form", void 0);
+AttCertIssuer = asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], AttCertIssuer);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/attr_cert_validity_period.js
+
+
+class AttCertValidityPeriod {
+    constructor(params = {}) {
+        this.notBeforeTime = new Date();
+        this.notAfterTime = new Date();
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime })
+], AttCertValidityPeriod.prototype, "notBeforeTime", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime })
+], AttCertValidityPeriod.prototype, "notAfterTime", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/holder.js
+
+
+
+
+
+class Holder {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: IssuerSerial, implicit: true, context: 0, optional: true })
+], Holder.prototype, "baseCertificateID", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralNames, implicit: true, context: 1, optional: true })
+], Holder.prototype, "entityName", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ObjectDigestInfo, implicit: true, context: 2, optional: true })
+], Holder.prototype, "objectDigestInfo", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/attribute_certificate_info.js
+
+
+
+
+
+
+var AttCertVersion;
+(function (AttCertVersion) {
+    AttCertVersion[AttCertVersion["v2"] = 1] = "v2";
+})(AttCertVersion || (AttCertVersion = {}));
+class AttributeCertificateInfo {
+    constructor(params = {}) {
+        this.version = AttCertVersion.v2;
+        this.holder = new Holder();
+        this.issuer = new AttCertIssuer();
+        this.signature = new AlgorithmIdentifier();
+        this.serialNumber = new ArrayBuffer(0);
+        this.attrCertValidityPeriod = new AttCertValidityPeriod();
+        this.attributes = [];
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], AttributeCertificateInfo.prototype, "version", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Holder })
+], AttributeCertificateInfo.prototype, "holder", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttCertIssuer })
+], AttributeCertificateInfo.prototype, "issuer", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], AttributeCertificateInfo.prototype, "signature", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], AttributeCertificateInfo.prototype, "serialNumber", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttCertValidityPeriod })
+], AttributeCertificateInfo.prototype, "attrCertValidityPeriod", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: attribute_Attribute, repeated: "sequence" })
+], AttributeCertificateInfo.prototype, "attributes", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString, optional: true })
+], AttributeCertificateInfo.prototype, "issuerUniqueID", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Extensions, optional: true })
+], AttributeCertificateInfo.prototype, "extensions", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/attribute_certificate.js
+
+
+
+
+class AttributeCertificate {
+    constructor(params = {}) {
+        this.acinfo = new AttributeCertificateInfo();
+        this.signatureAlgorithm = new AlgorithmIdentifier();
+        this.signatureValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttributeCertificateInfo })
+], AttributeCertificate.prototype, "acinfo", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], AttributeCertificate.prototype, "signatureAlgorithm", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], AttributeCertificate.prototype, "signatureValue", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/class_list.js
+
+var ClassListFlags;
+(function (ClassListFlags) {
+    ClassListFlags[ClassListFlags["unmarked"] = 1] = "unmarked";
+    ClassListFlags[ClassListFlags["unclassified"] = 2] = "unclassified";
+    ClassListFlags[ClassListFlags["restricted"] = 4] = "restricted";
+    ClassListFlags[ClassListFlags["confidential"] = 8] = "confidential";
+    ClassListFlags[ClassListFlags["secret"] = 16] = "secret";
+    ClassListFlags[ClassListFlags["topSecret"] = 32] = "topSecret";
+})(ClassListFlags || (ClassListFlags = {}));
+class ClassList extends es2015/* BitString */._K {
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/security_category.js
+
+
+class SecurityCategory {
+    constructor(params = {}) {
+        this.type = "";
+        this.value = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier, implicit: true, context: 0 })
+], SecurityCategory.prototype, "type", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, implicit: true, context: 1 })
+], SecurityCategory.prototype, "value", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/clearance.js
+
+
+
+
+class Clearance {
+    constructor(params = {}) {
+        this.policyId = "";
+        this.classList = new ClassList(ClassListFlags.unclassified);
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], Clearance.prototype, "policyId", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ClassList, defaultValue: new ClassList(ClassListFlags.unclassified) })
+], Clearance.prototype, "classList", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SecurityCategory, repeated: "set" })
+], Clearance.prototype, "securityCategories", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/ietf_attr_syntax.js
+
+
+
+class IetfAttrSyntaxValueChoices {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], IetfAttrSyntaxValueChoices.prototype, "cotets", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], IetfAttrSyntaxValueChoices.prototype, "oid", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Utf8String */.gZ.Utf8String })
+], IetfAttrSyntaxValueChoices.prototype, "string", void 0);
+class IetfAttrSyntax {
+    constructor(params = {}) {
+        this.values = [];
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralNames, implicit: true, context: 0, optional: true })
+], IetfAttrSyntax.prototype, "policyAuthority", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: IetfAttrSyntaxValueChoices, repeated: "sequence" })
+], IetfAttrSyntax.prototype, "values", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/object_identifiers.js
+
+const id_pe_ac_auditIdentity = `${id_pe}.4`;
+const id_pe_aaControls = `${id_pe}.6`;
+const id_pe_ac_proxying = `${id_pe}.10`;
+const id_ce_targetInformation = `${id_ce}.55`;
+const id_aca = `${id_pkix}.10`;
+const id_aca_authenticationInfo = `${id_aca}.1`;
+const id_aca_accessIdentity = `${id_aca}.2`;
+const id_aca_chargingIdentity = `${id_aca}.3`;
+const id_aca_group = `${id_aca}.4`;
+const id_aca_encAttrs = `${id_aca}.6`;
+const id_at = "2.5.4";
+const id_at_role = `${id_at}.72`;
+const id_at_clearance = "2.5.1.5.55";
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/target.js
+var Targets_1;
+
+
+
+
+
+class TargetCert {
+    constructor(params = {}) {
+        this.targetCertificate = new IssuerSerial();
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: IssuerSerial })
+], TargetCert.prototype, "targetCertificate", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, optional: true })
+], TargetCert.prototype, "targetName", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ObjectDigestInfo, optional: true })
+], TargetCert.prototype, "certDigestInfo", void 0);
+let Target = class Target {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, context: 0, implicit: true })
+], Target.prototype, "targetName", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, context: 1, implicit: true })
+], Target.prototype, "targetGroup", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: TargetCert, context: 2, implicit: true })
+], Target.prototype, "targetCert", void 0);
+Target = asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], Target);
+
+let Targets = Targets_1 = class Targets extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, Targets_1.prototype);
+    }
+};
+Targets = Targets_1 = asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: Target })
+], Targets);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/proxy_info.js
+var ProxyInfo_1;
+
+
+
+let ProxyInfo = ProxyInfo_1 = class ProxyInfo extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, ProxyInfo_1.prototype);
+    }
+};
+ProxyInfo = ProxyInfo_1 = asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: Targets })
+], ProxyInfo);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/role_syntax.js
+
+
+
+class RoleSyntax {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralNames, implicit: true, context: 0, optional: true })
+], RoleSyntax.prototype, "roleAuthority", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName, implicit: true, context: 1 })
+], RoleSyntax.prototype, "roleName", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/svce_auth_info.js
+
+
+
+class SvceAuthInfo {
+    constructor(params = {}) {
+        this.service = new GeneralName();
+        this.ident = new GeneralName();
+        Object.assign(this, params);
+    }
+}
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName })
+], SvceAuthInfo.prototype, "service", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: GeneralName })
+], SvceAuthInfo.prototype, "ident", void 0);
+asn1_x509_attr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi, optional: true })
+], SvceAuthInfo.prototype, "authInfo", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-x509-attr/build/es2015/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/certificate_choices.js
+var CertificateSet_1;
+
+
+
+
+class OtherCertificateFormat {
+    constructor(params = {}) {
+        this.otherCertFormat = "";
+        this.otherCert = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], OtherCertificateFormat.prototype, "otherCertFormat", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any })
+], OtherCertificateFormat.prototype, "otherCert", void 0);
+let CertificateChoices = class CertificateChoices {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Certificate })
+], CertificateChoices.prototype, "certificate", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AttributeCertificate, context: 2, implicit: true })
+], CertificateChoices.prototype, "v2AttrCert", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: OtherCertificateFormat, context: 3, implicit: true })
+], CertificateChoices.prototype, "other", void 0);
+CertificateChoices = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CertificateChoices);
+
+let CertificateSet = CertificateSet_1 = class CertificateSet extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, CertificateSet_1.prototype);
+    }
+};
+CertificateSet = CertificateSet_1 = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: CertificateChoices })
+], CertificateSet);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/content_info.js
+
+
+class ContentInfo {
+    constructor(params = {}) {
+        this.contentType = "";
+        this.content = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], ContentInfo.prototype, "contentType", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], ContentInfo.prototype, "content", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/encapsulated_content_info.js
+
+
+let EncapsulatedContent = class EncapsulatedContent {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], EncapsulatedContent.prototype, "single", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any })
+], EncapsulatedContent.prototype, "any", void 0);
+EncapsulatedContent = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], EncapsulatedContent);
+
+class EncapsulatedContentInfo {
+    constructor(params = {}) {
+        this.eContentType = "";
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], EncapsulatedContentInfo.prototype, "eContentType", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: EncapsulatedContent, context: 0, optional: true })
+], EncapsulatedContentInfo.prototype, "eContent", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/issuer_and_serial_number.js
+
+
+
+class IssuerAndSerialNumber {
+    constructor(params = {}) {
+        this.issuer = new name_Name;
+        this.serialNumber = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name })
+], IssuerAndSerialNumber.prototype, "issuer", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], IssuerAndSerialNumber.prototype, "serialNumber", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/object_identifiers.js
+const id_ct_contentInfo = "1.2.840.113549.1.9.16.1.6";
+const id_data = "1.2.840.113549.1.7.1";
+const id_signedData = "1.2.840.113549.1.7.2";
+const id_envelopedData = "1.2.840.113549.1.7.3";
+const id_digestedData = "1.2.840.113549.1.7.5";
+const id_encryptedData = "1.2.840.113549.1.7.6";
+const id_authData = "1.2.840.113549.1.9.16.1.2";
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/revocation_info_choice.js
+var RevocationInfoChoices_1;
+
+
+
+const id_ri = `${id_pkix}.16`;
+const id_ri_ocsp_response = `${id_ri}.2`;
+const id_ri_scvp = `${id_ri}.4`;
+class OtherRevocationInfoFormat {
+    constructor(params = {}) {
+        this.otherRevInfoFormat = "";
+        this.otherRevInfo = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], OtherRevocationInfoFormat.prototype, "otherRevInfoFormat", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any })
+], OtherRevocationInfoFormat.prototype, "otherRevInfo", void 0);
+let RevocationInfoChoice = class RevocationInfoChoice {
+    constructor(params = {}) {
+        this.other = new OtherRevocationInfoFormat();
+        Object.assign(this, params);
+    }
+};
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: OtherRevocationInfoFormat, context: 1, implicit: true })
+], RevocationInfoChoice.prototype, "other", void 0);
+RevocationInfoChoice = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], RevocationInfoChoice);
+
+let RevocationInfoChoices = RevocationInfoChoices_1 = class RevocationInfoChoices extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, RevocationInfoChoices_1.prototype);
+    }
+};
+RevocationInfoChoices = RevocationInfoChoices_1 = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: RevocationInfoChoice })
+], RevocationInfoChoices);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/types.js
+
+
+
+var CMSVersion;
+(function (CMSVersion) {
+    CMSVersion[CMSVersion["v0"] = 0] = "v0";
+    CMSVersion[CMSVersion["v1"] = 1] = "v1";
+    CMSVersion[CMSVersion["v2"] = 2] = "v2";
+    CMSVersion[CMSVersion["v3"] = 3] = "v3";
+    CMSVersion[CMSVersion["v4"] = 4] = "v4";
+    CMSVersion[CMSVersion["v5"] = 5] = "v5";
+})(CMSVersion || (CMSVersion = {}));
+;
+let DigestAlgorithmIdentifier = class DigestAlgorithmIdentifier extends AlgorithmIdentifier {
+};
+DigestAlgorithmIdentifier = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], DigestAlgorithmIdentifier);
+
+let SignatureAlgorithmIdentifier = class SignatureAlgorithmIdentifier extends AlgorithmIdentifier {
+};
+SignatureAlgorithmIdentifier = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], SignatureAlgorithmIdentifier);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/signer_identifier.js
+
+
+
+
+let SignerIdentifier = class SignerIdentifier {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SubjectKeyIdentifier, context: 0, implicit: true })
+], SignerIdentifier.prototype, "subjectKeyIdentifier", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: IssuerAndSerialNumber })
+], SignerIdentifier.prototype, "issuerAndSerialNumber", void 0);
+SignerIdentifier = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], SignerIdentifier);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/signer_info.js
+var SignerInfos_1;
+
+
+
+
+
+class SignerInfo {
+    constructor(params = {}) {
+        this.version = CMSVersion.v0;
+        this.sid = new SignerIdentifier();
+        this.digestAlgorithm = new DigestAlgorithmIdentifier();
+        this.signatureAlgorithm = new SignatureAlgorithmIdentifier();
+        this.signature = new es2015/* OctetString */.fi();
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], SignerInfo.prototype, "version", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SignerIdentifier })
+], SignerInfo.prototype, "sid", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DigestAlgorithmIdentifier })
+], SignerInfo.prototype, "digestAlgorithm", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Attribute, repeated: "set", context: 0, implicit: true, optional: true })
+], SignerInfo.prototype, "signedAttrs", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SignatureAlgorithmIdentifier })
+], SignerInfo.prototype, "signatureAlgorithm", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], SignerInfo.prototype, "signature", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Attribute, repeated: "set", context: 1, implicit: true, optional: true })
+], SignerInfo.prototype, "unsignedAttrs", void 0);
+let SignerInfos = SignerInfos_1 = class SignerInfos extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, SignerInfos_1.prototype);
+    }
+};
+SignerInfos = SignerInfos_1 = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: SignerInfo })
+], SignerInfos);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/signed_data.js
+var DigestAlgorithmIdentifiers_1;
+
+
+
+
+
+
+
+let DigestAlgorithmIdentifiers = DigestAlgorithmIdentifiers_1 = class DigestAlgorithmIdentifiers extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, DigestAlgorithmIdentifiers_1.prototype);
+    }
+};
+DigestAlgorithmIdentifiers = DigestAlgorithmIdentifiers_1 = asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: DigestAlgorithmIdentifier })
+], DigestAlgorithmIdentifiers);
+
+class SignedData {
+    constructor(params = {}) {
+        this.version = CMSVersion.v0;
+        this.digestAlgorithms = new DigestAlgorithmIdentifiers();
+        this.encapContentInfo = new EncapsulatedContentInfo();
+        this.signerInfos = new SignerInfos();
+        Object.assign(this, params);
+    }
+}
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], SignedData.prototype, "version", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DigestAlgorithmIdentifiers })
+], SignedData.prototype, "digestAlgorithms", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: EncapsulatedContentInfo })
+], SignedData.prototype, "encapContentInfo", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: CertificateSet, context: 0, implicit: true, optional: true })
+], SignedData.prototype, "certificates", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: RevocationInfoChoice, context: 1, implicit: true, optional: true })
+], SignedData.prototype, "crls", void 0);
+asn1_cms_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SignerInfos })
+], SignedData.prototype, "signerInfos", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-cms/build/es2015/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_pfx_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_pfx_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_pfx_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_pfx_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_pfx_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_pfx_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_pfx_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_pfx_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_pfx_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_pfx_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_pfx_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_pfx_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_pfx_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_pfx_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_pfx_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_pfx_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_pfx_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_pfx_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_pfx_node_modules_tslib_tslib_es6_values === "function" ? asn1_pfx_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var asn1_pfx_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_pfx_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_pfx_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    asn1_pfx_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_pfx_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/attribute.js
+var PKCS12AttrSet_1;
+
+
+class PKCS12Attribute {
+    constructor(params = {}) {
+        this.attrId = "";
+        this.attrValues = [];
+        Object.assign(params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], PKCS12Attribute.prototype, "attrId", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, repeated: "set" })
+], PKCS12Attribute.prototype, "attrValues", void 0);
+let PKCS12AttrSet = PKCS12AttrSet_1 = class PKCS12AttrSet extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, PKCS12AttrSet_1.prototype);
+    }
+};
+PKCS12AttrSet = PKCS12AttrSet_1 = asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: PKCS12Attribute })
+], PKCS12AttrSet);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/authenticated_safe.js
+var AuthenticatedSafe_1;
+
+
+
+let AuthenticatedSafe = AuthenticatedSafe_1 = class AuthenticatedSafe extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, AuthenticatedSafe_1.prototype);
+    }
+};
+AuthenticatedSafe = AuthenticatedSafe_1 = asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: ContentInfo })
+], AuthenticatedSafe);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/object_identifiers.js
+const id_rsadsi = "1.2.840.113549";
+const id_pkcs = `${id_rsadsi}.1`;
+const id_pkcs_12 = `${id_pkcs}.12`;
+const id_pkcs_12PbeIds = `${id_pkcs_12}.1`;
+const id_pbeWithSHAAnd128BitRC4 = `${id_pkcs_12PbeIds}.1`;
+const id_pbeWithSHAAnd40BitRC4 = `${id_pkcs_12PbeIds}.2`;
+const id_pbeWithSHAAnd3_KeyTripleDES_CBC = `${id_pkcs_12PbeIds}.3`;
+const id_pbeWithSHAAnd2_KeyTripleDES_CBC = `${id_pkcs_12PbeIds}.4`;
+const id_pbeWithSHAAnd128BitRC2_CBC = `${id_pkcs_12PbeIds}.5`;
+const id_pbewithSHAAnd40BitRC2_CBC = `${id_pkcs_12PbeIds}.6`;
+const id_bagtypes = `${id_pkcs_12}.10.1`;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/types.js
+
+const id_keyBag = `${id_bagtypes}.1`;
+const id_pkcs8ShroudedKeyBag = `${id_bagtypes}.2`;
+const id_certBag = `${id_bagtypes}.3`;
+const id_CRLBag = `${id_bagtypes}.4`;
+const id_SecretBag = `${id_bagtypes}.5`;
+const id_SafeContents = `${id_bagtypes}.6`;
+const id_pkcs_9 = "1.2.840.113549.1.9";
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/cert_bag.js
+
+
+
+class CertBag {
+    constructor(params = {}) {
+        this.certId = "";
+        this.certValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], CertBag.prototype, "certId", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], CertBag.prototype, "certValue", void 0);
+const id_certTypes = `${id_pkcs_9}.22`;
+const id_x509Certificate = `${id_certTypes}.1`;
+const id_sdsiCertificate = `${id_certTypes}.2`;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/crl_bag.js
+
+
+
+class CRLBag {
+    constructor(params = {}) {
+        this.crlId = "";
+        this.crltValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], CRLBag.prototype, "crlId", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], CRLBag.prototype, "crltValue", void 0);
+const id_crlTypes = `${id_pkcs_9}.23`;
+const id_x509CRL = `${id_crlTypes}.1`;
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs8/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_pkcs8_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_pkcs8_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_pkcs8_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_pkcs8_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_pkcs8_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_pkcs8_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_pkcs8_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_pkcs8_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_pkcs8_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_pkcs8_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_pkcs8_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_pkcs8_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_pkcs8_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_pkcs8_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_pkcs8_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_pkcs8_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_pkcs8_node_modules_tslib_tslib_es6_values === "function" ? asn1_pkcs8_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var asn1_pkcs8_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_pkcs8_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    asn1_pkcs8_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_pkcs8_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs8/build/es2015/encrypted_private_key_info.js
+
+
+
+class EncryptedData extends es2015/* OctetString */.fi {
+}
+class encrypted_private_key_info_EncryptedPrivateKeyInfo {
+    constructor(params = {}) {
+        this.encryptionAlgorithm = new AlgorithmIdentifier();
+        this.encryptedData = new EncryptedData();
+        Object.assign(this, params);
+    }
+}
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], encrypted_private_key_info_EncryptedPrivateKeyInfo.prototype, "encryptionAlgorithm", void 0);
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: EncryptedData })
+], encrypted_private_key_info_EncryptedPrivateKeyInfo.prototype, "encryptedData", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs8/build/es2015/private_key_info.js
+var Attributes_1;
+
+
+
+var private_key_info_Version;
+(function (Version) {
+    Version[Version["v1"] = 0] = "v1";
+})(private_key_info_Version || (private_key_info_Version = {}));
+class PrivateKey extends es2015/* OctetString */.fi {
+}
+let Attributes = Attributes_1 = class Attributes extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, Attributes_1.prototype);
+    }
+};
+Attributes = Attributes_1 = asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: attribute_Attribute })
+], Attributes);
+
+class PrivateKeyInfo {
+    constructor(params = {}) {
+        this.version = private_key_info_Version.v1;
+        this.privateKeyAlgorithm = new AlgorithmIdentifier();
+        this.privateKey = new PrivateKey();
+        Object.assign(this, params);
+    }
+}
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], PrivateKeyInfo.prototype, "version", void 0);
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], PrivateKeyInfo.prototype, "privateKeyAlgorithm", void 0);
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: PrivateKey })
+], PrivateKeyInfo.prototype, "privateKey", void 0);
+asn1_pkcs8_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: Attributes, implicit: true, context: 0, optional: true })
+], PrivateKeyInfo.prototype, "attributes", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs8/build/es2015/index.js
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/key_bag.js
+
+
+
+let KeyBag = class KeyBag extends PrivateKeyInfo {
+};
+KeyBag = asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], KeyBag);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/pkcs8_shrouded_key_bag.js
+
+
+
+let PKCS8ShroudedKeyBag = class PKCS8ShroudedKeyBag extends encrypted_private_key_info_EncryptedPrivateKeyInfo {
+};
+PKCS8ShroudedKeyBag = asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], PKCS8ShroudedKeyBag);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/secret_bag.js
+
+
+class SecretBag {
+    constructor(params = {}) {
+        this.secretTypeId = "";
+        this.secretValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], SecretBag.prototype, "secretTypeId", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], SecretBag.prototype, "secretValue", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/bags/index.js
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/mac_data.js
+
+
+
+class MacData {
+    constructor(params = {}) {
+        this.mac = new DigestInfo();
+        this.macSalt = new es2015/* OctetString */.fi();
+        this.iterations = 1;
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: DigestInfo })
+], MacData.prototype, "mac", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], MacData.prototype, "macSalt", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, defaultValue: 1 })
+], MacData.prototype, "iterations", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/pfx.js
+
+
+
+
+class PFX {
+    constructor(params = {}) {
+        this.version = 3;
+        this.authSafe = new ContentInfo();
+        this.macData = new MacData();
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], PFX.prototype, "version", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ContentInfo })
+], PFX.prototype, "authSafe", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: MacData, optional: true })
+], PFX.prototype, "macData", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/safe_bag.js
+var SafeContents_1;
+
+
+
+class SafeBag {
+    constructor(params = {}) {
+        this.bagId = "";
+        this.bagValue = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], SafeBag.prototype, "bagId", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Any */.gZ.Any, context: 0 })
+], SafeBag.prototype, "bagValue", void 0);
+asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: PKCS12Attribute, repeated: "set", optional: true })
+], SafeBag.prototype, "bagAttributes", void 0);
+let SafeContents = SafeContents_1 = class SafeContents extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, SafeContents_1.prototype);
+    }
+};
+SafeContents = SafeContents_1 = asn1_pfx_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: SafeBag })
+], SafeContents);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pfx/build/es2015/index.js
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-pkcs9/build/es2015/index.js
+var ExtensionRequest_1, ExtendedCertificateAttributes_1, SMIMECapabilities_1;
+
+
+
+
+
+
+
+const id_pkcs9 = "1.2.840.113549.1.9";
+const id_pkcs9_mo = `${id_pkcs9}.0`;
+const id_pkcs9_oc = `${id_pkcs9}.24`;
+const id_pkcs9_at = `${id_pkcs9}.25`;
+const id_pkcs9_sx = `${id_pkcs9}.26`;
+const id_pkcs9_mr = `${id_pkcs9}.27`;
+const id_pkcs9_oc_pkcsEntity = `${id_pkcs9_oc}.1`;
+const id_pkcs9_oc_naturalPerson = `${id_pkcs9_oc}.2`;
+const id_pkcs9_at_emailAddress = `${id_pkcs9}.1`;
+const id_pkcs9_at_unstructuredName = `${id_pkcs9}.2`;
+const id_pkcs9_at_contentType = `${id_pkcs9}.3`;
+const id_pkcs9_at_messageDigest = `${id_pkcs9}.4`;
+const id_pkcs9_at_signingTime = `${id_pkcs9}.5`;
+const id_pkcs9_at_counterSignature = `${id_pkcs9}.6`;
+const id_pkcs9_at_challengePassword = `${id_pkcs9}.7`;
+const id_pkcs9_at_unstructuredAddress = `${id_pkcs9}.8`;
+const id_pkcs9_at_extendedCertificateAttributes = `${id_pkcs9}.9`;
+const id_pkcs9_at_signingDescription = `${id_pkcs9}.13`;
+const id_pkcs9_at_extensionRequest = `${id_pkcs9}.14`;
+const id_pkcs9_at_smimeCapabilities = `${id_pkcs9}.15`;
+const id_pkcs9_at_friendlyName = `${id_pkcs9}.20`;
+const id_pkcs9_at_localKeyId = `${id_pkcs9}.21`;
+const id_pkcs9_at_userPKCS12 = (/* unused pure expression or super */ null && (`2.16.840.1.113730.3.1.216`));
+const id_pkcs9_at_pkcs15Token = `${id_pkcs9_at}.1`;
+const id_pkcs9_at_encryptedPrivateKeyInfo = `${id_pkcs9_at}.2`;
+const id_pkcs9_at_randomNonce = `${id_pkcs9_at}.3`;
+const id_pkcs9_at_sequenceNumber = `${id_pkcs9_at}.4`;
+const id_pkcs9_at_pkcs7PDU = `${id_pkcs9_at}.5`;
+const id_ietf_at = `1.3.6.1.5.5.7.9`;
+const id_pkcs9_at_dateOfBirth = `${id_ietf_at}.1`;
+const id_pkcs9_at_placeOfBirth = `${id_ietf_at}.2`;
+const id_pkcs9_at_gender = `${id_ietf_at}.3`;
+const id_pkcs9_at_countryOfCitizenship = `${id_ietf_at}.4`;
+const id_pkcs9_at_countryOfResidence = `${id_ietf_at}.5`;
+const id_pkcs9_sx_pkcs9String = `${id_pkcs9_sx}.1`;
+const id_pkcs9_sx_signingTime = `${id_pkcs9_sx}.2`;
+const id_pkcs9_mr_caseIgnoreMatch = `${id_pkcs9_mr}.1`;
+const id_pkcs9_mr_signingTimeMatch = `${id_pkcs9_mr}.2`;
+const id_smime = `${id_pkcs9}.16`;
+const es2015_id_certTypes = `${id_pkcs9}.22`;
+const crlTypes = `${id_pkcs9}.23`;
+const id_at_pseudonym = `${id_at}.65`;
+let PKCS9String = class PKCS9String extends DirectoryString {
+    constructor(params = {}) {
+        super(params);
+    }
+    toString() {
+        const o = {};
+        o.toString();
+        return this.ia5String || super.toString();
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String })
+], PKCS9String.prototype, "ia5String", void 0);
+PKCS9String = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], PKCS9String);
+
+let Pkcs7PDU = class Pkcs7PDU extends ContentInfo {
+};
+Pkcs7PDU = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], Pkcs7PDU);
+
+let UserPKCS12 = class UserPKCS12 extends PFX {
+};
+UserPKCS12 = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], UserPKCS12);
+
+let EncryptedPrivateKeyInfo = class EncryptedPrivateKeyInfo extends encrypted_private_key_info_EncryptedPrivateKeyInfo {
+};
+EncryptedPrivateKeyInfo = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], EncryptedPrivateKeyInfo);
+
+let EmailAddress = class EmailAddress {
+    constructor(value = "") {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.IA5String */.gZ.IA5String })
+], EmailAddress.prototype, "value", void 0);
+EmailAddress = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], EmailAddress);
+
+let UnstructuredName = class UnstructuredName extends PKCS9String {
+};
+UnstructuredName = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], UnstructuredName);
+
+let UnstructuredAddress = class UnstructuredAddress extends DirectoryString {
+};
+UnstructuredAddress = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], UnstructuredAddress);
+
+let DateOfBirth = class DateOfBirth {
+    constructor(value = new Date()) {
+        this.value = value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.GeneralizedTime */.gZ.GeneralizedTime })
+], DateOfBirth.prototype, "value", void 0);
+DateOfBirth = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], DateOfBirth);
+
+let PlaceOfBirth = class PlaceOfBirth extends DirectoryString {
+};
+PlaceOfBirth = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], PlaceOfBirth);
+
+let Gender = class Gender {
+    constructor(value = "M") {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.PrintableString */.gZ.PrintableString })
+], Gender.prototype, "value", void 0);
+Gender = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], Gender);
+
+let CountryOfCitizenship = class CountryOfCitizenship {
+    constructor(value = "") {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.PrintableString */.gZ.PrintableString })
+], CountryOfCitizenship.prototype, "value", void 0);
+CountryOfCitizenship = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CountryOfCitizenship);
+
+let CountryOfResidence = class CountryOfResidence extends CountryOfCitizenship {
+};
+CountryOfResidence = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], CountryOfResidence);
+
+let Pseudonym = class Pseudonym extends DirectoryString {
+};
+Pseudonym = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], Pseudonym);
+
+let ContentType = class ContentType {
+    constructor(value = "") {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], ContentType.prototype, "value", void 0);
+ContentType = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], ContentType);
+
+class MessageDigest extends (/* unused pure expression or super */ null && (OctetString)) {
+}
+let SigningTime = class SigningTime extends Time {
+};
+SigningTime = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], SigningTime);
+
+class RandomNonce extends (/* unused pure expression or super */ null && (OctetString)) {
+}
+let SequenceNumber = class SequenceNumber {
+    constructor(value = 0) {
+        this.value = value;
+    }
+    toString() {
+        return this.value.toString();
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], SequenceNumber.prototype, "value", void 0);
+SequenceNumber = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], SequenceNumber);
+
+let CounterSignature = class CounterSignature extends SignerInfo {
+};
+CounterSignature = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], CounterSignature);
+
+let ChallengePassword = class ChallengePassword extends DirectoryString {
+};
+ChallengePassword = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], ChallengePassword);
+
+let ExtensionRequest = ExtensionRequest_1 = class ExtensionRequest extends Extensions {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, ExtensionRequest_1.prototype);
+    }
+};
+ExtensionRequest = ExtensionRequest_1 = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], ExtensionRequest);
+
+let ExtendedCertificateAttributes = ExtendedCertificateAttributes_1 = class ExtendedCertificateAttributes extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, ExtendedCertificateAttributes_1.prototype);
+    }
+};
+ExtendedCertificateAttributes = ExtendedCertificateAttributes_1 = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Set */.cN.Set, itemType: Attribute })
+], ExtendedCertificateAttributes);
+
+let FriendlyName = class FriendlyName {
+    constructor(value = "") {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+};
+node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BmpString */.gZ.BmpString })
+], FriendlyName.prototype, "value", void 0);
+FriendlyName = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], FriendlyName);
+
+class LocalKeyId extends (/* unused pure expression or super */ null && (OctetString)) {
+}
+class SigningDescription extends DirectoryString {
+}
+let SMIMECapability = class SMIMECapability extends AlgorithmIdentifier {
+};
+SMIMECapability = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence })
+], SMIMECapability);
+
+let SMIMECapabilities = SMIMECapabilities_1 = class SMIMECapabilities extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, SMIMECapabilities_1.prototype);
+    }
+};
+SMIMECapabilities = SMIMECapabilities_1 = node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: SMIMECapability })
+], SMIMECapabilities);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/x509/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var x509_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    x509_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return x509_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function x509_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    x509_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var x509_node_modules_tslib_tslib_es6_assign = function() {
+    x509_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return x509_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function x509_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function x509_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function x509_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function x509_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function x509_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function x509_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var x509_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function x509_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) x509_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function x509_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function x509_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function x509_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(x509_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function x509_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function x509_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function x509_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof x509_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new x509_node_modules_tslib_tslib_es6_await(v);
+}
+
+function x509_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof x509_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function x509_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: x509_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function x509_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof x509_node_modules_tslib_tslib_es6_values === "function" ? x509_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function x509_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var x509_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function x509_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) x509_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    x509_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function x509_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function x509_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function x509_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/object_identifiers.js
+const id_ecPublicKey = "1.2.840.10045.2.1";
+const id_ecDH = "1.3.132.1.12";
+const id_ecMQV = "1.3.132.1.13";
+const id_ecdsaWithSHA1 = "1.2.840.10045.4.1";
+const id_ecdsaWithSHA224 = "1.2.840.10045.4.3.1";
+const id_ecdsaWithSHA256 = "1.2.840.10045.4.3.2";
+const id_ecdsaWithSHA384 = "1.2.840.10045.4.3.3";
+const id_ecdsaWithSHA512 = "1.2.840.10045.4.3.4";
+const id_secp192r1 = "1.2.840.10045.3.1.1";
+const id_sect163k1 = "1.3.132.0.1";
+const id_sect163r2 = "1.3.132.0.15";
+const id_secp224r1 = "1.3.132.0.33";
+const id_sect233k1 = "1.3.132.0.26";
+const id_sect233r1 = "1.3.132.0.27";
+const id_secp256r1 = "1.2.840.10045.3.1.7";
+const id_sect283k1 = "1.3.132.0.16";
+const id_sect283r1 = "1.3.132.0.17";
+const id_secp384r1 = "1.3.132.0.34";
+const id_sect409k1 = "1.3.132.0.36";
+const id_sect409r1 = "1.3.132.0.37";
+const id_secp521r1 = "1.3.132.0.35";
+const id_sect571k1 = "1.3.132.0.38";
+const id_sect571r1 = "1.3.132.0.39";
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/algorithms.js
+
+
+function algorithms_create(algorithm) {
+    return new AlgorithmIdentifier({ algorithm });
+}
+const ecdsaWithSHA1 = algorithms_create(id_ecdsaWithSHA1);
+const ecdsaWithSHA224 = algorithms_create(id_ecdsaWithSHA224);
+const ecdsaWithSHA256 = algorithms_create(id_ecdsaWithSHA256);
+const ecdsaWithSHA384 = algorithms_create(id_ecdsaWithSHA384);
+const ecdsaWithSHA512 = algorithms_create(id_ecdsaWithSHA512);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_ecc_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_ecc_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_ecc_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_ecc_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_ecc_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_ecc_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_ecc_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_ecc_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_ecc_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_ecc_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_ecc_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_ecc_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_ecc_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_ecc_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_ecc_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_ecc_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_ecc_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_ecc_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_ecc_node_modules_tslib_tslib_es6_values === "function" ? asn1_ecc_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var asn1_ecc_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_ecc_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_ecc_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    asn1_ecc_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_ecc_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/ec_parameters.js
+
+
+let ECParameters = class ECParameters {
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+};
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.ObjectIdentifier */.gZ.ObjectIdentifier })
+], ECParameters.prototype, "namedCurve", void 0);
+ECParameters = asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Choice */.cN.Choice })
+], ECParameters);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/ec_private_key.js
+
+
+
+class ECPrivateKey {
+    constructor(params = {}) {
+        this.version = 1;
+        this.privateKey = new es2015/* OctetString */.fi();
+        Object.assign(this, params);
+    }
+}
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], ECPrivateKey.prototype, "version", void 0);
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* OctetString */.fi })
+], ECPrivateKey.prototype, "privateKey", void 0);
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: ECParameters, context: 0, optional: true })
+], ECPrivateKey.prototype, "parameters", void 0);
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString, context: 1, optional: true })
+], ECPrivateKey.prototype, "publicKey", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/ec_signature_value.js
+
+
+class ECDSASigValue {
+    constructor(params = {}) {
+        this.r = new ArrayBuffer(0);
+        this.s = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], ECDSASigValue.prototype, "r", void 0);
+asn1_ecc_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer, converter: es2015/* AsnIntegerArrayBufferConverter */.te })
+], ECDSASigValue.prototype, "s", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-ecc/build/es2015/index.js
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-csr/node_modules/tslib/tslib.es6.js
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var asn1_csr_node_modules_tslib_tslib_es6_extendStatics = function(d, b) {
+    asn1_csr_node_modules_tslib_tslib_es6_extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return asn1_csr_node_modules_tslib_tslib_es6_extendStatics(d, b);
+};
+
+function asn1_csr_node_modules_tslib_tslib_es6_extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    asn1_csr_node_modules_tslib_tslib_es6_extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var asn1_csr_node_modules_tslib_tslib_es6_assign = function() {
+    asn1_csr_node_modules_tslib_tslib_es6_assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return asn1_csr_node_modules_tslib_tslib_es6_assign.apply(this, arguments);
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var asn1_csr_node_modules_tslib_tslib_es6_createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function asn1_csr_node_modules_tslib_tslib_es6_exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) asn1_csr_node_modules_tslib_tslib_es6_createBinding(o, m, p);
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function asn1_csr_node_modules_tslib_tslib_es6_spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(asn1_csr_node_modules_tslib_tslib_es6_read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function asn1_csr_node_modules_tslib_tslib_es6_spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_await(v) {
+    return this instanceof asn1_csr_node_modules_tslib_tslib_es6_await ? (this.v = v, this) : new asn1_csr_node_modules_tslib_tslib_es6_await(v);
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof asn1_csr_node_modules_tslib_tslib_es6_await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: asn1_csr_node_modules_tslib_tslib_es6_await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof asn1_csr_node_modules_tslib_tslib_es6_values === "function" ? asn1_csr_node_modules_tslib_tslib_es6_values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var asn1_csr_node_modules_tslib_tslib_es6_setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function asn1_csr_node_modules_tslib_tslib_es6_importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) asn1_csr_node_modules_tslib_tslib_es6_createBinding(result, mod, k);
+    asn1_csr_node_modules_tslib_tslib_es6_setModuleDefault(result, mod);
+    return result;
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function asn1_csr_node_modules_tslib_tslib_es6_classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-csr/build/es2015/attributes.js
+var attributes_Attributes_1;
+
+
+
+let attributes_Attributes = attributes_Attributes_1 = class Attributes extends es2015/* AsnArray */.YQ {
+    constructor(items) {
+        super(items);
+        Object.setPrototypeOf(this, attributes_Attributes_1.prototype);
+    }
+};
+attributes_Attributes = attributes_Attributes_1 = asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnType */.Ve)({ type: es2015/* AsnTypeTypes.Sequence */.cN.Sequence, itemType: attribute_Attribute })
+], attributes_Attributes);
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-csr/build/es2015/certification_request_info.js
+
+
+
+
+class CertificationRequestInfo {
+    constructor(params = {}) {
+        this.version = 0;
+        this.subject = new name_Name();
+        this.subjectPKInfo = new SubjectPublicKeyInfo();
+        this.attributes = new attributes_Attributes();
+        Object.assign(this, params);
+    }
+}
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.Integer */.gZ.Integer })
+], CertificationRequestInfo.prototype, "version", void 0);
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: name_Name })
+], CertificationRequestInfo.prototype, "subject", void 0);
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: SubjectPublicKeyInfo })
+], CertificationRequestInfo.prototype, "subjectPKInfo", void 0);
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: attributes_Attributes, implicit: true, context: 0 })
+], CertificationRequestInfo.prototype, "attributes", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-csr/build/es2015/certification_request.js
+
+
+
+
+class CertificationRequest {
+    constructor(params = {}) {
+        this.certificationRequestInfo = new CertificationRequestInfo();
+        this.signatureAlgorithm = new AlgorithmIdentifier();
+        this.signature = new ArrayBuffer(0);
+        Object.assign(this, params);
+    }
+}
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: CertificationRequestInfo })
+], CertificationRequest.prototype, "certificationRequestInfo", void 0);
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: AlgorithmIdentifier })
+], CertificationRequest.prototype, "signatureAlgorithm", void 0);
+asn1_csr_node_modules_tslib_tslib_es6_decorate([
+    (0,es2015/* AsnProp */.qw)({ type: es2015/* AsnPropTypes.BitString */.gZ.BitString })
+], CertificationRequest.prototype, "signature", void 0);
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/asn1-csr/build/es2015/index.js
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@peculiar/x509/build/x509.es.js
+/*!
+ * MIT License
+ * 
+ * Copyright (c) Peculiar Ventures. All rights reserved.
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class AsnData {
+    constructor(...args) {
+        if (args.length === 1) {
+            const asn = args[0];
+            this.rawData = es2015/* AsnConvert.serialize */.zc.serialize(asn);
+            this.onInit(asn);
+        }
+        else {
+            const asn = es2015/* AsnConvert.parse */.zc.parse(args[0], args[1]);
+            this.rawData = build.BufferSourceConverter.toArrayBuffer(args[0]);
+            this.onInit(asn);
+        }
+    }
+    equal(data) {
+        if (data instanceof AsnData) {
+            return (0,build.isEqual)(data.rawData, this.rawData);
+        }
+        return false;
+    }
+}
+
+class Extension extends AsnData {
+    constructor(...args) {
+        let raw;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            raw = build.BufferSourceConverter.toArrayBuffer(args[0]);
+        }
+        else {
+            raw = es2015/* AsnConvert.serialize */.zc.serialize(new extension_Extension({
+                extnID: args[0],
+                critical: args[1],
+                extnValue: new es2015/* OctetString */.fi(build.BufferSourceConverter.toArrayBuffer(args[2])),
+            }));
+        }
+        super(raw, extension_Extension);
+    }
+    onInit(asn) {
+        this.type = asn.extnID;
+        this.critical = asn.critical;
+        this.value = asn.extnValue.buffer;
+    }
+}
+
+class CryptoProvider extends Map {
+    constructor() {
+        super();
+        if (typeof self !== "undefined" && typeof crypto !== "undefined") {
+            this.set(CryptoProvider.DEFAULT, crypto);
+        }
+    }
+    static isCryptoKeyPair(data) {
+        return data && data.privateKey && data.publicKey;
+    }
+    static isCryptoKey(data) {
+        return data && data.usages && data.type && data.algorithm && data.extractable !== undefined;
+    }
+    get(key = CryptoProvider.DEFAULT) {
+        const crypto = super.get(key.toLowerCase());
+        if (!crypto) {
+            throw new Error(`Cannot get Crypto by name '${key}'`);
+        }
+        return crypto;
+    }
+    set(key, value) {
+        if (typeof key === "string") {
+            if (!value) {
+                throw new TypeError("Argument 'value' is required");
+            }
+            super.set(key.toLowerCase(), value);
+        }
+        else {
+            super.set(CryptoProvider.DEFAULT, key);
+        }
+        return this;
+    }
+}
+CryptoProvider.DEFAULT = "default";
+const cryptoProvider = new CryptoProvider();
+
+const diAlgorithm = "crypto.algorithm";
+class AlgorithmProvider {
+    getAlgorithms() {
+        return instance.resolveAll(diAlgorithm);
+    }
+    toAsnAlgorithm(alg) {
+        ({ ...alg });
+        for (const algorithm of this.getAlgorithms()) {
+            const res = algorithm.toAsnAlgorithm(alg);
+            if (res) {
+                return res;
+            }
+        }
+        if (/[0-9.]+/.test(alg.name)) {
+            const res = new AlgorithmIdentifier({
+                algorithm: alg.name,
+            });
+            if ("parameters" in alg) {
+                const unknown = alg;
+                res.parameters = unknown.parameters;
+            }
+            return res;
+        }
+        throw new Error("Cannot convert WebCrypto algorithm to ASN.1 algorithm");
+    }
+    toWebAlgorithm(alg) {
+        for (const algorithm of this.getAlgorithms()) {
+            const res = algorithm.toWebAlgorithm(alg);
+            if (res) {
+                return res;
+            }
+        }
+        const unknown = {
+            name: alg.algorithm,
+            parameters: alg.parameters,
+        };
+        return unknown;
+    }
+}
+const diAlgorithmProvider = "crypto.algorithmProvider";
+instance.registerSingleton(diAlgorithmProvider, AlgorithmProvider);
+
+class PemConverter {
+    constructor() {
+        this.CertificateTag = "CERTIFICATE";
+        this.CertificateRequestTag = "CERTIFICATE REQUEST";
+        this.PublicKeyTag = "PUBLIC KEY";
+        this.PrivateKeyTag = "PRIVATE KEY";
+    }
+    static isPem(data) {
+        return typeof data === "string"
+            && /-{5}BEGIN [A-Z0-9 ]+-{5}([a-zA-Z0-9=+/\n\r]+)-{5}END [A-Z0-9 ]+-{5}/g.test(data);
+    }
+    static decode(pem) {
+        const pattern = /-{5}BEGIN [A-Z0-9 ]+-{5}([a-zA-Z0-9=+/\n\r]+)-{5}END [A-Z0-9 ]+-{5}/g;
+        const res = [];
+        let matches = null;
+        while (matches = pattern.exec(pem)) {
+            const base64 = matches[1]
+                .replace(/\r/g, "")
+                .replace(/\n/g, "");
+            res.push(build.Convert.FromBase64(base64));
+        }
+        return res;
+    }
+    static encode(rawData, tag) {
+        if (Array.isArray(rawData)) {
+            const raws = new Array();
+            rawData.forEach(element => {
+                raws.push(this.encodeBuffer(element, tag));
+            });
+            return raws.join("\n");
+        }
+        else {
+            return this.encodeBuffer(rawData, tag);
+        }
+    }
+    static encodeBuffer(rawData, tag) {
+        const base64 = build.Convert.ToBase64(rawData);
+        let sliced;
+        let offset = 0;
+        const rows = Array();
+        while (offset < base64.length) {
+            if (base64.length - offset < 64) {
+                sliced = base64.substring(offset);
+            }
+            else {
+                sliced = base64.substring(offset, offset + 64);
+                offset += 64;
+            }
+            if (sliced.length !== 0) {
+                rows.push(sliced);
+                if (sliced.length < 64) {
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+        }
+        const upperCaseTag = tag.toLocaleUpperCase();
+        return `-----BEGIN ${upperCaseTag}-----\n${rows.join("\n")}\n-----END ${upperCaseTag}-----`;
+    }
+}
+
+class PemData extends AsnData {
+    static isAsnEncoded(data) {
+        return build.BufferSourceConverter.isBufferSource(data) || typeof data === "string";
+    }
+    static toArrayBuffer(raw) {
+        if (typeof raw === "string") {
+            if (PemConverter.isPem(raw)) {
+                return PemConverter.decode(raw)[0];
+            }
+            else if (build.Convert.isHex(raw)) {
+                return build.Convert.FromHex(raw);
+            }
+            else if (build.Convert.isBase64(raw)) {
+                return build.Convert.FromBase64(raw);
+            }
+            else if (build.Convert.isBase64Url(raw)) {
+                return build.Convert.FromBase64Url(raw);
+            }
+            else {
+                throw new TypeError("Unsupported format of 'raw' argument. Must be one of DER, PEM, HEX, Base64, or Base4Url");
+            }
+        }
+        else {
+            const stringRaw = build.Convert.ToBinary(raw);
+            if (PemConverter.isPem(stringRaw)) {
+                return PemConverter.decode(stringRaw)[0];
+            }
+            else if (build.Convert.isHex(stringRaw)) {
+                return build.Convert.FromHex(stringRaw);
+            }
+            else if (build.Convert.isBase64(stringRaw)) {
+                return build.Convert.FromBase64(stringRaw);
+            }
+            else if (build.Convert.isBase64Url(stringRaw)) {
+                return build.Convert.FromBase64Url(stringRaw);
+            }
+            return build.BufferSourceConverter.toArrayBuffer(raw);
+        }
+    }
+    constructor(...args) {
+        if (PemData.isAsnEncoded(args[0])) {
+            super(PemData.toArrayBuffer(args[0]), args[1]);
+        }
+        else {
+            super(args[0]);
+        }
+    }
+    toString(format = "pem") {
+        switch (format) {
+            case "pem":
+                return PemConverter.encode(this.rawData, this.tag);
+            case "hex":
+                return build.Convert.ToHex(this.rawData);
+            case "base64":
+                return build.Convert.ToBase64(this.rawData);
+            case "base64url":
+                return build.Convert.ToBase64Url(this.rawData);
+            default:
+                throw TypeError("Argument 'format' is unsupported value");
+        }
+    }
+}
+
+class PublicKey extends PemData {
+    constructor(param) {
+        if (PemData.isAsnEncoded(param)) {
+            super(param, SubjectPublicKeyInfo);
+        }
+        else {
+            super(param);
+        }
+        this.tag = "PUBLIC KEY";
+    }
+    async export(...args) {
+        let crypto;
+        let keyUsages = ["verify"];
+        let algorithm = { hash: "SHA-256", ...this.algorithm };
+        if (args.length > 1) {
+            algorithm = args[0] || algorithm;
+            keyUsages = args[1] || keyUsages;
+            crypto = args[2] || cryptoProvider.get();
+        }
+        else {
+            crypto = args[0] || cryptoProvider.get();
+        }
+        return crypto.subtle.importKey("spki", this.rawData, algorithm, true, keyUsages);
+    }
+    onInit(asn) {
+        const algProv = instance.resolve(diAlgorithmProvider);
+        const algorithm = this.algorithm = algProv.toWebAlgorithm(asn.algorithm);
+        switch (asn.algorithm.algorithm) {
+            case id_rsaEncryption:
+                {
+                    const rsaPublicKey = es2015/* AsnConvert.parse */.zc.parse(asn.subjectPublicKey, RSAPublicKey);
+                    const modulus = build.BufferSourceConverter.toUint8Array(rsaPublicKey.modulus);
+                    algorithm.publicExponent = build.BufferSourceConverter.toUint8Array(rsaPublicKey.publicExponent);
+                    algorithm.modulusLength = (!modulus[0] ? modulus.slice(1) : modulus).byteLength << 3;
+                    break;
+                }
+        }
+    }
+    async getThumbprint(...args) {
+        var _a;
+        let crypto;
+        let algorithm = "SHA-1";
+        if (args.length >= 1 && !((_a = args[0]) === null || _a === void 0 ? void 0 : _a.subtle)) {
+            algorithm = args[0] || algorithm;
+            crypto = args[1] || cryptoProvider.get();
+        }
+        else {
+            crypto = args[0] || cryptoProvider.get();
+        }
+        return await crypto.subtle.digest(algorithm, this.rawData);
+    }
+    async getKeyIdentifier(crypto) {
+        if (!crypto) {
+            crypto = cryptoProvider.get();
+        }
+        const asn = es2015/* AsnConvert.parse */.zc.parse(this.rawData, SubjectPublicKeyInfo);
+        return await crypto.subtle.digest("SHA-1", asn.subjectPublicKey);
+    }
+}
+
+class NameIdentifier {
+    constructor() {
+        this.items = {};
+    }
+    get(idOrName) {
+        return this.items[idOrName] || null;
+    }
+    register(id, name) {
+        this.items[id] = name;
+        this.items[name] = id;
+    }
+}
+const names = new NameIdentifier();
+names.register("CN", "2.5.4.3");
+names.register("L", "2.5.4.7");
+names.register("ST", "2.5.4.8");
+names.register("O", "2.5.4.10");
+names.register("OU", "2.5.4.11");
+names.register("C", "2.5.4.6");
+names.register("DC", "0.9.2342.19200300.100.1.25");
+names.register("E", "1.2.840.113549.1.9.1");
+names.register("G", "2.5.4.42");
+names.register("I", "2.5.4.43");
+names.register("SN", "2.5.4.4");
+names.register("T", "2.5.4.12");
+function replaceUnknownCharacter(text, char) {
+    return `\\${build.Convert.ToHex(build.Convert.FromUtf8String(char)).toUpperCase()}`;
+}
+function x509_es_escape(data) {
+    return data
+        .replace(/([,+"\\<>;])/g, "\\$1")
+        .replace(/^([ #])/, "\\$1")
+        .replace(/([ ]$)/, "\\$1")
+        .replace(/([\r\n\t])/, replaceUnknownCharacter);
+}
+class Name {
+    constructor(data, extraNames = {}) {
+        this.extraNames = new NameIdentifier();
+        this.asn = new name_Name();
+        for (const key in extraNames) {
+            if (Object.prototype.hasOwnProperty.call(extraNames, key)) {
+                const value = extraNames[key];
+                this.extraNames.register(key, value);
+            }
+        }
+        if (typeof data === "string") {
+            this.asn = this.fromString(data);
+        }
+        else if (data instanceof name_Name) {
+            this.asn = data;
+        }
+        else if (build.BufferSourceConverter.isBufferSource(data)) {
+            this.asn = es2015/* AsnConvert.parse */.zc.parse(data, name_Name);
+        }
+        else {
+            this.asn = this.fromJSON(data);
+        }
+    }
+    static isASCII(text) {
+        for (let i = 0; i < text.length; i++) {
+            const code = text.charCodeAt(i);
+            if (code > 0xFF) {
+                return false;
+            }
+        }
+        return true;
+    }
+    getName(idOrName) {
+        return this.extraNames.get(idOrName) || names.get(idOrName);
+    }
+    toString() {
+        return this.asn.map(rdn => rdn.map(o => {
+            const type = this.getName(o.type) || o.type;
+            const value = o.value.anyValue
+                ? `#${build.Convert.ToHex(o.value.anyValue)}`
+                : x509_es_escape(o.value.toString());
+            return `${type}=${value}`;
+        })
+            .join("+"))
+            .join(", ");
+    }
+    toJSON() {
+        var _a;
+        const json = [];
+        for (const rdn of this.asn) {
+            const jsonItem = {};
+            for (const attr of rdn) {
+                const type = this.getName(attr.type) || attr.type;
+                (_a = jsonItem[type]) !== null && _a !== void 0 ? _a : (jsonItem[type] = []);
+                jsonItem[type].push(attr.value.anyValue ? `#${build.Convert.ToHex(attr.value.anyValue)}` : attr.value.toString());
+            }
+            json.push(jsonItem);
+        }
+        return json;
+    }
+    fromString(data) {
+        const asn = new name_Name();
+        const regex = /(\d\.[\d.]*\d|[A-Za-z]+)=((?:"")|(?:".*?[^\\]")|(?:[^,+].*?(?:[^\\][,+]))|(?:))([,+])?/g;
+        let matches = null;
+        let level = ",";
+        while (matches = regex.exec(`${data},`)) {
+            let [, type, value] = matches;
+            const lastChar = value[value.length - 1];
+            if (lastChar === "," || lastChar === "+") {
+                value = value.slice(0, value.length - 1);
+                matches[3] = lastChar;
+            }
+            const next = matches[3];
+            if (!/[\d.]+/.test(type)) {
+                type = this.getName(type) || "";
+            }
+            if (!type) {
+                throw new Error(`Cannot get OID for name type '${type}'`);
+            }
+            const attr = new AttributeTypeAndValue({ type });
+            if (value.charAt(0) === "#") {
+                attr.value.anyValue = build.Convert.FromHex(value.slice(1));
+            }
+            else {
+                const quotedMatches = /"(.*?[^\\])?"/.exec(value);
+                if (quotedMatches) {
+                    value = quotedMatches[1];
+                }
+                value = value
+                    .replace(/\\0a/ig, "\n")
+                    .replace(/\\0d/ig, "\r")
+                    .replace(/\\0g/ig, "\t")
+                    .replace(/\\(.)/g, "$1");
+                if (type === this.getName("E") || type === this.getName("DC")) {
+                    attr.value.ia5String = value;
+                }
+                else {
+                    if (Name.isASCII(value)) {
+                        attr.value.printableString = value;
+                    }
+                    else {
+                        attr.value.utf8String = value;
+                    }
+                }
+            }
+            if (level === "+") {
+                asn[asn.length - 1].push(attr);
+            }
+            else {
+                asn.push(new RelativeDistinguishedName([attr]));
+            }
+            level = next;
+        }
+        return asn;
+    }
+    fromJSON(data) {
+        const asn = new name_Name();
+        for (const item of data) {
+            const asnRdn = new RelativeDistinguishedName();
+            for (const type in item) {
+                let typeId = type;
+                if (!/[\d.]+/.test(type)) {
+                    typeId = this.getName(type) || "";
+                }
+                if (!typeId) {
+                    throw new Error(`Cannot get OID for name type '${type}'`);
+                }
+                const values = item[type];
+                for (const value of values) {
+                    const asnAttr = new AttributeTypeAndValue({ type: typeId });
+                    if (value[0] === "#") {
+                        asnAttr.value.anyValue = build.Convert.FromHex(value.slice(1));
+                    }
+                    else {
+                        if (typeId === this.getName("E") || typeId === this.getName("DC")) {
+                            asnAttr.value.ia5String = value;
+                        }
+                        else {
+                            asnAttr.value.printableString = value;
+                        }
+                    }
+                    asnRdn.push(asnAttr);
+                }
+            }
+            asn.push(asnRdn);
+        }
+        return asn;
+    }
+    toArrayBuffer() {
+        return es2015/* AsnConvert.serialize */.zc.serialize(this.asn);
+    }
+    async getThumbprint(...args) {
+        var _a;
+        let crypto;
+        let algorithm = "SHA-1";
+        if (args.length >= 1 && !((_a = args[0]) === null || _a === void 0 ? void 0 : _a.subtle)) {
+            algorithm = args[0] || algorithm;
+            crypto = args[1] || cryptoProvider.get();
+        }
+        else {
+            crypto = args[0] || cryptoProvider.get();
+        }
+        return await crypto.subtle.digest(algorithm, this.toArrayBuffer());
+    }
+}
+
+class ExtensionFactory {
+    static register(id, type) {
+        this.items.set(id, type);
+    }
+    static create(data) {
+        const extension = new Extension(data);
+        const Type = this.items.get(extension.type);
+        if (Type) {
+            return new Type(data);
+        }
+        return extension;
+    }
+}
+ExtensionFactory.items = new Map();
+
+const diAsnSignatureFormatter = "crypto.signatureFormatter";
+class AsnDefaultSignatureFormatter {
+    toAsnSignature(algorithm, signature) {
+        return build.BufferSourceConverter.toArrayBuffer(signature);
+    }
+    toWebSignature(algorithm, signature) {
+        return build.BufferSourceConverter.toArrayBuffer(signature);
+    }
+}
+
+class X509Certificate extends PemData {
+    constructor(param) {
+        if (PemData.isAsnEncoded(param)) {
+            super(param, Certificate);
+        }
+        else {
+            super(param);
+        }
+        this.tag = "CERTIFICATE";
+    }
+    onInit(asn) {
+        const tbs = asn.tbsCertificate;
+        this.tbs = es2015/* AsnConvert.serialize */.zc.serialize(tbs);
+        this.serialNumber = build.Convert.ToHex(tbs.serialNumber);
+        this.subjectName = new Name(tbs.subject);
+        this.subject = new Name(tbs.subject).toString();
+        this.issuerName = new Name(tbs.issuer);
+        this.issuer = this.issuerName.toString();
+        const algProv = instance.resolve(diAlgorithmProvider);
+        this.signatureAlgorithm = algProv.toWebAlgorithm(asn.signatureAlgorithm);
+        this.signature = asn.signatureValue;
+        const notBefore = tbs.validity.notBefore.utcTime || tbs.validity.notBefore.generalTime;
+        if (!notBefore) {
+            throw new Error("Cannot get 'notBefore' value");
+        }
+        this.notBefore = notBefore;
+        const notAfter = tbs.validity.notAfter.utcTime || tbs.validity.notAfter.generalTime;
+        if (!notAfter) {
+            throw new Error("Cannot get 'notAfter' value");
+        }
+        this.notAfter = notAfter;
+        this.extensions = [];
+        if (tbs.extensions) {
+            this.extensions = tbs.extensions.map(o => ExtensionFactory.create(es2015/* AsnConvert.serialize */.zc.serialize(o)));
+        }
+        this.publicKey = new PublicKey(tbs.subjectPublicKeyInfo);
+    }
+    getExtension(type) {
+        for (const ext of this.extensions) {
+            if (typeof type === "string") {
+                if (ext.type === type) {
+                    return ext;
+                }
+            }
+            else {
+                if (ext instanceof type) {
+                    return ext;
+                }
+            }
+        }
+        return null;
+    }
+    getExtensions(type) {
+        return this.extensions.filter(o => {
+            if (typeof type === "string") {
+                return o.type === type;
+            }
+            else {
+                return o instanceof type;
+            }
+        });
+    }
+    async verify(params = {}, crypto = cryptoProvider.get()) {
+        let keyAlgorithm;
+        let publicKey;
+        const paramsKey = params.publicKey;
+        try {
+            if (!paramsKey) {
+                keyAlgorithm = { ...this.publicKey.algorithm, ...this.signatureAlgorithm };
+                publicKey = await this.publicKey.export(keyAlgorithm, ["verify"], crypto);
+            }
+            else if (paramsKey instanceof X509Certificate) {
+                keyAlgorithm = { ...paramsKey.publicKey.algorithm, ...this.signatureAlgorithm };
+                publicKey = await paramsKey.publicKey.export(keyAlgorithm, ["verify"]);
+            }
+            else if (paramsKey instanceof PublicKey) {
+                keyAlgorithm = { ...paramsKey.algorithm, ...this.signatureAlgorithm };
+                publicKey = await paramsKey.export(keyAlgorithm, ["verify"]);
+            }
+            else {
+                keyAlgorithm = { ...paramsKey.algorithm, ...this.signatureAlgorithm };
+                publicKey = paramsKey;
+            }
+        }
+        catch (e) {
+            return false;
+        }
+        const signatureFormatters = instance.resolveAll(diAsnSignatureFormatter).reverse();
+        let signature = null;
+        for (const signatureFormatter of signatureFormatters) {
+            signature = signatureFormatter.toWebSignature(keyAlgorithm, this.signature);
+            if (signature) {
+                break;
+            }
+        }
+        if (!signature) {
+            throw Error("Cannot convert ASN.1 signature value to WebCrypto format");
+        }
+        const ok = await crypto.subtle.verify(this.signatureAlgorithm, publicKey, signature, this.tbs);
+        if (params.signatureOnly) {
+            return ok;
+        }
+        else {
+            const date = params.date || new Date();
+            const time = date.getTime();
+            return ok && this.notBefore.getTime() < time && time < this.notAfter.getTime();
+        }
+    }
+    async getThumbprint(...args) {
+        let crypto;
+        let algorithm = "SHA-1";
+        if (args[0]) {
+            if (!args[0].subtle) {
+                algorithm = args[0] || algorithm;
+                crypto = args[1];
+            }
+            else {
+                crypto = args[0];
+            }
+        }
+        crypto !== null && crypto !== void 0 ? crypto : (crypto = cryptoProvider.get());
+        return await crypto.subtle.digest(algorithm, this.rawData);
+    }
+    async isSelfSigned() {
+        return this.subject === this.issuer && await this.verify({ signatureOnly: true });
+    }
+}
+
+class AuthorityKeyIdentifierExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+        }
+        else if (typeof args[0] === "string") {
+            const value = new AuthorityKeyIdentifier({ keyIdentifier: new es2015/* OctetString */.fi(build.Convert.FromHex(args[0])) });
+            super(id_ce_authorityKeyIdentifier, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+        }
+        else {
+            const certId = args[0];
+            const value = new AuthorityKeyIdentifier({
+                authorityCertIssuer: certId.name,
+                authorityCertSerialNumber: build.Convert.FromHex(certId.serialNumber),
+            });
+            super(id_ce_authorityKeyIdentifier, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+        }
+    }
+    static async create(param, critical = false, crypto = cryptoProvider.get()) {
+        if (param instanceof X509Certificate || CryptoProvider.isCryptoKey(param)) {
+            const publicKey = param instanceof X509Certificate ? await param.publicKey.export(crypto) : param;
+            const spki = await crypto.subtle.exportKey("spki", publicKey);
+            const key = new PublicKey(spki);
+            const id = await key.getKeyIdentifier(crypto);
+            return new AuthorityKeyIdentifierExtension(build.Convert.ToHex(id), critical);
+        }
+        else {
+            return new AuthorityKeyIdentifierExtension(param, critical);
+        }
+    }
+    onInit(asn) {
+        super.onInit(asn);
+        const aki = es2015/* AsnConvert.parse */.zc.parse(asn.extnValue, AuthorityKeyIdentifier);
+        if (aki.keyIdentifier) {
+            this.keyId = build.Convert.ToHex(aki.keyIdentifier);
+        }
+        if (aki.authorityCertIssuer && aki.authorityCertSerialNumber) {
+            this.certId = {
+                name: aki.authorityCertIssuer,
+                serialNumber: build.Convert.ToHex(aki.authorityCertSerialNumber),
+            };
+        }
+    }
+}
+
+class BasicConstraintsExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.value, BasicConstraints);
+            this.ca = value.cA;
+            this.pathLength = value.pathLenConstraint;
+        }
+        else {
+            const value = new BasicConstraints({
+                cA: args[0],
+                pathLenConstraint: args[1],
+            });
+            super(id_ce_basicConstraints, args[2], es2015/* AsnConvert.serialize */.zc.serialize(value));
+            this.ca = args[0];
+            this.pathLength = args[1];
+        }
+    }
+}
+
+class ExtendedKeyUsageExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.value, ExtendedKeyUsage);
+            this.usages = value.map(o => o);
+        }
+        else {
+            const value = new ExtendedKeyUsage(args[0]);
+            super(id_ce_extKeyUsage, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+            this.usages = args[0];
+        }
+    }
+}
+
+var x509_es_KeyUsageFlags;
+(function (KeyUsageFlags) {
+    KeyUsageFlags[KeyUsageFlags["digitalSignature"] = 1] = "digitalSignature";
+    KeyUsageFlags[KeyUsageFlags["nonRepudiation"] = 2] = "nonRepudiation";
+    KeyUsageFlags[KeyUsageFlags["keyEncipherment"] = 4] = "keyEncipherment";
+    KeyUsageFlags[KeyUsageFlags["dataEncipherment"] = 8] = "dataEncipherment";
+    KeyUsageFlags[KeyUsageFlags["keyAgreement"] = 16] = "keyAgreement";
+    KeyUsageFlags[KeyUsageFlags["keyCertSign"] = 32] = "keyCertSign";
+    KeyUsageFlags[KeyUsageFlags["cRLSign"] = 64] = "cRLSign";
+    KeyUsageFlags[KeyUsageFlags["encipherOnly"] = 128] = "encipherOnly";
+    KeyUsageFlags[KeyUsageFlags["decipherOnly"] = 256] = "decipherOnly";
+})(x509_es_KeyUsageFlags || (x509_es_KeyUsageFlags = {}));
+class KeyUsagesExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.value, KeyUsage);
+            this.usages = value.toNumber();
+        }
+        else {
+            const value = new KeyUsage(args[0]);
+            super(id_ce_keyUsage, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+            this.usages = args[0];
+        }
+    }
+}
+
+class SubjectKeyIdentifierExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.value, SubjectKeyIdentifier);
+            this.keyId = build.Convert.ToHex(value);
+        }
+        else {
+            const identifier = typeof args[0] === "string"
+                ? build.Convert.FromHex(args[0])
+                : args[0];
+            const value = new SubjectKeyIdentifier(identifier);
+            super(id_ce_subjectKeyIdentifier, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+            this.keyId = build.Convert.ToHex(identifier);
+        }
+    }
+    static async create(publicKey, critical = false, crypto = cryptoProvider.get()) {
+        const spki = await crypto.subtle.exportKey("spki", publicKey);
+        const key = new PublicKey(spki);
+        const id = await key.getKeyIdentifier(crypto);
+        return new SubjectKeyIdentifierExtension(build.Convert.ToHex(id), critical);
+    }
+}
+
+class OtherName extends AsnData {
+    constructor(...args) {
+        let raw;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            raw = build.BufferSourceConverter.toArrayBuffer(args[0]);
+        }
+        else {
+            const type = args[0];
+            const value = build.BufferSourceConverter.toArrayBuffer(args[1]);
+            raw = es2015/* AsnConvert.serialize */.zc.serialize(new general_name_OtherName({ typeId: type, value }));
+        }
+        super(raw, general_name_OtherName);
+    }
+    onInit(asn) {
+        this.type = asn.typeId;
+        this.value = asn.value;
+    }
+    toJSON() {
+        return {
+            type: this.type,
+            value: build.Convert.ToHex(this.value),
+        };
+    }
+}
+class SubjectAlternativeNameExtension extends Extension {
+    constructor(...args) {
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+        }
+        else {
+            const data = args[0] || {};
+            const value = new SubjectAlternativeName();
+            for (const item of data.dns || []) {
+                value.push(new GeneralName({
+                    dNSName: item,
+                }));
+            }
+            for (const item of data.email || []) {
+                value.push(new GeneralName({
+                    rfc822Name: item,
+                }));
+            }
+            for (const item of data.guid || []) {
+                const matches = /([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})/i.exec(item);
+                if (!matches) {
+                    throw new Error("Cannot parse GUID value. Value doesn't match to regular expression");
+                }
+                const hex = matches
+                    .slice(1)
+                    .map((o, i) => {
+                    if (i < 3) {
+                        return build.Convert.ToHex(new Uint8Array(build.Convert.FromHex(o)).reverse());
+                    }
+                    return o;
+                })
+                    .join("");
+                value.push(new GeneralName({
+                    otherName: new general_name_OtherName({
+                        typeId: SubjectAlternativeNameExtension.GUID,
+                        value: es2015/* AsnConvert.serialize */.zc.serialize(new es2015/* OctetString */.fi(build.Convert.FromHex(hex))),
+                    }),
+                }));
+            }
+            for (const item of data.ip || []) {
+                value.push(new GeneralName({
+                    iPAddress: item,
+                }));
+            }
+            for (const item of data.url || []) {
+                value.push(new GeneralName({
+                    uniformResourceIdentifier: item,
+                }));
+            }
+            for (const item of data.upn || []) {
+                value.push(new GeneralName({
+                    otherName: new general_name_OtherName({
+                        typeId: SubjectAlternativeNameExtension.UPN,
+                        value: es2015/* AsnConvert.serialize */.zc.serialize(es2015/* AsnUtf8StringConverter.toASN */.VU.toASN(item))
+                    }),
+                }));
+            }
+            for (const item of data.registeredId || []) {
+                value.push(new GeneralName({
+                    registeredID: item,
+                }));
+            }
+            for (const item of data.otherName || []) {
+                value.push(new GeneralName({
+                    otherName: new general_name_OtherName({
+                        typeId: item.type,
+                        value: build.Convert.FromHex(item.value),
+                    }),
+                }));
+            }
+            super(id_ce_subjectAltName, args[1], es2015/* AsnConvert.serialize */.zc.serialize(value));
+        }
+    }
+    onInit(asn) {
+        super.onInit(asn);
+        const value = es2015/* AsnConvert.parse */.zc.parse(asn.extnValue, SubjectAlternativeName);
+        this.dns = value.filter(o => o.dNSName).map(o => o.dNSName || "");
+        this.email = value.filter(o => o.rfc822Name).map(o => o.rfc822Name || "");
+        this.ip = value.filter(o => o.iPAddress).map(o => o.iPAddress || "");
+        this.url = value.filter(o => o.uniformResourceIdentifier).map(o => o.uniformResourceIdentifier || "");
+        this.upn = value
+            .filter(o => { var _a; return ((_a = o.otherName) === null || _a === void 0 ? void 0 : _a.typeId) === SubjectAlternativeNameExtension.UPN; })
+            .map(o => o.otherName ? es2015/* AsnConvert.parse */.zc.parse(o.otherName.value, DirectoryString).toString() : "");
+        this.guid = value
+            .filter(o => { var _a; return ((_a = o.otherName) === null || _a === void 0 ? void 0 : _a.typeId) === SubjectAlternativeNameExtension.GUID; })
+            .map(o => o.otherName ? es2015/* AsnConvert.parse */.zc.parse(o.otherName.value, es2015/* OctetString */.fi) : new es2015/* OctetString */.fi())
+            .map(o => {
+            const matches = /([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})/i.exec(build.Convert.ToHex(o));
+            if (!matches) {
+                throw new Error("Cannot parse GUID value. Value doesn't match to regular expression");
+            }
+            const guid = matches
+                .slice(1)
+                .map((o, i) => {
+                if (i < 3) {
+                    return build.Convert.ToHex(new Uint8Array(build.Convert.FromHex(o)).reverse());
+                }
+                return o;
+            })
+                .join("-");
+            return `{${guid}}`;
+        });
+        this.registeredId = value.filter(o => o.registeredID).map(o => o.registeredID || "");
+        this.otherNames = value
+            .filter(o => o.otherName && ![SubjectAlternativeNameExtension.GUID, SubjectAlternativeNameExtension.UPN].includes(o.otherName.typeId))
+            .map(o => new OtherName(o.otherName.typeId, o.otherName.value));
+    }
+    toJSON() {
+        const json = {};
+        if (this.dns.length) {
+            json.dns = [...this.dns];
+        }
+        if (this.email.length) {
+            json.email = [...this.email];
+        }
+        if (this.ip.length) {
+            json.ip = [...this.ip];
+        }
+        if (this.guid.length) {
+            json.guid = [...this.guid];
+        }
+        if (this.upn.length) {
+            json.upn = [...this.upn];
+        }
+        if (this.url.length) {
+            json.url = [...this.url];
+        }
+        if (this.registeredId.length) {
+            json.registeredId = [...this.registeredId];
+        }
+        if (this.otherNames.length) {
+            json.otherName = this.otherNames.map(o => o.toJSON());
+        }
+        return json;
+    }
+}
+SubjectAlternativeNameExtension.GUID = "1.3.6.1.4.1.311.25.1";
+SubjectAlternativeNameExtension.UPN = "1.3.6.1.4.1.311.20.2.3";
+
+class CertificatePolicyExtension extends Extension {
+    constructor(...args) {
+        var _a;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+            const asnPolicies = es2015/* AsnConvert.parse */.zc.parse(this.value, CertificatePolicies);
+            this.policies = asnPolicies.map(o => o.policyIdentifier);
+        }
+        else {
+            const policies = args[0];
+            const critical = (_a = args[1]) !== null && _a !== void 0 ? _a : false;
+            const value = new CertificatePolicies(policies.map(o => (new PolicyInformation({
+                policyIdentifier: o,
+            }))));
+            super(id_ce_certificatePolicies, critical, es2015/* AsnConvert.serialize */.zc.serialize(value));
+            this.policies = policies;
+        }
+    }
+}
+ExtensionFactory.register(id_ce_certificatePolicies, CertificatePolicyExtension);
+
+class x509_es_Attribute extends AsnData {
+    constructor(...args) {
+        let raw;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            raw = build.BufferSourceConverter.toArrayBuffer(args[0]);
+        }
+        else {
+            const type = args[0];
+            const values = Array.isArray(args[1]) ? args[1].map(o => build.BufferSourceConverter.toArrayBuffer(o)) : [];
+            raw = es2015/* AsnConvert.serialize */.zc.serialize(new attribute_Attribute({ type, values }));
+        }
+        super(raw, attribute_Attribute);
+    }
+    onInit(asn) {
+        this.type = asn.type;
+        this.values = asn.values;
+    }
+}
+
+class ChallengePasswordAttribute extends x509_es_Attribute {
+    constructor(...args) {
+        var _a;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+        }
+        else {
+            const value = new ChallengePassword({
+                printableString: args[0],
+            });
+            super(id_pkcs9_at_challengePassword, [es2015/* AsnConvert.serialize */.zc.serialize(value)]);
+        }
+        (_a = this.password) !== null && _a !== void 0 ? _a : (this.password = "");
+    }
+    onInit(asn) {
+        super.onInit(asn);
+        if (this.values[0]) {
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.values[0], ChallengePassword);
+            this.password = value.toString();
+        }
+    }
+}
+
+class ExtensionsAttribute extends x509_es_Attribute {
+    constructor(...args) {
+        var _a;
+        if (build.BufferSourceConverter.isBufferSource(args[0])) {
+            super(args[0]);
+        }
+        else {
+            const value = new Extensions(args[0]);
+            super(id_pkcs9_at_extensionRequest, [es2015/* AsnConvert.serialize */.zc.serialize(value)]);
+        }
+        (_a = this.items) !== null && _a !== void 0 ? _a : (this.items = []);
+    }
+    onInit(asn) {
+        super.onInit(asn);
+        if (this.values[0]) {
+            const value = es2015/* AsnConvert.parse */.zc.parse(this.values[0], Extensions);
+            this.items = value.map(o => ExtensionFactory.create(es2015/* AsnConvert.serialize */.zc.serialize(o)));
+        }
+    }
+}
+
+class AttributeFactory {
+    static register(id, type) {
+        this.items.set(id, type);
+    }
+    static create(data) {
+        const attribute = new x509_es_Attribute(data);
+        const Type = this.items.get(attribute.type);
+        if (Type) {
+            return new Type(data);
+        }
+        return attribute;
+    }
+}
+AttributeFactory.items = new Map();
+
+let RsaAlgorithm = class RsaAlgorithm {
+    toAsnAlgorithm(alg) {
+        switch (alg.name.toLowerCase()) {
+            case "rsassa-pkcs1-v1_5":
+                if (alg.hash) {
+                    switch (alg.hash.name.toLowerCase()) {
+                        case "sha-1":
+                            return new AlgorithmIdentifier({ algorithm: id_sha1WithRSAEncryption, parameters: null });
+                        case "sha-256":
+                            return new AlgorithmIdentifier({ algorithm: id_sha256WithRSAEncryption, parameters: null });
+                        case "sha-384":
+                            return new AlgorithmIdentifier({ algorithm: id_sha384WithRSAEncryption, parameters: null });
+                        case "sha-512":
+                            return new AlgorithmIdentifier({ algorithm: id_sha512WithRSAEncryption, parameters: null });
+                    }
+                }
+                else {
+                    return new AlgorithmIdentifier({ algorithm: id_rsaEncryption, parameters: null });
+                }
+        }
+        return null;
+    }
+    toWebAlgorithm(alg) {
+        switch (alg.algorithm) {
+            case id_rsaEncryption:
+                return { name: "RSASSA-PKCS1-v1_5" };
+            case id_sha1WithRSAEncryption:
+                return { name: "RSASSA-PKCS1-v1_5", hash: { name: "SHA-1" } };
+            case id_sha256WithRSAEncryption:
+                return { name: "RSASSA-PKCS1-v1_5", hash: { name: "SHA-256" } };
+            case id_sha384WithRSAEncryption:
+                return { name: "RSASSA-PKCS1-v1_5", hash: { name: "SHA-384" } };
+            case id_sha512WithRSAEncryption:
+                return { name: "RSASSA-PKCS1-v1_5", hash: { name: "SHA-512" } };
+        }
+        return null;
+    }
+};
+RsaAlgorithm = x509_node_modules_tslib_tslib_es6_decorate([
+    decorators_injectable()
+], RsaAlgorithm);
+instance.registerSingleton(diAlgorithm, RsaAlgorithm);
+
+var EcAlgorithm_1;
+const idVersionOne = "1.3.36.3.3.2.8.1.1";
+const idBrainpoolP160r1 = `${idVersionOne}.1`;
+const idBrainpoolP160t1 = `${idVersionOne}.2`;
+const idBrainpoolP192r1 = `${idVersionOne}.3`;
+const idBrainpoolP192t1 = `${idVersionOne}.4`;
+const idBrainpoolP224r1 = `${idVersionOne}.5`;
+const idBrainpoolP224t1 = `${idVersionOne}.6`;
+const idBrainpoolP256r1 = `${idVersionOne}.7`;
+const idBrainpoolP256t1 = `${idVersionOne}.8`;
+const idBrainpoolP320r1 = `${idVersionOne}.9`;
+const idBrainpoolP320t1 = `${idVersionOne}.10`;
+const idBrainpoolP384r1 = `${idVersionOne}.11`;
+const idBrainpoolP384t1 = `${idVersionOne}.12`;
+const idBrainpoolP512r1 = `${idVersionOne}.13`;
+const idBrainpoolP512t1 = `${idVersionOne}.14`;
+const brainpoolP160r1 = "brainpoolP160r1";
+const brainpoolP160t1 = "brainpoolP160t1";
+const brainpoolP192r1 = "brainpoolP192r1";
+const brainpoolP192t1 = "brainpoolP192t1";
+const brainpoolP224r1 = "brainpoolP224r1";
+const brainpoolP224t1 = "brainpoolP224t1";
+const brainpoolP256r1 = "brainpoolP256r1";
+const brainpoolP256t1 = "brainpoolP256t1";
+const brainpoolP320r1 = "brainpoolP320r1";
+const brainpoolP320t1 = "brainpoolP320t1";
+const brainpoolP384r1 = "brainpoolP384r1";
+const brainpoolP384t1 = "brainpoolP384t1";
+const brainpoolP512r1 = "brainpoolP512r1";
+const brainpoolP512t1 = "brainpoolP512t1";
+const ECDSA = "ECDSA";
+let EcAlgorithm = EcAlgorithm_1 = class EcAlgorithm {
+    toAsnAlgorithm(alg) {
+        switch (alg.name.toLowerCase()) {
+            case ECDSA.toLowerCase():
+                if ("hash" in alg) {
+                    const hash = typeof alg.hash === "string" ? alg.hash : alg.hash.name;
+                    switch (hash.toLowerCase()) {
+                        case "sha-1":
+                            return ecdsaWithSHA1;
+                        case "sha-256":
+                            return ecdsaWithSHA256;
+                        case "sha-384":
+                            return ecdsaWithSHA384;
+                        case "sha-512":
+                            return ecdsaWithSHA512;
+                    }
+                }
+                else if ("namedCurve" in alg) {
+                    let parameters = "";
+                    switch (alg.namedCurve) {
+                        case "P-256":
+                            parameters = id_secp256r1;
+                            break;
+                        case "K-256":
+                            parameters = EcAlgorithm_1.SECP256K1;
+                            break;
+                        case "P-384":
+                            parameters = id_secp384r1;
+                            break;
+                        case "P-521":
+                            parameters = id_secp521r1;
+                            break;
+                        case brainpoolP160r1:
+                            parameters = idBrainpoolP160r1;
+                            break;
+                        case brainpoolP160t1:
+                            parameters = idBrainpoolP160t1;
+                            break;
+                        case brainpoolP192r1:
+                            parameters = idBrainpoolP192r1;
+                            break;
+                        case brainpoolP192t1:
+                            parameters = idBrainpoolP192t1;
+                            break;
+                        case brainpoolP224r1:
+                            parameters = idBrainpoolP224r1;
+                            break;
+                        case brainpoolP224t1:
+                            parameters = idBrainpoolP224t1;
+                            break;
+                        case brainpoolP256r1:
+                            parameters = idBrainpoolP256r1;
+                            break;
+                        case brainpoolP256t1:
+                            parameters = idBrainpoolP256t1;
+                            break;
+                        case brainpoolP320r1:
+                            parameters = idBrainpoolP320r1;
+                            break;
+                        case brainpoolP320t1:
+                            parameters = idBrainpoolP320t1;
+                            break;
+                        case brainpoolP384r1:
+                            parameters = idBrainpoolP384r1;
+                            break;
+                        case brainpoolP384t1:
+                            parameters = idBrainpoolP384t1;
+                            break;
+                        case brainpoolP512r1:
+                            parameters = idBrainpoolP512r1;
+                            break;
+                        case brainpoolP512t1:
+                            parameters = idBrainpoolP512t1;
+                            break;
+                    }
+                    if (parameters) {
+                        return new AlgorithmIdentifier({
+                            algorithm: id_ecPublicKey,
+                            parameters: es2015/* AsnConvert.serialize */.zc.serialize(new ECParameters({ namedCurve: parameters })),
+                        });
+                    }
+                }
+        }
+        return null;
+    }
+    toWebAlgorithm(alg) {
+        switch (alg.algorithm) {
+            case id_ecdsaWithSHA1:
+                return { name: ECDSA, hash: { name: "SHA-1" } };
+            case id_ecdsaWithSHA256:
+                return { name: ECDSA, hash: { name: "SHA-256" } };
+            case id_ecdsaWithSHA384:
+                return { name: ECDSA, hash: { name: "SHA-384" } };
+            case id_ecdsaWithSHA512:
+                return { name: ECDSA, hash: { name: "SHA-512" } };
+            case id_ecPublicKey: {
+                if (!alg.parameters) {
+                    throw new TypeError("Cannot get required parameters from EC algorithm");
+                }
+                const parameters = es2015/* AsnConvert.parse */.zc.parse(alg.parameters, ECParameters);
+                switch (parameters.namedCurve) {
+                    case id_secp256r1:
+                        return { name: ECDSA, namedCurve: "P-256" };
+                    case EcAlgorithm_1.SECP256K1:
+                        return { name: ECDSA, namedCurve: "K-256" };
+                    case id_secp384r1:
+                        return { name: ECDSA, namedCurve: "P-384" };
+                    case id_secp521r1:
+                        return { name: ECDSA, namedCurve: "P-521" };
+                    case idBrainpoolP160r1:
+                        return { name: ECDSA, namedCurve: brainpoolP160r1 };
+                    case idBrainpoolP160t1:
+                        return { name: ECDSA, namedCurve: brainpoolP160t1 };
+                    case idBrainpoolP192r1:
+                        return { name: ECDSA, namedCurve: brainpoolP192r1 };
+                    case idBrainpoolP192t1:
+                        return { name: ECDSA, namedCurve: brainpoolP192t1 };
+                    case idBrainpoolP224r1:
+                        return { name: ECDSA, namedCurve: brainpoolP224r1 };
+                    case idBrainpoolP224t1:
+                        return { name: ECDSA, namedCurve: brainpoolP224t1 };
+                    case idBrainpoolP256r1:
+                        return { name: ECDSA, namedCurve: brainpoolP256r1 };
+                    case idBrainpoolP256t1:
+                        return { name: ECDSA, namedCurve: brainpoolP256t1 };
+                    case idBrainpoolP320r1:
+                        return { name: ECDSA, namedCurve: brainpoolP320r1 };
+                    case idBrainpoolP320t1:
+                        return { name: ECDSA, namedCurve: brainpoolP320t1 };
+                    case idBrainpoolP384r1:
+                        return { name: ECDSA, namedCurve: brainpoolP384r1 };
+                    case idBrainpoolP384t1:
+                        return { name: ECDSA, namedCurve: brainpoolP384t1 };
+                    case idBrainpoolP512r1:
+                        return { name: ECDSA, namedCurve: brainpoolP512r1 };
+                    case idBrainpoolP512t1:
+                        return { name: ECDSA, namedCurve: brainpoolP512t1 };
+                }
+            }
+        }
+        return null;
+    }
+};
+EcAlgorithm.SECP256K1 = "1.3.132.0.10";
+EcAlgorithm = EcAlgorithm_1 = x509_node_modules_tslib_tslib_es6_decorate([
+    decorators_injectable()
+], EcAlgorithm);
+instance.registerSingleton(diAlgorithm, EcAlgorithm);
+
+class AsnEcSignatureFormatter {
+    addPadding(pointSize, data) {
+        const bytes = build.BufferSourceConverter.toUint8Array(data);
+        const res = new Uint8Array(pointSize);
+        res.set(bytes, pointSize - bytes.length);
+        return res;
+    }
+    removePadding(data, positive = false) {
+        let bytes = build.BufferSourceConverter.toUint8Array(data);
+        for (let i = 0; i < bytes.length; i++) {
+            if (!bytes[i]) {
+                continue;
+            }
+            bytes = bytes.slice(i);
+            break;
+        }
+        if (positive && bytes[0] > 127) {
+            const result = new Uint8Array(bytes.length + 1);
+            result.set(bytes, 1);
+            return result.buffer;
+        }
+        return bytes.buffer;
+    }
+    toAsnSignature(algorithm, signature) {
+        if (algorithm.name === "ECDSA") {
+            const namedCurve = algorithm.namedCurve;
+            const pointSize = AsnEcSignatureFormatter.namedCurveSize.get(namedCurve) || AsnEcSignatureFormatter.defaultNamedCurveSize;
+            const ecSignature = new ECDSASigValue();
+            const uint8Signature = build.BufferSourceConverter.toUint8Array(signature);
+            ecSignature.r = this.removePadding(uint8Signature.slice(0, pointSize), true);
+            ecSignature.s = this.removePadding(uint8Signature.slice(pointSize, pointSize + pointSize), true);
+            return es2015/* AsnConvert.serialize */.zc.serialize(ecSignature);
+        }
+        return null;
+    }
+    toWebSignature(algorithm, signature) {
+        if (algorithm.name === "ECDSA") {
+            const ecSigValue = es2015/* AsnConvert.parse */.zc.parse(signature, ECDSASigValue);
+            const namedCurve = algorithm.namedCurve;
+            const pointSize = AsnEcSignatureFormatter.namedCurveSize.get(namedCurve) || AsnEcSignatureFormatter.defaultNamedCurveSize;
+            const r = this.addPadding(pointSize, this.removePadding(ecSigValue.r));
+            const s = this.addPadding(pointSize, this.removePadding(ecSigValue.s));
+            return (0,build.combine)(r, s);
+        }
+        return null;
+    }
+}
+AsnEcSignatureFormatter.namedCurveSize = new Map();
+AsnEcSignatureFormatter.defaultNamedCurveSize = 32;
+
+const idX25519 = "1.3.101.110";
+const idX448 = "1.3.101.111";
+const idEd25519 = "1.3.101.112";
+const idEd448 = "1.3.101.113";
+let EdAlgorithm = class EdAlgorithm {
+    toAsnAlgorithm(alg) {
+        let algorithm = null;
+        switch (alg.name.toLowerCase()) {
+            case "eddsa":
+                switch (alg.namedCurve.toLowerCase()) {
+                    case "ed25519":
+                        algorithm = idEd25519;
+                        break;
+                    case "ed448":
+                        algorithm = idEd448;
+                        break;
+                }
+                break;
+            case "ecdh-es":
+                switch (alg.namedCurve.toLowerCase()) {
+                    case "x25519":
+                        algorithm = idX25519;
+                        break;
+                    case "x448":
+                        algorithm = idX448;
+                        break;
+                }
+        }
+        if (algorithm) {
+            return new AlgorithmIdentifier({
+                algorithm,
+            });
+        }
+        return null;
+    }
+    toWebAlgorithm(alg) {
+        switch (alg.algorithm) {
+            case idEd25519:
+                return { name: "EdDSA", namedCurve: "Ed25519" };
+            case idEd448:
+                return { name: "EdDSA", namedCurve: "Ed448" };
+            case idX25519:
+                return { name: "ECDH-ES", namedCurve: "X25519" };
+            case idX448:
+                return { name: "ECDH-ES", namedCurve: "X448" };
+        }
+        return null;
+    }
+};
+EdAlgorithm = x509_node_modules_tslib_tslib_es6_decorate([
+    decorators_injectable()
+], EdAlgorithm);
+instance.registerSingleton(diAlgorithm, EdAlgorithm);
+
+class Pkcs10CertificateRequest extends PemData {
+    constructor(param) {
+        if (PemData.isAsnEncoded(param)) {
+            super(param, CertificationRequest);
+        }
+        else {
+            super(param);
+        }
+        this.tag = "CERTIFICATE REQUEST";
+    }
+    onInit(asn) {
+        this.tbs = es2015/* AsnConvert.serialize */.zc.serialize(asn.certificationRequestInfo);
+        this.publicKey = new PublicKey(asn.certificationRequestInfo.subjectPKInfo);
+        const algProv = instance.resolve(diAlgorithmProvider);
+        this.signatureAlgorithm = algProv.toWebAlgorithm(asn.signatureAlgorithm);
+        this.signature = asn.signature;
+        this.attributes = asn.certificationRequestInfo.attributes
+            .map(o => AttributeFactory.create(es2015/* AsnConvert.serialize */.zc.serialize(o)));
+        const extensions = this.getAttribute(id_pkcs9_at_extensionRequest);
+        this.extensions = [];
+        if (extensions instanceof ExtensionsAttribute) {
+            this.extensions = extensions.items;
+        }
+        this.subjectName = new Name(asn.certificationRequestInfo.subject);
+        this.subject = this.subjectName.toString();
+    }
+    getAttribute(type) {
+        for (const attr of this.attributes) {
+            if (attr.type === type) {
+                return attr;
+            }
+        }
+        return null;
+    }
+    getAttributes(type) {
+        return this.attributes.filter(o => o.type === type);
+    }
+    getExtension(type) {
+        for (const ext of this.extensions) {
+            if (ext.type === type) {
+                return ext;
+            }
+        }
+        return null;
+    }
+    getExtensions(type) {
+        return this.extensions.filter(o => o.type === type);
+    }
+    async verify(crypto = cryptoProvider.get()) {
+        const algorithm = { ...this.publicKey.algorithm, ...this.signatureAlgorithm };
+        const publicKey = await this.publicKey.export(algorithm, ["verify"], crypto);
+        const signatureFormatters = instance.resolveAll(diAsnSignatureFormatter).reverse();
+        let signature = null;
+        for (const signatureFormatter of signatureFormatters) {
+            signature = signatureFormatter.toWebSignature(algorithm, this.signature);
+            if (signature) {
+                break;
+            }
+        }
+        if (!signature) {
+            throw Error("Cannot convert WebCrypto signature value to ASN.1 format");
+        }
+        const ok = await crypto.subtle.verify(this.signatureAlgorithm, publicKey, signature, this.tbs);
+        return ok;
+    }
+}
+
+class Pkcs10CertificateRequestGenerator {
+    static async create(params, crypto = cryptoProvider.get()) {
+        if (!params.keys.privateKey) {
+            throw new Error("Bad field 'keys' in 'params' argument. 'privateKey' is empty");
+        }
+        if (!params.keys.publicKey) {
+            throw new Error("Bad field 'keys' in 'params' argument. 'privateKey' is empty");
+        }
+        const spki = await crypto.subtle.exportKey("spki", params.keys.publicKey);
+        const asnReq = new CertificationRequest({
+            certificationRequestInfo: new CertificationRequestInfo({
+                subjectPKInfo: es2015/* AsnConvert.parse */.zc.parse(spki, SubjectPublicKeyInfo),
+            }),
+        });
+        if (params.name) {
+            const name = params.name instanceof Name
+                ? params.name
+                : new Name(params.name);
+            asnReq.certificationRequestInfo.subject = es2015/* AsnConvert.parse */.zc.parse(name.toArrayBuffer(), name_Name);
+        }
+        if (params.attributes) {
+            for (const o of params.attributes) {
+                asnReq.certificationRequestInfo.attributes.push(es2015/* AsnConvert.parse */.zc.parse(o.rawData, attribute_Attribute));
+            }
+        }
+        if (params.extensions && params.extensions.length) {
+            const attr = new attribute_Attribute({ type: id_pkcs9_at_extensionRequest });
+            const extensions = new Extensions();
+            for (const o of params.extensions) {
+                extensions.push(es2015/* AsnConvert.parse */.zc.parse(o.rawData, extension_Extension));
+            }
+            attr.values.push(es2015/* AsnConvert.serialize */.zc.serialize(extensions));
+            asnReq.certificationRequestInfo.attributes.push(attr);
+        }
+        const signingAlgorithm = { ...params.signingAlgorithm, ...params.keys.privateKey.algorithm };
+        const algProv = instance.resolve(diAlgorithmProvider);
+        asnReq.signatureAlgorithm = algProv.toAsnAlgorithm(signingAlgorithm);
+        const tbs = es2015/* AsnConvert.serialize */.zc.serialize(asnReq.certificationRequestInfo);
+        const signature = await crypto.subtle.sign(signingAlgorithm, params.keys.privateKey, tbs);
+        const signatureFormatters = instance.resolveAll(diAsnSignatureFormatter).reverse();
+        let asnSignature = null;
+        for (const signatureFormatter of signatureFormatters) {
+            asnSignature = signatureFormatter.toAsnSignature(signingAlgorithm, signature);
+            if (asnSignature) {
+                break;
+            }
+        }
+        if (!asnSignature) {
+            throw Error("Cannot convert WebCrypto signature value to ASN.1 format");
+        }
+        asnReq.signature = asnSignature;
+        return new Pkcs10CertificateRequest(es2015/* AsnConvert.serialize */.zc.serialize(asnReq));
+    }
+}
+
+class X509Certificates extends Array {
+    constructor(param) {
+        super();
+        if (PemData.isAsnEncoded(param)) {
+            this.import(param);
+        }
+        else if (param instanceof X509Certificate) {
+            this.push(param);
+        }
+        else if (Array.isArray(param)) {
+            for (const item of param) {
+                this.push(item);
+            }
+        }
+    }
+    export(format) {
+        const signedData = new SignedData();
+        signedData.certificates = new CertificateSet(this.map(o => new CertificateChoices({
+            certificate: es2015/* AsnConvert.parse */.zc.parse(o.rawData, Certificate)
+        })));
+        const cms = new ContentInfo({
+            contentType: id_signedData,
+            content: es2015/* AsnConvert.serialize */.zc.serialize(signedData),
+        });
+        const raw = es2015/* AsnConvert.serialize */.zc.serialize(cms);
+        if (format === "raw") {
+            return raw;
+        }
+        return this.toString(format);
+    }
+    import(data) {
+        const raw = PemData.toArrayBuffer(data);
+        const cms = es2015/* AsnConvert.parse */.zc.parse(raw, ContentInfo);
+        if (cms.contentType !== id_signedData) {
+            throw new TypeError("Cannot parse CMS package. Incoming data is not a SignedData object.");
+        }
+        const signedData = es2015/* AsnConvert.parse */.zc.parse(cms.content, SignedData);
+        this.clear();
+        for (const item of signedData.certificates || []) {
+            if (item.certificate) {
+                this.push(new X509Certificate(item.certificate));
+            }
+        }
+    }
+    clear() {
+        while (this.pop()) {
+        }
+    }
+    toString(format = "pem") {
+        const raw = this.export("raw");
+        switch (format) {
+            case "pem":
+                return PemConverter.encode(raw, "CMS");
+            case "hex":
+                return build.Convert.ToHex(raw);
+            case "base64":
+                return build.Convert.ToBase64(raw);
+            case "base64url":
+                return build.Convert.ToBase64Url(raw);
+            default:
+                throw TypeError("Argument 'format' is unsupported value");
+        }
+    }
+}
+
+class X509ChainBuilder {
+    constructor(params = {}) {
+        this.certificates = [];
+        if (params.certificates) {
+            this.certificates = params.certificates;
+        }
+    }
+    async build(cert) {
+        const chain = new X509Certificates(cert);
+        let current = cert;
+        while (current = await this.findIssuer(current)) {
+            const thumbprint = await current.getThumbprint();
+            for (const item of chain) {
+                const thumbprint2 = await item.getThumbprint();
+                if ((0,build.isEqual)(thumbprint, thumbprint2)) {
+                    throw new Error("Cannot build a certificate chain. Circular dependency.");
+                }
+            }
+            chain.push(current);
+        }
+        return chain;
+    }
+    async findIssuer(cert) {
+        if (!await cert.isSelfSigned()) {
+            const akiExt = cert.getExtension(id_ce_authorityKeyIdentifier);
+            for (const item of this.certificates) {
+                if (item.subject !== cert.issuer) {
+                    continue;
+                }
+                if (akiExt) {
+                    if (akiExt.keyId) {
+                        const skiExt = item.getExtension(id_ce_subjectKeyIdentifier);
+                        if (skiExt && skiExt.keyId !== akiExt.keyId) {
+                            continue;
+                        }
+                    }
+                    else if (akiExt.certId) {
+                        const sanExt = item.getExtension(id_ce_subjectAltName);
+                        if (sanExt &&
+                            !(akiExt.certId.serialNumber === item.serialNumber && (0,build.isEqual)(es2015/* AsnConvert.serialize */.zc.serialize(akiExt.certId.name), es2015/* AsnConvert.serialize */.zc.serialize(sanExt)))) {
+                            continue;
+                        }
+                    }
+                }
+                if (!await cert.verify({
+                    publicKey: await item.publicKey.export(),
+                    signatureOnly: true,
+                })) {
+                    continue;
+                }
+                return item;
+            }
+        }
+        return null;
+    }
+}
+
+class X509CertificateGenerator {
+    static async createSelfSigned(params, crypto = cryptoProvider.get()) {
+        if (!params.keys.privateKey) {
+            throw new Error("Bad field 'keys' in 'params' argument. 'privateKey' is empty");
+        }
+        if (!params.keys.publicKey) {
+            throw new Error("Bad field 'keys' in 'params' argument. 'privateKey' is empty");
+        }
+        return this.create({
+            serialNumber: params.serialNumber,
+            subject: params.name,
+            issuer: params.name,
+            notBefore: params.notBefore,
+            notAfter: params.notAfter,
+            publicKey: params.keys.publicKey,
+            signingKey: params.keys.privateKey,
+            signingAlgorithm: params.signingAlgorithm,
+            extensions: params.extensions,
+        }, crypto);
+    }
+    static async create(params, crypto = cryptoProvider.get()) {
+        var _a;
+        const spki = await crypto.subtle.exportKey("spki", params.publicKey);
+        const asnX509 = new Certificate({
+            tbsCertificate: new TBSCertificate({
+                version: Version.v3,
+                serialNumber: build.Convert.FromHex(params.serialNumber),
+                validity: new Validity({
+                    notBefore: params.notBefore,
+                    notAfter: params.notAfter,
+                }),
+                extensions: new Extensions(((_a = params.extensions) === null || _a === void 0 ? void 0 : _a.map(o => es2015/* AsnConvert.parse */.zc.parse(o.rawData, extension_Extension))) || []),
+                subjectPublicKeyInfo: es2015/* AsnConvert.parse */.zc.parse(spki, SubjectPublicKeyInfo),
+            }),
+        });
+        if (params.subject) {
+            const name = params.subject instanceof Name
+                ? params.subject
+                : new Name(params.subject);
+            asnX509.tbsCertificate.subject = es2015/* AsnConvert.parse */.zc.parse(name.toArrayBuffer(), name_Name);
+        }
+        if (params.issuer) {
+            const name = params.issuer instanceof Name
+                ? params.issuer
+                : new Name(params.issuer);
+            asnX509.tbsCertificate.issuer = es2015/* AsnConvert.parse */.zc.parse(name.toArrayBuffer(), name_Name);
+        }
+        const signingAlgorithm = { ...params.signingAlgorithm, ...params.signingKey.algorithm };
+        const algProv = instance.resolve(diAlgorithmProvider);
+        asnX509.tbsCertificate.signature = asnX509.signatureAlgorithm = algProv.toAsnAlgorithm(signingAlgorithm);
+        const tbs = es2015/* AsnConvert.serialize */.zc.serialize(asnX509.tbsCertificate);
+        const signature = await crypto.subtle.sign(signingAlgorithm, params.signingKey, tbs);
+        const signatureFormatters = instance.resolveAll(diAsnSignatureFormatter).reverse();
+        let asnSignature = null;
+        for (const signatureFormatter of signatureFormatters) {
+            asnSignature = signatureFormatter.toAsnSignature(signingAlgorithm, signature);
+            if (asnSignature) {
+                break;
+            }
+        }
+        if (!asnSignature) {
+            throw Error("Cannot convert ASN.1 signature value to WebCrypto format");
+        }
+        asnX509.signatureValue = asnSignature;
+        return new X509Certificate(es2015/* AsnConvert.serialize */.zc.serialize(asnX509));
+    }
+}
+
+ExtensionFactory.register(id_ce_basicConstraints, BasicConstraintsExtension);
+ExtensionFactory.register(id_ce_extKeyUsage, ExtendedKeyUsageExtension);
+ExtensionFactory.register(id_ce_keyUsage, KeyUsagesExtension);
+ExtensionFactory.register(id_ce_subjectKeyIdentifier, SubjectKeyIdentifierExtension);
+ExtensionFactory.register(id_ce_authorityKeyIdentifier, AuthorityKeyIdentifierExtension);
+ExtensionFactory.register(id_ce_subjectAltName, SubjectAlternativeNameExtension);
+AttributeFactory.register(id_pkcs9_at_challengePassword, ChallengePasswordAttribute);
+AttributeFactory.register(id_pkcs9_at_extensionRequest, ExtensionsAttribute);
+instance.registerSingleton(diAsnSignatureFormatter, AsnDefaultSignatureFormatter);
+instance.registerSingleton(diAsnSignatureFormatter, AsnEcSignatureFormatter);
+AsnEcSignatureFormatter.namedCurveSize.set("P-256", 32);
+AsnEcSignatureFormatter.namedCurveSize.set("K-256", 32);
+AsnEcSignatureFormatter.namedCurveSize.set("P-384", 48);
+AsnEcSignatureFormatter.namedCurveSize.set("P-521", 66);
+
+
+
+
+/***/ }),
+
 /***/ 1293:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -6251,6 +20107,7024 @@ module.exports = {
   BerWriter: Ber.Writer
 
 };
+
+
+/***/ }),
+
+/***/ 3898:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Any": () => (/* binding */ Any),
+  "BaseBlock": () => (/* binding */ BaseBlock),
+  "BitString": () => (/* binding */ BitString),
+  "BmpString": () => (/* binding */ BmpString),
+  "Boolean": () => (/* binding */ Boolean),
+  "CharacterString": () => (/* binding */ CharacterString),
+  "Choice": () => (/* binding */ Choice),
+  "Constructed": () => (/* binding */ Constructed),
+  "DATE": () => (/* binding */ DATE),
+  "DateTime": () => (/* binding */ DateTime),
+  "Duration": () => (/* binding */ Duration),
+  "EndOfContent": () => (/* binding */ EndOfContent),
+  "Enumerated": () => (/* binding */ Enumerated),
+  "GeneralString": () => (/* binding */ GeneralString),
+  "GeneralizedTime": () => (/* binding */ GeneralizedTime),
+  "GraphicString": () => (/* binding */ GraphicString),
+  "HexBlock": () => (/* binding */ HexBlock),
+  "IA5String": () => (/* binding */ IA5String),
+  "Integer": () => (/* binding */ Integer),
+  "Null": () => (/* binding */ Null),
+  "NumericString": () => (/* binding */ NumericString),
+  "ObjectIdentifier": () => (/* binding */ ObjectIdentifier),
+  "OctetString": () => (/* binding */ OctetString),
+  "Primitive": () => (/* binding */ Primitive),
+  "PrintableString": () => (/* binding */ PrintableString),
+  "RawData": () => (/* binding */ RawData),
+  "RelativeObjectIdentifier": () => (/* binding */ RelativeObjectIdentifier),
+  "Repeated": () => (/* binding */ Repeated),
+  "Sequence": () => (/* binding */ Sequence),
+  "Set": () => (/* binding */ Set),
+  "TIME": () => (/* binding */ TIME),
+  "TeletexString": () => (/* binding */ TeletexString),
+  "TimeOfDay": () => (/* binding */ TimeOfDay),
+  "UTCTime": () => (/* binding */ UTCTime),
+  "UniversalString": () => (/* binding */ UniversalString),
+  "Utf8String": () => (/* binding */ Utf8String),
+  "ValueBlock": () => (/* binding */ ValueBlock),
+  "VideotexString": () => (/* binding */ VideotexString),
+  "VisibleString": () => (/* binding */ VisibleString),
+  "compareSchema": () => (/* binding */ compareSchema),
+  "fromBER": () => (/* binding */ fromBER),
+  "fromJSON": () => (/* binding */ fromJSON),
+  "verifySchema": () => (/* binding */ verifySchema)
+});
+
+;// CONCATENATED MODULE: ./node_modules/pvutils/src/utils.js
+//**************************************************************************************
+/**
+ * Making UTC date from local date
+ * @param {Date} date Date to convert from
+ * @returns {Date}
+ */
+function getUTCDate(date)
+{
+	// noinspection NestedFunctionCallJS, MagicNumberJS
+	return new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleReturnPointsJS
+/**
+ * Get value for input parameters, or set a default value
+ * @param {Object} parameters
+ * @param {string} name
+ * @param defaultValue
+ */
+function getParametersValue(parameters, name, defaultValue)
+{
+	// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS
+	if((parameters instanceof Object) === false)
+		return defaultValue;
+	
+	// noinspection NonBlockStatementBodyJS
+	if(name in parameters)
+		return parameters[name];
+	
+	return defaultValue;
+}
+//**************************************************************************************
+/**
+ * Converts "ArrayBuffer" into a hexdecimal string
+ * @param {ArrayBuffer} inputBuffer
+ * @param {number} [inputOffset=0]
+ * @param {number} [inputLength=inputBuffer.byteLength]
+ * @param {boolean} [insertSpace=false]
+ * @returns {string}
+ */
+function bufferToHexCodes(inputBuffer, inputOffset = 0, inputLength = (inputBuffer.byteLength - inputOffset), insertSpace = false)
+{
+	let result = "";
+	
+	for(const item of (new Uint8Array(inputBuffer, inputOffset, inputLength)))
+	{
+		// noinspection ChainedFunctionCallJS
+		const str = item.toString(16).toUpperCase();
+		
+		// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS
+		if(str.length === 1)
+			result += "0";
+		
+		result += str;
+		
+		// noinspection NonBlockStatementBodyJS
+		if(insertSpace)
+			result += " ";
+	}
+	
+	return result.trim();
+}
+//**************************************************************************************
+// noinspection JSValidateJSDoc, FunctionWithMultipleReturnPointsJS
+/**
+ * Check input "ArrayBuffer" for common functions
+ * @param {LocalBaseBlock} baseBlock
+ * @param {ArrayBuffer} inputBuffer
+ * @param {number} inputOffset
+ * @param {number} inputLength
+ * @returns {boolean}
+ */
+function checkBufferParams(baseBlock, inputBuffer, inputOffset, inputLength)
+{
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if((inputBuffer instanceof ArrayBuffer) === false)
+	{
+		// noinspection JSUndefinedPropertyAssignment
+		baseBlock.error = "Wrong parameter: inputBuffer must be \"ArrayBuffer\"";
+		return false;
+	}
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if(inputBuffer.byteLength === 0)
+	{
+		// noinspection JSUndefinedPropertyAssignment
+		baseBlock.error = "Wrong parameter: inputBuffer has zero length";
+		return false;
+	}
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if(inputOffset < 0)
+	{
+		// noinspection JSUndefinedPropertyAssignment
+		baseBlock.error = "Wrong parameter: inputOffset less than zero";
+		return false;
+	}
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if(inputLength < 0)
+	{
+		// noinspection JSUndefinedPropertyAssignment
+		baseBlock.error = "Wrong parameter: inputLength less than zero";
+		return false;
+	}
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if((inputBuffer.byteLength - inputOffset - inputLength) < 0)
+	{
+		// noinspection JSUndefinedPropertyAssignment
+		baseBlock.error = "End of input reached before message was fully decoded (inconsistent offset and length values)";
+		return false;
+	}
+	
+	return true;
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleReturnPointsJS
+/**
+ * Convert number from 2^base to 2^10
+ * @param {Uint8Array} inputBuffer
+ * @param {number} inputBase
+ * @returns {number}
+ */
+function utilFromBase(inputBuffer, inputBase)
+{
+	let result = 0;
+	
+	// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS
+	if(inputBuffer.length === 1)
+		return inputBuffer[0];
+	
+	// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS
+	for(let i = (inputBuffer.length - 1); i >= 0; i--)
+		result += inputBuffer[(inputBuffer.length - 1) - i] * Math.pow(2, inputBase * i);
+	
+	return result;
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS, FunctionWithMultipleReturnPointsJS
+/**
+ * Convert number from 2^10 to 2^base
+ * @param {!number} value The number to convert
+ * @param {!number} base The base for 2^base
+ * @param {number} [reserved=0] Pre-defined number of bytes in output array (-1 = limited by function itself)
+ * @returns {ArrayBuffer}
+ */
+function utilToBase(value, base, reserved = (-1))
+{
+	const internalReserved = reserved;
+	let internalValue = value;
+	
+	let result = 0;
+	let biggest = Math.pow(2, base);
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	for(let i = 1; i < 8; i++)
+	{
+		if(value < biggest)
+		{
+			let retBuf;
+			
+			// noinspection ConstantOnRightSideOfComparisonJS
+			if(internalReserved < 0)
+			{
+				retBuf = new ArrayBuffer(i);
+				result = i;
+			}
+			else
+			{
+				// noinspection NonBlockStatementBodyJS
+				if(internalReserved < i)
+					return (new ArrayBuffer(0));
+				
+				retBuf = new ArrayBuffer(internalReserved);
+				
+				result = internalReserved;
+			}
+			
+			const retView = new Uint8Array(retBuf);
+			
+			// noinspection ConstantOnRightSideOfComparisonJS
+			for(let j = (i - 1); j >= 0; j--)
+			{
+				const basis = Math.pow(2, j * base);
+				
+				retView[result - j - 1] = Math.floor(internalValue / basis);
+				internalValue -= (retView[result - j - 1]) * basis;
+			}
+			
+			return retBuf;
+		}
+		
+		biggest *= Math.pow(2, base);
+	}
+	
+	return new ArrayBuffer(0);
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS
+/**
+ * Concatenate two ArrayBuffers
+ * @param {...ArrayBuffer} buffers Set of ArrayBuffer
+ */
+function utilConcatBuf(...buffers)
+{
+	//region Initial variables
+	let outputLength = 0;
+	let prevLength = 0;
+	//endregion
+	
+	//region Calculate output length
+	
+	// noinspection NonBlockStatementBodyJS
+	for(const buffer of buffers)
+		outputLength += buffer.byteLength;
+	//endregion
+	
+	const retBuf = new ArrayBuffer(outputLength);
+	const retView = new Uint8Array(retBuf);
+	
+	for(const buffer of buffers)
+	{
+		// noinspection NestedFunctionCallJS
+		retView.set(new Uint8Array(buffer), prevLength);
+		prevLength += buffer.byteLength;
+	}
+	
+	return retBuf;
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS
+/**
+ * Concatenate two Uint8Array
+ * @param {...Uint8Array} views Set of Uint8Array
+ */
+function utilConcatView(...views)
+{
+	//region Initial variables
+	let outputLength = 0;
+	let prevLength = 0;
+	//endregion
+	
+	//region Calculate output length
+	// noinspection NonBlockStatementBodyJS
+	for(const view of views)
+		outputLength += view.length;
+	//endregion
+	
+	const retBuf = new ArrayBuffer(outputLength);
+	const retView = new Uint8Array(retBuf);
+	
+	for(const view of views)
+	{
+		retView.set(view, prevLength);
+		prevLength += view.length;
+	}
+	
+	return retView;
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS
+/**
+ * Decoding of "two complement" values
+ * The function must be called in scope of instance of "hexBlock" class ("valueHex" and "warnings" properties must be present)
+ * @returns {number}
+ */
+function utilDecodeTC()
+{
+	const buf = new Uint8Array(this.valueHex);
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	if(this.valueHex.byteLength >= 2)
+	{
+		//noinspection JSBitwiseOperatorUsage, ConstantOnRightSideOfComparisonJS, LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		const condition1 = (buf[0] === 0xFF) && (buf[1] & 0x80);
+		// noinspection ConstantOnRightSideOfComparisonJS, LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		const condition2 = (buf[0] === 0x00) && ((buf[1] & 0x80) === 0x00);
+		
+		// noinspection NonBlockStatementBodyJS
+		if(condition1 || condition2)
+			this.warnings.push("Needlessly long format");
+	}
+	
+	//region Create big part of the integer
+	const bigIntBuffer = new ArrayBuffer(this.valueHex.byteLength);
+	const bigIntView = new Uint8Array(bigIntBuffer);
+	// noinspection NonBlockStatementBodyJS
+	for(let i = 0; i < this.valueHex.byteLength; i++)
+		bigIntView[i] = 0;
+	
+	// noinspection MagicNumberJS, NonShortCircuitBooleanExpressionJS
+	bigIntView[0] = (buf[0] & 0x80); // mask only the biggest bit
+	
+	const bigInt = utilFromBase(bigIntView, 8);
+	//endregion
+	
+	//region Create small part of the integer
+	const smallIntBuffer = new ArrayBuffer(this.valueHex.byteLength);
+	const smallIntView = new Uint8Array(smallIntBuffer);
+	// noinspection NonBlockStatementBodyJS
+	for(let j = 0; j < this.valueHex.byteLength; j++)
+		smallIntView[j] = buf[j];
+	
+	// noinspection MagicNumberJS
+	smallIntView[0] &= 0x7F; // mask biggest bit
+	
+	const smallInt = utilFromBase(smallIntView, 8);
+	//endregion
+	
+	return (smallInt - bigInt);
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS, FunctionWithMultipleReturnPointsJS
+/**
+ * Encode integer value to "two complement" format
+ * @param {number} value Value to encode
+ * @returns {ArrayBuffer}
+ */
+function utilEncodeTC(value)
+{
+	// noinspection ConstantOnRightSideOfComparisonJS, ConditionalExpressionJS
+	const modValue = (value < 0) ? (value * (-1)) : value;
+	let bigInt = 128;
+	
+	// noinspection ConstantOnRightSideOfComparisonJS
+	for(let i = 1; i < 8; i++)
+	{
+		if(modValue <= bigInt)
+		{
+			// noinspection ConstantOnRightSideOfComparisonJS
+			if(value < 0)
+			{
+				const smallInt = bigInt - modValue;
+				
+				const retBuf = utilToBase(smallInt, 8, i);
+				const retView = new Uint8Array(retBuf);
+				
+				// noinspection MagicNumberJS
+				retView[0] |= 0x80;
+				
+				return retBuf;
+			}
+			
+			let retBuf = utilToBase(modValue, 8, i);
+			let retView = new Uint8Array(retBuf);
+			
+			//noinspection JSBitwiseOperatorUsage, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+			if(retView[0] & 0x80)
+			{
+				//noinspection JSCheckFunctionSignatures
+				const tempBuf = retBuf.slice(0);
+				const tempView = new Uint8Array(tempBuf);
+				
+				retBuf = new ArrayBuffer(retBuf.byteLength + 1);
+				// noinspection ReuseOfLocalVariableJS
+				retView = new Uint8Array(retBuf);
+				
+				// noinspection NonBlockStatementBodyJS
+				for(let k = 0; k < tempBuf.byteLength; k++)
+					retView[k + 1] = tempView[k];
+				
+				// noinspection MagicNumberJS
+				retView[0] = 0x00;
+			}
+			
+			return retBuf;
+		}
+		
+		bigInt *= Math.pow(2, 8);
+	}
+	
+	return (new ArrayBuffer(0));
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleReturnPointsJS, ParameterNamingConventionJS
+/**
+ * Compare two array buffers
+ * @param {!ArrayBuffer} inputBuffer1
+ * @param {!ArrayBuffer} inputBuffer2
+ * @returns {boolean}
+ */
+function isEqualBuffer(inputBuffer1, inputBuffer2)
+{
+	// noinspection NonBlockStatementBodyJS
+	if(inputBuffer1.byteLength !== inputBuffer2.byteLength)
+		return false;
+	
+	// noinspection LocalVariableNamingConventionJS
+	const view1 = new Uint8Array(inputBuffer1);
+	// noinspection LocalVariableNamingConventionJS
+	const view2 = new Uint8Array(inputBuffer2);
+	
+	for(let i = 0; i < view1.length; i++)
+	{
+		// noinspection NonBlockStatementBodyJS
+		if(view1[i] !== view2[i])
+			return false;
+	}
+	
+	return true;
+}
+//**************************************************************************************
+// noinspection FunctionWithMultipleReturnPointsJS
+/**
+ * Pad input number with leade "0" if needed
+ * @returns {string}
+ * @param {number} inputNumber
+ * @param {number} fullLength
+ */
+function padNumber(inputNumber, fullLength)
+{
+	const str = inputNumber.toString(10);
+	
+	// noinspection NonBlockStatementBodyJS
+	if(fullLength < str.length)
+		return "";
+	
+	const dif = fullLength - str.length;
+	
+	const padding = new Array(dif);
+	// noinspection NonBlockStatementBodyJS
+	for(let i = 0; i < dif; i++)
+		padding[i] = "0";
+	
+	const paddingString = padding.join("");
+	
+	return paddingString.concat(str);
+}
+//**************************************************************************************
+const base64Template = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+const base64UrlTemplate = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=";
+//**************************************************************************************
+// noinspection FunctionWithMultipleLoopsJS, OverlyComplexFunctionJS, FunctionTooLongJS, FunctionNamingConventionJS
+/**
+ * Encode string into BASE64 (or "base64url")
+ * @param {string} input
+ * @param {boolean} useUrlTemplate If "true" then output would be encoded using "base64url"
+ * @param {boolean} skipPadding Skip BASE-64 padding or not
+ * @param {boolean} skipLeadingZeros Skip leading zeros in input data or not
+ * @returns {string}
+ */
+function toBase64(input, useUrlTemplate = false, skipPadding = false, skipLeadingZeros = false)
+{
+	let i = 0;
+	
+	// noinspection LocalVariableNamingConventionJS
+	let flag1 = 0;
+	// noinspection LocalVariableNamingConventionJS
+	let flag2 = 0;
+	
+	let output = "";
+	
+	// noinspection ConditionalExpressionJS
+	const template = (useUrlTemplate) ? base64UrlTemplate : base64Template;
+	
+	if(skipLeadingZeros)
+	{
+		let nonZeroPosition = 0;
+		
+		for(let i = 0; i < input.length; i++)
+		{
+			// noinspection ConstantOnRightSideOfComparisonJS
+			if(input.charCodeAt(i) !== 0)
+			{
+				nonZeroPosition = i;
+				// noinspection BreakStatementJS
+				break;
+			}
+		}
+		
+		// noinspection AssignmentToFunctionParameterJS
+		input = input.slice(nonZeroPosition);
+	}
+	
+	while(i < input.length)
+	{
+		// noinspection LocalVariableNamingConventionJS, IncrementDecrementResultUsedJS
+		const chr1 = input.charCodeAt(i++);
+		// noinspection NonBlockStatementBodyJS
+		if(i >= input.length)
+			flag1 = 1;
+		// noinspection LocalVariableNamingConventionJS, IncrementDecrementResultUsedJS
+		const chr2 = input.charCodeAt(i++);
+		// noinspection NonBlockStatementBodyJS
+		if(i >= input.length)
+			flag2 = 1;
+		// noinspection LocalVariableNamingConventionJS, IncrementDecrementResultUsedJS
+		const chr3 = input.charCodeAt(i++);
+		
+		// noinspection LocalVariableNamingConventionJS
+		const enc1 = chr1 >> 2;
+		// noinspection LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		const enc2 = ((chr1 & 0x03) << 4) | (chr2 >> 4);
+		// noinspection LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		let enc3 = ((chr2 & 0x0F) << 2) | (chr3 >> 6);
+		// noinspection LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		let enc4 = chr3 & 0x3F;
+		
+		// noinspection ConstantOnRightSideOfComparisonJS
+		if(flag1 === 1)
+		{
+			// noinspection NestedAssignmentJS, AssignmentResultUsedJS, MagicNumberJS
+			enc3 = enc4 = 64;
+		}
+		else
+		{
+			// noinspection ConstantOnRightSideOfComparisonJS
+			if(flag2 === 1)
+			{
+				// noinspection MagicNumberJS
+				enc4 = 64;
+			}
+		}
+		
+		// noinspection NonBlockStatementBodyJS
+		if(skipPadding)
+		{
+			// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS, MagicNumberJS
+			if(enc3 === 64)
+				output += `${template.charAt(enc1)}${template.charAt(enc2)}`;
+			else
+			{
+				// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS, MagicNumberJS
+				if(enc4 === 64)
+					output += `${template.charAt(enc1)}${template.charAt(enc2)}${template.charAt(enc3)}`;
+				else
+					output += `${template.charAt(enc1)}${template.charAt(enc2)}${template.charAt(enc3)}${template.charAt(enc4)}`;
+			}
+		}
+		else
+			output += `${template.charAt(enc1)}${template.charAt(enc2)}${template.charAt(enc3)}${template.charAt(enc4)}`;
+	}
+	
+	return output;
+}
+//**************************************************************************************
+// noinspection FunctionWithMoreThanThreeNegationsJS, FunctionWithMultipleLoopsJS, OverlyComplexFunctionJS, FunctionNamingConventionJS
+/**
+ * Decode string from BASE64 (or "base64url")
+ * @param {string} input
+ * @param {boolean} [useUrlTemplate=false] If "true" then output would be encoded using "base64url"
+ * @param {boolean} [cutTailZeros=false] If "true" then cut tailing zeroz from function result
+ * @returns {string}
+ */
+function fromBase64(input, useUrlTemplate = false, cutTailZeros = false)
+{
+	// noinspection ConditionalExpressionJS
+	const template = (useUrlTemplate) ? base64UrlTemplate : base64Template;
+	
+	//region Aux functions
+	// noinspection FunctionWithMultipleReturnPointsJS, NestedFunctionJS
+	function indexof(toSearch)
+	{
+		// noinspection ConstantOnRightSideOfComparisonJS, MagicNumberJS
+		for(let i = 0; i < 64; i++)
+		{
+			// noinspection NonBlockStatementBodyJS
+			if(template.charAt(i) === toSearch)
+				return i;
+		}
+		
+		// noinspection MagicNumberJS
+		return 64;
+	}
+	
+	// noinspection NestedFunctionJS
+	function test(incoming)
+	{
+		// noinspection ConstantOnRightSideOfComparisonJS, ConditionalExpressionJS, MagicNumberJS
+		return ((incoming === 64) ? 0x00 : incoming);
+	}
+	//endregion
+	
+	let i = 0;
+	
+	let output = "";
+	
+	while(i < input.length)
+	{
+		// noinspection NestedFunctionCallJS, LocalVariableNamingConventionJS, IncrementDecrementResultUsedJS
+		const enc1 = indexof(input.charAt(i++));
+		// noinspection NestedFunctionCallJS, LocalVariableNamingConventionJS, ConditionalExpressionJS, MagicNumberJS, IncrementDecrementResultUsedJS
+		const enc2 = (i >= input.length) ? 0x00 : indexof(input.charAt(i++));
+		// noinspection NestedFunctionCallJS, LocalVariableNamingConventionJS, ConditionalExpressionJS, MagicNumberJS, IncrementDecrementResultUsedJS
+		const enc3 = (i >= input.length) ? 0x00 : indexof(input.charAt(i++));
+		// noinspection NestedFunctionCallJS, LocalVariableNamingConventionJS, ConditionalExpressionJS, MagicNumberJS, IncrementDecrementResultUsedJS
+		const enc4 = (i >= input.length) ? 0x00 : indexof(input.charAt(i++));
+		
+		// noinspection LocalVariableNamingConventionJS, NonShortCircuitBooleanExpressionJS
+		const chr1 = (test(enc1) << 2) | (test(enc2) >> 4);
+		// noinspection LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		const chr2 = ((test(enc2) & 0x0F) << 4) | (test(enc3) >> 2);
+		// noinspection LocalVariableNamingConventionJS, MagicNumberJS, NonShortCircuitBooleanExpressionJS
+		const chr3 = ((test(enc3) & 0x03) << 6) | test(enc4);
+		
+		output += String.fromCharCode(chr1);
+		
+		// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS, MagicNumberJS
+		if(enc3 !== 64)
+			output += String.fromCharCode(chr2);
+		
+		// noinspection ConstantOnRightSideOfComparisonJS, NonBlockStatementBodyJS, MagicNumberJS
+		if(enc4 !== 64)
+			output += String.fromCharCode(chr3);
+	}
+	
+	if(cutTailZeros)
+	{
+		const outputLength = output.length;
+		let nonZeroStart = (-1);
+		
+		// noinspection ConstantOnRightSideOfComparisonJS
+		for(let i = (outputLength - 1); i >= 0; i--)
+		{
+			// noinspection ConstantOnRightSideOfComparisonJS
+			if(output.charCodeAt(i) !== 0)
+			{
+				nonZeroStart = i;
+				// noinspection BreakStatementJS
+				break;
+			}
+		}
+		
+		// noinspection NonBlockStatementBodyJS, NegatedIfStatementJS
+		if(nonZeroStart !== (-1))
+			output = output.slice(0, nonZeroStart + 1);
+		else
+			output = "";
+	}
+	
+	return output;
+}
+//**************************************************************************************
+function arrayBufferToString(buffer)
+{
+	let resultString = "";
+	const view = new Uint8Array(buffer);
+	
+	// noinspection NonBlockStatementBodyJS
+	for(const element of view)
+		resultString += String.fromCharCode(element);
+	
+	return resultString;
+}
+//**************************************************************************************
+function stringToArrayBuffer(str)
+{
+	const stringLength = str.length;
+	
+	const resultBuffer = new ArrayBuffer(stringLength);
+	const resultView = new Uint8Array(resultBuffer);
+	
+	// noinspection NonBlockStatementBodyJS
+	for(let i = 0; i < stringLength; i++)
+		resultView[i] = str.charCodeAt(i);
+	
+	return resultBuffer;
+}
+//**************************************************************************************
+const log2 = Math.log(2);
+//**************************************************************************************
+// noinspection FunctionNamingConventionJS
+/**
+ * Get nearest to input length power of 2
+ * @param {number} length Current length of existing array
+ * @returns {number}
+ */
+function nearestPowerOf2(length)
+{
+	const base = (Math.log(length) / log2);
+	
+	const floor = Math.floor(base);
+	const round = Math.round(base);
+	
+	// noinspection ConditionalExpressionJS
+	return ((floor === round) ? floor : round);
+}
+//**************************************************************************************
+/**
+ * Delete properties by name from specified object
+ * @param {Object} object Object to delete properties from
+ * @param {Array.<string>} propsArray Array of properties names
+ */
+function clearProps(object, propsArray)
+{
+	for(const prop of propsArray)
+		delete object[prop];
+}
+//**************************************************************************************
+
+;// CONCATENATED MODULE: ./node_modules/asn1js/src/asn1.js
+/* eslint-disable indent */
+/*
+ * Copyright (c) 2016-2018, Peculiar Ventures
+ * All rights reserved.
+ *
+ * Author 2016-2018, Yury Strozhevsky <www.strozhevsky.com>.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
+ *
+ */
+//**************************************************************************************
+
+//**************************************************************************************
+//region Other utility functions
+//**************************************************************************************
+function assertBigInt() {
+  if (typeof BigInt === "undefined") {
+    throw new Error("BigInt is not defined. Your environment doesn't implement BigInt.")
+  }
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of global variables
+//**************************************************************************************
+const powers2 = [new Uint8Array([1])];
+const digitsString = "0123456789";
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration for "LocalBaseBlock" class
+//**************************************************************************************
+/**
+ * Class used as a base block for all remaining ASN.1 classes
+ * @typedef LocalBaseBlock
+ * @interface
+ * @property {number} blockLength
+ * @property {string} error
+ * @property {Array.<string>} warnings
+ * @property {ArrayBuffer} valueBeforeDecode
+ */
+class LocalBaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalBaseBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueBeforeDecode]
+	 */
+	constructor(parameters = {})
+	{
+		/**
+		 * @type {number} blockLength
+		 */
+		this.blockLength = getParametersValue(parameters, "blockLength", 0);
+		/**
+		 * @type {string} error
+		 */
+		this.error = getParametersValue(parameters, "error", "");
+		/**
+		 * @type {Array.<string>} warnings
+		 */
+		this.warnings = getParametersValue(parameters, "warnings", []);
+		//noinspection JSCheckFunctionSignatures
+		/**
+		 * @type {ArrayBuffer} valueBeforeDecode
+		 */
+		if("valueBeforeDecode" in parameters)
+			this.valueBeforeDecode = parameters.valueBeforeDecode.slice(0);
+		else
+			this.valueBeforeDecode = new ArrayBuffer(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "baseBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		return {
+			blockName: this.constructor.blockName(),
+			blockLength: this.blockLength,
+			error: this.error,
+			warnings: this.warnings,
+			valueBeforeDecode: bufferToHexCodes(this.valueBeforeDecode, 0, this.valueBeforeDecode.byteLength)
+		};
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Description for "HexBlock" class
+//**************************************************************************************
+/**
+ * Class used as a base block for all remaining ASN.1 classes
+ * @extends LocalBaseBlock
+ * @typedef HexBlock
+ * @property {number} blockLength
+ * @property {string} error
+ * @property {Array.<string>} warnings
+ * @property {ArrayBuffer} valueBeforeDecode
+ * @property {boolean} isHexOnly
+ * @property {ArrayBuffer} valueHex
+ */
+//noinspection JSUnusedLocalSymbols
+const HexBlock = BaseClass => class LocalHexBlockMixin extends BaseClass
+{
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Constructor for "HexBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		/**
+		 * @type {boolean}
+		 */
+		this.isHexOnly = getParametersValue(parameters, "isHexOnly", false);
+		/**
+		 * @type {ArrayBuffer}
+		 */
+		if("valueHex" in parameters)
+			this.valueHex = parameters.valueHex.slice(0);
+		else
+			this.valueHex = new ArrayBuffer(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "hexBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		//region Initial checks
+		if(intBuffer.length === 0)
+		{
+			this.warnings.push("Zero buffer length");
+			return inputOffset;
+		}
+		//endregion
+
+		//region Copy input buffer to internal buffer
+		this.valueHex = inputBuffer.slice(inputOffset, inputOffset + inputLength);
+		//endregion
+
+		this.blockLength = inputLength;
+
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		if(this.isHexOnly !== true)
+		{
+			this.error = "Flag \"isHexOnly\" is not set, abort";
+			return new ArrayBuffer(0);
+		}
+
+		if(sizeOnly === true)
+			return new ArrayBuffer(this.valueHex.byteLength);
+
+		//noinspection JSCheckFunctionSignatures
+		return this.valueHex.slice(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.blockName = this.constructor.blockName();
+		object.isHexOnly = this.isHexOnly;
+		object.valueHex = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+
+		return object;
+	}
+	//**********************************************************************************
+};
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of identification block class
+//**************************************************************************************
+class LocalIdentificationBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalBaseBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {Object} [idBlock]
+	 */
+	constructor(parameters = {})
+	{
+		super();
+
+		if("idBlock" in parameters)
+		{
+			//region Properties from hexBlock class
+			this.isHexOnly = getParametersValue(parameters.idBlock, "isHexOnly", false);
+			this.valueHex = getParametersValue(parameters.idBlock, "valueHex", new ArrayBuffer(0));
+			//endregion
+
+			this.tagClass = getParametersValue(parameters.idBlock, "tagClass", (-1));
+			this.tagNumber = getParametersValue(parameters.idBlock, "tagNumber", (-1));
+			this.isConstructed = getParametersValue(parameters.idBlock, "isConstructed", false);
+		}
+		else
+		{
+			this.tagClass = (-1);
+			this.tagNumber = (-1);
+			this.isConstructed = false;
+		}
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "identificationBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//region Initial variables
+		let firstOctet = 0;
+		let retBuf;
+		let retView;
+		//endregion
+
+		switch(this.tagClass)
+		{
+			case 1:
+				firstOctet |= 0x00; // UNIVERSAL
+				break;
+			case 2:
+				firstOctet |= 0x40; // APPLICATION
+				break;
+			case 3:
+				firstOctet |= 0x80; // CONTEXT-SPECIFIC
+				break;
+			case 4:
+				firstOctet |= 0xC0; // PRIVATE
+				break;
+			default:
+				this.error = "Unknown tag class";
+				return (new ArrayBuffer(0));
+		}
+
+		if(this.isConstructed)
+			firstOctet |= 0x20;
+
+		if((this.tagNumber < 31) && (!this.isHexOnly))
+		{
+			retBuf = new ArrayBuffer(1);
+			retView = new Uint8Array(retBuf);
+
+			if(!sizeOnly)
+			{
+				let number = this.tagNumber;
+				number &= 0x1F;
+				firstOctet |= number;
+
+				retView[0] = firstOctet;
+			}
+
+			return retBuf;
+		}
+
+		if(this.isHexOnly === false)
+		{
+			const encodedBuf = utilToBase(this.tagNumber, 7);
+			const encodedView = new Uint8Array(encodedBuf);
+			const size = encodedBuf.byteLength;
+
+			retBuf = new ArrayBuffer(size + 1);
+			retView = new Uint8Array(retBuf);
+			retView[0] = (firstOctet | 0x1F);
+
+			if(!sizeOnly)
+			{
+				for(let i = 0; i < (size - 1); i++)
+					retView[i + 1] = encodedView[i] | 0x80;
+
+				retView[size] = encodedView[size - 1];
+			}
+
+			return retBuf;
+		}
+
+		retBuf = new ArrayBuffer(this.valueHex.byteLength + 1);
+		retView = new Uint8Array(retBuf);
+
+		retView[0] = (firstOctet | 0x1F);
+
+		if(sizeOnly === false)
+		{
+			const curView = new Uint8Array(this.valueHex);
+
+			for(let i = 0; i < (curView.length - 1); i++)
+				retView[i + 1] = curView[i] | 0x80;
+
+			retView[this.valueHex.byteLength] = curView[curView.length - 1];
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		//region Initial checks
+		if(intBuffer.length === 0)
+		{
+			this.error = "Zero buffer length";
+			return (-1);
+		}
+		//endregion
+
+		//region Find tag class
+		const tagClassMask = intBuffer[0] & 0xC0;
+
+		switch(tagClassMask)
+		{
+			case 0x00:
+				this.tagClass = (1); // UNIVERSAL
+				break;
+			case 0x40:
+				this.tagClass = (2); // APPLICATION
+				break;
+			case 0x80:
+				this.tagClass = (3); // CONTEXT-SPECIFIC
+				break;
+			case 0xC0:
+				this.tagClass = (4); // PRIVATE
+				break;
+			default:
+				this.error = "Unknown tag class";
+				return (-1);
+		}
+		//endregion
+
+		//region Find it's constructed or not
+		this.isConstructed = (intBuffer[0] & 0x20) === 0x20;
+		//endregion
+
+		//region Find tag number
+		this.isHexOnly = false;
+
+		const tagNumberMask = intBuffer[0] & 0x1F;
+
+		//region Simple case (tag number < 31)
+		if(tagNumberMask !== 0x1F)
+		{
+			this.tagNumber = (tagNumberMask);
+			this.blockLength = 1;
+		}
+		//endregion
+		//region Tag number bigger or equal to 31
+		else
+		{
+			let count = 1;
+
+			this.valueHex = new ArrayBuffer(255);
+			let tagNumberBufferMaxLength = 255;
+			let intTagNumberBuffer = new Uint8Array(this.valueHex);
+
+			//noinspection JSBitwiseOperatorUsage
+			while(intBuffer[count] & 0x80)
+			{
+				intTagNumberBuffer[count - 1] = intBuffer[count] & 0x7F;
+				count++;
+
+				if(count >= intBuffer.length)
+				{
+					this.error = "End of input reached before message was fully decoded";
+					return (-1);
+				}
+
+				//region In case if tag number length is greater than 255 bytes (rare but possible case)
+				if(count === tagNumberBufferMaxLength)
+				{
+					tagNumberBufferMaxLength += 255;
+
+					const tempBuffer = new ArrayBuffer(tagNumberBufferMaxLength);
+					const tempBufferView = new Uint8Array(tempBuffer);
+
+					for(let i = 0; i < intTagNumberBuffer.length; i++)
+						tempBufferView[i] = intTagNumberBuffer[i];
+
+					this.valueHex = new ArrayBuffer(tagNumberBufferMaxLength);
+					intTagNumberBuffer = new Uint8Array(this.valueHex);
+				}
+				//endregion
+			}
+
+			this.blockLength = (count + 1);
+			intTagNumberBuffer[count - 1] = intBuffer[count] & 0x7F; // Write last byte to buffer
+
+			//region Cut buffer
+			const tempBuffer = new ArrayBuffer(count);
+			const tempBufferView = new Uint8Array(tempBuffer);
+
+			for(let i = 0; i < count; i++)
+				tempBufferView[i] = intTagNumberBuffer[i];
+
+			this.valueHex = new ArrayBuffer(count);
+			intTagNumberBuffer = new Uint8Array(this.valueHex);
+			intTagNumberBuffer.set(tempBufferView);
+			//endregion
+
+			//region Try to convert long tag number to short form
+			if(this.blockLength <= 9)
+				this.tagNumber = utilFromBase(intTagNumberBuffer, 7);
+			else
+			{
+				this.isHexOnly = true;
+				this.warnings.push("Tag too long, represented as hex-coded");
+			}
+			//endregion
+		}
+		//endregion
+		//endregion
+
+		//region Check if constructed encoding was using for primitive type
+		if(((this.tagClass === 1)) &&
+			(this.isConstructed))
+		{
+			switch(this.tagNumber)
+			{
+				case 1:  // Boolean
+				case 2:  // REAL
+				case 5:  // Null
+				case 6:  // OBJECT IDENTIFIER
+				case 9:  // REAL
+				case 13: // RELATIVE OBJECT IDENTIFIER
+				case 14: // Time
+				case 23:
+				case 24:
+				case 31:
+				case 32:
+				case 33:
+				case 34:
+					this.error = "Constructed encoding used for primitive type";
+					return (-1);
+				default:
+			}
+		}
+		//endregion
+
+		return (inputOffset + this.blockLength); // Return current offset in input buffer
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName: string,
+	 *  tagClass: number,
+	 *  tagNumber: number,
+	 *  isConstructed: boolean,
+	 *  isHexOnly: boolean,
+	 *  valueHex: ArrayBuffer,
+	 *  blockLength: number,
+	 *  error: string, warnings: Array.<string>,
+	 *  valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.blockName = this.constructor.blockName();
+		object.tagClass = this.tagClass;
+		object.tagNumber = this.tagNumber;
+		object.isConstructed = this.isConstructed;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of length block class
+//**************************************************************************************
+class LocalLengthBlock extends LocalBaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalLengthBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {Object} [lenBlock]
+	 */
+	constructor(parameters = {})
+	{
+		super();
+
+		if("lenBlock" in parameters)
+		{
+			this.isIndefiniteForm = getParametersValue(parameters.lenBlock, "isIndefiniteForm", false);
+			this.longFormUsed = getParametersValue(parameters.lenBlock, "longFormUsed", false);
+			this.length = getParametersValue(parameters.lenBlock, "length", 0);
+		}
+		else
+		{
+			this.isIndefiniteForm = false;
+			this.longFormUsed = false;
+			this.length = 0;
+		}
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "lengthBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		//region Initial checks
+		if(intBuffer.length === 0)
+		{
+			this.error = "Zero buffer length";
+			return (-1);
+		}
+
+		if(intBuffer[0] === 0xFF)
+		{
+			this.error = "Length block 0xFF is reserved by standard";
+			return (-1);
+		}
+		//endregion
+
+		//region Check for length form type
+		this.isIndefiniteForm = intBuffer[0] === 0x80;
+		//endregion
+
+		//region Stop working in case of indefinite length form
+		if(this.isIndefiniteForm === true)
+		{
+			this.blockLength = 1;
+			return (inputOffset + this.blockLength);
+		}
+		//endregion
+
+		//region Check is long form of length encoding using
+		this.longFormUsed = !!(intBuffer[0] & 0x80);
+		//endregion
+
+		//region Stop working in case of short form of length value
+		if(this.longFormUsed === false)
+		{
+			this.length = (intBuffer[0]);
+			this.blockLength = 1;
+			return (inputOffset + this.blockLength);
+		}
+		//endregion
+
+		//region Calculate length value in case of long form
+		const count = intBuffer[0] & 0x7F;
+
+		if(count > 8) // Too big length value
+		{
+			this.error = "Too big integer";
+			return (-1);
+		}
+
+		if((count + 1) > intBuffer.length)
+		{
+			this.error = "End of input reached before message was fully decoded";
+			return (-1);
+		}
+
+		const lengthBufferView = new Uint8Array(count);
+
+		for(let i = 0; i < count; i++)
+			lengthBufferView[i] = intBuffer[i + 1];
+
+		if(lengthBufferView[count - 1] === 0x00)
+			this.warnings.push("Needlessly long encoded length");
+
+		this.length = utilFromBase(lengthBufferView, 8);
+
+		if(this.longFormUsed && (this.length <= 127))
+			this.warnings.push("Unnecessary usage of long length form");
+
+		this.blockLength = count + 1;
+		//endregion
+
+		return (inputOffset + this.blockLength); // Return current offset in input buffer
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//region Initial variables
+		let retBuf;
+		let retView;
+		//endregion
+
+		if(this.length > 127)
+			this.longFormUsed = true;
+
+		if(this.isIndefiniteForm)
+		{
+			retBuf = new ArrayBuffer(1);
+
+			if(sizeOnly === false)
+			{
+				retView = new Uint8Array(retBuf);
+				retView[0] = 0x80;
+			}
+
+			return retBuf;
+		}
+
+		if(this.longFormUsed === true)
+		{
+			const encodedBuf = utilToBase(this.length, 8);
+
+			if(encodedBuf.byteLength > 127)
+			{
+				this.error = "Too big length";
+				return (new ArrayBuffer(0));
+			}
+
+			retBuf = new ArrayBuffer(encodedBuf.byteLength + 1);
+
+			if(sizeOnly === true)
+				return retBuf;
+
+			const encodedView = new Uint8Array(encodedBuf);
+			retView = new Uint8Array(retBuf);
+
+			retView[0] = encodedBuf.byteLength | 0x80;
+
+			for(let i = 0; i < encodedBuf.byteLength; i++)
+				retView[i + 1] = encodedView[i];
+
+			return retBuf;
+		}
+
+		retBuf = new ArrayBuffer(1);
+
+		if(sizeOnly === false)
+		{
+			retView = new Uint8Array(retBuf);
+
+			retView[0] = this.length;
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.blockName = this.constructor.blockName();
+		object.isIndefiniteForm = this.isIndefiniteForm;
+		object.longFormUsed = this.longFormUsed;
+		object.length = this.length;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of value block class
+//**************************************************************************************
+class ValueBlock extends LocalBaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "ValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "valueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols,JSUnusedLocalSymbols,JSUnusedLocalSymbols
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Throw an exception for a function which needs to be specified in extended classes
+		throw TypeError("User need to make a specific function in a class which extends \"ValueBlock\"");
+		//endregion
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//region Throw an exception for a function which needs to be specified in extended classes
+		throw TypeError("User need to make a specific function in a class which extends \"ValueBlock\"");
+		//endregion
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of basic ASN.1 block class
+//**************************************************************************************
+class BaseBlock extends LocalBaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "BaseBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {Object} [primitiveSchema]
+	 * @property {string} [name]
+	 * @property {boolean} [optional]
+	 * @param valueBlockType Type of value block
+	 */
+	constructor(parameters = {}, valueBlockType = ValueBlock)
+	{
+		super(parameters);
+
+		if("name" in parameters)
+			this.name = parameters.name;
+		if("optional" in parameters)
+			this.optional = parameters.optional;
+		if("primitiveSchema" in parameters)
+			this.primitiveSchema = parameters.primitiveSchema;
+
+		this.idBlock = new LocalIdentificationBlock(parameters);
+		this.lenBlock = new LocalLengthBlock(parameters);
+		this.valueBlock = new valueBlockType(parameters);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BaseBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		let retBuf;
+
+		const idBlockBuf = this.idBlock.toBER(sizeOnly);
+		const valueBlockSizeBuf = this.valueBlock.toBER(true);
+
+		this.lenBlock.length = valueBlockSizeBuf.byteLength;
+		const lenBlockBuf = this.lenBlock.toBER(sizeOnly);
+
+		retBuf = utilConcatBuf(idBlockBuf, lenBlockBuf);
+
+		let valueBlockBuf;
+
+		if(sizeOnly === false)
+			valueBlockBuf = this.valueBlock.toBER(sizeOnly);
+		else
+			valueBlockBuf = new ArrayBuffer(this.lenBlock.length);
+
+		retBuf = utilConcatBuf(retBuf, valueBlockBuf);
+
+		if(this.lenBlock.isIndefiniteForm === true)
+		{
+			const indefBuf = new ArrayBuffer(2);
+
+			if(sizeOnly === false)
+			{
+				const indefView = new Uint8Array(indefBuf);
+
+				indefView[0] = 0x00;
+				indefView[1] = 0x00;
+			}
+
+			retBuf = utilConcatBuf(retBuf, indefBuf);
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.idBlock = this.idBlock.toJSON();
+		object.lenBlock = this.lenBlock.toJSON();
+		object.valueBlock = this.valueBlock.toJSON();
+
+		if("name" in this)
+			object.name = this.name;
+		if("optional" in this)
+			object.optional = this.optional;
+		if("primitiveSchema" in this)
+			object.primitiveSchema = this.primitiveSchema.toJSON();
+
+		return object;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${bufferToHexCodes(this.valueBlock.valueHex)}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of basic block for all PRIMITIVE types
+//**************************************************************************************
+class LocalPrimitiveValueBlock extends ValueBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalPrimitiveValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueBeforeDecode]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		//region Variables from "hexBlock" class
+		if("valueHex" in parameters)
+			this.valueHex = parameters.valueHex.slice(0);
+		else
+			this.valueHex = new ArrayBuffer(0);
+
+		this.isHexOnly = getParametersValue(parameters, "isHexOnly", true);
+		//endregion
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		//region Initial checks
+		if(intBuffer.length === 0)
+		{
+			this.warnings.push("Zero buffer length");
+			return inputOffset;
+		}
+		//endregion
+
+		//region Copy input buffer into internal buffer
+		this.valueHex = new ArrayBuffer(intBuffer.length);
+		const valueHexView = new Uint8Array(this.valueHex);
+
+		for(let i = 0; i < intBuffer.length; i++)
+			valueHexView[i] = intBuffer[i];
+		//endregion
+
+		this.blockLength = inputLength;
+
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		return this.valueHex.slice(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "PrimitiveValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.valueHex = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+		object.isHexOnly = this.isHexOnly;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class Primitive extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Primitive" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalPrimitiveValueBlock);
+
+		this.idBlock.isConstructed = false;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "PRIMITIVE";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of basic block for all CONSTRUCTED types
+//**************************************************************************************
+class LocalConstructedValueBlock extends ValueBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalConstructedValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.value = getParametersValue(parameters, "value", []);
+		this.isIndefiniteForm = getParametersValue(parameters, "isIndefiniteForm", false);
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Store initial offset and length
+		const initialOffset = inputOffset;
+		const initialLength = inputLength;
+		//endregion
+
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		//region Initial checks
+		if(intBuffer.length === 0)
+		{
+			this.warnings.push("Zero buffer length");
+			return inputOffset;
+		}
+		//endregion
+
+		//region Aux function
+		function checkLen(indefiniteLength, length)
+		{
+			if(indefiniteLength === true)
+				return 1;
+
+			return length;
+		}
+		//endregion
+
+		let currentOffset = inputOffset;
+
+		while(checkLen(this.isIndefiniteForm, inputLength) > 0)
+		{
+			const returnObject = LocalFromBER(inputBuffer, currentOffset, inputLength);
+			if(returnObject.offset === (-1))
+			{
+				this.error = returnObject.result.error;
+				this.warnings.concat(returnObject.result.warnings);
+				return (-1);
+			}
+
+			currentOffset = returnObject.offset;
+
+			this.blockLength += returnObject.result.blockLength;
+			inputLength -= returnObject.result.blockLength;
+
+			this.value.push(returnObject.result);
+
+			if((this.isIndefiniteForm === true) && (returnObject.result.constructor.blockName() === EndOfContent.blockName()))
+				break;
+		}
+
+		if(this.isIndefiniteForm === true)
+		{
+			if(this.value[this.value.length - 1].constructor.blockName() === EndOfContent.blockName())
+				this.value.pop();
+			else
+				this.warnings.push("No EndOfContent block encoded");
+		}
+
+		//region Copy "inputBuffer" to "valueBeforeDecode"
+		this.valueBeforeDecode = inputBuffer.slice(initialOffset, initialOffset + initialLength);
+		//endregion
+
+		return currentOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		let retBuf = new ArrayBuffer(0);
+
+		for(let i = 0; i < this.value.length; i++)
+		{
+			const valueBuf = this.value[i].toBER(sizeOnly);
+			retBuf = utilConcatBuf(retBuf, valueBuf);
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "ConstructedValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.isIndefiniteForm = this.isIndefiniteForm;
+		object.value = [];
+		for(let i = 0; i < this.value.length; i++)
+			object.value.push(this.value[i].toJSON());
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class Constructed extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Constructed" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalConstructedValueBlock);
+
+		this.idBlock.isConstructed = true;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "CONSTRUCTED";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		this.valueBlock.isIndefiniteForm = this.lenBlock.isIndefiniteForm;
+
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	toString() {
+		const values = [];
+		for (const value of this.valueBlock.value) {
+			values.push(value.toString().split("\n").map(o => `  ${o}`).join("\n"));
+		}
+		const blockName = this.idBlock.tagClass === 3
+			? `[${this.idBlock.tagNumber}]`
+			: this.constructor.blockName();
+		return values.length 
+			? `${blockName} :\n${values.join("\n")}` // items
+			: `${blockName} :`; // empty
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 EndOfContent type class
+//**************************************************************************************
+class LocalEndOfContentValueBlock extends ValueBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalEndOfContentValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols,JSUnusedLocalSymbols
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number}
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region There is no "value block" for EndOfContent type and we need to return the same offset
+		return inputOffset;
+		//endregion
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		return new ArrayBuffer(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "EndOfContentValueBlock";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class EndOfContent extends BaseBlock
+{
+	//**********************************************************************************
+	constructor(paramaters = {})
+	{
+		super(paramaters, LocalEndOfContentValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 0; // EndOfContent
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "EndOfContent";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 Boolean type class
+//**************************************************************************************
+class LocalBooleanValueBlock extends ValueBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalBooleanValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+		
+		this.value = getParametersValue(parameters, "value", false);
+		this.isHexOnly = getParametersValue(parameters, "isHexOnly", false);
+		
+		if("valueHex" in parameters)
+			this.valueHex = parameters.valueHex.slice(0);
+		else
+		{
+			this.valueHex = new ArrayBuffer(1);
+			if(this.value === true)
+			{
+				const view = new Uint8Array(this.valueHex);
+				view[0] = 0xFF;
+			}
+		}
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		//region Getting Uint8Array from ArrayBuffer
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+		//endregion
+
+		if(inputLength > 1)
+			this.warnings.push("Boolean value encoded in more then 1 octet");
+
+		this.isHexOnly = true;
+
+		//region Copy input buffer to internal array
+		this.valueHex = new ArrayBuffer(intBuffer.length);
+		const view = new Uint8Array(this.valueHex);
+
+		for(let i = 0; i < intBuffer.length; i++)
+			view[i] = intBuffer[i];
+		//endregion
+		
+		if(utilDecodeTC.call(this) !== 0 )
+			this.value = true;
+		else
+			this.value = false;
+
+		this.blockLength = inputLength;
+
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		return this.valueHex;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BooleanValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.value;
+		object.isHexOnly = this.isHexOnly;
+		object.valueHex = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class Boolean extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Boolean" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalBooleanValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 1; // Boolean
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BOOLEAN";
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.value}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 Sequence and Set type classes
+//**************************************************************************************
+class Sequence extends Constructed
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Sequence" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 16; // Sequence
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "SEQUENCE";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class Set extends Constructed
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Set" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 17; // Set
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "SET";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 Null type class
+//**************************************************************************************
+class Null extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Null" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalBaseBlock); // We will not have a call to "Null value block" because of specified "fromBER" and "toBER" functions
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 5; // Null
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "NULL";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedLocalSymbols
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		if(this.lenBlock.length > 0)
+			this.warnings.push("Non-zero length of value block for Null type");
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+		
+		this.blockLength += inputLength;
+		
+		if((inputOffset + inputLength) > inputBuffer.byteLength)
+		{
+			this.error = "End of input reached before message was fully decoded (inconsistent offset and length values)";
+			return (-1);
+		}
+		
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		const retBuf = new ArrayBuffer(2);
+
+		if(sizeOnly === true)
+			return retBuf;
+
+		const retView = new Uint8Array(retBuf);
+		retView[0] = 0x05;
+		retView[1] = 0x00;
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 OctetString type class
+//**************************************************************************************
+class LocalOctetStringValueBlock extends HexBlock(LocalConstructedValueBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalOctetStringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.isConstructed = getParametersValue(parameters, "isConstructed", false);
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		let resultOffset = 0;
+
+		if(this.isConstructed === true)
+		{
+			this.isHexOnly = false;
+
+			resultOffset = LocalConstructedValueBlock.prototype.fromBER.call(this, inputBuffer, inputOffset, inputLength);
+			if(resultOffset === (-1))
+				return resultOffset;
+
+			for(let i = 0; i < this.value.length; i++)
+			{
+				const currentBlockName = this.value[i].constructor.blockName();
+
+				if(currentBlockName === EndOfContent.blockName())
+				{
+					if(this.isIndefiniteForm === true)
+						break;
+					else
+					{
+						this.error = "EndOfContent is unexpected, OCTET STRING may consists of OCTET STRINGs only";
+						return (-1);
+					}
+				}
+
+				if(currentBlockName !== OctetString.blockName())
+				{
+					this.error = "OCTET STRING may consists of OCTET STRINGs only";
+					return (-1);
+				}
+			}
+		}
+		else
+		{
+			this.isHexOnly = true;
+
+			resultOffset = super.fromBER(inputBuffer, inputOffset, inputLength);
+			this.blockLength = inputLength;
+		}
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		if(this.isConstructed === true)
+			return LocalConstructedValueBlock.prototype.toBER.call(this, sizeOnly);
+
+		let retBuf = new ArrayBuffer(this.valueHex.byteLength);
+
+		if(sizeOnly === true)
+			return retBuf;
+
+		if(this.valueHex.byteLength === 0)
+			return retBuf;
+
+		retBuf = this.valueHex.slice(0);
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "OctetStringValueBlock";
+	}
+	//**********************************************************************************
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.isConstructed = this.isConstructed;
+		object.isHexOnly = this.isHexOnly;
+		object.valueHex = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class OctetString extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "OctetString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalOctetStringValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 4; // OctetString
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		this.valueBlock.isConstructed = this.idBlock.isConstructed;
+		this.valueBlock.isIndefiniteForm = this.lenBlock.isIndefiniteForm;
+
+		//region Ability to encode empty OCTET STRING
+		if(inputLength === 0)
+		{
+			if(this.idBlock.error.length === 0)
+				this.blockLength += this.idBlock.blockLength;
+
+			if(this.lenBlock.error.length === 0)
+				this.blockLength += this.lenBlock.blockLength;
+
+			return inputOffset;
+		}
+		//endregion
+
+		if (!this.valueBlock.isConstructed) {
+			const buf = inputBuffer.slice(inputOffset, inputOffset + inputLength);
+			try {
+				const asn = fromBER(buf);
+				if (asn.offset !== -1 && asn.offset === inputLength) {
+					this.valueBlock.value = [asn.result];
+				}
+			} catch (e) {
+				// nothing
+			}
+		}
+
+		return super.fromBER(inputBuffer, inputOffset, inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "OCTET STRING";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Checking that two OCTETSTRINGs are equal
+	 * @param {OctetString} octetString
+	 */
+	isEqual(octetString)
+	{
+		//region Check input type
+		if((octetString instanceof OctetString) === false)
+			return false;
+		//endregion
+
+		//region Compare two JSON strings
+		if(JSON.stringify(this) !== JSON.stringify(octetString))
+			return false;
+		//endregion
+
+		return true;
+	}
+	//**********************************************************************************
+	toString() {
+		if (this.valueBlock.isConstructed || (this.valueBlock.value && this.valueBlock.value.length)) {
+			return Constructed.prototype.toString.call(this);
+		} else {
+			return `${this.constructor.blockName()} : ${bufferToHexCodes(this.valueBlock.valueHex)}`;
+		}
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 BitString type class
+//**************************************************************************************
+class LocalBitStringValueBlock extends HexBlock(LocalConstructedValueBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalBitStringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.unusedBits = getParametersValue(parameters, "unusedBits", 0);
+		this.isConstructed = getParametersValue(parameters, "isConstructed", false);
+		this.blockLength = this.valueHex.byteLength;
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Ability to decode zero-length BitString value
+		if(inputLength === 0)
+			return inputOffset;
+		//endregion
+
+		let resultOffset = (-1);
+
+		//region If the BISTRING supposed to be a constructed value
+		if(this.isConstructed === true)
+		{
+			resultOffset = LocalConstructedValueBlock.prototype.fromBER.call(this, inputBuffer, inputOffset, inputLength);
+			if(resultOffset === (-1))
+				return resultOffset;
+
+			for(let i = 0; i < this.value.length; i++)
+			{
+				const currentBlockName = this.value[i].constructor.blockName();
+
+				if(currentBlockName === EndOfContent.blockName())
+				{
+					if(this.isIndefiniteForm === true)
+						break;
+					else
+					{
+						this.error = "EndOfContent is unexpected, BIT STRING may consists of BIT STRINGs only";
+						return (-1);
+					}
+				}
+
+				if(currentBlockName !== BitString.blockName())
+				{
+					this.error = "BIT STRING may consists of BIT STRINGs only";
+					return (-1);
+				}
+
+				if((this.unusedBits > 0) && (this.value[i].valueBlock.unusedBits > 0))
+				{
+					this.error = "Using of \"unused bits\" inside constructive BIT STRING allowed for least one only";
+					return (-1);
+				}
+
+				this.unusedBits = this.value[i].valueBlock.unusedBits;
+				if(this.unusedBits > 7)
+				{
+					this.error = "Unused bits for BitString must be in range 0-7";
+					return (-1);
+				}
+			}
+
+			return resultOffset;
+		}
+		//endregion
+		//region If the BitString supposed to be a primitive value
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+
+		this.unusedBits = intBuffer[0];
+		
+		if(this.unusedBits > 7)
+		{
+			this.error = "Unused bits for BitString must be in range 0-7";
+			return (-1);
+		}
+
+		if (!this.unusedBits) {
+			const buf = inputBuffer.slice(inputOffset + 1, inputOffset + inputLength);
+			try {
+				const asn = fromBER(buf);
+				if (asn.offset !== -1 && asn.offset === (inputLength - 1)) {
+					this.value = [asn.result];
+				}
+			} catch(e) {
+				// nothing
+			}
+		}
+
+		//region Copy input buffer to internal buffer
+		this.valueHex = new ArrayBuffer(intBuffer.length - 1);
+		const view = new Uint8Array(this.valueHex);
+		for(let i = 0; i < (inputLength - 1); i++)
+			view[i] = intBuffer[i + 1];
+		//endregion
+
+		this.blockLength = intBuffer.length;
+
+		return (inputOffset + inputLength);
+		//endregion
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		if(this.isConstructed === true)
+			return LocalConstructedValueBlock.prototype.toBER.call(this, sizeOnly);
+
+		if(sizeOnly === true)
+			return (new ArrayBuffer(this.valueHex.byteLength + 1));
+
+		if(this.valueHex.byteLength === 0)
+			return (new ArrayBuffer(0));
+
+		const curView = new Uint8Array(this.valueHex);
+
+		const retBuf = new ArrayBuffer(this.valueHex.byteLength + 1);
+		const retView = new Uint8Array(retBuf);
+
+		retView[0] = this.unusedBits;
+
+		for(let i = 0; i < this.valueHex.byteLength; i++)
+			retView[i + 1] = curView[i];
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BitStringValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {{blockName, blockLength, error, warnings, valueBeforeDecode}|{blockName: string, blockLength: number, error: string, warnings: Array.<string>, valueBeforeDecode: string}}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.unusedBits = this.unusedBits;
+		object.isConstructed = this.isConstructed;
+		object.isHexOnly = this.isHexOnly;
+		object.valueHex = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class BitString extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "BitString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalBitStringValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 3; // BitString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BIT STRING";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		//region Ability to encode empty BitString
+		if(inputLength === 0)
+			return inputOffset;
+		//endregion
+
+		this.valueBlock.isConstructed = this.idBlock.isConstructed;
+		this.valueBlock.isIndefiniteForm = this.lenBlock.isIndefiniteForm;
+
+		return super.fromBER(inputBuffer, inputOffset, inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Checking that two BITSTRINGs are equal
+	 * @param {BitString} bitString
+	 */
+	isEqual(bitString)
+	{
+		//region Check input type
+		if((bitString instanceof BitString) === false)
+			return false;
+		//endregion
+
+		//region Compare two JSON strings
+		if(JSON.stringify(this) !== JSON.stringify(bitString))
+			return false;
+		//endregion
+
+		return true;
+	}
+	//**********************************************************************************
+	toString() {
+		if (this.valueBlock.isConstructed || (this.valueBlock.value && this.valueBlock.value.length)) {
+			return Constructed.prototype.toString.call(this);
+		} else {
+			// convert bytes to bits
+			const bits = [];
+			const valueHex = new Uint8Array(this.valueBlock.valueHex);
+			for (const byte of valueHex) {
+				bits.push(byte.toString(2).padStart(8, "0"));
+			}
+			return `${this.constructor.blockName()} : ${bits.join("")}`;
+		}
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 Integer type class
+//**************************************************************************************
+/**
+ * @extends ValueBlock
+ */
+class LocalIntegerValueBlock extends HexBlock(ValueBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalIntegerValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		if("value" in parameters)
+			this.valueDec = parameters.value;
+	}
+	//**********************************************************************************
+	/**
+	 * Setter for "valueHex"
+	 * @param {ArrayBuffer} _value
+	 */
+	set valueHex(_value)
+	{
+		this._valueHex = _value.slice(0);
+
+		if(_value.byteLength >= 4)
+		{
+			this.warnings.push("Too big Integer for decoding, hex only");
+			this.isHexOnly = true;
+			this._valueDec = 0;
+		}
+		else
+		{
+			this.isHexOnly = false;
+
+			if(_value.byteLength > 0)
+				this._valueDec = utilDecodeTC.call(this);
+		}
+	}
+	//**********************************************************************************
+	/**
+	 * Getter for "valueHex"
+	 * @returns {ArrayBuffer}
+	 */
+	get valueHex()
+	{
+		return this._valueHex;
+	}
+	//**********************************************************************************
+	/**
+	 * Getter for "valueDec"
+	 * @param {number} _value
+	 */
+	set valueDec(_value)
+	{
+		this._valueDec = _value;
+
+		this.isHexOnly = false;
+		this._valueHex = utilEncodeTC(_value);
+	}
+	//**********************************************************************************
+	/**
+	 * Getter for "valueDec"
+	 * @returns {number}
+	 */
+	get valueDec()
+	{
+		return this._valueDec;
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from DER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 DER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 DER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @param {number} [expectedLength=0] Expected length of converted "valueHex" buffer
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromDER(inputBuffer, inputOffset, inputLength, expectedLength = 0)
+	{
+		const offset = this.fromBER(inputBuffer, inputOffset, inputLength);
+		if(offset === (-1))
+			return offset;
+
+		const view = new Uint8Array(this._valueHex);
+
+		if((view[0] === 0x00) && ((view[1] & 0x80) !== 0))
+		{
+			const updatedValueHex = new ArrayBuffer(this._valueHex.byteLength - 1);
+			const updatedView = new Uint8Array(updatedValueHex);
+
+			updatedView.set(new Uint8Array(this._valueHex, 1, this._valueHex.byteLength - 1));
+
+			this._valueHex = updatedValueHex.slice(0);
+		}
+		else
+		{
+			if(expectedLength !== 0)
+			{
+				if(this._valueHex.byteLength < expectedLength)
+				{
+					if((expectedLength - this._valueHex.byteLength) > 1)
+						expectedLength = this._valueHex.byteLength + 1;
+					
+					const updatedValueHex = new ArrayBuffer(expectedLength);
+					const updatedView = new Uint8Array(updatedValueHex);
+
+					updatedView.set(view, expectedLength - this._valueHex.byteLength);
+
+					this._valueHex = updatedValueHex.slice(0);
+				}
+			}
+		}
+
+		return offset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (DER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toDER(sizeOnly = false)
+	{
+		const view = new Uint8Array(this._valueHex);
+
+		switch(true)
+		{
+			case ((view[0] & 0x80) !== 0):
+				{
+					const updatedValueHex = new ArrayBuffer(this._valueHex.byteLength + 1);
+					const updatedView = new Uint8Array(updatedValueHex);
+
+					updatedView[0] = 0x00;
+					updatedView.set(view, 1);
+
+					this._valueHex = updatedValueHex.slice(0);
+				}
+				break;
+			case ((view[0] === 0x00) && ((view[1] & 0x80) === 0)):
+				{
+					const updatedValueHex = new ArrayBuffer(this._valueHex.byteLength - 1);
+					const updatedView = new Uint8Array(updatedValueHex);
+
+					updatedView.set(new Uint8Array(this._valueHex, 1, this._valueHex.byteLength - 1));
+
+					this._valueHex = updatedValueHex.slice(0);
+				}
+				break;
+			default:
+		}
+
+		return this.toBER(sizeOnly);
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = super.fromBER(inputBuffer, inputOffset, inputLength);
+		if(resultOffset === (-1))
+			return resultOffset;
+
+		this.blockLength = inputLength;
+
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//noinspection JSCheckFunctionSignatures
+		return this.valueHex.slice(0);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "IntegerValueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.valueDec = this.valueDec;
+
+		return object;
+	}
+	//**********************************************************************************
+	/**
+	 * Convert current value to decimal string representation
+	 */
+	toString()
+	{
+		//region Aux functions
+		function viewAdd(first, second)
+		{
+			//region Initial variables
+			const c = new Uint8Array([0]);
+			
+			let firstView = new Uint8Array(first);
+			let secondView = new Uint8Array(second);
+			
+			let firstViewCopy = firstView.slice(0);
+			const firstViewCopyLength = firstViewCopy.length - 1;
+			let secondViewCopy = secondView.slice(0);
+			const secondViewCopyLength = secondViewCopy.length - 1;
+			
+			let value = 0;
+			
+			const max = (secondViewCopyLength < firstViewCopyLength) ? firstViewCopyLength : secondViewCopyLength;
+			
+			let counter = 0;
+			//endregion
+			
+			for(let i = max; i >= 0; i--, counter++)
+			{
+				switch(true)
+				{
+					case (counter < secondViewCopy.length):
+						value = firstViewCopy[firstViewCopyLength - counter] + secondViewCopy[secondViewCopyLength - counter] + c[0];
+						break;
+					default:
+						value = firstViewCopy[firstViewCopyLength - counter] + c[0];
+				}
+				
+				c[0] = value / 10;
+				
+				switch(true)
+				{
+					case (counter >= firstViewCopy.length):
+						firstViewCopy = utilConcatView(new Uint8Array([value % 10]), firstViewCopy);
+						break;
+					default:
+						firstViewCopy[firstViewCopyLength - counter] = value % 10;
+				}
+			}
+			
+			if(c[0] > 0)
+				firstViewCopy = utilConcatView(c, firstViewCopy);
+			
+			return firstViewCopy.slice(0);
+		}
+		
+		function power2(n)
+		{
+			if(n >= powers2.length)
+			{
+				for(let p = powers2.length; p <= n; p++)
+				{
+					const c = new Uint8Array([0]);
+					let digits = (powers2[p - 1]).slice(0);
+					
+					for(let i = (digits.length - 1); i >=0; i--)
+					{
+						const newValue = new Uint8Array([(digits[i] << 1) + c[0]]);
+						c[0] = newValue[0] / 10;
+						digits[i] = newValue[0] % 10;
+					}
+					
+					if (c[0] > 0)
+						digits = utilConcatView(c, digits);
+					
+					powers2.push(digits);
+				}
+			}
+			
+			return powers2[n];
+		}
+		
+		function viewSub(first, second)
+		{
+			//region Initial variables
+			let b = 0;
+			
+			let firstView = new Uint8Array(first);
+			let secondView = new Uint8Array(second);
+			
+			let firstViewCopy = firstView.slice(0);
+			const firstViewCopyLength = firstViewCopy.length - 1;
+			let secondViewCopy = secondView.slice(0);
+			const secondViewCopyLength = secondViewCopy.length - 1;
+			
+			let value;
+			
+			let counter = 0;
+			//endregion
+			
+			for(let i = secondViewCopyLength; i >= 0; i--, counter++)
+			{
+				value = firstViewCopy[firstViewCopyLength - counter] - secondViewCopy[secondViewCopyLength - counter] - b;
+				
+				switch(true)
+				{
+					case (value < 0):
+						b = 1;
+						firstViewCopy[firstViewCopyLength - counter] = value + 10;
+						break;
+					default:
+						b = 0;
+						firstViewCopy[firstViewCopyLength - counter] = value;
+				}
+			}
+			
+			if(b > 0)
+			{
+				for(let i = (firstViewCopyLength - secondViewCopyLength + 1); i >= 0; i--, counter++)
+				{
+					value = firstViewCopy[firstViewCopyLength - counter] - b;
+					
+					if(value < 0)
+					{
+						b = 1;
+						firstViewCopy[firstViewCopyLength - counter] = value + 10;
+					}
+					else
+					{
+						b = 0;
+						firstViewCopy[firstViewCopyLength - counter] = value;
+						break;
+					}
+				}
+			}
+			
+			return firstViewCopy.slice();
+		}
+		//endregion
+		
+		//region Initial variables
+		const firstBit = (this._valueHex.byteLength * 8) - 1;
+		
+		let digits = new Uint8Array((this._valueHex.byteLength * 8) / 3);
+		let bitNumber = 0;
+		let currentByte;
+		
+		const asn1View = new Uint8Array(this._valueHex);
+		
+		let result = "";
+		
+		let flag = false;
+		//endregion
+		
+		//region Calculate number
+		for(let byteNumber = (this._valueHex.byteLength - 1); byteNumber >= 0; byteNumber--)
+		{
+			currentByte = asn1View[byteNumber];
+			
+			for(let i = 0; i < 8; i++)
+			{
+				if((currentByte & 1) === 1)
+				{
+					switch(bitNumber)
+					{
+						case firstBit:
+							digits = viewSub(power2(bitNumber), digits);
+							result = "-";
+							break;
+						default:
+							digits = viewAdd(digits, power2(bitNumber));
+					}
+				}
+				
+				bitNumber++;
+				currentByte >>= 1;
+			}
+		}
+		//endregion
+		
+		//region Print number
+		for(let i = 0; i < digits.length; i++)
+		{
+			if(digits[i])
+				flag = true;
+			
+			if(flag)
+				result += digitsString.charAt(digits[i]);
+		}
+		
+		if(flag === false)
+			result += digitsString.charAt(0);
+		//endregion
+		
+		return result;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class Integer extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Integer" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalIntegerValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 2; // Integer
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "INTEGER";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Compare two Integer object, or Integer and ArrayBuffer objects
+	 * @param {!Integer|ArrayBuffer} otherValue
+	 * @returns {boolean}
+	 */
+	isEqual(otherValue)
+	{
+		if(otherValue instanceof Integer)
+		{
+			if(this.valueBlock.isHexOnly && otherValue.valueBlock.isHexOnly) // Compare two ArrayBuffers
+				return isEqualBuffer(this.valueBlock.valueHex, otherValue.valueBlock.valueHex);
+
+			if(this.valueBlock.isHexOnly === otherValue.valueBlock.isHexOnly)
+				return (this.valueBlock.valueDec === otherValue.valueBlock.valueDec);
+
+			return false;
+		}
+		
+		if(otherValue instanceof ArrayBuffer)
+			return isEqualBuffer(this.valueBlock.valueHex, otherValue);
+
+		return false;
+	}
+	//**********************************************************************************
+	/**
+	 * Convert current Integer value from BER into DER format
+	 * @returns {Integer}
+	 */
+	convertToDER()
+	{
+		const integer = new Integer({ valueHex: this.valueBlock.valueHex });
+		integer.valueBlock.toDER();
+
+		return integer;
+	}
+	//**********************************************************************************
+	/**
+	 * Convert current Integer value from DER to BER format
+	 * @returns {Integer}
+	 */
+	convertFromDER()
+	{
+		const expectedLength = (this.valueBlock.valueHex.byteLength % 2) ? (this.valueBlock.valueHex.byteLength + 1) : this.valueBlock.valueHex.byteLength;
+		const integer = new Integer({ valueHex: this.valueBlock.valueHex });
+		integer.valueBlock.fromDER(integer.valueBlock.valueHex, 0, integer.valueBlock.valueHex.byteLength, expectedLength);
+		
+		return integer;
+	}
+	//**********************************************************************************
+	toString() {
+		assertBigInt();
+		const hex = bufferToHexCodes(this.valueBlock.valueHex);
+		const bigInt = BigInt(`0x${hex}`);
+		return `${this.constructor.blockName()} : ${bigInt.toString()}`;
+	}
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 Enumerated type class
+//**************************************************************************************
+class Enumerated extends Integer
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Enumerated" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 10; // Enumerated
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "ENUMERATED";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of ASN.1 ObjectIdentifier type class
+//**************************************************************************************
+class LocalSidValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalSidValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {number} [valueDec]
+	 * @property {boolean} [isFirstSid]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.valueDec = getParametersValue(parameters, "valueDec", -1);
+		this.isFirstSid = getParametersValue(parameters, "isFirstSid", false);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "sidBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		if(inputLength === 0)
+			return inputOffset;
+
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if(checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+
+		this.valueHex = new ArrayBuffer(inputLength);
+		let view = new Uint8Array(this.valueHex);
+
+		for(let i = 0; i < inputLength; i++)
+		{
+			view[i] = intBuffer[i] & 0x7F;
+
+			this.blockLength++;
+
+			if((intBuffer[i] & 0x80) === 0x00)
+				break;
+		}
+
+		//region Ajust size of valueHex buffer
+		const tempValueHex = new ArrayBuffer(this.blockLength);
+		const tempView = new Uint8Array(tempValueHex);
+
+		for(let i = 0; i < this.blockLength; i++)
+			tempView[i] = view[i];
+
+		//noinspection JSCheckFunctionSignatures
+		this.valueHex = tempValueHex.slice(0);
+		view = new Uint8Array(this.valueHex);
+		//endregion
+
+		if((intBuffer[this.blockLength - 1] & 0x80) !== 0x00)
+		{
+			this.error = "End of input reached before message was fully decoded";
+			return (-1);
+		}
+
+		if(view[0] === 0x00)
+			this.warnings.push("Needlessly long format of SID encoding");
+
+		if(this.blockLength <= 8)
+			this.valueDec = utilFromBase(view, 7);
+		else
+		{
+			this.isHexOnly = true;
+			this.warnings.push("Too big SID for decoding, hex only");
+		}
+
+		return (inputOffset + this.blockLength);
+	}
+//**********************************************************************************
+	/**
+	 * Save a BigInt value immediately as an array of octects.
+	 */
+ set valueBigInt(value) {
+
+	assertBigInt();
+
+	let bits = BigInt(value).toString(2);
+	while (bits.length % 7) {
+		bits = '0' + bits
+	}
+	const bytes = new Uint8Array(bits.length / 7)
+	for (let i = 0; i < bytes.length; i++) {
+		bytes[i] = parseInt(bits.slice(i*7, i*7 + 7), 2) + (i + 1 < bytes.length ? 0x80 : 0)
+	}
+	this.fromBER(bytes.buffer, 0, bytes.length)
+}
+//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//region Initial variables
+		let retBuf;
+		let retView;
+		//endregion
+
+		if(this.isHexOnly)
+		{
+			if(sizeOnly === true)
+				return (new ArrayBuffer(this.valueHex.byteLength));
+
+			const curView = new Uint8Array(this.valueHex);
+
+			retBuf = new ArrayBuffer(this.blockLength);
+			retView = new Uint8Array(retBuf);
+
+			for(let i = 0; i < (this.blockLength - 1); i++)
+				retView[i] = curView[i] | 0x80;
+
+			retView[this.blockLength - 1] = curView[this.blockLength - 1];
+
+			return retBuf;
+		}
+
+		const encodedBuf = utilToBase(this.valueDec, 7);
+		if(encodedBuf.byteLength === 0)
+		{
+			this.error = "Error during encoding SID value";
+			return (new ArrayBuffer(0));
+		}
+
+		retBuf = new ArrayBuffer(encodedBuf.byteLength);
+
+		if(sizeOnly === false)
+		{
+			const encodedView = new Uint8Array(encodedBuf);
+			retView = new Uint8Array(retBuf);
+
+			for(let i = 0; i < (encodedBuf.byteLength - 1); i++)
+				retView[i] = encodedView[i] | 0x80;
+
+			retView[encodedBuf.byteLength - 1] = encodedView[encodedBuf.byteLength - 1];
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Create string representation of current SID block
+	 * @returns {string}
+	 */
+	toString()
+	{
+		let result = "";
+
+		if(this.isHexOnly === true)
+			result = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+		else
+		{
+			if(this.isFirstSid)
+			{
+				let sidValue = this.valueDec;
+
+				if(this.valueDec <= 39)
+					result = "0.";
+				else
+				{
+					if(this.valueDec <= 79)
+					{
+						result = "1.";
+						sidValue -= 40;
+					}
+					else
+					{
+						result = "2.";
+						sidValue -= 80;
+					}
+				}
+
+				result += sidValue.toString();
+			}
+			else
+				result = this.valueDec.toString();
+		}
+
+		return result;
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.valueDec = this.valueDec;
+		object.isFirstSid = this.isFirstSid;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class LocalObjectIdentifierValueBlock extends ValueBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalObjectIdentifierValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.fromString(getParametersValue(parameters, "value", ""));
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		let resultOffset = inputOffset;
+
+		while(inputLength > 0)
+		{
+			const sidBlock = new LocalSidValueBlock();
+			resultOffset = sidBlock.fromBER(inputBuffer, resultOffset, inputLength);
+			if(resultOffset === (-1))
+			{
+				this.blockLength = 0;
+				this.error = sidBlock.error;
+				return resultOffset;
+			}
+
+			if(this.value.length === 0)
+				sidBlock.isFirstSid = true;
+
+			this.blockLength += sidBlock.blockLength;
+			inputLength -= sidBlock.blockLength;
+
+			this.value.push(sidBlock);
+		}
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		let retBuf = new ArrayBuffer(0);
+
+		for(let i = 0; i < this.value.length; i++)
+		{
+			const valueBuf = this.value[i].toBER(sizeOnly);
+			if(valueBuf.byteLength === 0)
+			{
+				this.error = this.value[i].error;
+				return (new ArrayBuffer(0));
+			}
+
+			retBuf = utilConcatBuf(retBuf, valueBuf);
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Create "LocalObjectIdentifierValueBlock" class from string
+	 * @param {string} string Input string to convert from
+	 * @returns {boolean}
+	 */
+	fromString(string)
+	{
+		this.value = []; // Clear existing SID values
+
+		let pos1 = 0;
+		let pos2 = 0;
+
+		let sid = "";
+
+		let flag = false;
+
+		do
+		{
+			pos2 = string.indexOf(".", pos1);
+			if(pos2 === (-1))
+				sid = string.substr(pos1);
+			else
+				sid = string.substr(pos1, pos2 - pos1);
+
+			pos1 = pos2 + 1;
+
+			if(flag)
+			{
+				const sidBlock = this.value[0];
+
+				let plus = 0;
+
+				switch(sidBlock.valueDec)
+				{
+					case 0:
+						break;
+					case 1:
+						plus = 40;
+						break;
+					case 2:
+						plus = 80;
+						break;
+					default:
+						this.value = []; // clear SID array
+						return false; // ???
+				}
+
+				const parsedSID = parseInt(sid, 10);
+				if(isNaN(parsedSID))
+					return true;
+
+				sidBlock.valueDec = parsedSID + plus;
+
+				flag = false;
+			}
+			else
+			{
+				const sidBlock = new LocalSidValueBlock();
+        if (sid > Number.MAX_SAFE_INTEGER) {
+					assertBigInt();
+					const sidValue = BigInt(sid);
+          sidBlock.valueBigInt = sidValue
+        } else {
+          sidBlock.valueDec = parseInt(sid, 10);
+          if (isNaN(sidBlock.valueDec)) return true;  
+        }
+
+				if(this.value.length === 0)
+				{
+					sidBlock.isFirstSid = true;
+					flag = true;
+				}
+
+				this.value.push(sidBlock);
+			}
+		} while(pos2 !== (-1));
+
+		return true;
+	}
+	//**********************************************************************************
+	/**
+	 * Converts "LocalObjectIdentifierValueBlock" class to string
+	 * @returns {string}
+	 */
+	toString()
+	{
+		let result = "";
+		let isHexOnly = false;
+
+		for(let i = 0; i < this.value.length; i++)
+		{
+			isHexOnly = this.value[i].isHexOnly;
+
+			let sidStr = this.value[i].toString();
+
+			if(i !== 0)
+				result = `${result}.`;
+
+			if(isHexOnly)
+			{
+				sidStr = `{${sidStr}}`;
+
+				if(this.value[i].isFirstSid)
+					result = `2.{${sidStr} - 80}`;
+				else
+					result += sidStr;
+			}
+			else
+				result += sidStr;
+		}
+
+		return result;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "ObjectIdentifierValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.toString();
+		object.sidArray = [];
+		for(let i = 0; i < this.value.length; i++)
+			object.sidArray.push(this.value[i].toJSON());
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class ObjectIdentifier extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "ObjectIdentifier" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalObjectIdentifierValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 6; // OBJECT IDENTIFIER
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "OBJECT IDENTIFIER";
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.toString()}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of all string's classes
+//**************************************************************************************
+class LocalUtf8StringValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Constructor for "LocalUtf8StringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.isHexOnly = true;
+		this.value = ""; // String representation of decoded ArrayBuffer
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "Utf8StringValueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.value;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class Utf8String extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Utf8String" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalUtf8StringValueBlock);
+
+		if("value" in parameters)
+			this.fromString(parameters.value);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 12; // Utf8String
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "UTF8String";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		this.valueBlock.value = String.fromCharCode.apply(null, new Uint8Array(inputBuffer));
+
+		try
+		{
+			//noinspection JSDeprecatedSymbols
+			this.valueBlock.value = decodeURIComponent(escape(this.valueBlock.value));
+		}
+		catch(ex)
+		{
+			this.warnings.push(`Error during "decodeURIComponent": ${ex}, using raw string`);
+		}
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		//noinspection JSDeprecatedSymbols
+		const str = unescape(encodeURIComponent(inputString));
+		const strLen = str.length;
+
+		this.valueBlock.valueHex = new ArrayBuffer(strLen);
+		const view = new Uint8Array(this.valueBlock.valueHex);
+
+		for(let i = 0; i < strLen; i++)
+			view[i] = str.charCodeAt(i);
+
+		this.valueBlock.value = inputString;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.value}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//region Declaration of ASN.1 RelativeObjectIdentifier type class
+//**************************************************************************************
+class LocalRelativeSidValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalRelativeSidValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {number} [valueDec]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.valueDec = getParametersValue(parameters, "valueDec", -1);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "relativeSidBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		if (inputLength === 0)
+			return inputOffset;
+
+		//region Basic check for parameters
+		//noinspection JSCheckFunctionSignatures
+		if (checkBufferParams(this, inputBuffer, inputOffset, inputLength) === false)
+			return (-1);
+		//endregion
+
+		const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+
+		this.valueHex = new ArrayBuffer(inputLength);
+		let view = new Uint8Array(this.valueHex);
+
+		for (let i = 0; i < inputLength; i++)
+		{
+			view[i] = intBuffer[i] & 0x7F;
+
+			this.blockLength++;
+
+			if ((intBuffer[i] & 0x80) === 0x00)
+				break;
+		}
+
+		//region Ajust size of valueHex buffer
+		const tempValueHex = new ArrayBuffer(this.blockLength);
+		const tempView = new Uint8Array(tempValueHex);
+
+		for (let i = 0; i < this.blockLength; i++)
+			tempView[i] = view[i];
+
+		//noinspection JSCheckFunctionSignatures
+		this.valueHex = tempValueHex.slice(0);
+		view = new Uint8Array(this.valueHex);
+		//endregion
+
+		if ((intBuffer[this.blockLength - 1] & 0x80) !== 0x00)
+		{
+			this.error = "End of input reached before message was fully decoded";
+			return (-1);
+		}
+
+		if (view[0] === 0x00)
+			this.warnings.push("Needlessly long format of SID encoding");
+
+		if (this.blockLength <= 8)
+			this.valueDec = utilFromBase(view, 7);
+		else
+		{
+			this.isHexOnly = true;
+			this.warnings.push("Too big SID for decoding, hex only");
+		}
+
+		return (inputOffset + this.blockLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		//region Initial variables
+		let retBuf;
+		let retView;
+		//endregion
+
+		if (this.isHexOnly)
+		{
+			if (sizeOnly === true)
+				return (new ArrayBuffer(this.valueHex.byteLength));
+
+			const curView = new Uint8Array(this.valueHex);
+
+			retBuf = new ArrayBuffer(this.blockLength);
+			retView = new Uint8Array(retBuf);
+
+			for (let i = 0; i < (this.blockLength - 1); i++)
+				retView[i] = curView[i] | 0x80;
+
+			retView[this.blockLength - 1] = curView[this.blockLength - 1];
+
+			return retBuf;
+		}
+
+		const encodedBuf = utilToBase(this.valueDec, 7);
+		if (encodedBuf.byteLength === 0)
+		{
+			this.error = "Error during encoding SID value";
+			return (new ArrayBuffer(0));
+		}
+
+		retBuf = new ArrayBuffer(encodedBuf.byteLength);
+
+		if (sizeOnly === false)
+		{
+			const encodedView = new Uint8Array(encodedBuf);
+			retView = new Uint8Array(retBuf);
+
+			for (let i = 0; i < (encodedBuf.byteLength - 1); i++)
+				retView[i] = encodedView[i] | 0x80;
+
+			retView[encodedBuf.byteLength - 1] = encodedView[encodedBuf.byteLength - 1];
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Create string representation of current SID block
+	 * @returns {string}
+	 */
+	toString()
+	{
+		let result = "";
+
+		if (this.isHexOnly === true)
+			result = bufferToHexCodes(this.valueHex, 0, this.valueHex.byteLength);
+		else {
+			result = this.valueDec.toString();
+		}
+
+		return result;
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try {
+			object = super.toJSON();
+		} catch (ex) {}
+		//endregion
+
+		object.valueDec = this.valueDec;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class LocalRelativeObjectIdentifierValueBlock extends ValueBlock {
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalRelativeObjectIdentifierValueBlock" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.fromString(getParametersValue(parameters, "value", ""));
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		let resultOffset = inputOffset;
+
+		while (inputLength > 0)
+		{
+			const sidBlock = new LocalRelativeSidValueBlock();
+			resultOffset = sidBlock.fromBER(inputBuffer, resultOffset, inputLength);
+			if (resultOffset === (-1))
+			{
+				this.blockLength = 0;
+				this.error = sidBlock.error;
+				return resultOffset;
+			}
+
+			this.blockLength += sidBlock.blockLength;
+			inputLength -= sidBlock.blockLength;
+
+			this.value.push(sidBlock);
+		}
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		let retBuf = new ArrayBuffer(0);
+
+		for (let i = 0; i < this.value.length; i++)
+		{
+			const valueBuf = this.value[i].toBER(sizeOnly);
+			if (valueBuf.byteLength === 0)
+			{
+				this.error = this.value[i].error;
+				return (new ArrayBuffer(0));
+			}
+
+			retBuf = utilConcatBuf(retBuf, valueBuf);
+		}
+
+		return retBuf;
+	}
+	//**********************************************************************************
+	/**
+	 * Create "LocalRelativeObjectIdentifierValueBlock" class from string
+	 * @param {string} string Input string to convert from
+	 * @returns {boolean}
+	 */
+	fromString(string)
+	{
+		this.value = []; // Clear existing SID values
+
+		let pos1 = 0;
+		let pos2 = 0;
+
+		let sid = "";
+
+		do
+		{
+			pos2 = string.indexOf(".", pos1);
+			if (pos2 === (-1))
+				sid = string.substr(pos1);
+			else
+				sid = string.substr(pos1, pos2 - pos1);
+
+			pos1 = pos2 + 1;
+
+			const sidBlock = new LocalRelativeSidValueBlock();
+			sidBlock.valueDec = parseInt(sid, 10);
+			if (isNaN(sidBlock.valueDec))
+				return true;
+
+			this.value.push(sidBlock);
+
+		} while (pos2 !== (-1));
+
+		return true;
+	}
+	//**********************************************************************************
+	/**
+	 * Converts "LocalRelativeObjectIdentifierValueBlock" class to string
+	 * @returns {string}
+	 */
+	toString()
+	{
+		let result = "";
+		let isHexOnly = false;
+
+		for (let i = 0; i < this.value.length; i++)
+		{
+			isHexOnly = this.value[i].isHexOnly;
+
+			let sidStr = this.value[i].toString();
+
+			if (i !== 0)
+				result = `${result}.`;
+
+			if (isHexOnly)
+			{
+				sidStr = `{${sidStr}}`;
+				result += sidStr;
+			} else
+				result += sidStr;
+		}
+
+		return result;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "RelativeObjectIdentifierValueBlock";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		} catch (ex) {}
+		//endregion
+
+		object.value = this.toString();
+		object.sidArray = [];
+		for (let i = 0; i < this.value.length; i++)
+			object.sidArray.push(this.value[i].toJSON());
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class RelativeObjectIdentifier extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "RelativeObjectIdentifier" class
+	 * @param {Object} [parameters={}]
+	 * @property {ArrayBuffer} [valueHex]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalRelativeObjectIdentifierValueBlock);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 13; // RELATIVE OBJECT IDENTIFIER
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "RelativeObjectIdentifier";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+/**
+ * @extends LocalBaseBlock
+ * @extends HexBlock
+ */
+class LocalBmpStringValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalBmpStringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.isHexOnly = true;
+		this.value = "";
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BmpStringValueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.value;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class BmpString extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "BmpString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalBmpStringValueBlock);
+
+		if("value" in parameters)
+			this.fromString(parameters.value);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 30; // BmpString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "BMPString";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		//noinspection JSCheckFunctionSignatures
+		const copyBuffer = inputBuffer.slice(0);
+		const valueView = new Uint8Array(copyBuffer);
+
+		for(let i = 0; i < valueView.length; i += 2)
+		{
+			const temp = valueView[i];
+
+			valueView[i] = valueView[i + 1];
+			valueView[i + 1] = temp;
+		}
+
+		this.valueBlock.value = String.fromCharCode.apply(null, new Uint16Array(copyBuffer));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		const strLength = inputString.length;
+
+		this.valueBlock.valueHex = new ArrayBuffer(strLength * 2);
+		const valueHexView = new Uint8Array(this.valueBlock.valueHex);
+
+		for(let i = 0; i < strLength; i++)
+		{
+			const codeBuf = utilToBase(inputString.charCodeAt(i), 8);
+			const codeView = new Uint8Array(codeBuf);
+			if(codeView.length > 2)
+				continue;
+
+			const dif = 2 - codeView.length;
+
+			for(let j = (codeView.length - 1); j >= 0; j--)
+				valueHexView[i * 2 + j + dif] = codeView[j];
+		}
+
+		this.valueBlock.value = inputString;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.value}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class LocalUniversalStringValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalUniversalStringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.isHexOnly = true;
+		this.value = "";
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "UniversalStringValueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.value;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class UniversalString extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "UniversalString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalUniversalStringValueBlock);
+
+		if("value" in parameters)
+			this.fromString(parameters.value);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 28; // UniversalString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "UniversalString";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		//noinspection JSCheckFunctionSignatures
+		const copyBuffer = inputBuffer.slice(0);
+		const valueView = new Uint8Array(copyBuffer);
+
+		for(let i = 0; i < valueView.length; i += 4)
+		{
+			valueView[i] = valueView[i + 3];
+			valueView[i + 1] = valueView[i + 2];
+			valueView[i + 2] = 0x00;
+			valueView[i + 3] = 0x00;
+		}
+
+		this.valueBlock.value = String.fromCharCode.apply(null, new Uint32Array(copyBuffer));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		const strLength = inputString.length;
+
+		this.valueBlock.valueHex = new ArrayBuffer(strLength * 4);
+		const valueHexView = new Uint8Array(this.valueBlock.valueHex);
+
+		for(let i = 0; i < strLength; i++)
+		{
+			const codeBuf = utilToBase(inputString.charCodeAt(i), 8);
+			const codeView = new Uint8Array(codeBuf);
+			if(codeView.length > 4)
+				continue;
+
+			const dif = 4 - codeView.length;
+
+			for(let j = (codeView.length - 1); j >= 0; j--)
+				valueHexView[i * 4 + j + dif] = codeView[j];
+		}
+
+		this.valueBlock.value = inputString;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.value}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+class LocalSimpleStringValueBlock extends HexBlock(LocalBaseBlock)
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalSimpleStringValueBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.value = "";
+		this.isHexOnly = true;
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "SimpleStringValueBlock";
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.value = this.value;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends BaseBlock
+ */
+class LocalSimpleStringBlock extends BaseBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "LocalSimpleStringBlock" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters, LocalSimpleStringValueBlock);
+
+		if("value" in parameters)
+			this.fromString(parameters.value);
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "SIMPLESTRING";
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		this.valueBlock.value = String.fromCharCode.apply(null, new Uint8Array(inputBuffer));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		const strLen = inputString.length;
+
+		this.valueBlock.valueHex = new ArrayBuffer(strLen);
+		const view = new Uint8Array(this.valueBlock.valueHex);
+
+		for(let i = 0; i < strLen; i++)
+			view[i] = inputString.charCodeAt(i);
+
+		this.valueBlock.value = inputString;
+	}
+	//**********************************************************************************
+	toString() {
+		return `${this.constructor.blockName()} : ${this.valueBlock.value}`;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class NumericString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "NumericString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 18; // NumericString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "NumericString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class PrintableString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "PrintableString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 19; // PrintableString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "PrintableString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class TeletexString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "TeletexString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 20; // TeletexString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "TeletexString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class VideotexString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "VideotexString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 21; // VideotexString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "VideotexString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class IA5String extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "IA5String" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 22; // IA5String
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "IA5String";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class GraphicString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "GraphicString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 25; // GraphicString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "GraphicString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class VisibleString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "VisibleString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 26; // VisibleString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "VisibleString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class GeneralString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "GeneralString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 27; // GeneralString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "GeneralString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends LocalSimpleStringBlock
+ */
+class CharacterString extends LocalSimpleStringBlock
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "CharacterString" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 29; // CharacterString
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "CharacterString";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of all date and time classes
+//**************************************************************************************
+/**
+ * @extends VisibleString
+ */
+class UTCTime extends VisibleString
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "UTCTime" class
+	 * @param {Object} [parameters={}]
+	 * @property {string} [value] String representatio of the date
+	 * @property {Date} [valueDate] JavaScript "Date" object
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.year = 0;
+		this.month = 0;
+		this.day = 0;
+		this.hour = 0;
+		this.minute = 0;
+		this.second = 0;
+
+		//region Create UTCTime from ASN.1 UTC string value
+		if("value" in parameters)
+		{
+			this.fromString(parameters.value);
+
+			this.valueBlock.valueHex = new ArrayBuffer(parameters.value.length);
+			const view = new Uint8Array(this.valueBlock.valueHex);
+
+			for(let i = 0; i < parameters.value.length; i++)
+				view[i] = parameters.value.charCodeAt(i);
+		}
+		//endregion
+		//region Create GeneralizedTime from JavaScript Date type
+		if("valueDate" in parameters)
+		{
+			this.fromDate(parameters.valueDate);
+			this.valueBlock.valueHex = this.toBuffer();
+		}
+		//endregion
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 23; // UTCTime
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		this.fromString(String.fromCharCode.apply(null, new Uint8Array(inputBuffer)));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ASN.1 internal string into ArrayBuffer
+	 * @returns {ArrayBuffer}
+	 */
+	toBuffer()
+	{
+		const str = this.toString();
+
+		const buffer = new ArrayBuffer(str.length);
+		const view = new Uint8Array(buffer);
+
+		for(let i = 0; i < str.length; i++)
+			view[i] = str.charCodeAt(i);
+
+		return buffer;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting "Date" object into ASN.1 internal string
+	 * @param {!Date} inputDate JavaScript "Date" object
+	 */
+	fromDate(inputDate)
+	{
+		this.year = inputDate.getUTCFullYear();
+		this.month = inputDate.getUTCMonth() + 1;
+		this.day = inputDate.getUTCDate();
+		this.hour = inputDate.getUTCHours();
+		this.minute = inputDate.getUTCMinutes();
+		this.second = inputDate.getUTCSeconds();
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Function converting ASN.1 internal string into "Date" object
+	 * @returns {Date}
+	 */
+	toDate()
+	{
+		return (new Date(Date.UTC(this.year, this.month - 1, this.day, this.hour, this.minute, this.second)));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		//region Parse input string
+		const parser = /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})Z/ig;
+		const parserArray = parser.exec(inputString);
+		if(parserArray === null)
+		{
+			this.error = "Wrong input string for convertion";
+			return;
+		}
+		//endregion
+
+		//region Store parsed values
+		const year = parseInt(parserArray[1], 10);
+		if(year >= 50)
+			this.year = 1900 + year;
+		else
+			this.year = 2000 + year;
+
+		this.month = parseInt(parserArray[2], 10);
+		this.day = parseInt(parserArray[3], 10);
+		this.hour = parseInt(parserArray[4], 10);
+		this.minute = parseInt(parserArray[5], 10);
+		this.second = parseInt(parserArray[6], 10);
+		//endregion
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ASN.1 internal class into JavaScript string
+	 * @returns {string}
+	 */
+	toString()
+	{
+		const outputArray = new Array(7);
+
+		outputArray[0] = padNumber(((this.year < 2000) ? (this.year - 1900) : (this.year - 2000)), 2);
+		outputArray[1] = padNumber(this.month, 2);
+		outputArray[2] = padNumber(this.day, 2);
+		outputArray[3] = padNumber(this.hour, 2);
+		outputArray[4] = padNumber(this.minute, 2);
+		outputArray[5] = padNumber(this.second, 2);
+		outputArray[6] = "Z";
+
+		return outputArray.join("");
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "UTCTime";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.year = this.year;
+		object.month = this.month;
+		object.day = this.day;
+		object.hour = this.hour;
+		object.minute = this.minute;
+		object.second = this.second;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends VisibleString
+ */
+class GeneralizedTime extends VisibleString
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "GeneralizedTime" class
+	 * @param {Object} [parameters={}]
+	 * @property {string} [value] String representatio of the date
+	 * @property {Date} [valueDate] JavaScript "Date" object
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.year = 0;
+		this.month = 0;
+		this.day = 0;
+		this.hour = 0;
+		this.minute = 0;
+		this.second = 0;
+		this.millisecond = 0;
+
+		//region Create UTCTime from ASN.1 UTC string value
+		if("value" in parameters)
+		{
+			this.fromString(parameters.value);
+
+			this.valueBlock.valueHex = new ArrayBuffer(parameters.value.length);
+			const view = new Uint8Array(this.valueBlock.valueHex);
+
+			for(let i = 0; i < parameters.value.length; i++)
+				view[i] = parameters.value.charCodeAt(i);
+		}
+		//endregion
+		//region Create GeneralizedTime from JavaScript Date type
+		if("valueDate" in parameters)
+		{
+			this.fromDate(parameters.valueDate);
+			this.valueBlock.valueHex = this.toBuffer();
+		}
+		//endregion
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 24; // GeneralizedTime
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		const resultOffset = this.valueBlock.fromBER(inputBuffer, inputOffset, (this.lenBlock.isIndefiniteForm === true) ? inputLength : this.lenBlock.length);
+		if(resultOffset === (-1))
+		{
+			this.error = this.valueBlock.error;
+			return resultOffset;
+		}
+
+		this.fromBuffer(this.valueBlock.valueHex);
+
+		if(this.idBlock.error.length === 0)
+			this.blockLength += this.idBlock.blockLength;
+
+		if(this.lenBlock.error.length === 0)
+			this.blockLength += this.lenBlock.blockLength;
+
+		if(this.valueBlock.error.length === 0)
+			this.blockLength += this.valueBlock.blockLength;
+
+		return resultOffset;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ArrayBuffer into ASN.1 internal string
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 */
+	fromBuffer(inputBuffer)
+	{
+		this.fromString(String.fromCharCode.apply(null, new Uint8Array(inputBuffer)));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ASN.1 internal string into ArrayBuffer
+	 * @returns {ArrayBuffer}
+	 */
+	toBuffer()
+	{
+		const str = this.toString();
+
+		const buffer = new ArrayBuffer(str.length);
+		const view = new Uint8Array(buffer);
+
+		for(let i = 0; i < str.length; i++)
+			view[i] = str.charCodeAt(i);
+
+		return buffer;
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting "Date" object into ASN.1 internal string
+	 * @param {!Date} inputDate JavaScript "Date" object
+	 */
+	fromDate(inputDate)
+	{
+		this.year = inputDate.getUTCFullYear();
+		this.month = inputDate.getUTCMonth() + 1;
+		this.day = inputDate.getUTCDate();
+		this.hour = inputDate.getUTCHours();
+		this.minute = inputDate.getUTCMinutes();
+		this.second = inputDate.getUTCSeconds();
+		this.millisecond = inputDate.getUTCMilliseconds();
+	}
+	//**********************************************************************************
+	//noinspection JSUnusedGlobalSymbols
+	/**
+	 * Function converting ASN.1 internal string into "Date" object
+	 * @returns {Date}
+	 */
+	toDate()
+	{
+		return (new Date(Date.UTC(this.year, this.month - 1, this.day, this.hour, this.minute, this.second, this.millisecond)));
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting JavaScript string into ASN.1 internal class
+	 * @param {!string} inputString ASN.1 BER encoded array
+	 */
+	fromString(inputString)
+	{
+		//region Initial variables
+		let isUTC = false;
+
+		let timeString = "";
+		let dateTimeString = "";
+		let fractionPart = 0;
+
+		let parser;
+
+		let hourDifference = 0;
+		let minuteDifference = 0;
+		//endregion
+
+		//region Convert as UTC time
+		if(inputString[inputString.length - 1] === "Z")
+		{
+			timeString = inputString.substr(0, inputString.length - 1);
+
+			isUTC = true;
+		}
+		//endregion
+		//region Convert as local time
+		else
+		{
+			//noinspection JSPrimitiveTypeWrapperUsage
+			const number = new Number(inputString[inputString.length - 1]);
+
+			if(isNaN(number.valueOf()))
+				throw new Error("Wrong input string for convertion");
+
+			timeString = inputString;
+		}
+		//endregion
+
+		//region Check that we do not have a "+" and "-" symbols inside UTC time
+		if(isUTC)
+		{
+			if(timeString.indexOf("+") !== (-1))
+				throw new Error("Wrong input string for convertion");
+
+			if(timeString.indexOf("-") !== (-1))
+				throw new Error("Wrong input string for convertion");
+		}
+		//endregion
+		//region Get "UTC time difference" in case of local time
+		else
+		{
+			let multiplier = 1;
+			let differencePosition = timeString.indexOf("+");
+			let differenceString = "";
+
+			if(differencePosition === (-1))
+			{
+				differencePosition = timeString.indexOf("-");
+				multiplier = (-1);
+			}
+
+			if(differencePosition !== (-1))
+			{
+				differenceString = timeString.substr(differencePosition + 1);
+				timeString = timeString.substr(0, differencePosition);
+
+				if((differenceString.length !== 2) && (differenceString.length !== 4))
+					throw new Error("Wrong input string for convertion");
+
+				//noinspection JSPrimitiveTypeWrapperUsage
+				let number = new Number(differenceString.substr(0, 2));
+
+				if(isNaN(number.valueOf()))
+					throw new Error("Wrong input string for convertion");
+
+				hourDifference = multiplier * number;
+
+				if(differenceString.length === 4)
+				{
+					//noinspection JSPrimitiveTypeWrapperUsage
+					number = new Number(differenceString.substr(2, 2));
+
+					if(isNaN(number.valueOf()))
+						throw new Error("Wrong input string for convertion");
+
+					minuteDifference = multiplier * number;
+				}
+			}
+		}
+		//endregion
+
+		//region Get position of fraction point
+		let fractionPointPosition = timeString.indexOf("."); // Check for "full stop" symbol
+		if(fractionPointPosition === (-1))
+			fractionPointPosition = timeString.indexOf(","); // Check for "comma" symbol
+		//endregion
+
+		//region Get fraction part
+		if(fractionPointPosition !== (-1))
+		{
+			//noinspection JSPrimitiveTypeWrapperUsage
+			const fractionPartCheck = new Number(`0${timeString.substr(fractionPointPosition)}`);
+
+			if(isNaN(fractionPartCheck.valueOf()))
+				throw new Error("Wrong input string for convertion");
+
+			fractionPart = fractionPartCheck.valueOf();
+
+			dateTimeString = timeString.substr(0, fractionPointPosition);
+		}
+		else
+			dateTimeString = timeString;
+		//endregion
+
+		//region Parse internal date
+		switch(true)
+		{
+			case (dateTimeString.length === 8): // "YYYYMMDD"
+				parser = /(\d{4})(\d{2})(\d{2})/ig;
+				if(fractionPointPosition !== (-1))
+					throw new Error("Wrong input string for convertion"); // Here we should not have a "fraction point"
+				break;
+			case (dateTimeString.length === 10): // "YYYYMMDDHH"
+				parser = /(\d{4})(\d{2})(\d{2})(\d{2})/ig;
+
+				if(fractionPointPosition !== (-1))
+				{
+					let fractionResult = 60 * fractionPart;
+					this.minute = Math.floor(fractionResult);
+
+					fractionResult = 60 * (fractionResult - this.minute);
+					this.second = Math.floor(fractionResult);
+
+					fractionResult = 1000 * (fractionResult - this.second);
+					this.millisecond = Math.floor(fractionResult);
+				}
+				break;
+			case (dateTimeString.length === 12): // "YYYYMMDDHHMM"
+				parser = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/ig;
+
+				if(fractionPointPosition !== (-1))
+				{
+					let fractionResult = 60 * fractionPart;
+					this.second = Math.floor(fractionResult);
+
+					fractionResult = 1000 * (fractionResult - this.second);
+					this.millisecond = Math.floor(fractionResult);
+				}
+				break;
+			case (dateTimeString.length === 14): // "YYYYMMDDHHMMSS"
+				parser = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/ig;
+
+				if(fractionPointPosition !== (-1))
+				{
+					const fractionResult = 1000 * fractionPart;
+					this.millisecond = Math.floor(fractionResult);
+				}
+				break;
+			default:
+				throw new Error("Wrong input string for convertion");
+		}
+		//endregion
+
+		//region Put parsed values at right places
+		const parserArray = parser.exec(dateTimeString);
+		if(parserArray === null)
+			throw new Error("Wrong input string for convertion");
+
+		for(let j = 1; j < parserArray.length; j++)
+		{
+			switch(j)
+			{
+				case 1:
+					this.year = parseInt(parserArray[j], 10);
+					break;
+				case 2:
+					this.month = parseInt(parserArray[j], 10);
+					break;
+				case 3:
+					this.day = parseInt(parserArray[j], 10);
+					break;
+				case 4:
+					this.hour = parseInt(parserArray[j], 10) + hourDifference;
+					break;
+				case 5:
+					this.minute = parseInt(parserArray[j], 10) + minuteDifference;
+					break;
+				case 6:
+					this.second = parseInt(parserArray[j], 10);
+					break;
+				default:
+					throw new Error("Wrong input string for convertion");
+			}
+		}
+		//endregion
+
+		//region Get final date
+		if(isUTC === false)
+		{
+			const tempDate = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
+
+			this.year = tempDate.getUTCFullYear();
+			this.month = tempDate.getUTCMonth();
+			this.day = tempDate.getUTCDay();
+			this.hour = tempDate.getUTCHours();
+			this.minute = tempDate.getUTCMinutes();
+			this.second = tempDate.getUTCSeconds();
+			this.millisecond = tempDate.getUTCMilliseconds();
+		}
+		//endregion
+	}
+	//**********************************************************************************
+	/**
+	 * Function converting ASN.1 internal class into JavaScript string
+	 * @returns {string}
+	 */
+	toString()
+	{
+		const outputArray = [];
+
+		outputArray.push(padNumber(this.year, 4));
+		outputArray.push(padNumber(this.month, 2));
+		outputArray.push(padNumber(this.day, 2));
+		outputArray.push(padNumber(this.hour, 2));
+		outputArray.push(padNumber(this.minute, 2));
+		outputArray.push(padNumber(this.second, 2));
+		if(this.millisecond !== 0)
+		{
+			outputArray.push(".");
+			outputArray.push(padNumber(this.millisecond, 3));
+		}
+		outputArray.push("Z");
+
+		return outputArray.join("");
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "GeneralizedTime";
+	}
+	//**********************************************************************************
+	/**
+	 * Convertion for the block to JSON object
+	 * @returns {Object}
+	 */
+	toJSON()
+	{
+		let object = {};
+		
+		//region Seems at the moment (Sep 2016) there is no way how to check method is supported in "super" object
+		try
+		{
+			object = super.toJSON();
+		}
+		catch(ex){}
+		//endregion
+
+		object.year = this.year;
+		object.month = this.month;
+		object.day = this.day;
+		object.hour = this.hour;
+		object.minute = this.minute;
+		object.second = this.second;
+		object.millisecond = this.millisecond;
+
+		return object;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends Utf8String
+ */
+class DATE extends Utf8String
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "DATE" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 31; // DATE
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "DATE";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends Utf8String
+ */
+class TimeOfDay extends Utf8String
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "TimeOfDay" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 32; // TimeOfDay
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "TimeOfDay";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends Utf8String
+ */
+class DateTime extends Utf8String
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "DateTime" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 33; // DateTime
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "DateTime";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends Utf8String
+ */
+class Duration extends Utf8String
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Duration" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 34; // Duration
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "Duration";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+/**
+ * @extends Utf8String
+ */
+class TIME extends Utf8String
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Time" class
+	 * @param {Object} [parameters={}]
+	 */
+	constructor(parameters = {})
+	{
+		super(parameters);
+
+		this.idBlock.tagClass = 1; // UNIVERSAL
+		this.idBlock.tagNumber = 14; // Time
+	}
+	//**********************************************************************************
+	/**
+	 * Aux function, need to get a block name. Need to have it here for inhiritence
+	 * @returns {string}
+	 */
+	static blockName()
+	{
+		return "TIME";
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of special ASN.1 schema type Choice
+//**************************************************************************************
+class Choice
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Choice" class
+	 * @param {Object} [parameters={}]
+	 * @property {Array} [value] Array of ASN.1 types for make a choice from
+	 * @property {boolean} [optional]
+	 */
+	constructor(parameters = {})
+	{
+		this.value = getParametersValue(parameters, "value", []);
+		this.optional = getParametersValue(parameters, "optional", false);
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of special ASN.1 schema type Any
+//**************************************************************************************
+class Any
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Any" class
+	 * @param {Object} [parameters={}]
+	 * @property {string} [name]
+	 * @property {boolean} [optional]
+	 */
+	constructor(parameters = {})
+	{
+		this.name = getParametersValue(parameters, "name", "");
+		this.optional = getParametersValue(parameters, "optional", false);
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of special ASN.1 schema type Repeated
+//**************************************************************************************
+class Repeated
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Repeated" class
+	 * @param {Object} [parameters={}]
+	 * @property {string} [name]
+	 * @property {boolean} [optional]
+	 */
+	constructor(parameters = {})
+	{
+		this.name = getParametersValue(parameters, "name", "");
+		this.optional = getParametersValue(parameters, "optional", false);
+		this.value = getParametersValue(parameters, "value", new Any());
+		this.local = getParametersValue(parameters, "local", false); // Could local or global array to store elements
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Declaration of special ASN.1 schema type RawData
+//**************************************************************************************
+/**
+ * @description Special class providing ability to have "toBER/fromBER" for raw ArrayBuffer
+ */
+class RawData
+{
+	//**********************************************************************************
+	/**
+	 * Constructor for "Repeated" class
+	 * @param {Object} [parameters={}]
+	 * @property {string} [name]
+	 * @property {boolean} [optional]
+	 */
+	constructor(parameters = {})
+	{
+		this.data = getParametersValue(parameters, "data", new ArrayBuffer(0));
+	}
+	//**********************************************************************************
+	/**
+	 * Base function for converting block from BER encoded array of bytes
+	 * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+	 * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+	 * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+	 * @returns {number} Offset after least decoded byte
+	 */
+	fromBER(inputBuffer, inputOffset, inputLength)
+	{
+		this.data = inputBuffer.slice(inputOffset, inputLength);
+		return (inputOffset + inputLength);
+	}
+	//**********************************************************************************
+	/**
+	 * Encoding of current ASN.1 block into ASN.1 encoded array (BER rules)
+	 * @param {boolean} [sizeOnly=false] Flag that we need only a size of encoding, not a real array of bytes
+	 * @returns {ArrayBuffer}
+	 */
+	toBER(sizeOnly = false)
+	{
+		return this.data;
+	}
+	//**********************************************************************************
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Major ASN.1 BER decoding function
+//**************************************************************************************
+/**
+ * Internal library function for decoding ASN.1 BER
+ * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array
+ * @param {!number} inputOffset Offset in ASN.1 BER encoded array where decoding should be started
+ * @param {!number} inputLength Maximum length of array of bytes which can be using in this function
+ * @returns {{offset: number, result: Object}}
+ */
+function LocalFromBER(inputBuffer, inputOffset, inputLength)
+{
+	const incomingOffset = inputOffset; // Need to store initial offset since "inputOffset" is changing in the function
+
+	//region Local function changing a type for ASN.1 classes
+	function localChangeType(inputObject, newType)
+	{
+		if(inputObject instanceof newType)
+			return inputObject;
+
+		const newObject = new newType();
+		newObject.idBlock = inputObject.idBlock;
+		newObject.lenBlock = inputObject.lenBlock;
+		newObject.warnings = inputObject.warnings;
+		//noinspection JSCheckFunctionSignatures
+		newObject.valueBeforeDecode = inputObject.valueBeforeDecode.slice(0);
+
+		return newObject;
+	}
+	//endregion
+
+	//region Create a basic ASN.1 type since we need to return errors and warnings from the function
+	let returnObject = new BaseBlock({}, Object);
+	//endregion
+
+	//region Basic check for parameters
+	const baseBlock = new LocalBaseBlock();
+	if(checkBufferParams(baseBlock, inputBuffer, inputOffset, inputLength) === false)
+	{
+		returnObject.error = baseBlock.error;
+		return {
+			offset: (-1),
+			result: returnObject
+		};
+	}
+	//endregion
+
+	//region Getting Uint8Array from ArrayBuffer
+	const intBuffer = new Uint8Array(inputBuffer, inputOffset, inputLength);
+	//endregion
+
+	//region Initial checks
+	if(intBuffer.length === 0)
+	{
+		returnObject.error = "Zero buffer length";
+		return {
+			offset: (-1),
+			result: returnObject
+		};
+	}
+	//endregion
+
+	//region Decode indentifcation block of ASN.1 BER structure
+	let resultOffset = returnObject.idBlock.fromBER(inputBuffer, inputOffset, inputLength);
+	returnObject.warnings.concat(returnObject.idBlock.warnings);
+	if(resultOffset === (-1))
+	{
+		returnObject.error = returnObject.idBlock.error;
+		return {
+			offset: (-1),
+			result: returnObject
+		};
+	}
+
+	inputOffset = resultOffset;
+	inputLength -= returnObject.idBlock.blockLength;
+	//endregion
+
+	//region Decode length block of ASN.1 BER structure
+	resultOffset = returnObject.lenBlock.fromBER(inputBuffer, inputOffset, inputLength);
+	returnObject.warnings.concat(returnObject.lenBlock.warnings);
+	if(resultOffset === (-1))
+	{
+		returnObject.error = returnObject.lenBlock.error;
+		return {
+			offset: (-1),
+			result: returnObject
+		};
+	}
+
+	inputOffset = resultOffset;
+	inputLength -= returnObject.lenBlock.blockLength;
+	//endregion
+
+	//region Check for usign indefinite length form in encoding for primitive types
+	if((returnObject.idBlock.isConstructed === false) &&
+		(returnObject.lenBlock.isIndefiniteForm === true))
+	{
+		returnObject.error = "Indefinite length form used for primitive encoding form";
+		return {
+			offset: (-1),
+			result: returnObject
+		};
+	}
+	//endregion
+
+	//region Switch ASN.1 block type
+	let newASN1Type = BaseBlock;
+
+	switch(returnObject.idBlock.tagClass)
+	{
+		//region UNIVERSAL
+		case 1:
+			//region Check for reserved tag numbers
+			if((returnObject.idBlock.tagNumber >= 37) &&
+				(returnObject.idBlock.isHexOnly === false))
+			{
+				returnObject.error = "UNIVERSAL 37 and upper tags are reserved by ASN.1 standard";
+				return {
+					offset: (-1),
+					result: returnObject
+				};
+			}
+			//endregion
+
+			switch(returnObject.idBlock.tagNumber)
+			{
+				//region EndOfContent type
+				case 0:
+					//region Check for EndOfContent type
+					if((returnObject.idBlock.isConstructed === true) &&
+						(returnObject.lenBlock.length > 0))
+					{
+						returnObject.error = "Type [UNIVERSAL 0] is reserved";
+						return {
+							offset: (-1),
+							result: returnObject
+						};
+					}
+					//endregion
+
+					newASN1Type = EndOfContent;
+
+					break;
+				//endregion
+				//region Boolean type
+				case 1:
+					newASN1Type = Boolean;
+					break;
+				//endregion
+				//region Integer type
+				case 2:
+					newASN1Type = Integer;
+					break;
+				//endregion
+				//region BitString type
+				case 3:
+					newASN1Type = BitString;
+					break;
+				//endregion
+				//region OctetString type
+				case 4:
+					newASN1Type = OctetString;
+					break;
+				//endregion
+				//region Null type
+				case 5:
+					newASN1Type = Null;
+					break;
+				//endregion
+				//region OBJECT IDENTIFIER type
+				case 6:
+					newASN1Type = ObjectIdentifier;
+					break;
+				//endregion
+				//region Enumerated type
+				case 10:
+					newASN1Type = Enumerated;
+					break;
+				//endregion
+				//region Utf8String type
+				case 12:
+					newASN1Type = Utf8String;
+					break;
+				//endregion
+				//region Time type
+				//region RELATIVE OBJECT IDENTIFIER type
+				case 13:
+					newASN1Type = RelativeObjectIdentifier;
+					break;
+				//endregion
+				case 14:
+					newASN1Type = TIME;
+					break;
+				//endregion
+				//region ASN.1 reserved type
+				case 15:
+					returnObject.error = "[UNIVERSAL 15] is reserved by ASN.1 standard";
+					return {
+						offset: (-1),
+						result: returnObject
+					};
+				//endregion
+				//region Sequence type
+				case 16:
+					newASN1Type = Sequence;
+					break;
+				//endregion
+				//region Set type
+				case 17:
+					newASN1Type = Set;
+					break;
+				//endregion
+				//region NumericString type
+				case 18:
+					newASN1Type = NumericString;
+					break;
+				//endregion
+				//region PrintableString type
+				case 19:
+					newASN1Type = PrintableString;
+					break;
+				//endregion
+				//region TeletexString type
+				case 20:
+					newASN1Type = TeletexString;
+					break;
+				//endregion
+				//region VideotexString type
+				case 21:
+					newASN1Type = VideotexString;
+					break;
+				//endregion
+				//region IA5String type
+				case 22:
+					newASN1Type = IA5String;
+					break;
+				//endregion
+				//region UTCTime type
+				case 23:
+					newASN1Type = UTCTime;
+					break;
+				//endregion
+				//region GeneralizedTime type
+				case 24:
+					newASN1Type = GeneralizedTime;
+					break;
+				//endregion
+				//region GraphicString type
+				case 25:
+					newASN1Type = GraphicString;
+					break;
+				//endregion
+				//region VisibleString type
+				case 26:
+					newASN1Type = VisibleString;
+					break;
+				//endregion
+				//region GeneralString type
+				case 27:
+					newASN1Type = GeneralString;
+					break;
+				//endregion
+				//region UniversalString type
+				case 28:
+					newASN1Type = UniversalString;
+					break;
+				//endregion
+				//region CharacterString type
+				case 29:
+					newASN1Type = CharacterString;
+					break;
+				//endregion
+				//region BmpString type
+				case 30:
+					newASN1Type = BmpString;
+					break;
+				//endregion
+				//region DATE type
+				case 31:
+					newASN1Type = DATE;
+					break;
+				//endregion
+				//region TimeOfDay type
+				case 32:
+					newASN1Type = TimeOfDay;
+					break;
+				//endregion
+				//region Date-Time type
+				case 33:
+					newASN1Type = DateTime;
+					break;
+				//endregion
+				//region Duration type
+				case 34:
+					newASN1Type = Duration;
+					break;
+				//endregion
+				//region default
+				default:
+					{
+						let newObject;
+
+						if(returnObject.idBlock.isConstructed === true)
+							newObject = new Constructed();
+						else
+							newObject = new Primitive();
+
+						newObject.idBlock = returnObject.idBlock;
+						newObject.lenBlock = returnObject.lenBlock;
+						newObject.warnings = returnObject.warnings;
+
+						returnObject = newObject;
+					}
+				//endregion
+			}
+			break;
+		//endregion
+		//region All other tag classes
+		case 2: // APPLICATION
+		case 3: // CONTEXT-SPECIFIC
+		case 4: // PRIVATE
+		default:
+			{
+				if(returnObject.idBlock.isConstructed === true)
+					newASN1Type = Constructed;
+				else
+					newASN1Type = Primitive;
+			}
+		//endregion
+	}
+	//endregion
+
+	//region Change type and perform BER decoding
+	returnObject = localChangeType(returnObject, newASN1Type);
+	resultOffset = returnObject.fromBER(inputBuffer, inputOffset, (returnObject.lenBlock.isIndefiniteForm === true) ? inputLength : returnObject.lenBlock.length);
+	//endregion
+
+	//region Coping incoming buffer for entire ASN.1 block
+	returnObject.valueBeforeDecode = inputBuffer.slice(incomingOffset, incomingOffset + returnObject.blockLength);
+	//endregion
+
+	return {
+		offset: resultOffset,
+		result: returnObject
+	};
+}
+//**************************************************************************************
+/**
+ * Major function for decoding ASN.1 BER array into internal library structuries
+ * @param {!ArrayBuffer} inputBuffer ASN.1 BER encoded array of bytes
+ */
+function fromBER(inputBuffer)
+{
+	if(inputBuffer.byteLength === 0)
+	{
+		const result = new BaseBlock({}, Object);
+		result.error = "Input buffer has zero length";
+
+		return {
+			offset: (-1),
+			result
+		};
+	}
+
+	return LocalFromBER(inputBuffer, 0, inputBuffer.byteLength);
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Major scheme verification function
+//**************************************************************************************
+/**
+ * Compare of two ASN.1 object trees
+ * @param {!Object} root Root of input ASN.1 object tree
+ * @param {!Object} inputData Input ASN.1 object tree
+ * @param {!Object} inputSchema Input ASN.1 schema to compare with
+ * @return {{verified: boolean}|{verified:boolean, result: Object}}
+ */
+function compareSchema(root, inputData, inputSchema)
+{
+	//region Special case for Choice schema element type
+	if(inputSchema instanceof Choice)
+	{
+		const choiceResult = false;
+
+		for(let j = 0; j < inputSchema.value.length; j++)
+		{
+			const result = compareSchema(root, inputData, inputSchema.value[j]);
+			if(result.verified === true)
+			{
+				return {
+					verified: true,
+					result: root
+				};
+			}
+		}
+
+		if(choiceResult === false)
+		{
+			const _result = {
+				verified: false,
+				result: {
+					error: "Wrong values for Choice type"
+				}
+			};
+
+			if(inputSchema.hasOwnProperty("name"))
+				_result.name = inputSchema.name;
+
+			return _result;
+		}
+	}
+	//endregion
+
+	//region Special case for Any schema element type
+	if(inputSchema instanceof Any)
+	{
+		//region Add named component of ASN.1 schema
+		if(inputSchema.hasOwnProperty("name"))
+			root[inputSchema.name] = inputData;
+		//endregion
+
+		return {
+			verified: true,
+			result: root
+		};
+	}
+	//endregion
+
+	//region Initial check
+	if((root instanceof Object) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong root object" }
+		};
+	}
+
+	if((inputData instanceof Object) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 data" }
+		};
+	}
+
+	if((inputSchema instanceof Object) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(("idBlock" in inputSchema) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+	//endregion
+
+	//region Comparing idBlock properties in ASN.1 data and ASN.1 schema
+	//region Encode and decode ASN.1 schema idBlock
+	/// <remarks>This encoding/decoding is neccessary because could be an errors in schema definition</remarks>
+	if(("fromBER" in inputSchema.idBlock) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(("toBER" in inputSchema.idBlock) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	const encodedId = inputSchema.idBlock.toBER(false);
+	if(encodedId.byteLength === 0)
+	{
+		return {
+			verified: false,
+			result: { error: "Error encoding idBlock for ASN.1 schema" }
+		};
+	}
+
+	const decodedOffset = inputSchema.idBlock.fromBER(encodedId, 0, encodedId.byteLength);
+	if(decodedOffset === (-1))
+	{
+		return {
+			verified: false,
+			result: { error: "Error decoding idBlock for ASN.1 schema" }
+		};
+	}
+	//endregion
+
+	//region tagClass
+	if(inputSchema.idBlock.hasOwnProperty("tagClass") === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(inputSchema.idBlock.tagClass !== inputData.idBlock.tagClass)
+	{
+		return {
+			verified: false,
+			result: root
+		};
+	}
+	//endregion
+	//region tagNumber
+	if(inputSchema.idBlock.hasOwnProperty("tagNumber") === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(inputSchema.idBlock.tagNumber !== inputData.idBlock.tagNumber)
+	{
+		return {
+			verified: false,
+			result: root
+		};
+	}
+	//endregion
+	//region isConstructed
+	if(inputSchema.idBlock.hasOwnProperty("isConstructed") === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(inputSchema.idBlock.isConstructed !== inputData.idBlock.isConstructed)
+	{
+		return {
+			verified: false,
+			result: root
+		};
+	}
+	//endregion
+	//region isHexOnly
+	if(("isHexOnly" in inputSchema.idBlock) === false) // Since 'isHexOnly' is an inhirited property
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema" }
+		};
+	}
+
+	if(inputSchema.idBlock.isHexOnly !== inputData.idBlock.isHexOnly)
+	{
+		return {
+			verified: false,
+			result: root
+		};
+	}
+	//endregion
+	//region valueHex
+	if(inputSchema.idBlock.isHexOnly === true)
+	{
+		if(("valueHex" in inputSchema.idBlock) === false) // Since 'valueHex' is an inhirited property
+		{
+			return {
+				verified: false,
+				result: { error: "Wrong ASN.1 schema" }
+			};
+		}
+
+		const schemaView = new Uint8Array(inputSchema.idBlock.valueHex);
+		const asn1View = new Uint8Array(inputData.idBlock.valueHex);
+
+		if(schemaView.length !== asn1View.length)
+		{
+			return {
+				verified: false,
+				result: root
+			};
+		}
+
+		for(let i = 0; i < schemaView.length; i++)
+		{
+			if(schemaView[i] !== asn1View[1])
+			{
+				return {
+					verified: false,
+					result: root
+				};
+			}
+		}
+	}
+	//endregion
+	//endregion
+
+	//region Add named component of ASN.1 schema
+	if(inputSchema.hasOwnProperty("name"))
+	{
+		inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+		if(inputSchema.name !== "")
+			root[inputSchema.name] = inputData;
+	}
+	//endregion
+
+	//region Getting next ASN.1 block for comparition
+	if(inputSchema.idBlock.isConstructed === true)
+	{
+		let admission = 0;
+		let result = { verified: false };
+
+		let maxLength = inputSchema.valueBlock.value.length;
+
+		if(maxLength > 0)
+		{
+			if(inputSchema.valueBlock.value[0] instanceof Repeated)
+				maxLength = inputData.valueBlock.value.length;
+		}
+
+		//region Special case when constructive value has no elements
+		if(maxLength === 0)
+		{
+			return {
+				verified: true,
+				result: root
+			};
+		}
+		//endregion
+
+		//region Special case when "inputData" has no values and "inputSchema" has all optional values
+		if((inputData.valueBlock.value.length === 0) &&
+			(inputSchema.valueBlock.value.length !== 0))
+		{
+			let _optional = true;
+
+			for(let i = 0; i < inputSchema.valueBlock.value.length; i++)
+				_optional = _optional && (inputSchema.valueBlock.value[i].optional || false);
+
+			if(_optional === true)
+			{
+				return {
+					verified: true,
+					result: root
+				};
+			}
+
+			//region Delete early added name of block
+			if(inputSchema.hasOwnProperty("name"))
+			{
+				inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+				if(inputSchema.name !== "")
+					delete root[inputSchema.name];
+			}
+			//endregion
+
+			root.error = "Inconsistent object length";
+
+			return {
+				verified: false,
+				result: root
+			};
+		}
+		//endregion
+
+		for(let i = 0; i < maxLength; i++)
+		{
+			//region Special case when there is an "optional" element of ASN.1 schema at the end
+			if((i - admission) >= inputData.valueBlock.value.length)
+			{
+				if(inputSchema.valueBlock.value[i].optional === false)
+				{
+					const _result = {
+						verified: false,
+						result: root
+					};
+
+					root.error = "Inconsistent length between ASN.1 data and schema";
+
+					//region Delete early added name of block
+					if(inputSchema.hasOwnProperty("name"))
+					{
+						inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+						if(inputSchema.name !== "")
+						{
+							delete root[inputSchema.name];
+							_result.name = inputSchema.name;
+						}
+					}
+					//endregion
+
+					return _result;
+				}
+			}
+			//endregion
+			else
+			{
+				//region Special case for Repeated type of ASN.1 schema element
+				if(inputSchema.valueBlock.value[0] instanceof Repeated)
+				{
+					result = compareSchema(root, inputData.valueBlock.value[i], inputSchema.valueBlock.value[0].value);
+					if(result.verified === false)
+					{
+						if(inputSchema.valueBlock.value[0].optional === true)
+							admission++;
+						else
+						{
+							//region Delete early added name of block
+							if(inputSchema.hasOwnProperty("name"))
+							{
+								inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+								if(inputSchema.name !== "")
+									delete root[inputSchema.name];
+							}
+							//endregion
+
+							return result;
+						}
+					}
+
+					if(("name" in inputSchema.valueBlock.value[0]) && (inputSchema.valueBlock.value[0].name.length > 0))
+					{
+						let arrayRoot = {};
+
+						if(("local" in inputSchema.valueBlock.value[0]) && (inputSchema.valueBlock.value[0].local === true))
+							arrayRoot = inputData;
+						else
+							arrayRoot = root;
+
+						if(typeof arrayRoot[inputSchema.valueBlock.value[0].name] === "undefined")
+							arrayRoot[inputSchema.valueBlock.value[0].name] = [];
+
+						arrayRoot[inputSchema.valueBlock.value[0].name].push(inputData.valueBlock.value[i]);
+					}
+				}
+				//endregion
+				else
+				{
+					result = compareSchema(root, inputData.valueBlock.value[i - admission], inputSchema.valueBlock.value[i]);
+					if(result.verified === false)
+					{
+						if(inputSchema.valueBlock.value[i].optional === true)
+							admission++;
+						else
+						{
+							//region Delete early added name of block
+							if(inputSchema.hasOwnProperty("name"))
+							{
+								inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+								if(inputSchema.name !== "")
+									delete root[inputSchema.name];
+							}
+							//endregion
+
+							return result;
+						}
+					}
+				}
+			}
+		}
+
+		if(result.verified === false) // The situation may take place if last element is "optional" and verification failed
+		{
+			const _result = {
+				verified: false,
+				result: root
+			};
+
+			//region Delete early added name of block
+			if(inputSchema.hasOwnProperty("name"))
+			{
+				inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+				if(inputSchema.name !== "")
+				{
+					delete root[inputSchema.name];
+					_result.name = inputSchema.name;
+				}
+			}
+			//endregion
+
+			return _result;
+		}
+
+		return {
+			verified: true,
+			result: root
+		};
+	}
+	//endregion
+	//region Ability to parse internal value for primitive-encoded value (value of OctetString, for example)
+	if(("primitiveSchema" in inputSchema) &&
+		("valueHex" in inputData.valueBlock))
+	{
+		//region Decoding of raw ASN.1 data
+		const asn1 = fromBER(inputData.valueBlock.valueHex);
+		if(asn1.offset === (-1))
+		{
+			const _result = {
+				verified: false,
+				result: asn1.result
+			};
+
+			//region Delete early added name of block
+			if(inputSchema.hasOwnProperty("name"))
+			{
+				inputSchema.name = inputSchema.name.replace(/^\s+|\s+$/g, "");
+				if(inputSchema.name !== "")
+				{
+					delete root[inputSchema.name];
+					_result.name = inputSchema.name;
+				}
+			}
+			//endregion
+
+			return _result;
+		}
+		//endregion
+
+		return compareSchema(root, asn1.result, inputSchema.primitiveSchema);
+	}
+
+	return {
+		verified: true,
+		result: root
+	};
+	//endregion
+}
+//**************************************************************************************
+//noinspection JSUnusedGlobalSymbols
+/**
+ * ASN.1 schema verification for ArrayBuffer data
+ * @param {!ArrayBuffer} inputBuffer Input BER-encoded ASN.1 data
+ * @param {!Object} inputSchema Input ASN.1 schema to verify against to
+ * @return {{verified: boolean}|{verified:boolean, result: Object}}
+ */
+function verifySchema(inputBuffer, inputSchema)
+{
+	//region Initial check
+	if((inputSchema instanceof Object) === false)
+	{
+		return {
+			verified: false,
+			result: { error: "Wrong ASN.1 schema type" }
+		};
+	}
+	//endregion
+
+	//region Decoding of raw ASN.1 data
+	const asn1 = fromBER(inputBuffer);
+	if(asn1.offset === (-1))
+	{
+		return {
+			verified: false,
+			result: asn1.result
+		};
+	}
+	//endregion
+
+	//region Compare ASN.1 struct with input schema
+	return compareSchema(asn1.result, asn1.result, inputSchema);
+	//endregion
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
+//region Major function converting JSON to ASN.1 objects
+//**************************************************************************************
+//noinspection JSUnusedGlobalSymbols
+/**
+ * Converting from JSON to ASN.1 objects
+ * @param {string|Object} json JSON string or object to convert to ASN.1 objects
+ */
+function fromJSON(json)
+{
+	// TODO Implement
+}
+//**************************************************************************************
+//endregion
+//**************************************************************************************
 
 
 /***/ }),
@@ -39451,6 +60325,1009 @@ if (typeof Object.create === 'function') {
 
 /***/ }),
 
+/***/ 6512:
+/***/ (function(module) {
+
+(function (root) {
+    'use strict';
+    // A list of regular expressions that match arbitrary IPv4 addresses,
+    // for which a number of weird notations exist.
+    // Note that an address like 0010.0xa5.1.1 is considered legal.
+    const ipv4Part = '(0?\\d+|0x[a-f0-9]+)';
+    const ipv4Regexes = {
+        fourOctet: new RegExp(`^${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}$`, 'i'),
+        threeOctet: new RegExp(`^${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}$`, 'i'),
+        twoOctet: new RegExp(`^${ipv4Part}\\.${ipv4Part}$`, 'i'),
+        longValue: new RegExp(`^${ipv4Part}$`, 'i')
+    };
+
+    // Regular Expression for checking Octal numbers
+    const octalRegex = new RegExp(`^0[0-7]+$`, 'i');
+    const hexRegex = new RegExp(`^0x[a-f0-9]+$`, 'i');
+
+    const zoneIndex = '%[0-9a-z]{1,}';
+
+    // IPv6-matching regular expressions.
+    // For IPv6, the task is simpler: it is enough to match the colon-delimited
+    // hexadecimal IPv6 and a transitional variant with dotted-decimal IPv4 at
+    // the end.
+    const ipv6Part = '(?:[0-9a-f]+::?)+';
+    const ipv6Regexes = {
+        zoneIndex: new RegExp(zoneIndex, 'i'),
+        'native': new RegExp(`^(::)?(${ipv6Part})?([0-9a-f]+)?(::)?(${zoneIndex})?$`, 'i'),
+        deprecatedTransitional: new RegExp(`^(?:::)(${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}(${zoneIndex})?)$`, 'i'),
+        transitional: new RegExp(`^((?:${ipv6Part})|(?:::)(?:${ipv6Part})?)${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}\\.${ipv4Part}(${zoneIndex})?$`, 'i')
+    };
+
+    // Expand :: in an IPv6 address or address part consisting of `parts` groups.
+    function expandIPv6 (string, parts) {
+        // More than one '::' means invalid adddress
+        if (string.indexOf('::') !== string.lastIndexOf('::')) {
+            return null;
+        }
+
+        let colonCount = 0;
+        let lastColon = -1;
+        let zoneId = (string.match(ipv6Regexes.zoneIndex) || [])[0];
+        let replacement, replacementCount;
+
+        // Remove zone index and save it for later
+        if (zoneId) {
+            zoneId = zoneId.substring(1);
+            string = string.replace(/%.+$/, '');
+        }
+
+        // How many parts do we already have?
+        while ((lastColon = string.indexOf(':', lastColon + 1)) >= 0) {
+            colonCount++;
+        }
+
+        // 0::0 is two parts more than ::
+        if (string.substr(0, 2) === '::') {
+            colonCount--;
+        }
+
+        if (string.substr(-2, 2) === '::') {
+            colonCount--;
+        }
+
+        // The following loop would hang if colonCount > parts
+        if (colonCount > parts) {
+            return null;
+        }
+
+        // replacement = ':' + '0:' * (parts - colonCount)
+        replacementCount = parts - colonCount;
+        replacement = ':';
+        while (replacementCount--) {
+            replacement += '0:';
+        }
+
+        // Insert the missing zeroes
+        string = string.replace('::', replacement);
+
+        // Trim any garbage which may be hanging around if :: was at the edge in
+        // the source strin
+        if (string[0] === ':') {
+            string = string.slice(1);
+        }
+
+        if (string[string.length - 1] === ':') {
+            string = string.slice(0, -1);
+        }
+
+        parts = (function () {
+            const ref = string.split(':');
+            const results = [];
+
+            for (let i = 0; i < ref.length; i++) {
+                results.push(parseInt(ref[i], 16));
+            }
+
+            return results;
+        })();
+
+        return {
+            parts: parts,
+            zoneId: zoneId
+        };
+    }
+
+    // A generic CIDR (Classless Inter-Domain Routing) RFC1518 range matcher.
+    function matchCIDR (first, second, partSize, cidrBits) {
+        if (first.length !== second.length) {
+            throw new Error('ipaddr: cannot match CIDR for objects with different lengths');
+        }
+
+        let part = 0;
+        let shift;
+
+        while (cidrBits > 0) {
+            shift = partSize - cidrBits;
+            if (shift < 0) {
+                shift = 0;
+            }
+
+            if (first[part] >> shift !== second[part] >> shift) {
+                return false;
+            }
+
+            cidrBits -= partSize;
+            part += 1;
+        }
+
+        return true;
+    }
+
+    function parseIntAuto (string) {
+        // Hexadedimal base 16 (0x#)
+        if (hexRegex.test(string)) {
+            return parseInt(string, 16);
+        }
+        // While octal representation is discouraged by ECMAScript 3
+        // and forbidden by ECMAScript 5, we silently allow it to
+        // work only if the rest of the string has numbers less than 8.
+        if (string[0] === '0' && !isNaN(parseInt(string[1], 10))) {
+        if (octalRegex.test(string)) {
+            return parseInt(string, 8);
+        }
+            throw new Error(`ipaddr: cannot parse ${string} as octal`);
+        }
+        // Always include the base 10 radix!
+        return parseInt(string, 10);
+    }
+
+    function padPart (part, length) {
+        while (part.length < length) {
+            part = `0${part}`;
+        }
+
+        return part;
+    }
+
+    const ipaddr = {};
+
+    // An IPv4 address (RFC791).
+    ipaddr.IPv4 = (function () {
+        // Constructs a new IPv4 address from an array of four octets
+        // in network order (MSB first)
+        // Verifies the input.
+        function IPv4 (octets) {
+            if (octets.length !== 4) {
+                throw new Error('ipaddr: ipv4 octet count should be 4');
+            }
+
+            let i, octet;
+
+            for (i = 0; i < octets.length; i++) {
+                octet = octets[i];
+                if (!((0 <= octet && octet <= 255))) {
+                    throw new Error('ipaddr: ipv4 octet should fit in 8 bits');
+                }
+            }
+
+            this.octets = octets;
+        }
+
+        // Special IPv4 address ranges.
+        // See also https://en.wikipedia.org/wiki/Reserved_IP_addresses
+        IPv4.prototype.SpecialRanges = {
+            unspecified: [[new IPv4([0, 0, 0, 0]), 8]],
+            broadcast: [[new IPv4([255, 255, 255, 255]), 32]],
+            // RFC3171
+            multicast: [[new IPv4([224, 0, 0, 0]), 4]],
+            // RFC3927
+            linkLocal: [[new IPv4([169, 254, 0, 0]), 16]],
+            // RFC5735
+            loopback: [[new IPv4([127, 0, 0, 0]), 8]],
+            // RFC6598
+            carrierGradeNat: [[new IPv4([100, 64, 0, 0]), 10]],
+            // RFC1918
+            'private': [
+                [new IPv4([10, 0, 0, 0]), 8],
+                [new IPv4([172, 16, 0, 0]), 12],
+                [new IPv4([192, 168, 0, 0]), 16]
+            ],
+            // Reserved and testing-only ranges; RFCs 5735, 5737, 2544, 1700
+            reserved: [
+                [new IPv4([192, 0, 0, 0]), 24],
+                [new IPv4([192, 0, 2, 0]), 24],
+                [new IPv4([192, 88, 99, 0]), 24],
+                [new IPv4([198, 51, 100, 0]), 24],
+                [new IPv4([203, 0, 113, 0]), 24],
+                [new IPv4([240, 0, 0, 0]), 4]
+            ]
+        };
+
+        // The 'kind' method exists on both IPv4 and IPv6 classes.
+        IPv4.prototype.kind = function () {
+            return 'ipv4';
+        };
+
+        // Checks if this address matches other one within given CIDR range.
+        IPv4.prototype.match = function (other, cidrRange) {
+            let ref;
+            if (cidrRange === undefined) {
+                ref = other;
+                other = ref[0];
+                cidrRange = ref[1];
+            }
+
+            if (other.kind() !== 'ipv4') {
+                throw new Error('ipaddr: cannot match ipv4 address with non-ipv4 one');
+            }
+
+            return matchCIDR(this.octets, other.octets, 8, cidrRange);
+        };
+
+        // returns a number of leading ones in IPv4 address, making sure that
+        // the rest is a solid sequence of 0's (valid netmask)
+        // returns either the CIDR length or null if mask is not valid
+        IPv4.prototype.prefixLengthFromSubnetMask = function () {
+            let cidr = 0;
+            // non-zero encountered stop scanning for zeroes
+            let stop = false;
+            // number of zeroes in octet
+            const zerotable = {
+                0: 8,
+                128: 7,
+                192: 6,
+                224: 5,
+                240: 4,
+                248: 3,
+                252: 2,
+                254: 1,
+                255: 0
+            };
+            let i, octet, zeros;
+
+            for (i = 3; i >= 0; i -= 1) {
+                octet = this.octets[i];
+                if (octet in zerotable) {
+                    zeros = zerotable[octet];
+                    if (stop && zeros !== 0) {
+                        return null;
+                    }
+
+                    if (zeros !== 8) {
+                        stop = true;
+                    }
+
+                    cidr += zeros;
+                } else {
+                    return null;
+                }
+            }
+
+            return 32 - cidr;
+        };
+
+        // Checks if the address corresponds to one of the special ranges.
+        IPv4.prototype.range = function () {
+            return ipaddr.subnetMatch(this, this.SpecialRanges);
+        };
+
+        // Returns an array of byte-sized values in network order (MSB first)
+        IPv4.prototype.toByteArray = function () {
+            return this.octets.slice(0);
+        };
+
+        // Converts this IPv4 address to an IPv4-mapped IPv6 address.
+        IPv4.prototype.toIPv4MappedAddress = function () {
+            return ipaddr.IPv6.parse(`::ffff:${this.toString()}`);
+        };
+
+        // Symmetrical method strictly for aligning with the IPv6 methods.
+        IPv4.prototype.toNormalizedString = function () {
+            return this.toString();
+        };
+
+        // Returns the address in convenient, decimal-dotted format.
+        IPv4.prototype.toString = function () {
+            return this.octets.join('.');
+        };
+
+        return IPv4;
+    })();
+
+    // A utility function to return broadcast address given the IPv4 interface and prefix length in CIDR notation
+    ipaddr.IPv4.broadcastAddressFromCIDR = function (string) {
+
+        try {
+            const cidr = this.parseCIDR(string);
+            const ipInterfaceOctets = cidr[0].toByteArray();
+            const subnetMaskOctets = this.subnetMaskFromPrefixLength(cidr[1]).toByteArray();
+            const octets = [];
+            let i = 0;
+            while (i < 4) {
+                // Broadcast address is bitwise OR between ip interface and inverted mask
+                octets.push(parseInt(ipInterfaceOctets[i], 10) | parseInt(subnetMaskOctets[i], 10) ^ 255);
+                i++;
+            }
+
+            return new this(octets);
+        } catch (e) {
+            throw new Error('ipaddr: the address does not have IPv4 CIDR format');
+        }
+    };
+
+    // Checks if a given string is formatted like IPv4 address.
+    ipaddr.IPv4.isIPv4 = function (string) {
+        return this.parser(string) !== null;
+    };
+
+    // Checks if a given string is a valid IPv4 address.
+    ipaddr.IPv4.isValid = function (string) {
+        try {
+            new this(this.parser(string));
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    // Checks if a given string is a full four-part IPv4 Address.
+    ipaddr.IPv4.isValidFourPartDecimal = function (string) {
+        if (ipaddr.IPv4.isValid(string) && string.match(/^(0|[1-9]\d*)(\.(0|[1-9]\d*)){3}$/)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    // A utility function to return network address given the IPv4 interface and prefix length in CIDR notation
+    ipaddr.IPv4.networkAddressFromCIDR = function (string) {
+        let cidr, i, ipInterfaceOctets, octets, subnetMaskOctets;
+
+        try {
+            cidr = this.parseCIDR(string);
+            ipInterfaceOctets = cidr[0].toByteArray();
+            subnetMaskOctets = this.subnetMaskFromPrefixLength(cidr[1]).toByteArray();
+            octets = [];
+            i = 0;
+            while (i < 4) {
+                // Network address is bitwise AND between ip interface and mask
+                octets.push(parseInt(ipInterfaceOctets[i], 10) & parseInt(subnetMaskOctets[i], 10));
+                i++;
+            }
+
+            return new this(octets);
+        } catch (e) {
+            throw new Error('ipaddr: the address does not have IPv4 CIDR format');
+        }
+    };
+
+    // Tries to parse and validate a string with IPv4 address.
+    // Throws an error if it fails.
+    ipaddr.IPv4.parse = function (string) {
+        const parts = this.parser(string);
+
+        if (parts === null) {
+            throw new Error('ipaddr: string is not formatted like an IPv4 Address');
+        }
+
+        return new this(parts);
+    };
+
+    // Parses the string as an IPv4 Address with CIDR Notation.
+    ipaddr.IPv4.parseCIDR = function (string) {
+        let match;
+
+        if ((match = string.match(/^(.+)\/(\d+)$/))) {
+            const maskLength = parseInt(match[2]);
+            if (maskLength >= 0 && maskLength <= 32) {
+                const parsed = [this.parse(match[1]), maskLength];
+                Object.defineProperty(parsed, 'toString', {
+                    value: function () {
+                        return this.join('/');
+                    }
+                });
+                return parsed;
+            }
+        }
+
+        throw new Error('ipaddr: string is not formatted like an IPv4 CIDR range');
+    };
+
+    // Classful variants (like a.b, where a is an octet, and b is a 24-bit
+    // value representing last three octets; this corresponds to a class C
+    // address) are omitted due to classless nature of modern Internet.
+    ipaddr.IPv4.parser = function (string) {
+        let match, part, value;
+
+        // parseInt recognizes all that octal & hexadecimal weirdness for us
+        if ((match = string.match(ipv4Regexes.fourOctet))) {
+            return (function () {
+                const ref = match.slice(1, 6);
+                const results = [];
+
+                for (let i = 0; i < ref.length; i++) {
+                    part = ref[i];
+                    results.push(parseIntAuto(part));
+                }
+
+                return results;
+            })();
+        } else if ((match = string.match(ipv4Regexes.longValue))) {
+            value = parseIntAuto(match[1]);
+            if (value > 0xffffffff || value < 0) {
+                throw new Error('ipaddr: address outside defined range');
+            }
+
+            return ((function () {
+                const results = [];
+                let shift;
+
+                for (shift = 0; shift <= 24; shift += 8) {
+                    results.push((value >> shift) & 0xff);
+                }
+
+                return results;
+            })()).reverse();
+        } else if ((match = string.match(ipv4Regexes.twoOctet))) {
+            return (function () {
+                const ref = match.slice(1, 4);
+                const results = [];
+
+                value = parseIntAuto(ref[1]);
+                if (value > 0xffffff || value < 0) {
+                    throw new Error('ipaddr: address outside defined range');
+                }
+
+                results.push(parseIntAuto(ref[0]));
+                results.push((value >> 16) & 0xff);
+                results.push((value >>  8) & 0xff);
+                results.push( value        & 0xff);
+
+                return results;
+            })();
+        } else if ((match = string.match(ipv4Regexes.threeOctet))) {
+            return (function () {
+                const ref = match.slice(1, 5);
+                const results = [];
+
+                value = parseIntAuto(ref[2]);
+                if (value > 0xffff || value < 0) {
+                    throw new Error('ipaddr: address outside defined range');
+                }
+
+                results.push(parseIntAuto(ref[0]));
+                results.push(parseIntAuto(ref[1]));
+                results.push((value >> 8) & 0xff);
+                results.push( value       & 0xff);
+
+                return results;
+            })();
+        } else {
+            return null;
+        }
+    };
+
+    // A utility function to return subnet mask in IPv4 format given the prefix length
+    ipaddr.IPv4.subnetMaskFromPrefixLength = function (prefix) {
+        prefix = parseInt(prefix);
+        if (prefix < 0 || prefix > 32) {
+            throw new Error('ipaddr: invalid IPv4 prefix length');
+        }
+
+        const octets = [0, 0, 0, 0];
+        let j = 0;
+        const filledOctetCount = Math.floor(prefix / 8);
+
+        while (j < filledOctetCount) {
+            octets[j] = 255;
+            j++;
+        }
+
+        if (filledOctetCount < 4) {
+            octets[filledOctetCount] = Math.pow(2, prefix % 8) - 1 << 8 - (prefix % 8);
+        }
+
+        return new this(octets);
+    };
+
+    // An IPv6 address (RFC2460)
+    ipaddr.IPv6 = (function () {
+        // Constructs an IPv6 address from an array of eight 16 - bit parts
+        // or sixteen 8 - bit parts in network order(MSB first).
+        // Throws an error if the input is invalid.
+        function IPv6 (parts, zoneId) {
+            let i, part;
+
+            if (parts.length === 16) {
+                this.parts = [];
+                for (i = 0; i <= 14; i += 2) {
+                    this.parts.push((parts[i] << 8) | parts[i + 1]);
+                }
+            } else if (parts.length === 8) {
+                this.parts = parts;
+            } else {
+                throw new Error('ipaddr: ipv6 part count should be 8 or 16');
+            }
+
+            for (i = 0; i < this.parts.length; i++) {
+                part = this.parts[i];
+                if (!((0 <= part && part <= 0xffff))) {
+                    throw new Error('ipaddr: ipv6 part should fit in 16 bits');
+                }
+            }
+
+            if (zoneId) {
+                this.zoneId = zoneId;
+            }
+        }
+
+        // Special IPv6 ranges
+        IPv6.prototype.SpecialRanges = {
+            // RFC4291, here and after
+            unspecified: [new IPv6([0, 0, 0, 0, 0, 0, 0, 0]), 128],
+            linkLocal: [new IPv6([0xfe80, 0, 0, 0, 0, 0, 0, 0]), 10],
+            multicast: [new IPv6([0xff00, 0, 0, 0, 0, 0, 0, 0]), 8],
+            loopback: [new IPv6([0, 0, 0, 0, 0, 0, 0, 1]), 128],
+            uniqueLocal: [new IPv6([0xfc00, 0, 0, 0, 0, 0, 0, 0]), 7],
+            ipv4Mapped: [new IPv6([0, 0, 0, 0, 0, 0xffff, 0, 0]), 96],
+            // RFC6145
+            rfc6145: [new IPv6([0, 0, 0, 0, 0xffff, 0, 0, 0]), 96],
+            // RFC6052
+            rfc6052: [new IPv6([0x64, 0xff9b, 0, 0, 0, 0, 0, 0]), 96],
+            // RFC3056
+            '6to4': [new IPv6([0x2002, 0, 0, 0, 0, 0, 0, 0]), 16],
+            // RFC6052, RFC6146
+            teredo: [new IPv6([0x2001, 0, 0, 0, 0, 0, 0, 0]), 32],
+            // RFC4291
+            reserved: [[new IPv6([0x2001, 0xdb8, 0, 0, 0, 0, 0, 0]), 32]]
+        };
+
+        // Checks if this address is an IPv4-mapped IPv6 address.
+        IPv6.prototype.isIPv4MappedAddress = function () {
+            return this.range() === 'ipv4Mapped';
+        };
+
+        // The 'kind' method exists on both IPv4 and IPv6 classes.
+        IPv6.prototype.kind = function () {
+            return 'ipv6';
+        };
+
+        // Checks if this address matches other one within given CIDR range.
+        IPv6.prototype.match = function (other, cidrRange) {
+            let ref;
+
+            if (cidrRange === undefined) {
+                ref = other;
+                other = ref[0];
+                cidrRange = ref[1];
+            }
+
+            if (other.kind() !== 'ipv6') {
+                throw new Error('ipaddr: cannot match ipv6 address with non-ipv6 one');
+            }
+
+            return matchCIDR(this.parts, other.parts, 16, cidrRange);
+        };
+
+        // returns a number of leading ones in IPv6 address, making sure that
+        // the rest is a solid sequence of 0's (valid netmask)
+        // returns either the CIDR length or null if mask is not valid
+        IPv6.prototype.prefixLengthFromSubnetMask = function () {
+            let cidr = 0;
+            // non-zero encountered stop scanning for zeroes
+            let stop = false;
+            // number of zeroes in octet
+            const zerotable = {
+                0: 16,
+                32768: 15,
+                49152: 14,
+                57344: 13,
+                61440: 12,
+                63488: 11,
+                64512: 10,
+                65024: 9,
+                65280: 8,
+                65408: 7,
+                65472: 6,
+                65504: 5,
+                65520: 4,
+                65528: 3,
+                65532: 2,
+                65534: 1,
+                65535: 0
+            };
+            let part, zeros;
+
+            for (let i = 7; i >= 0; i -= 1) {
+                part = this.parts[i];
+                if (part in zerotable) {
+                    zeros = zerotable[part];
+                    if (stop && zeros !== 0) {
+                        return null;
+                    }
+
+                    if (zeros !== 16) {
+                        stop = true;
+                    }
+
+                    cidr += zeros;
+                } else {
+                    return null;
+                }
+            }
+
+            return 128 - cidr;
+        };
+
+
+        // Checks if the address corresponds to one of the special ranges.
+        IPv6.prototype.range = function () {
+            return ipaddr.subnetMatch(this, this.SpecialRanges);
+        };
+
+        // Returns an array of byte-sized values in network order (MSB first)
+        IPv6.prototype.toByteArray = function () {
+            let part;
+            const bytes = [];
+            const ref = this.parts;
+            for (let i = 0; i < ref.length; i++) {
+                part = ref[i];
+                bytes.push(part >> 8);
+                bytes.push(part & 0xff);
+            }
+
+            return bytes;
+        };
+
+        // Returns the address in expanded format with all zeroes included, like
+        // 2001:0db8:0008:0066:0000:0000:0000:0001
+        IPv6.prototype.toFixedLengthString = function () {
+            const addr = ((function () {
+                const results = [];
+                for (let i = 0; i < this.parts.length; i++) {
+                    results.push(padPart(this.parts[i].toString(16), 4));
+                }
+
+                return results;
+            }).call(this)).join(':');
+
+            let suffix = '';
+
+            if (this.zoneId) {
+                suffix = `%${this.zoneId}`;
+            }
+
+            return addr + suffix;
+        };
+
+        // Converts this address to IPv4 address if it is an IPv4-mapped IPv6 address.
+        // Throws an error otherwise.
+        IPv6.prototype.toIPv4Address = function () {
+            if (!this.isIPv4MappedAddress()) {
+                throw new Error('ipaddr: trying to convert a generic ipv6 address to ipv4');
+            }
+
+            const ref = this.parts.slice(-2);
+            const high = ref[0];
+            const low = ref[1];
+
+            return new ipaddr.IPv4([high >> 8, high & 0xff, low >> 8, low & 0xff]);
+        };
+
+        // Returns the address in expanded format with all zeroes included, like
+        // 2001:db8:8:66:0:0:0:1
+        //
+        // Deprecated: use toFixedLengthString() instead.
+        IPv6.prototype.toNormalizedString = function () {
+            const addr = ((function () {
+                const results = [];
+
+                for (let i = 0; i < this.parts.length; i++) {
+                    results.push(this.parts[i].toString(16));
+                }
+
+                return results;
+            }).call(this)).join(':');
+
+            let suffix = '';
+
+            if (this.zoneId) {
+                suffix = `%${this.zoneId}`;
+            }
+
+            return addr + suffix;
+        };
+
+        // Returns the address in compact, human-readable format like
+        // 2001:db8:8:66::1
+        // in line with RFC 5952 (see https://tools.ietf.org/html/rfc5952#section-4)
+        IPv6.prototype.toRFC5952String = function () {
+            const regex = /((^|:)(0(:|$)){2,})/g;
+            const string = this.toNormalizedString();
+            let bestMatchIndex = 0;
+            let bestMatchLength = -1;
+            let match;
+
+            while ((match = regex.exec(string))) {
+                if (match[0].length > bestMatchLength) {
+                    bestMatchIndex = match.index;
+                    bestMatchLength = match[0].length;
+                }
+            }
+
+            if (bestMatchLength < 0) {
+                return string;
+            }
+
+            return `${string.substring(0, bestMatchIndex)}::${string.substring(bestMatchIndex + bestMatchLength)}`;
+        };
+
+        // Returns the address in compact, human-readable format like
+        // 2001:db8:8:66::1
+        //
+        // Deprecated: use toRFC5952String() instead.
+        IPv6.prototype.toString = function () {
+            // Replace the first sequence of 1 or more '0' parts with '::'
+            return this.toNormalizedString().replace(/((^|:)(0(:|$))+)/, '::');
+        };
+
+        return IPv6;
+
+    })();
+
+    // A utility function to return broadcast address given the IPv6 interface and prefix length in CIDR notation
+    ipaddr.IPv6.broadcastAddressFromCIDR = function (string) {
+        try {
+            const cidr = this.parseCIDR(string);
+            const ipInterfaceOctets = cidr[0].toByteArray();
+            const subnetMaskOctets = this.subnetMaskFromPrefixLength(cidr[1]).toByteArray();
+            const octets = [];
+            let i = 0;
+            while (i < 16) {
+                // Broadcast address is bitwise OR between ip interface and inverted mask
+                octets.push(parseInt(ipInterfaceOctets[i], 10) | parseInt(subnetMaskOctets[i], 10) ^ 255);
+                i++;
+            }
+
+            return new this(octets);
+        } catch (e) {
+            throw new Error(`ipaddr: the address does not have IPv6 CIDR format (${e})`);
+        }
+    };
+
+    // Checks if a given string is formatted like IPv6 address.
+    ipaddr.IPv6.isIPv6 = function (string) {
+        return this.parser(string) !== null;
+    };
+
+    // Checks to see if string is a valid IPv6 Address
+    ipaddr.IPv6.isValid = function (string) {
+
+        // Since IPv6.isValid is always called first, this shortcut
+        // provides a substantial performance gain.
+        if (typeof string === 'string' && string.indexOf(':') === -1) {
+            return false;
+        }
+
+        try {
+            const addr = this.parser(string);
+            new this(addr.parts, addr.zoneId);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    // A utility function to return network address given the IPv6 interface and prefix length in CIDR notation
+    ipaddr.IPv6.networkAddressFromCIDR = function (string) {
+        let cidr, i, ipInterfaceOctets, octets, subnetMaskOctets;
+
+        try {
+            cidr = this.parseCIDR(string);
+            ipInterfaceOctets = cidr[0].toByteArray();
+            subnetMaskOctets = this.subnetMaskFromPrefixLength(cidr[1]).toByteArray();
+            octets = [];
+            i = 0;
+            while (i < 16) {
+                // Network address is bitwise AND between ip interface and mask
+                octets.push(parseInt(ipInterfaceOctets[i], 10) & parseInt(subnetMaskOctets[i], 10));
+                i++;
+            }
+
+            return new this(octets);
+        } catch (e) {
+            throw new Error(`ipaddr: the address does not have IPv6 CIDR format (${e})`);
+        }
+    };
+
+    // Tries to parse and validate a string with IPv6 address.
+    // Throws an error if it fails.
+    ipaddr.IPv6.parse = function (string) {
+        const addr = this.parser(string);
+
+        if (addr.parts === null) {
+            throw new Error('ipaddr: string is not formatted like an IPv6 Address');
+        }
+
+        return new this(addr.parts, addr.zoneId);
+    };
+
+    ipaddr.IPv6.parseCIDR = function (string) {
+        let maskLength, match, parsed;
+
+        if ((match = string.match(/^(.+)\/(\d+)$/))) {
+            maskLength = parseInt(match[2]);
+            if (maskLength >= 0 && maskLength <= 128) {
+                parsed = [this.parse(match[1]), maskLength];
+                Object.defineProperty(parsed, 'toString', {
+                    value: function () {
+                        return this.join('/');
+                    }
+                });
+                return parsed;
+            }
+        }
+
+        throw new Error('ipaddr: string is not formatted like an IPv6 CIDR range');
+    };
+
+    // Parse an IPv6 address.
+    ipaddr.IPv6.parser = function (string) {
+        let addr, i, match, octet, octets, zoneId;
+
+        if ((match = string.match(ipv6Regexes.deprecatedTransitional))) {
+            return this.parser(`::ffff:${match[1]}`);
+        }
+        if (ipv6Regexes.native.test(string)) {
+            return expandIPv6(string, 8);
+        }
+        if ((match = string.match(ipv6Regexes.transitional))) {
+            zoneId = match[6] || '';
+            addr = expandIPv6(match[1].slice(0, -1) + zoneId, 6);
+            if (addr.parts) {
+                octets = [
+                    parseInt(match[2]),
+                    parseInt(match[3]),
+                    parseInt(match[4]),
+                    parseInt(match[5])
+                ];
+                for (i = 0; i < octets.length; i++) {
+                    octet = octets[i];
+                    if (!((0 <= octet && octet <= 255))) {
+                        return null;
+                    }
+                }
+
+                addr.parts.push(octets[0] << 8 | octets[1]);
+                addr.parts.push(octets[2] << 8 | octets[3]);
+                return {
+                    parts: addr.parts,
+                    zoneId: addr.zoneId
+                };
+            }
+        }
+
+        return null;
+    };
+
+    // A utility function to return subnet mask in IPv6 format given the prefix length
+    ipaddr.IPv6.subnetMaskFromPrefixLength = function (prefix) {
+        prefix = parseInt(prefix);
+        if (prefix < 0 || prefix > 128) {
+            throw new Error('ipaddr: invalid IPv6 prefix length');
+        }
+
+        const octets = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let j = 0;
+        const filledOctetCount = Math.floor(prefix / 8);
+
+        while (j < filledOctetCount) {
+            octets[j] = 255;
+            j++;
+        }
+
+        if (filledOctetCount < 16) {
+            octets[filledOctetCount] = Math.pow(2, prefix % 8) - 1 << 8 - (prefix % 8);
+        }
+
+        return new this(octets);
+    };
+
+    // Try to parse an array in network order (MSB first) for IPv4 and IPv6
+    ipaddr.fromByteArray = function (bytes) {
+        const length = bytes.length;
+
+        if (length === 4) {
+            return new ipaddr.IPv4(bytes);
+        } else if (length === 16) {
+            return new ipaddr.IPv6(bytes);
+        } else {
+            throw new Error('ipaddr: the binary input is neither an IPv6 nor IPv4 address');
+        }
+    };
+
+    // Checks if the address is valid IP address
+    ipaddr.isValid = function (string) {
+        return ipaddr.IPv6.isValid(string) || ipaddr.IPv4.isValid(string);
+    };
+
+
+    // Attempts to parse an IP Address, first through IPv6 then IPv4.
+    // Throws an error if it could not be parsed.
+    ipaddr.parse = function (string) {
+        if (ipaddr.IPv6.isValid(string)) {
+            return ipaddr.IPv6.parse(string);
+        } else if (ipaddr.IPv4.isValid(string)) {
+            return ipaddr.IPv4.parse(string);
+        } else {
+            throw new Error('ipaddr: the address has neither IPv6 nor IPv4 format');
+        }
+    };
+
+    // Attempt to parse CIDR notation, first through IPv6 then IPv4.
+    // Throws an error if it could not be parsed.
+    ipaddr.parseCIDR = function (string) {
+        try {
+            return ipaddr.IPv6.parseCIDR(string);
+        } catch (e) {
+            try {
+                return ipaddr.IPv4.parseCIDR(string);
+            } catch (e2) {
+                throw new Error('ipaddr: the address has neither IPv6 nor IPv4 CIDR format');
+            }
+        }
+    };
+
+    // Parse an address and return plain IPv4 address if it is an IPv4-mapped address
+    ipaddr.process = function (string) {
+        const addr = this.parse(string);
+
+        if (addr.kind() === 'ipv6' && addr.isIPv4MappedAddress()) {
+            return addr.toIPv4Address();
+        } else {
+            return addr;
+        }
+    };
+
+    // An utility function to ease named range matching. See examples below.
+    // rangeList can contain both IPv4 and IPv6 subnet entries and will not throw errors
+    // on matching IPv4 addresses to IPv6 ranges or vice versa.
+    ipaddr.subnetMatch = function (address, rangeList, defaultName) {
+        let i, rangeName, rangeSubnets, subnet;
+
+        if (defaultName === undefined || defaultName === null) {
+            defaultName = 'unicast';
+        }
+
+        for (rangeName in rangeList) {
+            if (Object.prototype.hasOwnProperty.call(rangeList, rangeName)) {
+                rangeSubnets = rangeList[rangeName];
+                // ECMA5 Array.isArray isn't available everywhere
+                if (rangeSubnets[0] && !(rangeSubnets[0] instanceof Array)) {
+                    rangeSubnets = [rangeSubnets];
+                }
+
+                for (i = 0; i < rangeSubnets.length; i++) {
+                    subnet = rangeSubnets[i];
+                    if (address.kind() === subnet[0].kind() && address.match.apply(address, subnet)) {
+                        return rangeName;
+                    }
+                }
+            }
+        }
+
+        return defaultName;
+    };
+
+    // Export for both the CommonJS and browser-like environment
+    if ( true && module.exports) {
+        module.exports = ipaddr;
+
+    } else {
+        root.ipaddr = ipaddr;
+    }
+
+}(this));
+
+
+/***/ }),
+
 /***/ 2584:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -53624,6 +75501,353 @@ module.exports = function xor (a, b) {
 
 /***/ }),
 
+/***/ 2043:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/* provided dependency */ var Buffer = __webpack_require__(8764)["Buffer"];
+/**
+ * Copyright (c) 2020, Peculiar Ventures, All rights reserved.
+ */
+
+(function (global, factory) {
+   true ? factory(exports) :
+  0;
+})(this, (function (exports) { 'use strict';
+
+  class BufferSourceConverter {
+      static isArrayBuffer(data) {
+          return Object.prototype.toString.call(data) === '[object ArrayBuffer]';
+      }
+      static toArrayBuffer(data) {
+          const buf = this.toUint8Array(data);
+          if (buf.byteOffset || buf.length) {
+              return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length);
+          }
+          return buf.buffer;
+      }
+      static toUint8Array(data) {
+          return this.toView(data, Uint8Array);
+      }
+      static toView(data, type) {
+          if (typeof Buffer !== "undefined" && Buffer.isBuffer(data)) {
+              return new type(data.buffer, data.byteOffset, data.byteLength);
+          }
+          if (this.isArrayBuffer(data)) {
+              return new type(data);
+          }
+          if (this.isArrayBufferView(data)) {
+              return new type(data.buffer, data.byteOffset, data.byteLength);
+          }
+          throw new TypeError("The provided value is not of type '(ArrayBuffer or ArrayBufferView)'");
+      }
+      static isBufferSource(data) {
+          return this.isArrayBufferView(data)
+              || this.isArrayBuffer(data);
+      }
+      static isArrayBufferView(data) {
+          return ArrayBuffer.isView(data)
+              || (data && this.isArrayBuffer(data.buffer));
+      }
+      static isEqual(a, b) {
+          const aView = BufferSourceConverter.toUint8Array(a);
+          const bView = BufferSourceConverter.toUint8Array(b);
+          if (aView.length !== bView.byteLength) {
+              return false;
+          }
+          for (let i = 0; i < aView.length; i++) {
+              if (aView[i] !== bView[i]) {
+                  return false;
+              }
+          }
+          return true;
+      }
+  }
+
+  class Utf8Converter {
+      static fromString(text) {
+          const s = unescape(encodeURIComponent(text));
+          const uintArray = new Uint8Array(s.length);
+          for (let i = 0; i < s.length; i++) {
+              uintArray[i] = s.charCodeAt(i);
+          }
+          return uintArray.buffer;
+      }
+      static toString(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          let encodedString = "";
+          for (let i = 0; i < buf.length; i++) {
+              encodedString += String.fromCharCode(buf[i]);
+          }
+          const decodedString = decodeURIComponent(escape(encodedString));
+          return decodedString;
+      }
+  }
+  class Utf16Converter {
+      static toString(buffer, littleEndian = false) {
+          const arrayBuffer = BufferSourceConverter.toArrayBuffer(buffer);
+          const dataView = new DataView(arrayBuffer);
+          let res = "";
+          for (let i = 0; i < arrayBuffer.byteLength; i += 2) {
+              const code = dataView.getUint16(i, littleEndian);
+              res += String.fromCharCode(code);
+          }
+          return res;
+      }
+      static fromString(text, littleEndian = false) {
+          const res = new ArrayBuffer(text.length * 2);
+          const dataView = new DataView(res);
+          for (let i = 0; i < text.length; i++) {
+              dataView.setUint16(i * 2, text.charCodeAt(i), littleEndian);
+          }
+          return res;
+      }
+  }
+  class Convert {
+      static isHex(data) {
+          return typeof data === "string"
+              && /^[a-z0-9]+$/i.test(data);
+      }
+      static isBase64(data) {
+          return typeof data === "string"
+              && /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(data);
+      }
+      static isBase64Url(data) {
+          return typeof data === "string"
+              && /^[a-zA-Z0-9-_]+$/i.test(data);
+      }
+      static ToString(buffer, enc = "utf8") {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          switch (enc.toLowerCase()) {
+              case "utf8":
+                  return this.ToUtf8String(buf);
+              case "binary":
+                  return this.ToBinary(buf);
+              case "hex":
+                  return this.ToHex(buf);
+              case "base64":
+                  return this.ToBase64(buf);
+              case "base64url":
+                  return this.ToBase64Url(buf);
+              case "utf16le":
+                  return Utf16Converter.toString(buf, true);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.toString(buf);
+              default:
+                  throw new Error(`Unknown type of encoding '${enc}'`);
+          }
+      }
+      static FromString(str, enc = "utf8") {
+          if (!str) {
+              return new ArrayBuffer(0);
+          }
+          switch (enc.toLowerCase()) {
+              case "utf8":
+                  return this.FromUtf8String(str);
+              case "binary":
+                  return this.FromBinary(str);
+              case "hex":
+                  return this.FromHex(str);
+              case "base64":
+                  return this.FromBase64(str);
+              case "base64url":
+                  return this.FromBase64Url(str);
+              case "utf16le":
+                  return Utf16Converter.fromString(str, true);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.fromString(str);
+              default:
+                  throw new Error(`Unknown type of encoding '${enc}'`);
+          }
+      }
+      static ToBase64(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          if (typeof btoa !== "undefined") {
+              const binary = this.ToString(buf, "binary");
+              return btoa(binary);
+          }
+          else {
+              return Buffer.from(buf).toString("base64");
+          }
+      }
+      static FromBase64(base64) {
+          const formatted = this.formatString(base64);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isBase64(formatted)) {
+              throw new TypeError("Argument 'base64Text' is not Base64 encoded");
+          }
+          if (typeof atob !== "undefined") {
+              return this.FromBinary(atob(formatted));
+          }
+          else {
+              return new Uint8Array(Buffer.from(formatted, "base64")).buffer;
+          }
+      }
+      static FromBase64Url(base64url) {
+          const formatted = this.formatString(base64url);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isBase64Url(formatted)) {
+              throw new TypeError("Argument 'base64url' is not Base64Url encoded");
+          }
+          return this.FromBase64(this.Base64Padding(formatted.replace(/\-/g, "+").replace(/\_/g, "/")));
+      }
+      static ToBase64Url(data) {
+          return this.ToBase64(data).replace(/\+/g, "-").replace(/\//g, "_").replace(/\=/g, "");
+      }
+      static FromUtf8String(text, encoding = Convert.DEFAULT_UTF8_ENCODING) {
+          switch (encoding) {
+              case "ascii":
+                  return this.FromBinary(text);
+              case "utf8":
+                  return Utf8Converter.fromString(text);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.fromString(text);
+              case "utf16le":
+              case "usc2":
+                  return Utf16Converter.fromString(text, true);
+              default:
+                  throw new Error(`Unknown type of encoding '${encoding}'`);
+          }
+      }
+      static ToUtf8String(buffer, encoding = Convert.DEFAULT_UTF8_ENCODING) {
+          switch (encoding) {
+              case "ascii":
+                  return this.ToBinary(buffer);
+              case "utf8":
+                  return Utf8Converter.toString(buffer);
+              case "utf16":
+              case "utf16be":
+                  return Utf16Converter.toString(buffer);
+              case "utf16le":
+              case "usc2":
+                  return Utf16Converter.toString(buffer, true);
+              default:
+                  throw new Error(`Unknown type of encoding '${encoding}'`);
+          }
+      }
+      static FromBinary(text) {
+          const stringLength = text.length;
+          const resultView = new Uint8Array(stringLength);
+          for (let i = 0; i < stringLength; i++) {
+              resultView[i] = text.charCodeAt(i);
+          }
+          return resultView.buffer;
+      }
+      static ToBinary(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          let res = "";
+          for (let i = 0; i < buf.length; i++) {
+              res += String.fromCharCode(buf[i]);
+          }
+          return res;
+      }
+      static ToHex(buffer) {
+          const buf = BufferSourceConverter.toUint8Array(buffer);
+          const splitter = "";
+          const res = [];
+          const len = buf.length;
+          for (let i = 0; i < len; i++) {
+              const char = buf[i].toString(16).padStart(2, "0");
+              res.push(char);
+          }
+          return res.join(splitter);
+      }
+      static FromHex(hexString) {
+          let formatted = this.formatString(hexString);
+          if (!formatted) {
+              return new ArrayBuffer(0);
+          }
+          if (!Convert.isHex(formatted)) {
+              throw new TypeError("Argument 'hexString' is not HEX encoded");
+          }
+          if (formatted.length % 2) {
+              formatted = `0${formatted}`;
+          }
+          const res = new Uint8Array(formatted.length / 2);
+          for (let i = 0; i < formatted.length; i = i + 2) {
+              const c = formatted.slice(i, i + 2);
+              res[i / 2] = parseInt(c, 16);
+          }
+          return res.buffer;
+      }
+      static ToUtf16String(buffer, littleEndian = false) {
+          return Utf16Converter.toString(buffer, littleEndian);
+      }
+      static FromUtf16String(text, littleEndian = false) {
+          return Utf16Converter.fromString(text, littleEndian);
+      }
+      static Base64Padding(base64) {
+          const padCount = 4 - (base64.length % 4);
+          if (padCount < 4) {
+              for (let i = 0; i < padCount; i++) {
+                  base64 += "=";
+              }
+          }
+          return base64;
+      }
+      static formatString(data) {
+          return (data === null || data === void 0 ? void 0 : data.replace(/[\n\r\t ]/g, "")) || "";
+      }
+  }
+  Convert.DEFAULT_UTF8_ENCODING = "utf8";
+
+  function assign(target, ...sources) {
+      const res = arguments[0];
+      for (let i = 1; i < arguments.length; i++) {
+          const obj = arguments[i];
+          for (const prop in obj) {
+              res[prop] = obj[prop];
+          }
+      }
+      return res;
+  }
+  function combine(...buf) {
+      const totalByteLength = buf.map((item) => item.byteLength).reduce((prev, cur) => prev + cur);
+      const res = new Uint8Array(totalByteLength);
+      let currentPos = 0;
+      buf.map((item) => new Uint8Array(item)).forEach((arr) => {
+          for (const item2 of arr) {
+              res[currentPos++] = item2;
+          }
+      });
+      return res.buffer;
+  }
+  function isEqual(bytes1, bytes2) {
+      if (!(bytes1 && bytes2)) {
+          return false;
+      }
+      if (bytes1.byteLength !== bytes2.byteLength) {
+          return false;
+      }
+      const b1 = new Uint8Array(bytes1);
+      const b2 = new Uint8Array(bytes2);
+      for (let i = 0; i < bytes1.byteLength; i++) {
+          if (b1[i] !== b2[i]) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  exports.BufferSourceConverter = BufferSourceConverter;
+  exports.Convert = Convert;
+  exports.assign = assign;
+  exports.combine = combine;
+  exports.isEqual = isEqual;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+}));
+
+
+/***/ }),
+
 /***/ 1798:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -57001,6 +79225,1145 @@ exports.pipeline = __webpack_require__(9946);
 
 /***/ }),
 
+/***/ 8660:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+/* provided dependency */ var process = __webpack_require__(4155);
+/*! *****************************************************************************
+Copyright (C) Microsoft. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+var Reflect;
+(function (Reflect) {
+    // Metadata Proposal
+    // https://rbuckton.github.io/reflect-metadata/
+    (function (factory) {
+        var root = typeof __webpack_require__.g === "object" ? __webpack_require__.g :
+            typeof self === "object" ? self :
+                typeof this === "object" ? this :
+                    Function("return this;")();
+        var exporter = makeExporter(Reflect);
+        if (typeof root.Reflect === "undefined") {
+            root.Reflect = Reflect;
+        }
+        else {
+            exporter = makeExporter(root.Reflect, exporter);
+        }
+        factory(exporter);
+        function makeExporter(target, previous) {
+            return function (key, value) {
+                if (typeof target[key] !== "function") {
+                    Object.defineProperty(target, key, { configurable: true, writable: true, value: value });
+                }
+                if (previous)
+                    previous(key, value);
+            };
+        }
+    })(function (exporter) {
+        var hasOwn = Object.prototype.hasOwnProperty;
+        // feature test for Symbol support
+        var supportsSymbol = typeof Symbol === "function";
+        var toPrimitiveSymbol = supportsSymbol && typeof Symbol.toPrimitive !== "undefined" ? Symbol.toPrimitive : "@@toPrimitive";
+        var iteratorSymbol = supportsSymbol && typeof Symbol.iterator !== "undefined" ? Symbol.iterator : "@@iterator";
+        var supportsCreate = typeof Object.create === "function"; // feature test for Object.create support
+        var supportsProto = { __proto__: [] } instanceof Array; // feature test for __proto__ support
+        var downLevel = !supportsCreate && !supportsProto;
+        var HashMap = {
+            // create an object in dictionary mode (a.k.a. "slow" mode in v8)
+            create: supportsCreate
+                ? function () { return MakeDictionary(Object.create(null)); }
+                : supportsProto
+                    ? function () { return MakeDictionary({ __proto__: null }); }
+                    : function () { return MakeDictionary({}); },
+            has: downLevel
+                ? function (map, key) { return hasOwn.call(map, key); }
+                : function (map, key) { return key in map; },
+            get: downLevel
+                ? function (map, key) { return hasOwn.call(map, key) ? map[key] : undefined; }
+                : function (map, key) { return map[key]; },
+        };
+        // Load global or shim versions of Map, Set, and WeakMap
+        var functionPrototype = Object.getPrototypeOf(Function);
+        var usePolyfill = typeof process === "object" && process.env && process.env["REFLECT_METADATA_USE_MAP_POLYFILL"] === "true";
+        var _Map = !usePolyfill && typeof Map === "function" && typeof Map.prototype.entries === "function" ? Map : CreateMapPolyfill();
+        var _Set = !usePolyfill && typeof Set === "function" && typeof Set.prototype.entries === "function" ? Set : CreateSetPolyfill();
+        var _WeakMap = !usePolyfill && typeof WeakMap === "function" ? WeakMap : CreateWeakMapPolyfill();
+        // [[Metadata]] internal slot
+        // https://rbuckton.github.io/reflect-metadata/#ordinary-object-internal-methods-and-internal-slots
+        var Metadata = new _WeakMap();
+        /**
+         * Applies a set of decorators to a property of a target object.
+         * @param decorators An array of decorators.
+         * @param target The target object.
+         * @param propertyKey (Optional) The property key to decorate.
+         * @param attributes (Optional) The property descriptor for the target key.
+         * @remarks Decorators are applied in reverse order.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     Example = Reflect.decorate(decoratorsArray, Example);
+         *
+         *     // property (on constructor)
+         *     Reflect.decorate(decoratorsArray, Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     Reflect.decorate(decoratorsArray, Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     Object.defineProperty(Example, "staticMethod",
+         *         Reflect.decorate(decoratorsArray, Example, "staticMethod",
+         *             Object.getOwnPropertyDescriptor(Example, "staticMethod")));
+         *
+         *     // method (on prototype)
+         *     Object.defineProperty(Example.prototype, "method",
+         *         Reflect.decorate(decoratorsArray, Example.prototype, "method",
+         *             Object.getOwnPropertyDescriptor(Example.prototype, "method")));
+         *
+         */
+        function decorate(decorators, target, propertyKey, attributes) {
+            if (!IsUndefined(propertyKey)) {
+                if (!IsArray(decorators))
+                    throw new TypeError();
+                if (!IsObject(target))
+                    throw new TypeError();
+                if (!IsObject(attributes) && !IsUndefined(attributes) && !IsNull(attributes))
+                    throw new TypeError();
+                if (IsNull(attributes))
+                    attributes = undefined;
+                propertyKey = ToPropertyKey(propertyKey);
+                return DecorateProperty(decorators, target, propertyKey, attributes);
+            }
+            else {
+                if (!IsArray(decorators))
+                    throw new TypeError();
+                if (!IsConstructor(target))
+                    throw new TypeError();
+                return DecorateConstructor(decorators, target);
+            }
+        }
+        exporter("decorate", decorate);
+        // 4.1.2 Reflect.metadata(metadataKey, metadataValue)
+        // https://rbuckton.github.io/reflect-metadata/#reflect.metadata
+        /**
+         * A default metadata decorator factory that can be used on a class, class member, or parameter.
+         * @param metadataKey The key for the metadata entry.
+         * @param metadataValue The value for the metadata entry.
+         * @returns A decorator function.
+         * @remarks
+         * If `metadataKey` is already defined for the target and target key, the
+         * metadataValue for that key will be overwritten.
+         * @example
+         *
+         *     // constructor
+         *     @Reflect.metadata(key, value)
+         *     class Example {
+         *     }
+         *
+         *     // property (on constructor, TypeScript only)
+         *     class Example {
+         *         @Reflect.metadata(key, value)
+         *         static staticProperty;
+         *     }
+         *
+         *     // property (on prototype, TypeScript only)
+         *     class Example {
+         *         @Reflect.metadata(key, value)
+         *         property;
+         *     }
+         *
+         *     // method (on constructor)
+         *     class Example {
+         *         @Reflect.metadata(key, value)
+         *         static staticMethod() { }
+         *     }
+         *
+         *     // method (on prototype)
+         *     class Example {
+         *         @Reflect.metadata(key, value)
+         *         method() { }
+         *     }
+         *
+         */
+        function metadata(metadataKey, metadataValue) {
+            function decorator(target, propertyKey) {
+                if (!IsObject(target))
+                    throw new TypeError();
+                if (!IsUndefined(propertyKey) && !IsPropertyKey(propertyKey))
+                    throw new TypeError();
+                OrdinaryDefineOwnMetadata(metadataKey, metadataValue, target, propertyKey);
+            }
+            return decorator;
+        }
+        exporter("metadata", metadata);
+        /**
+         * Define a unique metadata entry on the target.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param metadataValue A value that contains attached metadata.
+         * @param target The target object on which to define metadata.
+         * @param propertyKey (Optional) The property key for the target.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     Reflect.defineMetadata("custom:annotation", options, Example);
+         *
+         *     // property (on constructor)
+         *     Reflect.defineMetadata("custom:annotation", options, Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     Reflect.defineMetadata("custom:annotation", options, Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     Reflect.defineMetadata("custom:annotation", options, Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     Reflect.defineMetadata("custom:annotation", options, Example.prototype, "method");
+         *
+         *     // decorator factory as metadata-producing annotation.
+         *     function MyAnnotation(options): Decorator {
+         *         return (target, key?) => Reflect.defineMetadata("custom:annotation", options, target, key);
+         *     }
+         *
+         */
+        function defineMetadata(metadataKey, metadataValue, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryDefineOwnMetadata(metadataKey, metadataValue, target, propertyKey);
+        }
+        exporter("defineMetadata", defineMetadata);
+        /**
+         * Gets a value indicating whether the target object or its prototype chain has the provided metadata key defined.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns `true` if the metadata key was defined on the target object or its prototype chain; otherwise, `false`.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.hasMetadata("custom:annotation", Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.hasMetadata("custom:annotation", Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.hasMetadata("custom:annotation", Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.hasMetadata("custom:annotation", Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.hasMetadata("custom:annotation", Example.prototype, "method");
+         *
+         */
+        function hasMetadata(metadataKey, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryHasMetadata(metadataKey, target, propertyKey);
+        }
+        exporter("hasMetadata", hasMetadata);
+        /**
+         * Gets a value indicating whether the target object has the provided metadata key defined.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns `true` if the metadata key was defined on the target object; otherwise, `false`.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.hasOwnMetadata("custom:annotation", Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.hasOwnMetadata("custom:annotation", Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.hasOwnMetadata("custom:annotation", Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.hasOwnMetadata("custom:annotation", Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.hasOwnMetadata("custom:annotation", Example.prototype, "method");
+         *
+         */
+        function hasOwnMetadata(metadataKey, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryHasOwnMetadata(metadataKey, target, propertyKey);
+        }
+        exporter("hasOwnMetadata", hasOwnMetadata);
+        /**
+         * Gets the metadata value for the provided metadata key on the target object or its prototype chain.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns The metadata value for the metadata key if found; otherwise, `undefined`.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.getMetadata("custom:annotation", Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.getMetadata("custom:annotation", Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.getMetadata("custom:annotation", Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.getMetadata("custom:annotation", Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.getMetadata("custom:annotation", Example.prototype, "method");
+         *
+         */
+        function getMetadata(metadataKey, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryGetMetadata(metadataKey, target, propertyKey);
+        }
+        exporter("getMetadata", getMetadata);
+        /**
+         * Gets the metadata value for the provided metadata key on the target object.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns The metadata value for the metadata key if found; otherwise, `undefined`.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.getOwnMetadata("custom:annotation", Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.getOwnMetadata("custom:annotation", Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.getOwnMetadata("custom:annotation", Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.getOwnMetadata("custom:annotation", Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.getOwnMetadata("custom:annotation", Example.prototype, "method");
+         *
+         */
+        function getOwnMetadata(metadataKey, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryGetOwnMetadata(metadataKey, target, propertyKey);
+        }
+        exporter("getOwnMetadata", getOwnMetadata);
+        /**
+         * Gets the metadata keys defined on the target object or its prototype chain.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns An array of unique metadata keys.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.getMetadataKeys(Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.getMetadataKeys(Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.getMetadataKeys(Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.getMetadataKeys(Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.getMetadataKeys(Example.prototype, "method");
+         *
+         */
+        function getMetadataKeys(target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryMetadataKeys(target, propertyKey);
+        }
+        exporter("getMetadataKeys", getMetadataKeys);
+        /**
+         * Gets the unique metadata keys defined on the target object.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns An array of unique metadata keys.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.getOwnMetadataKeys(Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.getOwnMetadataKeys(Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.getOwnMetadataKeys(Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.getOwnMetadataKeys(Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.getOwnMetadataKeys(Example.prototype, "method");
+         *
+         */
+        function getOwnMetadataKeys(target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            return OrdinaryOwnMetadataKeys(target, propertyKey);
+        }
+        exporter("getOwnMetadataKeys", getOwnMetadataKeys);
+        /**
+         * Deletes the metadata entry from the target object with the provided key.
+         * @param metadataKey A key used to store and retrieve metadata.
+         * @param target The target object on which the metadata is defined.
+         * @param propertyKey (Optional) The property key for the target.
+         * @returns `true` if the metadata entry was found and deleted; otherwise, false.
+         * @example
+         *
+         *     class Example {
+         *         // property declarations are not part of ES6, though they are valid in TypeScript:
+         *         // static staticProperty;
+         *         // property;
+         *
+         *         constructor(p) { }
+         *         static staticMethod(p) { }
+         *         method(p) { }
+         *     }
+         *
+         *     // constructor
+         *     result = Reflect.deleteMetadata("custom:annotation", Example);
+         *
+         *     // property (on constructor)
+         *     result = Reflect.deleteMetadata("custom:annotation", Example, "staticProperty");
+         *
+         *     // property (on prototype)
+         *     result = Reflect.deleteMetadata("custom:annotation", Example.prototype, "property");
+         *
+         *     // method (on constructor)
+         *     result = Reflect.deleteMetadata("custom:annotation", Example, "staticMethod");
+         *
+         *     // method (on prototype)
+         *     result = Reflect.deleteMetadata("custom:annotation", Example.prototype, "method");
+         *
+         */
+        function deleteMetadata(metadataKey, target, propertyKey) {
+            if (!IsObject(target))
+                throw new TypeError();
+            if (!IsUndefined(propertyKey))
+                propertyKey = ToPropertyKey(propertyKey);
+            var metadataMap = GetOrCreateMetadataMap(target, propertyKey, /*Create*/ false);
+            if (IsUndefined(metadataMap))
+                return false;
+            if (!metadataMap.delete(metadataKey))
+                return false;
+            if (metadataMap.size > 0)
+                return true;
+            var targetMetadata = Metadata.get(target);
+            targetMetadata.delete(propertyKey);
+            if (targetMetadata.size > 0)
+                return true;
+            Metadata.delete(target);
+            return true;
+        }
+        exporter("deleteMetadata", deleteMetadata);
+        function DecorateConstructor(decorators, target) {
+            for (var i = decorators.length - 1; i >= 0; --i) {
+                var decorator = decorators[i];
+                var decorated = decorator(target);
+                if (!IsUndefined(decorated) && !IsNull(decorated)) {
+                    if (!IsConstructor(decorated))
+                        throw new TypeError();
+                    target = decorated;
+                }
+            }
+            return target;
+        }
+        function DecorateProperty(decorators, target, propertyKey, descriptor) {
+            for (var i = decorators.length - 1; i >= 0; --i) {
+                var decorator = decorators[i];
+                var decorated = decorator(target, propertyKey, descriptor);
+                if (!IsUndefined(decorated) && !IsNull(decorated)) {
+                    if (!IsObject(decorated))
+                        throw new TypeError();
+                    descriptor = decorated;
+                }
+            }
+            return descriptor;
+        }
+        function GetOrCreateMetadataMap(O, P, Create) {
+            var targetMetadata = Metadata.get(O);
+            if (IsUndefined(targetMetadata)) {
+                if (!Create)
+                    return undefined;
+                targetMetadata = new _Map();
+                Metadata.set(O, targetMetadata);
+            }
+            var metadataMap = targetMetadata.get(P);
+            if (IsUndefined(metadataMap)) {
+                if (!Create)
+                    return undefined;
+                metadataMap = new _Map();
+                targetMetadata.set(P, metadataMap);
+            }
+            return metadataMap;
+        }
+        // 3.1.1.1 OrdinaryHasMetadata(MetadataKey, O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinaryhasmetadata
+        function OrdinaryHasMetadata(MetadataKey, O, P) {
+            var hasOwn = OrdinaryHasOwnMetadata(MetadataKey, O, P);
+            if (hasOwn)
+                return true;
+            var parent = OrdinaryGetPrototypeOf(O);
+            if (!IsNull(parent))
+                return OrdinaryHasMetadata(MetadataKey, parent, P);
+            return false;
+        }
+        // 3.1.2.1 OrdinaryHasOwnMetadata(MetadataKey, O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinaryhasownmetadata
+        function OrdinaryHasOwnMetadata(MetadataKey, O, P) {
+            var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ false);
+            if (IsUndefined(metadataMap))
+                return false;
+            return ToBoolean(metadataMap.has(MetadataKey));
+        }
+        // 3.1.3.1 OrdinaryGetMetadata(MetadataKey, O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinarygetmetadata
+        function OrdinaryGetMetadata(MetadataKey, O, P) {
+            var hasOwn = OrdinaryHasOwnMetadata(MetadataKey, O, P);
+            if (hasOwn)
+                return OrdinaryGetOwnMetadata(MetadataKey, O, P);
+            var parent = OrdinaryGetPrototypeOf(O);
+            if (!IsNull(parent))
+                return OrdinaryGetMetadata(MetadataKey, parent, P);
+            return undefined;
+        }
+        // 3.1.4.1 OrdinaryGetOwnMetadata(MetadataKey, O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinarygetownmetadata
+        function OrdinaryGetOwnMetadata(MetadataKey, O, P) {
+            var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ false);
+            if (IsUndefined(metadataMap))
+                return undefined;
+            return metadataMap.get(MetadataKey);
+        }
+        // 3.1.5.1 OrdinaryDefineOwnMetadata(MetadataKey, MetadataValue, O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinarydefineownmetadata
+        function OrdinaryDefineOwnMetadata(MetadataKey, MetadataValue, O, P) {
+            var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ true);
+            metadataMap.set(MetadataKey, MetadataValue);
+        }
+        // 3.1.6.1 OrdinaryMetadataKeys(O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinarymetadatakeys
+        function OrdinaryMetadataKeys(O, P) {
+            var ownKeys = OrdinaryOwnMetadataKeys(O, P);
+            var parent = OrdinaryGetPrototypeOf(O);
+            if (parent === null)
+                return ownKeys;
+            var parentKeys = OrdinaryMetadataKeys(parent, P);
+            if (parentKeys.length <= 0)
+                return ownKeys;
+            if (ownKeys.length <= 0)
+                return parentKeys;
+            var set = new _Set();
+            var keys = [];
+            for (var _i = 0, ownKeys_1 = ownKeys; _i < ownKeys_1.length; _i++) {
+                var key = ownKeys_1[_i];
+                var hasKey = set.has(key);
+                if (!hasKey) {
+                    set.add(key);
+                    keys.push(key);
+                }
+            }
+            for (var _a = 0, parentKeys_1 = parentKeys; _a < parentKeys_1.length; _a++) {
+                var key = parentKeys_1[_a];
+                var hasKey = set.has(key);
+                if (!hasKey) {
+                    set.add(key);
+                    keys.push(key);
+                }
+            }
+            return keys;
+        }
+        // 3.1.7.1 OrdinaryOwnMetadataKeys(O, P)
+        // https://rbuckton.github.io/reflect-metadata/#ordinaryownmetadatakeys
+        function OrdinaryOwnMetadataKeys(O, P) {
+            var keys = [];
+            var metadataMap = GetOrCreateMetadataMap(O, P, /*Create*/ false);
+            if (IsUndefined(metadataMap))
+                return keys;
+            var keysObj = metadataMap.keys();
+            var iterator = GetIterator(keysObj);
+            var k = 0;
+            while (true) {
+                var next = IteratorStep(iterator);
+                if (!next) {
+                    keys.length = k;
+                    return keys;
+                }
+                var nextValue = IteratorValue(next);
+                try {
+                    keys[k] = nextValue;
+                }
+                catch (e) {
+                    try {
+                        IteratorClose(iterator);
+                    }
+                    finally {
+                        throw e;
+                    }
+                }
+                k++;
+            }
+        }
+        // 6 ECMAScript Data Typ0es and Values
+        // https://tc39.github.io/ecma262/#sec-ecmascript-data-types-and-values
+        function Type(x) {
+            if (x === null)
+                return 1 /* Null */;
+            switch (typeof x) {
+                case "undefined": return 0 /* Undefined */;
+                case "boolean": return 2 /* Boolean */;
+                case "string": return 3 /* String */;
+                case "symbol": return 4 /* Symbol */;
+                case "number": return 5 /* Number */;
+                case "object": return x === null ? 1 /* Null */ : 6 /* Object */;
+                default: return 6 /* Object */;
+            }
+        }
+        // 6.1.1 The Undefined Type
+        // https://tc39.github.io/ecma262/#sec-ecmascript-language-types-undefined-type
+        function IsUndefined(x) {
+            return x === undefined;
+        }
+        // 6.1.2 The Null Type
+        // https://tc39.github.io/ecma262/#sec-ecmascript-language-types-null-type
+        function IsNull(x) {
+            return x === null;
+        }
+        // 6.1.5 The Symbol Type
+        // https://tc39.github.io/ecma262/#sec-ecmascript-language-types-symbol-type
+        function IsSymbol(x) {
+            return typeof x === "symbol";
+        }
+        // 6.1.7 The Object Type
+        // https://tc39.github.io/ecma262/#sec-object-type
+        function IsObject(x) {
+            return typeof x === "object" ? x !== null : typeof x === "function";
+        }
+        // 7.1 Type Conversion
+        // https://tc39.github.io/ecma262/#sec-type-conversion
+        // 7.1.1 ToPrimitive(input [, PreferredType])
+        // https://tc39.github.io/ecma262/#sec-toprimitive
+        function ToPrimitive(input, PreferredType) {
+            switch (Type(input)) {
+                case 0 /* Undefined */: return input;
+                case 1 /* Null */: return input;
+                case 2 /* Boolean */: return input;
+                case 3 /* String */: return input;
+                case 4 /* Symbol */: return input;
+                case 5 /* Number */: return input;
+            }
+            var hint = PreferredType === 3 /* String */ ? "string" : PreferredType === 5 /* Number */ ? "number" : "default";
+            var exoticToPrim = GetMethod(input, toPrimitiveSymbol);
+            if (exoticToPrim !== undefined) {
+                var result = exoticToPrim.call(input, hint);
+                if (IsObject(result))
+                    throw new TypeError();
+                return result;
+            }
+            return OrdinaryToPrimitive(input, hint === "default" ? "number" : hint);
+        }
+        // 7.1.1.1 OrdinaryToPrimitive(O, hint)
+        // https://tc39.github.io/ecma262/#sec-ordinarytoprimitive
+        function OrdinaryToPrimitive(O, hint) {
+            if (hint === "string") {
+                var toString_1 = O.toString;
+                if (IsCallable(toString_1)) {
+                    var result = toString_1.call(O);
+                    if (!IsObject(result))
+                        return result;
+                }
+                var valueOf = O.valueOf;
+                if (IsCallable(valueOf)) {
+                    var result = valueOf.call(O);
+                    if (!IsObject(result))
+                        return result;
+                }
+            }
+            else {
+                var valueOf = O.valueOf;
+                if (IsCallable(valueOf)) {
+                    var result = valueOf.call(O);
+                    if (!IsObject(result))
+                        return result;
+                }
+                var toString_2 = O.toString;
+                if (IsCallable(toString_2)) {
+                    var result = toString_2.call(O);
+                    if (!IsObject(result))
+                        return result;
+                }
+            }
+            throw new TypeError();
+        }
+        // 7.1.2 ToBoolean(argument)
+        // https://tc39.github.io/ecma262/2016/#sec-toboolean
+        function ToBoolean(argument) {
+            return !!argument;
+        }
+        // 7.1.12 ToString(argument)
+        // https://tc39.github.io/ecma262/#sec-tostring
+        function ToString(argument) {
+            return "" + argument;
+        }
+        // 7.1.14 ToPropertyKey(argument)
+        // https://tc39.github.io/ecma262/#sec-topropertykey
+        function ToPropertyKey(argument) {
+            var key = ToPrimitive(argument, 3 /* String */);
+            if (IsSymbol(key))
+                return key;
+            return ToString(key);
+        }
+        // 7.2 Testing and Comparison Operations
+        // https://tc39.github.io/ecma262/#sec-testing-and-comparison-operations
+        // 7.2.2 IsArray(argument)
+        // https://tc39.github.io/ecma262/#sec-isarray
+        function IsArray(argument) {
+            return Array.isArray
+                ? Array.isArray(argument)
+                : argument instanceof Object
+                    ? argument instanceof Array
+                    : Object.prototype.toString.call(argument) === "[object Array]";
+        }
+        // 7.2.3 IsCallable(argument)
+        // https://tc39.github.io/ecma262/#sec-iscallable
+        function IsCallable(argument) {
+            // NOTE: This is an approximation as we cannot check for [[Call]] internal method.
+            return typeof argument === "function";
+        }
+        // 7.2.4 IsConstructor(argument)
+        // https://tc39.github.io/ecma262/#sec-isconstructor
+        function IsConstructor(argument) {
+            // NOTE: This is an approximation as we cannot check for [[Construct]] internal method.
+            return typeof argument === "function";
+        }
+        // 7.2.7 IsPropertyKey(argument)
+        // https://tc39.github.io/ecma262/#sec-ispropertykey
+        function IsPropertyKey(argument) {
+            switch (Type(argument)) {
+                case 3 /* String */: return true;
+                case 4 /* Symbol */: return true;
+                default: return false;
+            }
+        }
+        // 7.3 Operations on Objects
+        // https://tc39.github.io/ecma262/#sec-operations-on-objects
+        // 7.3.9 GetMethod(V, P)
+        // https://tc39.github.io/ecma262/#sec-getmethod
+        function GetMethod(V, P) {
+            var func = V[P];
+            if (func === undefined || func === null)
+                return undefined;
+            if (!IsCallable(func))
+                throw new TypeError();
+            return func;
+        }
+        // 7.4 Operations on Iterator Objects
+        // https://tc39.github.io/ecma262/#sec-operations-on-iterator-objects
+        function GetIterator(obj) {
+            var method = GetMethod(obj, iteratorSymbol);
+            if (!IsCallable(method))
+                throw new TypeError(); // from Call
+            var iterator = method.call(obj);
+            if (!IsObject(iterator))
+                throw new TypeError();
+            return iterator;
+        }
+        // 7.4.4 IteratorValue(iterResult)
+        // https://tc39.github.io/ecma262/2016/#sec-iteratorvalue
+        function IteratorValue(iterResult) {
+            return iterResult.value;
+        }
+        // 7.4.5 IteratorStep(iterator)
+        // https://tc39.github.io/ecma262/#sec-iteratorstep
+        function IteratorStep(iterator) {
+            var result = iterator.next();
+            return result.done ? false : result;
+        }
+        // 7.4.6 IteratorClose(iterator, completion)
+        // https://tc39.github.io/ecma262/#sec-iteratorclose
+        function IteratorClose(iterator) {
+            var f = iterator["return"];
+            if (f)
+                f.call(iterator);
+        }
+        // 9.1 Ordinary Object Internal Methods and Internal Slots
+        // https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots
+        // 9.1.1.1 OrdinaryGetPrototypeOf(O)
+        // https://tc39.github.io/ecma262/#sec-ordinarygetprototypeof
+        function OrdinaryGetPrototypeOf(O) {
+            var proto = Object.getPrototypeOf(O);
+            if (typeof O !== "function" || O === functionPrototype)
+                return proto;
+            // TypeScript doesn't set __proto__ in ES5, as it's non-standard.
+            // Try to determine the superclass constructor. Compatible implementations
+            // must either set __proto__ on a subclass constructor to the superclass constructor,
+            // or ensure each class has a valid `constructor` property on its prototype that
+            // points back to the constructor.
+            // If this is not the same as Function.[[Prototype]], then this is definately inherited.
+            // This is the case when in ES6 or when using __proto__ in a compatible browser.
+            if (proto !== functionPrototype)
+                return proto;
+            // If the super prototype is Object.prototype, null, or undefined, then we cannot determine the heritage.
+            var prototype = O.prototype;
+            var prototypeProto = prototype && Object.getPrototypeOf(prototype);
+            if (prototypeProto == null || prototypeProto === Object.prototype)
+                return proto;
+            // If the constructor was not a function, then we cannot determine the heritage.
+            var constructor = prototypeProto.constructor;
+            if (typeof constructor !== "function")
+                return proto;
+            // If we have some kind of self-reference, then we cannot determine the heritage.
+            if (constructor === O)
+                return proto;
+            // we have a pretty good guess at the heritage.
+            return constructor;
+        }
+        // naive Map shim
+        function CreateMapPolyfill() {
+            var cacheSentinel = {};
+            var arraySentinel = [];
+            var MapIterator = /** @class */ (function () {
+                function MapIterator(keys, values, selector) {
+                    this._index = 0;
+                    this._keys = keys;
+                    this._values = values;
+                    this._selector = selector;
+                }
+                MapIterator.prototype["@@iterator"] = function () { return this; };
+                MapIterator.prototype[iteratorSymbol] = function () { return this; };
+                MapIterator.prototype.next = function () {
+                    var index = this._index;
+                    if (index >= 0 && index < this._keys.length) {
+                        var result = this._selector(this._keys[index], this._values[index]);
+                        if (index + 1 >= this._keys.length) {
+                            this._index = -1;
+                            this._keys = arraySentinel;
+                            this._values = arraySentinel;
+                        }
+                        else {
+                            this._index++;
+                        }
+                        return { value: result, done: false };
+                    }
+                    return { value: undefined, done: true };
+                };
+                MapIterator.prototype.throw = function (error) {
+                    if (this._index >= 0) {
+                        this._index = -1;
+                        this._keys = arraySentinel;
+                        this._values = arraySentinel;
+                    }
+                    throw error;
+                };
+                MapIterator.prototype.return = function (value) {
+                    if (this._index >= 0) {
+                        this._index = -1;
+                        this._keys = arraySentinel;
+                        this._values = arraySentinel;
+                    }
+                    return { value: value, done: true };
+                };
+                return MapIterator;
+            }());
+            return /** @class */ (function () {
+                function Map() {
+                    this._keys = [];
+                    this._values = [];
+                    this._cacheKey = cacheSentinel;
+                    this._cacheIndex = -2;
+                }
+                Object.defineProperty(Map.prototype, "size", {
+                    get: function () { return this._keys.length; },
+                    enumerable: true,
+                    configurable: true
+                });
+                Map.prototype.has = function (key) { return this._find(key, /*insert*/ false) >= 0; };
+                Map.prototype.get = function (key) {
+                    var index = this._find(key, /*insert*/ false);
+                    return index >= 0 ? this._values[index] : undefined;
+                };
+                Map.prototype.set = function (key, value) {
+                    var index = this._find(key, /*insert*/ true);
+                    this._values[index] = value;
+                    return this;
+                };
+                Map.prototype.delete = function (key) {
+                    var index = this._find(key, /*insert*/ false);
+                    if (index >= 0) {
+                        var size = this._keys.length;
+                        for (var i = index + 1; i < size; i++) {
+                            this._keys[i - 1] = this._keys[i];
+                            this._values[i - 1] = this._values[i];
+                        }
+                        this._keys.length--;
+                        this._values.length--;
+                        if (key === this._cacheKey) {
+                            this._cacheKey = cacheSentinel;
+                            this._cacheIndex = -2;
+                        }
+                        return true;
+                    }
+                    return false;
+                };
+                Map.prototype.clear = function () {
+                    this._keys.length = 0;
+                    this._values.length = 0;
+                    this._cacheKey = cacheSentinel;
+                    this._cacheIndex = -2;
+                };
+                Map.prototype.keys = function () { return new MapIterator(this._keys, this._values, getKey); };
+                Map.prototype.values = function () { return new MapIterator(this._keys, this._values, getValue); };
+                Map.prototype.entries = function () { return new MapIterator(this._keys, this._values, getEntry); };
+                Map.prototype["@@iterator"] = function () { return this.entries(); };
+                Map.prototype[iteratorSymbol] = function () { return this.entries(); };
+                Map.prototype._find = function (key, insert) {
+                    if (this._cacheKey !== key) {
+                        this._cacheIndex = this._keys.indexOf(this._cacheKey = key);
+                    }
+                    if (this._cacheIndex < 0 && insert) {
+                        this._cacheIndex = this._keys.length;
+                        this._keys.push(key);
+                        this._values.push(undefined);
+                    }
+                    return this._cacheIndex;
+                };
+                return Map;
+            }());
+            function getKey(key, _) {
+                return key;
+            }
+            function getValue(_, value) {
+                return value;
+            }
+            function getEntry(key, value) {
+                return [key, value];
+            }
+        }
+        // naive Set shim
+        function CreateSetPolyfill() {
+            return /** @class */ (function () {
+                function Set() {
+                    this._map = new _Map();
+                }
+                Object.defineProperty(Set.prototype, "size", {
+                    get: function () { return this._map.size; },
+                    enumerable: true,
+                    configurable: true
+                });
+                Set.prototype.has = function (value) { return this._map.has(value); };
+                Set.prototype.add = function (value) { return this._map.set(value, value), this; };
+                Set.prototype.delete = function (value) { return this._map.delete(value); };
+                Set.prototype.clear = function () { this._map.clear(); };
+                Set.prototype.keys = function () { return this._map.keys(); };
+                Set.prototype.values = function () { return this._map.values(); };
+                Set.prototype.entries = function () { return this._map.entries(); };
+                Set.prototype["@@iterator"] = function () { return this.keys(); };
+                Set.prototype[iteratorSymbol] = function () { return this.keys(); };
+                return Set;
+            }());
+        }
+        // naive WeakMap shim
+        function CreateWeakMapPolyfill() {
+            var UUID_SIZE = 16;
+            var keys = HashMap.create();
+            var rootKey = CreateUniqueKey();
+            return /** @class */ (function () {
+                function WeakMap() {
+                    this._key = CreateUniqueKey();
+                }
+                WeakMap.prototype.has = function (target) {
+                    var table = GetOrCreateWeakMapTable(target, /*create*/ false);
+                    return table !== undefined ? HashMap.has(table, this._key) : false;
+                };
+                WeakMap.prototype.get = function (target) {
+                    var table = GetOrCreateWeakMapTable(target, /*create*/ false);
+                    return table !== undefined ? HashMap.get(table, this._key) : undefined;
+                };
+                WeakMap.prototype.set = function (target, value) {
+                    var table = GetOrCreateWeakMapTable(target, /*create*/ true);
+                    table[this._key] = value;
+                    return this;
+                };
+                WeakMap.prototype.delete = function (target) {
+                    var table = GetOrCreateWeakMapTable(target, /*create*/ false);
+                    return table !== undefined ? delete table[this._key] : false;
+                };
+                WeakMap.prototype.clear = function () {
+                    // NOTE: not a real clear, just makes the previous data unreachable
+                    this._key = CreateUniqueKey();
+                };
+                return WeakMap;
+            }());
+            function CreateUniqueKey() {
+                var key;
+                do
+                    key = "@@WeakMap@@" + CreateUUID();
+                while (HashMap.has(keys, key));
+                keys[key] = true;
+                return key;
+            }
+            function GetOrCreateWeakMapTable(target, create) {
+                if (!hasOwn.call(target, rootKey)) {
+                    if (!create)
+                        return undefined;
+                    Object.defineProperty(target, rootKey, { value: HashMap.create() });
+                }
+                return target[rootKey];
+            }
+            function FillRandomBytes(buffer, size) {
+                for (var i = 0; i < size; ++i)
+                    buffer[i] = Math.random() * 0xff | 0;
+                return buffer;
+            }
+            function GenRandomBytes(size) {
+                if (typeof Uint8Array === "function") {
+                    if (typeof crypto !== "undefined")
+                        return crypto.getRandomValues(new Uint8Array(size));
+                    if (typeof msCrypto !== "undefined")
+                        return msCrypto.getRandomValues(new Uint8Array(size));
+                    return FillRandomBytes(new Uint8Array(size), size);
+                }
+                return FillRandomBytes(new Array(size), size);
+            }
+            function CreateUUID() {
+                var data = GenRandomBytes(UUID_SIZE);
+                // mark as random - RFC 4122 § 4.4
+                data[6] = data[6] & 0x4f | 0x40;
+                data[8] = data[8] & 0xbf | 0x80;
+                var result = "";
+                for (var offset = 0; offset < UUID_SIZE; ++offset) {
+                    var byte = data[offset];
+                    if (offset === 4 || offset === 6 || offset === 8)
+                        result += "-";
+                    if (byte < 16)
+                        result += "0";
+                    result += byte.toString(16).toLowerCase();
+                }
+                return result;
+            }
+        }
+        // uses a heuristic used by v8 and chakra to force an object into dictionary mode.
+        function MakeDictionary(obj) {
+            obj.__ = undefined;
+            delete obj.__;
+            return obj;
+        }
+    });
+})(Reflect || (Reflect = {}));
+
+
+/***/ }),
+
 /***/ 9785:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -59886,7 +83249,10 @@ IwLz3/Y=
 const cbor = __webpack_require__(2141)
 const cose = __webpack_require__(2681)
 const caroot = __webpack_require__(240)
-const X509Certificate = (__webpack_require__(5835).X509Certificate)
+const x509 = __webpack_require__(9759)
+const WebCrypto = (__webpack_require__(3561)/* .Crypto */ .w)
+x509.cryptoProvider.set(new WebCrypto())
+const crypto = __webpack_require__(5835)
 
 /**
  * The result of calling a verifyAttestation function.
@@ -59895,6 +83261,7 @@ const X509Certificate = (__webpack_require__(5835).X509Certificate)
  * @property {string} [reason] - If the attestation document is not valid, describes why validation failed.
  * @property {Object} [attr] - If the attestation document is valid, contains the attestation document attributes.
  */
+const verify = (childCert, parentCert) => childCert.verify({ signatureOnly: true, publicKey: parentCert })
 
 /**
  * Verify a AWS Nitro attestation document. Validates the attestation document signature and certificate.
@@ -59919,14 +83286,14 @@ async function verifyAttestation (document) {
   try {
     const COSESign1 = cbor.decodeAllSync(document)[0]
     AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
-    AttestationDocument.certificate = new X509Certificate(AttestationDocument.certificate)
+    AttestationDocument.certificate = new x509.X509Certificate(AttestationDocument.certificate)
   } catch (error) {
     return { valid: false, reason: 'Failed to validate attestation document' }
   }
 
   // Validate attestation document signature
   try {
-    const key = AttestationDocument.certificate.publicKey.export({ format: 'jwk', type: 'spki' })
+    const key = crypto.createPublicKey(AttestationDocument.certificate.publicKey.toString()).export({ format: 'jwk', type: 'spki' })
     const verifier = {
       key: {
         x: Buffer.from(key.x, 'base64'),
@@ -59939,14 +83306,13 @@ async function verifyAttestation (document) {
   }
 
   // Validate signing certificate
-  AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new X509Certificate(certificate))
-  AttestationDocument.caroot = new X509Certificate(caroot)
-  if (AttestationDocument.caroot.fingerprint256 !== '64:1A:03:21:A3:E2:44:EF:E4:56:46:31:95:D6:06:31:7E:D7:CD:CC:3C:17:56:E0:98:93:F3:C6:8F:79:BB:5B') return { valid: false, reason: 'Failed to verify root certificate' }
-  if (!AttestationDocument.certificate.verify(AttestationDocument.cabundle[AttestationDocument.cabundle.length - 1].publicKey)) return { valid: false, reason: 'Failed to verify attestation document signing certificate' }
+  AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new x509.X509Certificate(certificate))
+  AttestationDocument.caroot = new x509.X509Certificate(caroot)
+  if (!(await verify(AttestationDocument.certificate, AttestationDocument.cabundle[AttestationDocument.cabundle.length - 1]))) return { valid: false, reason: 'Failed to verify attestation document signing certificate' }
   for (let i = AttestationDocument.cabundle.length - 1; i > 0; i--) {
-    if (!AttestationDocument.cabundle[i].verify(AttestationDocument.cabundle[i - 1].publicKey)) return { valid: false, reason: 'Failed to verify attestation document certificate chain' }
+    if (!(await verify(AttestationDocument.cabundle[i], AttestationDocument.cabundle[i - 1]))) return { valid: false, reason: 'Failed to verify attestation document certificate chain' }
   }
-  if (!AttestationDocument.cabundle[0].verify(AttestationDocument.caroot.publicKey)) return { valid: false, reason: 'Failed to verify attestation document certificate chain' }
+  if (!(await verify(AttestationDocument.cabundle[0], AttestationDocument.caroot))) return { valid: false, reason: 'Failed to verify attestation document certificate chain' }
 
   // Return Results
   AttestationDocument.pcrs.forEach((value, key) => {

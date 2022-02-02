@@ -1,80 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-
-class Cert extends React.Component {
-  render() {
-    return (
-      <div className="cert mb-2">
-        <div className="row">
-          <div className="col-3">
-            <button className="btn btn-secondary my-2 my-sm-0 btn-block" onClick={this.openModal}><i class="fas fa-clipboard-list" />&nbsp; Details</button>
-          </div>
-          <div className="col-9">
-            <p className="mb-0 text-muted">{this.props.cert.subject}</p>
-            <p className="mb-0 text-muted">{this.props.cert.serialNumber}</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-}
-
-class Info extends React.Component {
-  render() {
-    const renderTooltip = (props) => (
-      <Tooltip id="button-tooltip" {...props}>{this.props.info}</Tooltip>
-    );
-
-    return (
-      <OverlayTrigger placement="right" overlay={renderTooltip}>
-        <i className="fa fa-info-circle"></i>
-      </OverlayTrigger>
-    )
-  }
-}
-
-const pcrNames = {
-  0: 'Enclave image file hash',
-  1: 'Linux kernel and bootstrap hash',
-  2: 'Application hash',
-  3: 'Parent instance IAM role hash',
-  4: 'Parent instance ID hash',
-  8: 'Enclave image signing certificate hash',
-}
-
-class Attribute extends React.Component {
-  render() {
-    var pcrs = [];
-    if (this.props.pcrs) {
-      var unset = 0;
-      for (let i = 0; i < 16; i++) {
-        if (/^0*$/.test(this.props.pcrs['pcr' + i])) {
-          unset++;
-        } else {
-          pcrs.push(<p key={'pcr-' + i} className="mb-0"><Info info={pcrNames[i] ? pcrNames[i] : 'Unknown PCR'} /> <span className="inline-label">PCR{i}:</span>{this.props.pcrs['pcr' + i]}</p>)
-        }
-      }
-      pcrs.push(<p key={'pcr-unset'} className="text-muted">+ {unset} PCRs Not Set</p>)
-    }
-    const ascii = /^[ -~]+$/;
-    return (<div className="row">
-      <div className="col-3"><p><b>{this.props.name}</b></p></div>
-      <div className="col-9">
-        {this.props.value && <p className="mb-0">{this.props.value}</p>}
-        {this.props.clean && <p className="text-muted">{this.props.clean}</p>}
-        {this.props.try === null && <p className="mb-0">NULL</p>}
-        {this.props.try && <>
-          <p className="mb-0">{this.props.try.toString('hex')}</p>
-          {ascii.test(this.props.try.toString()) && <p className="text-muted">{this.props.try.toString()}</p>}
-        </>}
-        {pcrs}
-        {this.props.children}
-      </div>
-    </div>)
-  }
-}
+import Cert from './components/Cert';
+import Attribute from './components/Attribute';
 
 class Nitro extends React.Component {
   constructor(props) {
@@ -127,14 +54,8 @@ class Nitro extends React.Component {
                 <Attribute name="Nonce" try={this.state.result.attr.nonce} />
                 <Attribute name="PCRs" pcrs={this.state.result.attr} />
                 <p className="text-success mt-3"><b><i className="fas fa-check-circle" /> Verification details</b></p>
-                <div className="row">
-                  <div className="col-3">
-                    <p><b>Public Key</b></p>
-                    <p><b>Signature</b></p>
-                  </div>
-                  <div className="col-9">
-                  </div>
-                </div>
+                <Attribute name="Public Key" try={this.state.result.attr.public_key} />
+                <Attribute name="Signature" try={this.state.result.attr.signature} />
                 <Attribute name="Certificate">
                   <Cert cert={this.state.result.attr.certificate} />
                 </Attribute>

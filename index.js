@@ -83252,7 +83252,7 @@ const cose = __webpack_require__(2681)
 const caroot = __webpack_require__(240)
 const x509 = __webpack_require__(9759)
 const { Crypto } = __webpack_require__(3561)
-const crypto = new Crypto()
+const crypto = (typeof window === 'undefined') ? new Crypto() : window.crypto
 x509.cryptoProvider.set(crypto)
 
 /**

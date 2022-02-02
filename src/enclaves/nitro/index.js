@@ -49,6 +49,7 @@ async function verifyAttestation (document, debug = false) {
   try {
     const COSESign1 = cbor.decodeAllSync(document)[0]
     AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
+    AttestationDocument.signature = COSESign1[3]
     AttestationDocument.certificate = new x509.X509Certificate(AttestationDocument.certificate)
   } catch (error) {
     if (debug) return { valid: false, reason: 'Failed to verify attestation document signature', error: error }

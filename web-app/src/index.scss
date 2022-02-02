@@ -1,5 +1,6 @@
 body {
   padding-top: 120px;
+  padding-bottom: 40px;
 }
 
 .drop-zone {
@@ -24,6 +25,22 @@ body {
     margin: 0;
     color: #b3b3b3;
   }
+
+  &.valid {
+    border-style: solid;
+    border-color: #2fb380;
+    p, h1 {
+      color: #2fb380;
+    }
+  }
+
+  &.invalid {
+    border-style: solid;
+    border-color: #da292e;
+    p, h1 {
+      color: #da292e;
+    }
+  }
 }
 
 
@@ -32,11 +49,47 @@ a.link {
   color: #4b71ca;
   padding-bottom: 3px;
   text-decoration: none;
+
+  &:hover {
+    border-bottom-color: #a1a1a1;
+    text-decoration: none;
+    color: #284487;
+    cursor: pointer;
+  }
 }
 
-a.link:hover {
-  border-bottom-color: #a1a1a1;
-  text-decoration: none;
-  color: #284487;
-  cursor: pointer;
+.form-control::placeholder {
+  color: #b3b3b3;
+}
+
+.verified-attr {
+  p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.inline-label {
+  display: inline-block;
+  width: 55px;
+  font-weight: 500;
+}
+
+.tooltip, .tooltip-inner {
+  white-space: nowrap;
+  max-width: none;
+}
+
+.cert {
+  border: 2px solid #2fb380;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

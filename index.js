@@ -896,13 +896,14 @@ class AsnConvert {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "w": () => (/* binding */ Crypto)
+  "Crypto": () => (/* binding */ Crypto),
+  "CryptoKey": () => (/* reexport */ webcrypto_core_es_CryptoKey)
 });
-
-// UNUSED EXPORTS: CryptoKey
 
 // EXTERNAL MODULE: ./node_modules/pvtsutils/build/index.js
 var build = __webpack_require__(2043);
@@ -83250,9 +83251,9 @@ const cbor = __webpack_require__(2141)
 const cose = __webpack_require__(2681)
 const caroot = __webpack_require__(240)
 const x509 = __webpack_require__(9759)
-const WebCrypto = (__webpack_require__(3561)/* .Crypto */ .w)
-x509.cryptoProvider.set(new WebCrypto())
-const { subtle } = (__webpack_require__(5835).webcrypto)
+const { Crypto } = __webpack_require__(3561)
+const crypto = new Crypto()
+x509.cryptoProvider.set(crypto)
 
 /**
  * The result of calling a verifyAttestation function.
@@ -83297,8 +83298,8 @@ async function verifyAttestation (document, debug = false) {
   // Validate attestation document signature
   try {
     const publicKey = AttestationDocument.certificate.publicKey
-    const cryptoKey = await subtle.importKey('spki', publicKey.rawData, { hash: 'SHA-256', ...publicKey.algorithm }, true, ['verify'])
-    const key = await subtle.exportKey('jwk', cryptoKey)
+    const cryptoKey = await crypto.subtle.importKey('spki', publicKey.rawData, { hash: 'SHA-256', ...publicKey.algorithm }, true, ['verify'])
+    const key = await crypto.subtle.exportKey('jwk', cryptoKey)
     const verifier = {
       key: {
         x: Buffer.from(key.x, 'base64'),

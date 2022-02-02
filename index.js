@@ -59885,8 +59885,8 @@ IwLz3/Y=
  */
 const cbor = __webpack_require__(2141)
 const cose = __webpack_require__(2681)
-const crypto = __webpack_require__(5835)
 const caroot = __webpack_require__(240)
+const X509Certificate = (__webpack_require__(5835).X509Certificate)
 
 /**
  * The result of calling a verifyAttestation function.
@@ -59913,14 +59913,20 @@ const caroot = __webpack_require__(240)
  * @memberOf nitro
  */
 async function verifyAttestation (document) {
+  let AttestationDocument
+
   // Parse attestation document
-  const COSESign1 = cbor.decodeAllSync(document)[0]
-  const AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
-  AttestationDocument.certificate = new crypto.X509Certificate(AttestationDocument.certificate)
-  const key = AttestationDocument.certificate.publicKey.export({ format: 'jwk', type: 'spki' })
+  try {
+    const COSESign1 = cbor.decodeAllSync(document)[0]
+    AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
+    AttestationDocument.certificate = new X509Certificate(AttestationDocument.certificate)
+  } catch (error) {
+    return { valid: false, reason: 'Failed to validate attestation document' }
+  }
 
   // Validate attestation document signature
   try {
+    const key = AttestationDocument.certificate.publicKey.export({ format: 'jwk', type: 'spki' })
     const verifier = {
       key: {
         x: Buffer.from(key.x, 'base64'),
@@ -59929,13 +59935,12 @@ async function verifyAttestation (document) {
     }
     await cose.sign.verify(document, verifier, { defaultType: cose.sign.Sign1Tag })
   } catch (error) {
-    console.log(error)
     return { valid: false, reason: 'Failed to verify attestation document signature' }
   }
 
   // Validate signing certificate
-  AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new crypto.X509Certificate(certificate))
-  AttestationDocument.caroot = new crypto.X509Certificate(caroot)
+  AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new X509Certificate(certificate))
+  AttestationDocument.caroot = new X509Certificate(caroot)
   if (AttestationDocument.caroot.fingerprint256 !== '64:1A:03:21:A3:E2:44:EF:E4:56:46:31:95:D6:06:31:7E:D7:CD:CC:3C:17:56:E0:98:93:F3:C6:8F:79:BB:5B') return { valid: false, reason: 'Failed to verify root certificate' }
   if (!AttestationDocument.certificate.verify(AttestationDocument.cabundle[AttestationDocument.cabundle.length - 1].publicKey)) return { valid: false, reason: 'Failed to verify attestation document signing certificate' }
   for (let i = AttestationDocument.cabundle.length - 1; i > 0; i--) {

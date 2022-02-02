@@ -28,9 +28,9 @@ module.exports = {
     },
     resolve: {
         fallback: {
-            path: false,
-            fs: false,
-            process: false,
+            // path: false,
+            // fs: false,
+            // process: false,
             crypto: require.resolve("crypto-browserify"),
             buffer: require.resolve("buffer"),
             stream: require.resolve("stream-browserify"),

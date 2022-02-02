@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["trust-center"] = factory();
+		exports["trust"] = factory();
 	else
-		root["trust-center"] = factory();
+		root["trust"] = factory();
 })(self, function() {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
@@ -6259,7 +6259,7 @@ module.exports = {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(9608);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Currently in sync with Node.js lib/assert.js
 // https://github.com/nodejs/node/commit/2a51ae424a513ec9a6aa3466baa0cc1d55dd4f3b
 // Originally from narwhal.js (http://narwhaljs.org)
@@ -6898,7 +6898,7 @@ assert.strict.strict = assert.strict;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(553);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Currently in sync with Node.js lib/internal/assert/assertion_error.js
 // https://github.com/nodejs/node/commit/0817840f775032169ddd70c85ac059f18ffcc81c
 
@@ -47544,7 +47544,7 @@ module.exports = {
 /***/ 4087:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* provided dependency */ var process = __webpack_require__(9696);
+/* provided dependency */ var process = __webpack_require__(4155);
 /*
  * Utils functions
  *
@@ -49520,7 +49520,7 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 /***/ 2368:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* provided dependency */ var process = __webpack_require__(8445);
+/* provided dependency */ var process = __webpack_require__(4155);
 var defaultEncoding
 /* istanbul ignore next */
 if (__webpack_require__.g.process && __webpack_require__.g.process.browser) {
@@ -49691,6 +49691,197 @@ module.exports = function (thing, encoding, name) {
     throw new TypeError(name + ' must be a string, a Buffer, a typed array or a DataView')
   }
 }
+
+
+/***/ }),
+
+/***/ 4155:
+/***/ ((module) => {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
 
 
 /***/ }),
@@ -53437,7 +53628,7 @@ module.exports = function xor (a, b) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(7290);
+/* provided dependency */ var process = __webpack_require__(4155);
 
 
 // limit of Crypto.getRandomValues()
@@ -53496,7 +53687,7 @@ function randomBytes (size, cb) {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(7411);
+/* provided dependency */ var process = __webpack_require__(4155);
 
 
 function oldBrowser () {
@@ -53748,7 +53939,7 @@ module.exports.q = codes;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(4526);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -53941,7 +54132,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(4526);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -55281,7 +55472,7 @@ function done(stream, er, data) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(4526);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -55986,7 +56177,7 @@ Writable.prototype._destroy = function (err, cb) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(3517);
+/* provided dependency */ var process = __webpack_require__(4155);
 
 
 var _Object$setPrototypeO;
@@ -56418,7 +56609,7 @@ function () {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(3517);
+/* provided dependency */ var process = __webpack_require__(4155);
  // undocumented cb() API, needed for core, not for public API
 
 function destroy(err, cb) {
@@ -57057,7 +57248,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(1457);
+/* provided dependency */ var process = __webpack_require__(4155);
 /* eslint-disable node/no-deprecated-api */
 
 
@@ -58859,7 +59050,7 @@ exports.isAnyArrayBuffer = isAnyArrayBuffer;
 /***/ 9539:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/* provided dependency */ var process = __webpack_require__(3463);
+/* provided dependency */ var process = __webpack_require__(4155);
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -59658,10 +59849,30 @@ module.exports = {
 
 /***/ }),
 
+/***/ 240:
+/***/ ((module) => {
+
+module.exports = `-----BEGIN CERTIFICATE-----
+MIICETCCAZagAwIBAgIRAPkxdWgbkK/hHUbMtOTn+FYwCgYIKoZIzj0EAwMwSTEL
+MAkGA1UEBhMCVVMxDzANBgNVBAoMBkFtYXpvbjEMMAoGA1UECwwDQVdTMRswGQYD
+VQQDDBJhd3Mubml0cm8tZW5jbGF2ZXMwHhcNMTkxMDI4MTMyODA1WhcNNDkxMDI4
+MTQyODA1WjBJMQswCQYDVQQGEwJVUzEPMA0GA1UECgwGQW1hem9uMQwwCgYDVQQL
+DANBV1MxGzAZBgNVBAMMEmF3cy5uaXRyby1lbmNsYXZlczB2MBAGByqGSM49AgEG
+BSuBBAAiA2IABPwCVOumCMHzaHDimtqQvkY4MpJzbolL//Zy2YlES1BR5TSksfbb
+48C8WBoyt7F2Bw7eEtaaP+ohG2bnUs990d0JX28TcPQXCEPZ3BABIeTPYwEoCWZE
+h8l5YoQwTcU/9KNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUkCW1DdkF
+R+eWw5b6cp3PmanfS5YwDgYDVR0PAQH/BAQDAgGGMAoGCCqGSM49BAMDA2kAMGYC
+MQCjfy+Rocm9Xue4YnwWmNJVA44fA0P5W2OpYow9OYCVRaEevL8uO1XYru5xtMPW
+rfMCMQCi85sWBbJwKKXdS6BptQFuZbT73o/gBh1qUxl/nNr12UO8Yfwr6wPLb+6N
+IwLz3/Y=
+-----END CERTIFICATE-----`
+
+
+/***/ }),
+
 /***/ 8344:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var __dirname = "/";
 /* provided dependency */ var Buffer = __webpack_require__(8764)["Buffer"];
 /**
  * @file AWS Nitro Enclaves
@@ -59675,8 +59886,7 @@ var __dirname = "/";
 const cbor = __webpack_require__(2141)
 const cose = __webpack_require__(2681)
 const crypto = __webpack_require__(5835)
-const fs = __webpack_require__(7018)
-const path = __webpack_require__(3596)
+const caroot = __webpack_require__(240)
 
 /**
  * The result of calling a verifyAttestation function.
@@ -59725,7 +59935,7 @@ async function verifyAttestation (document) {
 
   // Validate signing certificate
   AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new crypto.X509Certificate(certificate))
-  AttestationDocument.caroot = new crypto.X509Certificate(fs.readFileSync(path.join(__dirname, 'root.pem')))
+  AttestationDocument.caroot = new crypto.X509Certificate(caroot)
   if (AttestationDocument.caroot.fingerprint256 !== '64:1A:03:21:A3:E2:44:EF:E4:56:46:31:95:D6:06:31:7E:D7:CD:CC:3C:17:56:E0:98:93:F3:C6:8F:79:BB:5B') return { valid: false, reason: 'Failed to verify root certificate' }
   if (!AttestationDocument.certificate.verify(AttestationDocument.cabundle[AttestationDocument.cabundle.length - 1].publicKey)) return { valid: false, reason: 'Failed to verify attestation document signing certificate' }
   for (let i = AttestationDocument.cabundle.length - 1; i > 0; i--) {
@@ -59818,20 +60028,6 @@ module.exports.encryptForEnclave = encryptForEnclave
 
 /***/ }),
 
-/***/ 553:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 9608:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
 /***/ 6601:
 /***/ (() => {
 
@@ -59874,42 +60070,7 @@ module.exports.encryptForEnclave = encryptForEnclave
 
 /***/ }),
 
-/***/ 9696:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 8445:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
 /***/ 7108:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 7290:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 7411:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 3517:
 /***/ (() => {
 
 /* (ignored) */
@@ -59923,42 +60084,7 @@ module.exports.encryptForEnclave = encryptForEnclave
 
 /***/ }),
 
-/***/ 4526:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
 /***/ 4616:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 1457:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 3463:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 7018:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 3596:
 /***/ (() => {
 
 /* (ignored) */

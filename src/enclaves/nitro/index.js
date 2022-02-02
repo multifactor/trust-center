@@ -10,8 +10,7 @@
 const cbor = require('cbor')
 const cose = require('cose-js')
 const crypto = require('crypto')
-const fs = require('fs')
-const path = require('path')
+const caroot = require('./caroot')
 
 /**
  * The result of calling a verifyAttestation function.
@@ -60,7 +59,7 @@ async function verifyAttestation (document) {
 
   // Validate signing certificate
   AttestationDocument.cabundle = AttestationDocument.cabundle.map(certificate => new crypto.X509Certificate(certificate))
-  AttestationDocument.caroot = new crypto.X509Certificate(fs.readFileSync(path.join(__dirname, 'root.pem')))
+  AttestationDocument.caroot = new crypto.X509Certificate(caroot)
   if (AttestationDocument.caroot.fingerprint256 !== '64:1A:03:21:A3:E2:44:EF:E4:56:46:31:95:D6:06:31:7E:D7:CD:CC:3C:17:56:E0:98:93:F3:C6:8F:79:BB:5B') return { valid: false, reason: 'Failed to verify root certificate' }
   if (!AttestationDocument.certificate.verify(AttestationDocument.cabundle[AttestationDocument.cabundle.length - 1].publicKey)) return { valid: false, reason: 'Failed to verify attestation document signing certificate' }
   for (let i = AttestationDocument.cabundle.length - 1; i > 0; i--) {

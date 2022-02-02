@@ -57,6 +57,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "@peculiar/webcrypto": "^1.2.3",
     "@peculiar/x509": "^1.6.1",
     "cbor": "^8.1.0",
     "cose-js": "^0.8.3",

@@ -13,7 +13,7 @@ const caroot = require('./caroot')
 const x509 = require('@peculiar/x509')
 const WebCrypto = require('@peculiar/webcrypto').Crypto
 x509.cryptoProvider.set(new WebCrypto())
-const crypto = require('crypto')
+const { subtle } = require('crypto').webcrypto
 
 /**
  * The result of calling a verifyAttestation function.
@@ -55,7 +55,9 @@ async function verifyAttestation (document) {
 
   // Validate attestation document signature
   try {
-    const key = crypto.createPublicKey(AttestationDocument.certificate.publicKey.toString()).export({ format: 'jwk', type: 'spki' })
+    const publicKey = AttestationDocument.certificate.publicKey
+    const cryptoKey = await subtle.importKey('spki', publicKey.rawData, { hash: 'SHA-256', ...publicKey.algorithm }, true, ['verify'])
+    const key = await subtle.exportKey('jwk', cryptoKey)
     const verifier = {
       key: {
         x: Buffer.from(key.x, 'base64'),

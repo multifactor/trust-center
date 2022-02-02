@@ -20,6 +20,7 @@ const { subtle } = require('crypto').webcrypto
  * @typedef {Object} AttestationResult
  * @property {boolean} valid - Indicates whether the attestation document is valid.
  * @property {string} [reason] - If the attestation document is not valid, describes why validation failed.
+ * @property {string} [error] - If the attestation document is not valid and debug is true, includes error causing validation to fail.
  * @property {Object} [attr] - If the attestation document is valid, contains the attestation document attributes.
  */
 const verify = (childCert, parentCert) => childCert.verify({ signatureOnly: true, publicKey: parentCert })
@@ -34,13 +35,14 @@ const verify = (childCert, parentCert) => childCert.verify({ signatureOnly: true
  * await trust.enclaves.nitro.verify(invalidDocument); // -> {valid: false, reason: '...'}
  *
  * @param {Buffer} document - AWS Nitro attestation document as a Buffer
+ * @param {boolean} [debug=false] - Include advanced error details in response
  * @returns {AttestationResult} The validation result and attestation document attributes or rejection reason
  * @author Vivek Nair (https://nair.me) <vivek@nair.me>
  * @since 0.1.7
  * @async
  * @memberOf nitro
  */
-async function verifyAttestation (document) {
+async function verifyAttestation (document, debug = false) {
   let AttestationDocument
 
   // Parse attestation document
@@ -49,7 +51,7 @@ async function verifyAttestation (document) {
     AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
     AttestationDocument.certificate = new x509.X509Certificate(AttestationDocument.certificate)
   } catch (error) {
-    console.error(error)
+    if (debug) return { valid: false, reason: 'Failed to verify attestation document signature', error: error }
     return { valid: false, reason: 'Failed to validate attestation document' }
   }
 
@@ -66,7 +68,7 @@ async function verifyAttestation (document) {
     }
     await cose.sign.verify(document, verifier, { defaultType: cose.sign.Sign1Tag })
   } catch (error) {
-    console.error(error)
+    if (debug) return { valid: false, reason: 'Failed to verify attestation document signature', error: error }
     return { valid: false, reason: 'Failed to verify attestation document signature' }
   }
 

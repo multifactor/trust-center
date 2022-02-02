@@ -49,6 +49,7 @@ async function verifyAttestation (document) {
     AttestationDocument = cbor.decodeAllSync(COSESign1[2])[0]
     AttestationDocument.certificate = new x509.X509Certificate(AttestationDocument.certificate)
   } catch (error) {
+    console.error(error)
     return { valid: false, reason: 'Failed to validate attestation document' }
   }
 
@@ -63,6 +64,7 @@ async function verifyAttestation (document) {
     }
     await cose.sign.verify(document, verifier, { defaultType: cose.sign.Sign1Tag })
   } catch (error) {
+    console.error(error)
     return { valid: false, reason: 'Failed to verify attestation document signature' }
   }
 

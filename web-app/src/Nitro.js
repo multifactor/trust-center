@@ -27,7 +27,7 @@ class Nitro extends React.Component {
     return (<>
       <div className="page-header mb-4">
         <h1>AWS Nitro Tools</h1>
-        <p className="lead">Validate AWS Nitro attestations and encrypt secrets for use in Nitro enclaves. Upload an attestation document in CBOR format or paste a base64-encoded document below to begin.</p>
+        <p className="lead">Validate AWS Nitro attestations and encrypt secrets for use in Nitro enclaves. Upload an attestation document in CBOR format or paste a base64-encoded document below to begin. Sample attestation documents are available here: &nbsp;<a className="link" href="https://github.com/multifactor/trust-center/tree/main/test/examples" target="_blank" rel="noreferrer"><i className="fas fa-external-link-alt"></i>&nbsp;&thinsp;GitHub Repo</a></p>
       </div>
       <div className="row pt-4">
         <div className="col-6">

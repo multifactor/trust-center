@@ -10,7 +10,8 @@ class Nitro extends React.Component {
   }
 
   async verifyAttestation(attestationDocument) {
-    // const attestationResult = await trust.enclaves.nitro.verifyAttestation(attestationDocument)
+    const attestationResult = await window.trust.enclaves.nitro.verifyAttestation(attestationDocument)
+    console.log(attestationResult)
   }
 
   onUpload(acceptedFiles) {

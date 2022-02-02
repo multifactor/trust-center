@@ -46,13 +46,13 @@ class Navigation extends React.Component {
         </div>
       </nav>
       <Modal show={this.state.modal} onHide={this.closeModal}>
-        <div class="modal-header">
-          <h5 class="modal-title">Security Information</h5>
-          <button onClick={this.closeModal} type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <div className="modal-header">
+          <h5 className="modal-title">Security Information</h5>
+          <button onClick={this.closeModal} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
-        <div class="modal-body">
+        <div className="modal-body">
           <p>Modal body text goes here.</p>
         </div>
       </Modal>

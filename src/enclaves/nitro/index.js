@@ -12,7 +12,7 @@ const cose = require('cose-js')
 const caroot = require('./caroot')
 const x509 = require('@peculiar/x509')
 const { Crypto } = require('@peculiar/webcrypto')
-const crypto = new Crypto()
+const crypto = (typeof window === 'undefined') ? new Crypto() : window.crypto
 x509.cryptoProvider.set(crypto)
 
 /**

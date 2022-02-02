@@ -54,7 +54,6 @@ async function verifyAttestation (document) {
 
   // Validate attestation document signature
   try {
-    // const key = AttestationDocument.certificate.publicKey.export({ format: 'jwk', type: 'spki' })
     const key = crypto.createPublicKey(AttestationDocument.certificate.publicKey.toString()).export({ format: 'jwk', type: 'spki' })
     const verifier = {
       key: {

@@ -7,11 +7,21 @@ const { suite, test } = require('mocha')
 
 suite('nitro', () => {
   suite('verifyAttestation', () => {
-    test('invalid', async () => {
+    test('invalid document', async () => {
       const document = fs.readFileSync(path.join(__dirname, '../../examples/invalid.cbor'))
       const result = await trust.enclaves.nitro.verifyAttestation(document)
 
       result.valid.should.be.false
+      result.reason.should.equal('Failed to validate attestation document')
+    })
+
+    test('invalid signature', async () => {
+      const hex = fs.readFileSync(path.join(__dirname, './invalid2.cbor')).toString()
+      const document = Buffer.from(hex, 'hex')
+      const result = await trust.enclaves.nitro.verifyAttestation(document)
+
+      result.valid.should.be.false
+      result.reason.should.equal('Failed to verify attestation document signature')
     })
 
     test('valid', async () => {

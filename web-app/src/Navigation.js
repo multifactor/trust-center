@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import logo from './img/logo.png';
+import Attribute from './components/Attribute';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Navigation extends React.Component {
   }
 
   render() {
+    const sdk = document.getElementById('sdk')
     return (<>
       <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
         <div className="container">
@@ -53,7 +55,15 @@ class Navigation extends React.Component {
           </button>
         </div>
         <div className="modal-body">
-          <p>Modal body text goes here.</p>
+          <div className="verified-attr">
+            <Attribute name="SDK version" only={sdk.getAttribute('src').split('/')[4]} />
+            <Attribute name="SDK sha256" only={sdk.getAttribute('integrity').split('-')[1]} />
+          </div>
+          <ul className="mb-0">
+            <li>The trust center is entirely open source, and is hosted on <a className="link" href="https://github.com/multifactor/trust-center/tree/gh-pages" target="_blank" rel="noreferrer"><i className="fas fa-external-link-alt" />&nbsp;&thinsp;GitHub Pages</a> to ensure public auditability.</li>
+            <li>Once loaded, this page requires no network connectivity. Feel free to disconnect your network while using it.</li>
+            <li>Ensure the current domain is <a className="link" href="https://trust.multifactor.com">trust.multifactor.com</a>.</li>
+          </ul>
         </div>
       </Modal>
     </>)

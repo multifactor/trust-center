@@ -11,9 +11,9 @@ const cbor = require('cbor')
 const cose = require('cose-js')
 const caroot = require('./caroot')
 const x509 = require('@peculiar/x509')
-const WebCrypto = require('@peculiar/webcrypto').Crypto
-x509.cryptoProvider.set(new WebCrypto())
-const { subtle } = require('crypto').webcrypto
+const { Crypto } = require('@peculiar/webcrypto')
+const crypto = new Crypto()
+x509.cryptoProvider.set(crypto)
 
 /**
  * The result of calling a verifyAttestation function.
@@ -58,8 +58,8 @@ async function verifyAttestation (document, debug = false) {
   // Validate attestation document signature
   try {
     const publicKey = AttestationDocument.certificate.publicKey
-    const cryptoKey = await subtle.importKey('spki', publicKey.rawData, { hash: 'SHA-256', ...publicKey.algorithm }, true, ['verify'])
-    const key = await subtle.exportKey('jwk', cryptoKey)
+    const cryptoKey = await crypto.subtle.importKey('spki', publicKey.rawData, { hash: 'SHA-256', ...publicKey.algorithm }, true, ['verify'])
+    const key = await crypto.subtle.exportKey('jwk', cryptoKey)
     const verifier = {
       key: {
         x: Buffer.from(key.x, 'base64'),

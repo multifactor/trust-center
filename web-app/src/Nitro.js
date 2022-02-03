@@ -2,7 +2,17 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import Cert from './components/Cert';
 import Attribute from './components/Attribute';
+import Validate from './components/Validate';
 const Buffer = require('buffer/').Buffer
+
+const pcrNames = {
+  0: 'Enclave image file hash',
+  1: 'Linux kernel and bootstrap hash',
+  2: 'Application hash',
+  3: 'Parent instance IAM role hash',
+  4: 'Parent instance ID hash',
+  8: 'Enclave image signing certificate hash',
+}
 
 class Nitro extends React.Component {
   constructor(props) {
@@ -43,6 +53,7 @@ class Nitro extends React.Component {
   }
 
   render() {
+    const urlParams = new URLSearchParams(window.location.search)
     return (<>
       <div className="page-header mb-4">
         <h1>AWS Nitro Tools</h1>
@@ -63,7 +74,7 @@ class Nitro extends React.Component {
                 <Attribute name="Digest" value={this.state.result.attr.digest} />
                 <Attribute name="User Data" try={this.state.result.attr.user_data} />
                 <Attribute name="Nonce" try={this.state.result.attr.nonce} />
-                <Attribute name="PCRs" pcrs={this.state.result.attr} />
+                <Attribute name="PCRs" pcrs={this.state.result.attr} pcrNames={pcrNames} />
                 <p className="text-success mt-3"><b><i className="fas fa-check-circle" /> Verification details</b></p>
                 <Attribute name="Public Key" try={this.state.result.attr.public_key} />
                 <Attribute name="Signature" try={this.state.result.attr.signature} />
@@ -99,7 +110,8 @@ class Nitro extends React.Component {
         <div className="col-6 position-relative">
           {this.state.result ? <>{
             this.state.result.valid ? <>
-              <p>Nitro attestation document validated</p>
+              <p className="text-success"><b><i className="fas fa-check-circle" /> Assisted validation</b></p>
+              {Object.entries(pcrNames).map(([key, value]) => <Validate key={key} name={"PCR" + key} info={value} text="Expected SHA-384 Hash" value={this.state.result.attr['pcr' + key]} default={urlParams.get("pcr" + key)} />)}
             </> : <>
               <h2 className="text-danger"><i className="fas fa-exclamation-triangle"></i>&nbsp;&thinsp;This document is invalid</h2>
               <p>{this.state.result.reason}. For security reasons, performing further operations without a valid attestation document is not currently supported.</p>

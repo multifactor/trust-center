@@ -1,29 +1,5 @@
 import React from 'react';
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-
-class Info extends React.Component {
-  render() {
-    const renderTooltip = (props) => (
-      <Tooltip id="button-tooltip" {...props}>{this.props.info}</Tooltip>
-    );
-
-    return (
-      <OverlayTrigger placement="right" overlay={renderTooltip}>
-        <i className="fa fa-info-circle"></i>
-      </OverlayTrigger>
-    )
-  }
-}
-
-const pcrNames = {
-  0: 'Enclave image file hash',
-  1: 'Linux kernel and bootstrap hash',
-  2: 'Application hash',
-  3: 'Parent instance IAM role hash',
-  4: 'Parent instance ID hash',
-  8: 'Enclave image signing certificate hash',
-}
+import Info from './Info';
 
 class Attribute extends React.Component {
   render() {
@@ -34,7 +10,7 @@ class Attribute extends React.Component {
         if (/^0*$/.test(this.props.pcrs['pcr' + i])) {
           unset++;
         } else {
-          pcrs.push(<p key={'pcr-' + i} className="mb-0"><Info info={pcrNames[i] ? pcrNames[i] : 'Unknown PCR'} /> <span className="inline-label">PCR{i}:</span>{this.props.pcrs['pcr' + i]}</p>)
+          pcrs.push(<p key={'pcr-' + i} className="mb-0"><Info info={this.props.pcrNames[i] ? this.props.pcrNames[i] : 'Unknown PCR'} /> <span className="inline-label">PCR{i}:</span>{this.props.pcrs['pcr' + i]}</p>)
         }
       }
       pcrs.push(<p key={'pcr-unset'} className="text-muted">+ {unset} PCRs Not Set</p>)

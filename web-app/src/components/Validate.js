@@ -7,23 +7,32 @@ class Validate extends React.Component {
     if (this.props.default) {
       if (this.props.default === this.props.value) {
         this.state = {status: 'valid'}
+        this.props.callback('valid')
       } else {
         this.state = {status: 'invalid'}
+        this.props.callback('invalid')
       }
     } else {
       this.state = {status: null}
+      this.props.callback(null)
     }
     this.onChange = this.onChange.bind(this)
+    this.status = this.status.bind(this)
+  }
+
+  status(status) {
+    this.setState({status: status})
+    this.props.callback(status)
   }
 
   onChange(e) {
     const value = e.target.value;
     if (value.length === 0) {
-      this.setState({status: null});
+      this.status(null);
     } else if (value === this.props.value) {
-      this.setState({status: 'valid'});
+      this.status('valid');
     } else {
-      this.setState({status: 'invalid'});
+      this.status('invalid');
     }
   }
 
@@ -47,6 +56,7 @@ class Validate extends React.Component {
           {this.props.name} &nbsp;<Info info={this.props.info} />
         </div>
         <input type="text" onChange={this.onChange} className={control} placeholder={this.props.text} defaultValue={this.props.default} />
+        {this.state.status === "invalid" && <div className="invalid-feedback"><i className="fa fa-times"></i>&nbsp; Does not match actual {this.props.name} value: {this.props.value}</div>}
       </div>
     </div>);
   }

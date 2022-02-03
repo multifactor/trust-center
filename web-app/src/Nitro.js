@@ -1,8 +1,9 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import Modal from "react-bootstrap/Modal";
 import Cert from './components/Cert';
 import Attribute from './components/Attribute';
-import Validate from './components/Validate';
+import Validator from './components/Validator';
 const Buffer = require('buffer/').Buffer
 
 const pcrNames = {
@@ -17,15 +18,39 @@ const pcrNames = {
 class Nitro extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {result: null}
+    this.state = {result: null, pcr: true, modal: false, encrypted: null}
     this.onUpload = this.onUpload.bind(this)
     this.retry = this.retry.bind(this)
     this.onChange = this.onChange.bind(this)
     this.verifyAttestation = this.verifyAttestation.bind(this)
+    this.callback = this.callback.bind(this)
+    this.encrypt = this.encrypt.bind(this)
+    this.close = this.close.bind(this)
+    this.secret = React.createRef()
+  }
+
+  close() {
+    this.setState({modal: false})
+  }
+
+  async encrypt(e) {
+    e.preventDefault();
+    try {
+      const secret = this.secret.current.value;
+      if (secret.length === 0) throw new Error();
+      const encrypted = await window.trust.secrets.encryptForEnclave(this.state.result, secret);
+      this.setState({modal: true, encrypted: encrypted});
+    } catch (e) {
+      this.setState({modal: true, encrypted: null});
+    }
   }
 
   retry() {
     this.setState({result: null})
+  }
+
+  callback(pcr) {
+    this.setState({pcr: pcr})
   }
 
   async verifyAttestation(attestationDocument) {
@@ -81,12 +106,12 @@ class Nitro extends React.Component {
                 <Attribute name="Certificate">
                   <Cert cert={this.state.result.attr.certificate} />
                 </Attribute>
-                <div className="mb-2"></div>
+                <div className="mb-2" />
                 <Attribute name="CA Chain">
                   {this.state.result.attr.cabundle.reverse().map(cert =>
                   <Cert cert={cert} key={cert.serialNumber} />)}
                 </Attribute>
-                <div className="mb-2"></div>
+                <div className="mb-2" />
                 <Attribute name="CA Root">
                   <Cert cert={this.state.result.attr.caroot} />
                 </Attribute>
@@ -110,8 +135,49 @@ class Nitro extends React.Component {
         <div className="col-6 position-relative">
           {this.state.result ? <>{
             this.state.result.valid ? <>
-              <p className="text-success"><b><i className="fas fa-check-circle" /> Assisted validation</b></p>
-              {Object.entries(pcrNames).map(([key, value]) => <Validate key={key} name={"PCR" + key} info={value} text="Expected SHA-384 Hash" value={this.state.result.attr['pcr' + key]} default={urlParams.get("pcr" + key)} />)}
+              {
+                this.state.pcr ? <p className="text-danger"><b><i className="fas fa-times-circle" /> PCR validation</b></p>
+                : <p className="text-success"><b><i className="fas fa-check-circle" /> PCR validation</b></p>
+              }
+              <Validator callback={this.callback} items={Object.entries(pcrNames).map(([key, value]) => ({key: key, name: "PCR" + key, info: value, text: "Expected SHA-384 Hash", value: this.state.result.attr['pcr' + key], default: urlParams.get("pcr" + key)}))} />
+              <div className="pt-3 mt-4">
+                {
+                  this.state.pcr ? <>
+                    <p className="text-danger mb-0"><b><i className="fas fa-key" /> Enclave secrets</b></p>
+                    <p className="text-danger">Can't encrypt a secret for this enclave because one or more PCRs are invalid.</p>
+                  </>
+                  : <>
+                    <p className="text-success mb-0"><b><i className="fas fa-key" /> Enclave secrets</b></p>
+                    <p className="text-muted">Encrypt a value using PGP that can only be used within this enclave.</p>
+                  </>
+                }
+                <form onSubmit={this.encrypt}>
+                  <div className="form-group mb-3">
+                    <textarea ref={this.secret} disabled={this.state.pcr} className="form-control" id="exampleTextarea" rows="3" placeholder="Paste value secret here..." />
+                  </div>
+                  <div className="d-grid gap-2">
+                    <button disabled={this.state.pcr} className="btn btn-secondary" type="submit"><i className="fas fa-lock" />&nbsp;&thinsp;Encrypt</button>
+                  </div>
+                </form>
+                <Modal show={this.state.modal} onHide={this.close}>
+                  <div className="modal-header">
+                    <h5 className="modal-title">Enclave Secret</h5>
+                    <button onClick={this.close} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    {this.state.encrypted ? <>
+                        <p>This encrypted message can only be decrypted by the Nitro enclave which produced the submitted attestation document (Module ID {this.state.result.attr.module_id}).</p>
+                        <div className="form-group">
+                          <textarea rows="10" value={this.state.encrypted} className="form-control" />
+                        </div>
+                      </>
+                      : <p className="mb-0"><i className="fa fa-info-circle" />&nbsp; Failed to encrypt a secret for this enclave because the secret was invalid or the attestation document did not contain a valid PGP-encoded public key.</p>
+                    }
+                  </div>
+                </Modal>
+              </div>
             </> : <>
               <h2 className="text-danger"><i className="fas fa-exclamation-triangle"></i>&nbsp;&thinsp;This document is invalid</h2>
               <p>{this.state.result.reason}. For security reasons, performing further operations without a valid attestation document is not currently supported.</p>

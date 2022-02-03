@@ -93,3 +93,37 @@ a.link {
     transform: translateY(-50%);
   }
 }
+
+.invalid-feedback {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.has-success {
+  .input-group {
+    .input-group-text {
+      background-color: #2fb380;
+      border-color: #2fb380;
+      color: #fff;
+    }
+  }
+  .form-control.is-invalid {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+  }
+}
+
+.has-danger {
+  .input-group {
+    .input-group-text {
+      background-color: #da292e;
+      border-color: #da292e;
+      color: #fff;
+    }
+  }
+  .form-control.is-invalid {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+  }
+}

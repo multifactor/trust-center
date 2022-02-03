@@ -16,6 +16,11 @@ Multifactor Trust Center
 
 The Multifactor Trust Center provides tools for interacting with trusted computing devices such as Intel SGX and AWS Nitro enclaves. Validate attestation documents, verify cryptographic proofs, and encrypt secrets for use in enclaves using PGP, either manually via the online portal (trust.multifactor.com) or programmatically via the trust-center SDK. The trust center is entirely open source, requires no network connectivity, and is hosted on GitHub pages to ensure public auditability.
 
+## Demo
+Try using the link below to validate this [AWS Nitro attestation document](https://github.com/multifactor/trust-center/tree/main/test/examples) using the online portal, which will check that its signatures are valid and that the PCR0 value matches the value passed in the URL:
+
+[https://trust.multifactor.com/?pcr0=1595770e76cea659a5650a88b965b053eb66a0ce5a60a460223d50ff1d16b394d2651b130a38af4ccd818ad8cf42c963#/nitro](https://trust.multifactor.com/?pcr0=1595770e76cea659a5650a88b965b053eb66a0ce5a60a460223d50ff1d16b394d2651b130a38af4ccd818ad8cf42c963#/nitro)
+
 ## Download
 ### GitHub
 [Download Latest Release](https://github.com/multifactor/trust-center/releases)
